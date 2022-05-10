@@ -1,0 +1,159 @@
+<ngx-spinner bdColor="#fff" size="" color="#fff">
+    <div class='ajax-spinner-bars'>
+      <div class='bar-1'></div>
+      <div class='bar-2'></div>
+      <div class='bar-3'></div>
+      <div class='bar-4'></div>
+      <div class='bar-5'></div>
+      <div class='bar-6'></div>
+      <div class='bar-7'></div>
+      <div class='bar-8'></div>
+      <div class='bar-9'></div>
+      <div class='bar-10'></div>
+      <div class='bar-11'></div>
+      <div class='bar-12'></div>
+      <div class='bar-13'></div>
+      <div class='bar-14'></div>
+      <div class='bar-15'></div>
+      <div class='bar-16'></div>
+    </div>
+  </ngx-spinner>
+  <div class="container mt-5 pt-5">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="box shadows">
+              <div class="shadow p-3 mb-3">
+                <div class="header-post">
+  
+                  <article class="postTop">
+                    <div class="d-flex">
+                      <!-- <img *ngIf="postDetail?.addedBy?.image!=''" class="img-responsive round mr-3"
+                        src="{{_host}}{{postDetail?.addedBy?.image}}"> -->
+                      <img class="img-responsive round mr-3"
+                        src="assets/img/adel.jpg">
+                      <!-- <img *ngIf="item?.addedByImage!=''" class="img-responsive round mr-3" src="{{_host}}{{item?.addedByImage}}"> -->
+                      <div class="text-left">
+                        <p class="mb-0 pt-1">
+                          <a href="javascript:void(0)">
+                            <b>Palak</b>
+                          </a>
+                        </p>
+                        <p class="mb-0 pt-1">postDetail</p>
+                   
+                     
+                      </div>
+                     
+                    </div>
+                    <div class="dropdown cretDropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i aria-hidden="true" class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item"><i class="fa fa-share-alt mr-1" aria-hidden="true"></i>Share</a>
+                          <a class="dropdown-item"><i class="fa fa-bug mr-1" aria-hidden="true"></i> Report Post</a>
+                    
+                        </div>
+                      </div>
+                  </article>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In porttitor
+                    ligula et dolor dignissim, sit amet
+                    efficitur felis maximus. Suspendisse metus magna, tempus eu ultrices et, maximus id tellus. Ut eu
+                    lacinia
+                    ante, id facilisis enim. s. ut suscipit urna sollicitudin.</p>
+                  <!-- <p *ngIf="postDetail.whatIDid" class="ckContent" [innerHTML]='postDetail.whatIDid'></p> -->
+                </div>
+
+                <div class="post-img mt-3">
+                  <!-- <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+                    *ngIf="beforeImage && postDetail?.beforeImages
+                    !='' && postDetail?.beforeImages?.length>0" (breakpoint)="breakpoint($event)">
+                    <div ngxSlickItem *ngFor="let item of postDetail?.beforeImages" class="slide">
+                      <span class="before">Before</span>
+                      <div class="picsum-img-wrapper">
+                        <img src="{{_host}}images/modPost/{{item}}" alt=" slide">
+                      </div>
+                    </div>
+                  </ngx-slick-carousel> -->
+                    <img class="post-img" src="assets/img/user.png" alt="">
+                  <div class="like-share d-flex pt-2 pb-2 justify-content-between">
+                    <p class="mb-0 pt-2" (click)="openLikeModal(postDetail)"><i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                      3 Likes</p>
+                    <div class="pull-right pt-2">
+                      <small class="mr-3">3
+                        Comments</small>
+                      <small>2 Shares</small>
+                    </div>
+  
+  
+                  </div>
+                </div>
+                <hr style="margin: 0rem;" />
+                <div class="post-section pt-2 d-flex justify-content-between">
+                  <span class="mb-0 mr-4" (click)="addLike(postDetail?.addedBy?.id)"><i class="fa fa-thumbs-o-up bg mr-2"
+                      [ngClass]="{'text-primary': postDetail?.likestatus}" aria-hidden="true"></i>Like</span>
+                  <span class="mb-0 mr-4" (click)="readmoreLess();getComments()"><i
+                      class="fa fa-commenting-o bg mr-2" aria-hidden="true"></i>Comment</span>
+                  <span class="mb-0 mr-1" (click)="openshare()"><i class="fa fa-share bg" aria-hidden="true"></i>
+                    Share</span>
+                </div>
+
+                <!-- <article class="comments" *ngIf="postDetail.showMore">
+                  <input type="text" (keyup.enter)="addComment(null,postDetail?.addedBy?.id)" [(ngModel)]="commentOnPost"
+                    placeholder="Post a comment..." class="form-control commentInput" />
+                  <label>Press Enter to post.</label>
+                  <div class="loaderDiv text-center" *ngIf="loader"> <img style="width: 50px;"
+                      src="assets/img/loader-img.gif"></div>
+                  <article class="" *ngIf="!loader">
+                    <div class="commentItem" *ngFor="let comment of allComments">
+                      <div class="d-flex mb-2">
+                        <img *ngIf="!comment?.userImage" class="usercreate"
+                          src="https://scontent.fluh1-2.fna.fbcdn.net/v/t1.6435-9/244092514_107203155069882_3448758748006699298_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=yDhdhOZEYLUAX-gutKs&_nc_ht=scontent.fluh1-2.fna&oh=d08d6129d7f4b32ada63980ebd224a85&oe=61830157">
+                        <img *ngIf="comment?.userImage" class="usercreate" src="{{_host}}{{comment?.userImage}}">
+                        <div class="user-name-rule bg-gray">
+                          <strong>{{comment?.userFullName | titlecase}}</strong>
+                          <a class="public-bg"> {{comment?.comment}}</a>
+                          <a class="reply" *ngIf="comment.userId!=credentials.credentials.id"
+                            (click)="replyClick(comment.id)">Reply</a>
+                        </div>
+                      </div>
+  
+                      <article class="replyList">
+                        <div class="replyForm" *ngIf="replyForm == comment.id">
+                          <input type="text" [(ngModel)]="replyOnPost" (keyup.enter)="replyComment(comment.id,'comment',postDetail?.addedBy?.id)"
+                            placeholder="Post a reply..." class="form-control" />
+                          <label>Press Enter to post.</label>
+                        </div>
+                        <article class="replyItem align" *ngFor="let itm of comment?.reply">
+                          <div class="d-flex subReply">
+                            <img class="usercreate img-small"
+                              src="https://scontent.fluh1-2.fna.fbcdn.net/v/t1.6435-9/244092514_107203155069882_3448758748006699298_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=yDhdhOZEYLUAX-gutKs&_nc_ht=scontent.fluh1-2.fna&oh=d08d6129d7f4b32ada63980ebd224a85&oe=61830157">
+                            <div class="user-name-rule bg-gray">
+                              <strong>{{itm?.userFullName | titlecase}}</strong>
+                              <a class="public-bg"> {{itm?.comment}}</a>
+                              <a class="reply " (click)="replyClick(itm.id)">Reply</a>
+                            </div>
+                          </div>
+                          <div class="replyForm" *ngIf="replyForm == itm.id">
+                            <input type="text" [(ngModel)]="replyOnPost2" (keyup.enter)="replyComment(comment.id,'reply',postDetail?.addedBy?.id)"
+                              placeholder="Post a reply..." class="form-control" />
+                            <label>Press Enter to post.</label>
+                          </div>
+                        </article>
+                      </article>
+                    </div>
+                  </article>
+                </article> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+          <app-right-sponsored></app-right-sponsored>
+      </div>
+  
+    </div>
+  </div>

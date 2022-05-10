@@ -1,0 +1,844 @@
+<ngx-spinner bdColor="#fff" size="" color="#fff">
+  <div class='ajax-spinner-bars'>
+    <div class='bar-1'></div>
+    <div class='bar-2'></div>
+    <div class='bar-3'></div>
+    <div class='bar-4'></div>
+    <div class='bar-5'></div>
+    <div class='bar-6'></div>
+    <div class='bar-7'></div>
+    <div class='bar-8'></div>
+    <div class='bar-9'></div>
+    <div class='bar-10'></div>
+    <div class='bar-11'></div>
+    <div class='bar-12'></div>
+    <div class='bar-13'></div>
+    <div class='bar-14'></div>
+    <div class='bar-15'></div>
+    <div class='bar-16'></div>
+  </div>
+</ngx-spinner>
+
+<div class="container-fluid mt-5 pt-5 main-content mb-5">
+  <div class="row">
+    <!-- <div class="col-md-3">
+      <app-sponsored></app-sponsored>
+    </div> -->
+    <div class="col-sm-12 col-lg-6 mx-auto">
+      <div class="col-md-12 p-0">
+        <h1 class="headingPost">{{modPostId && isDraftMod==false ? "Edit
+          Mod" : modPostId && isDraftMod==true ? "Edit Draft Mod" :"Post a New Mod"}}</h1>
+        <p class="descPost" *ngIf="!modPostId"> Post a new mod where you can share what you did and even add affilate
+          links to grow revenue from sharing
+          <a class="text-primary" routerLink="/getting-started" href="javascript:;" routerLinkActive="active"
+            target="_blank">(Read more)</a>
+        </p>
+        <ul class="nav nav-pills w-100" id="pills-tab" role="tablist">
+
+          <li class="nav-item w-50">
+            <button class="btn btn-outline-primary w-100 tab" (click)="setConfigEditor();" id="pills-home-tab"
+              data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
+              aria-selected="true">{{modPostId && isDraftMod==false ? "Edit
+              Mod" : modPostId && isDraftMod==true ? "Edit Draft Mod" :"Post a New Mod"}}</button>
+            <!-- <button class="btn btn-outline-primary w-100 tab" (click)="setConfigEditor()" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+              aria-controls="pills-home" aria-selected="true">{{modPostId? "Edit Mod" :"Post a New Mod"}}</button> -->
+          </li>
+          <li class="nav-item w-50" >
+            <button class="btn btn-outline-primary w-100 tab" id="pills-profile-tab" data-toggle="pill"
+              href="#pills-profile" (click)="resetdata()" role="tab" aria-controls="pills-profile"
+              aria-selected="false">Your Mod Drafts ({{draftModsCount}})</button>
+          </li>
+        </ul>
+      </div>
+      <div class="tab-content" id="pills-tabContent">
+        <div class="shadow p-3 bg-white mt-0 tab-pane fade " id="pills-profile" role="tabpanel"
+          aria-labelledby="pills-profile-tab">
+          <app-draft-mods [reload]="reloaddraft" (editModItem)="addNewItem($event)"
+            (modCount)="showShareModForm($event)"></app-draft-mods>
+        </div>
+        <div class="shadow p-3 bg-white mt-0 tab-pane fade show" id="pills-home" role="tabpanel"
+          aria-labelledby="pills-home-tab">
+          <!-- <h4 class="modal-title text-center mb-3" id="modal-basic-title"><b>Thank you for sharing</b></h4>
+          <hr /> -->
+          <form [formGroup]="modPostForm">
+            <div class="form-group mb-0" *ngIf="isShown == 1">
+              <div class="row">
+                <div class="col-md-12 pb-2">
+                  <div class="form-group mb-2">
+
+                    <div class="col-md-12 p-0">
+                      <h4 class="mb-4 mt-2"><b>RV Details</b></h4>
+                      <p class="text-danger" *ngIf="myDetail?.isSuggestedMakeSeries && (this.selectedmake == '' ||
+        selectedmake == null ||
+        selectedmake == undefined) &&
+      registeredRV">
+                        Your RV Make and Series request is pending approval </p>
+                      <p class="text-danger" *ngIf="!myDetail?.isSuggestedMakeSeries && myDetail?.isSuggestedSeries && (
+        dmodelname == '' ||
+        dmodelname == null ||
+        dmodelname == undefined) &&
+      registeredRV">
+                        Your RV Series request is pending approval </p>
+                      <p class="text-danger" *ngIf="myDetail?.isSuggestedMakeSeries==false && (myDetail?.makeAction=='deleted' || myDetail?.makeAction=='rejected') && (myDetail?.seriesAction=='rejected' || myDetail?.seriesAction=='deleted')
+                                                            registeredRV">
+                        Please select a RV make and series in your profile or click the change button. </p>
+                      <p class="text-danger" *ngIf="myDetail?.makeAction=='approved' && (myDetail?.seriesAction=='rejected' || myDetail?.seriesAction=='deleted') &&
+                                                            registeredRV">
+                        Please select a RV series in your profile or click the change button. </p>
+                      <!-- <p class="text-danger"  *ngIf="!myDetail?.isSuggestedMakeSeries && (myDetail?.makeAction=='deleted' || myDetail?.makeAction=='rejected') &&  (this.selectedmake == '' ||
+        selectedmake == null ||
+        selectedmake == undefined) &&
+      registeredRV">
+                            Please select a RV make and series in your profile or click the change button. </p>
+                          <p class="text-danger" *ngIf="!myDetail?.isSuggestedMakeSeries && !myDetail?.isSuggestedSeries && (this.selectedmake != '' &&
+        selectedmake != null &&
+        selectedmake == undefined) &&  (myDetail?.seriesAction=='deleted' || myDetail?.seriesAction=='rejected') && (
+        dmodelname == '' ||
+        dmodelname == null ||
+        dmodelname == undefined) &&
+      registeredRV">
+                            Please select a RV series in your profile or click the change button. </p> -->
+                    </div>
+                    <span *ngIf="registeredRV"> {{this.rvtype1 }} > {{this.makename}} > {{this.dmodelname}} >
+                      {{myDetail?.year}} </span>
+                    <button *ngIf="registeredRV" class="btn btn-primary ml-3"
+                      (click)="registeredRV=false;onChangeRvType()">Change</button>
+                    <!-- <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="registeredRV" class="mr-1"
+                    (ngModelChange)="onChangeRvType()"> -->
+                  </div>
+                  <!-- <div class="form-group mb-2">
+
+                    <input type="checkbox" formControlName="isFeatured" class="mr-1">
+                    <b>Featured Mod <small>(Select to add this Mod to the featured section of your profile)</small> </b>
+                  </div>
+
+                  <div class="form-group mb-2">
+
+                    <input type="checkbox" formControlName="isCommentDisabled" class="mr-1">
+                    <b>Comments <small>(Select to disable comments on this post)</small></b>
+                  </div> -->
+                </div>
+
+              </div>
+
+              <div class="form-row">
+
+
+
+                <div class="d-flex mod_details w-100">
+                  <div class="common_width" *ngIf="!registeredRV">
+                    <div class="form-group">
+                      <label for="rvType">RV Class <span class="text-danger">*</span></label>
+                      <ngx-select-dropdown [config]="config2" [options]="rvTypes" [multiple]="false"
+                        formControlName="rvType" (change)="selectedRVType($event)" required>
+                      </ngx-select-dropdown>
+                      <div *ngIf="modSubmit && mf.rvType.errors">
+                        <div class="text-danger" *ngIf=" mf.rvType.errors.required">RV Type is
+                          required.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="common_width" *ngIf="!registeredRV">
+                    <div class="form-group">
+                      <label for="make">RV Make <span class="text-danger">*</span> </label>
+                      <ngx-select-dropdown [config]="config4" [options]="allMakes" [multiple]="false"
+                        formControlName="make" (change)="selectedMake($event)" required>
+                      </ngx-select-dropdown>
+                      <div *ngIf="modSubmit && mf.make.errors">
+                        <div class="text-danger" *ngIf="mf.make.errors.required">Make is
+                          required.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="common_width" *ngIf="!registeredRV">
+                    <div class="form-group">
+                      <label for="model">RV Series <span class="text-danger">*</span></label>
+                      <ngx-select-dropdown [config]="config3" [options]="allModels" [multiple]="false"
+                        formControlName="series" (change)="selectedSeries($event)" required>
+                      </ngx-select-dropdown>
+                      <div *ngIf="modSubmit && mf.series.errors">
+                        <div class="text-danger" *ngIf=" mf.series.errors.required">Series is
+                          required.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="common_width" *ngIf="!registeredRV">
+                    <div class="form-group">
+                      <label for="model">RV Model </label>
+                      <input type="text" formControlName="model" class="form-control" placeholder="Model">
+
+                    </div>
+                  </div>
+                  <div class="common_width" *ngIf="!registeredRV">
+                    <div class="form-group">
+                      <label for="year">RV Year <span class="text-danger">*</span></label>
+                      <select name="Year" id="Year" formControlName="year" class="form-control" required>
+                        <option value="{{item}}" *ngFor="let item of years">{{item}}</option>
+                      </select>
+                      <div *ngIf="modSubmit && mf.year.errors">
+                        <div class="text-danger" *ngIf=" mf.year.errors.required">Year is
+                          required.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <h4 class="mb-2 mt-2"><b>About the Mod</b></h4>
+                  <p>Let us Know what type of Mod that you're posting and some details around it.</p>
+                </div>
+                <div class="form-row mod_details">
+                  <div class="col-md-12">
+                    <div class="form-group ">
+                      <!-- <form [formGroup]="myForm"> -->
+                      <label>Mod Title <span class="text-danger">* -</span>Title this mod so the community can easily
+                        Know what kind of mod it was (example:- "Added a Paper Towel Dispenser") </label>
+                      <input type="text" #myInput [maxlength]="maxChars" formControlName="name" class="form-control"
+                        placeholder="Mod Title" required>
+                      <div>
+                        {{maxChars - myInput.value.length}} characters left
+                      </div>
+                      <div *ngIf="modSubmit && mf.name.errors">
+                        <div class="text-danger" *ngIf=" mf.name.errors.required">Title is
+                          required.</div>
+                      </div>
+                      <!-- </form> -->
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-12 mb-3">
+
+                    <div class="form-group mb-0">
+                      <label>Mod Summary <span class="text-danger">* -</span>What did you do and why? </label> <br />
+
+                      <!-- <textarea id="txtarea"></textarea> -->
+                      <textarea rows="3" cols="50" formControlName="whatIDid" class="w-100 control">
+                        </textarea>
+                      <div *ngIf="modSubmit && mf.whatIDid.errors">
+                        <div class="text-danger" *ngIf="mf.whatIDid.errors.required">Mod Summary is
+                          required.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <h4 class="mb-2 mt-2"><b>Mod Photos</b></h4>
+                    <p>Provide the before and after pictures for the mod so the community can see what you did.</p>
+                  </div>
+
+                  <div class="col-md-6 mt-2">
+                    <div class="form-group ">
+
+                      <label class="d-block">Before Photos (Max 3 at a time)</label>
+                      <span *ngFor="let item of beforeImages;let i=index">
+                        <img class="img-after" src="{{_host}}images/modPost/{{item}}">
+                        <i class="fa fa-times" title="Delete" (click)="removeImage(item,'beforeImages',i)"
+                          aria-hidden="true"></i>
+                      </span>
+                      <div *ngIf="BeforeImageErr">
+                        <div class="text-danger">{{BeforeImageErr}}</div>
+                      </div>
+                      <div class="progress" *ngIf="beforeImageLoader" style="max-width:400px;;">
+
+                        <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success"
+                          role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                          [ngStyle]="{width: progress + '%'}">
+                          {{progress}}%</div>
+                      </div>
+
+
+                      <div class="form-group ">
+                        <div class="file-upload">
+                          <div class="file-select">
+                            <div class="file-select-button" id="fileName3">Choose Photos</div>
+                            <div class="file-select-name" id="noFile" *ngIf="!beforeImages">No Photo chosen...</div>
+                            <input (change)="uploadBeforeImages($event.target.files)" accept="image/*" multiple
+                              type="file" name="chooseFile3" id="chooseFile3">
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="col-md-6 mt-2">
+
+                    <div class="form-group ">
+
+                      <label class="d-block">After Photos (Max 3 at a time)</label>
+                      <span *ngFor="let item of afterImages; let j=index">
+                        <img class="img-after" src="{{_host}}images/modPost/{{item}}">
+                        <i class="fa fa-times" title="Delete" (click)="removeImage(item,'afterImages',j)"
+                          aria-hidden="true"></i>
+                      </span>
+                      <div *ngIf="AfterImageErr">
+                        <div class="text-danger">{{AfterImageErr}}</div>
+                      </div>
+                      <div class="progress" *ngIf="afterImageLoader" style="max-width:400px;;">
+
+                        <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success"
+                          role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                          [ngStyle]="{width: progress + '%'}">
+                          {{progress}}%</div>
+                      </div>
+
+                      <div class="form-group ">
+                        <div class="file-upload">
+                          <div class="file-select">
+                            <div class="file-select-button" id="fileName">Choose Photos</div>
+                            <div class="file-select-name" *ngIf="!afterImages" id="noFile">No Photo chosen...</div>
+                            <input #uploadafter (change)="uploadAfterImages($event.target.files)" accept="image/*"
+                              multiple type="file" name="chooseFile" id="chooseFile">
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                    </div>
+                  </div>
+                  <div class="col-md-12 ">
+                    <h4 class="mb-2 mt-4"><b>Mod Specifications </b></h4>
+                    <p>Let us know some quick details about the mod so we can effectively classify it and make to easy
+                      for others to find.</p>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="modCategory">Mod Type <span class="text-danger">*</span></label>
+                      <select name="modCategory" id="modCategory" (change)="getModSubCategories($event.target.value)"
+                        [ngClass]="{ 'is-invalid': modSubmit && mf.modCategory.errors }" formControlName="modCategory"
+                        class="form-control" required>
+                        <option value="" selected disabled>{{modCategories.length>0 ? 'Select Mod Type' : 'No Data
+                          Found'}}
+                        </option>
+                        <option *ngFor="let item of modCategories" value="{{item.id}}">{{item.name}}</option>
+                      </select>
+                      <div *ngIf="modSubmit && mf.modCategory.errors">
+                        <div class="text-danger" *ngIf=" mf.modCategory.errors.required">Mod Type is
+                          required.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-7">
+                    <div class="form-row">
+                      <div class="col-sm-6 col-lg-4">
+                        <div class="form-group mod_size">
+                          <label for="size">Mod Size <span class="text-danger">*</span></label>
+                          <select name="size" id="size" [ngClass]="{ 'is-invalid': modSubmit && mf.size.errors }"
+                            formControlName="size" class="form-control" required>
+                            <option value="" selected disabled>{{difficulties.length>0 ? 'Select Mod Size' : 'No Data
+                              Found'}}
+                            </option>
+                            <option class="deskTop" title="{{item?.description}}" *ngFor="let item of difficulties"
+                              value="{{item.id}}">
+                              {{item.name}}
+                            </option>
+                            <option class="d-none ph-block pt-3 pb-3" *ngFor="let item of difficulties"
+                              value="{{item.id}}">
+                              <p class="d-block"> <b>{{item.name}}</b></p>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <div class="phViewDesc">{{item?.description}}</div>
+                            </option>
+                          </select>
+                          <div *ngIf="modSubmit && mf.size.errors">
+                            <div class="text-danger" *ngIf=" mf.size.errors.required">Mod Size is
+                              required.</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="size">Difficulty<span class="text-danger">*</span> </label>
+                          <select name="skillLevel" id="skillLevel"
+                            [ngClass]="{ 'is-invalid': modSubmit && mf.skillLevel.errors }" formControlName="skillLevel"
+                            class="form-control" required>
+                            <option value="" selected Disabled>{{skillLevelNeeded?.length>0 ? 'Select Difficulty' : 'No
+                              Data
+                              Found'}}</option>
+                            <option *ngFor="let item of skillLevelNeeded" value="{{item.id}}">{{item.name}}</option>
+                          </select>
+                          <div *ngIf="modSubmit && mf.skillLevel.errors">
+                            <div class="text-danger" *ngIf=" mf.skillLevel.errors.required">Difficulty is
+                              required.</div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="size">Total Time<span class="text-danger">*</span></label>
+                          <select name="timerange" id="timerange"
+                            [ngClass]="{ 'is-invalid': modSubmit && mf.timerange.errors }" formControlName="timerange"
+                            class="form-control" required>
+                            <option selected disabled value="">{{timeRanges.length>0 ? 'Select Total Time' : 'No Data
+                              Found'}}
+                            </option>
+                            <option *ngFor="let item of timeRanges" value="{{item.totalHours}}">{{item.totalHours}}
+                            </option>
+                          </select>
+                          <div *ngIf="modSubmit && mf.timerange.errors">
+                            <div class="text-danger" *ngIf=" mf.timerange.errors.required">Total Time is
+                              required.</div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group ">
+                      <label>Total Cost($)</label>
+                      <input type="number" min="0" oninput="this.value = Math.abs(this.value)"
+                        formControlName="totalCost" class="form-control" placeholder="Total Cost">
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <h4 class="mb-2 mt-4"><b>Products Used</b> <small class="text-primary green">Generate revenue with
+                        affiliate links! <a class="text-primary" routerLink="/getting-started" href="javascript:;"
+                          routerLinkActive="active" target="_blank"><i>Read more</i></a></small></h4>
+                    <p>Identify the products you used to accomplish this mod so the community can consider doing it
+                      themselves.</p>
+                  </div>
+                  <!-- <form [formGroup]="productForm" class="w-100">
+                          <div class="form-row"> -->
+
+                  <!-- <div class="form-group w-100 mb-0" formArrayName="productsFormArray"
+                              *ngFor="let links of productForm.get('productsFormArray')['controls']; let i = index;">
+                              <div class="d-flex justify-content-between align-items-center input_relative pl-2 pr-2 w-100"
+                                [formGroupName]="i">
+                                <div class="tools_link w-100">
+                                  <div class="form-row  w-100">
+                                    <div class="col-md-6 mb-3">
+                                      <label>Product Title<span class="text-danger">*</span></label>
+                                      <input type="text" class="form-control" formControlName="product" />
+                                  
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                      <label>Link to product (Optional)</label>
+                                      <input type="text" class="form-control" formControlName="affiliateLink" />
+                                      <div *ngIf="productSubmit && links.get('affiliateLink').errors">
+                                        <div class="text-danger" *ngIf="links.get('affiliateLink').errors?.pattern">Invalid link</div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-12 text-right pt-1" *ngIf="productsFormArray?.length > 1">
+                                      <button type="button" placement="top" ngbTooltip="Delete" (click)="deleteProductFromForm(i)"
+                                        class="btn btn-danger "><i class="fa fa-trash"></i></button>
+                                    </div>
+                                  </div>
+                                </div>
+                    
+                              </div>
+                            </div> -->
+                  <div class="col-md-12 mb-3 pl-2">
+                    <button class="btn btn-primary" type="button" (click)="openTool(productModal)"> Add Products
+                    </button>
+
+                  </div>
+                  <div class="col-md-12 pl-2">
+                    <div class="badges" *ngFor="let item of productArray;let productindex=index"
+                      [ngClass]="{'tool-url': item?.affiliateLink!=''}"><span
+                        (click)="editProduct(productindex)">{{item?.product}}</span><i class="fa fa-times-circle ml-2"
+                        aria-hidden="true" title="Delete" (click)="deleteProduct(item)"></i></div>
+                  </div>
+                  <!-- <div class="text-right w-100 border-top pt-3">
+                              <button type="button" (click)="submitProduct()" class="btn btn-primary">Submit</button>
+                            </div> -->
+                  <!-- </div>
+                        </form> -->
+                  <div class="container pl-1 pr-1">
+                    <div class="accordion" id="accordionExample">
+                      <div class="card">
+                        <div class="card-head" id="headingOne">
+                          <h2 class="mb-0 chnage collapsed" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="false" aria-controls="collapseOne">
+
+                          </h2>
+                        </div>
+                        <div id="collapseOne1">
+                          <div id="collapseOne" class="collapse accor " aria-labelledby="headingOne">
+                            <div class="card-body">
+                              <h3><span class="textclr">Step by Step "How To"</span> <a><small
+                                    class="text-green">Revenue Opportunity!</small></a></h3>
+                              <p>Provide details on what you did to install your mod so the community can consider doing
+                                this mod as well
+                                (think a “how to” description) You can also insert affiliate links to where you can make
+                                money as
+                                members purchase the products used to do the mod on their own vehicle <a
+                                  class="text-primary" routerLink="/getting-started" href="javascript:;"
+                                  routerLinkActive="active" target="_blank">(read more)</a></p>
+                              <div class="col-md-6 pl-0">
+
+                                <div class="form-group mb-0">
+                                  <label>Link to YouTube "How to" Video </label>
+                                  <input formControlName="youtubeLink" type="text" class="form-control"
+                                    placeholder="YouTube Link" (change)="validateYouTubeUrl($event.target.value)">
+                                  <div *ngIf="!validUrl">
+                                    <div class="text-danger">Link is invalid.</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-12 pl-0 mt-3">
+                                <div class="form-group ">
+                                  <label>How to Steps<small> (step by step of what you did with supporting photos,
+                                      affiliate links, etc.)</small></label>
+                                  <textarea id="txtarea"></textarea>
+                                  <!-- <div *ngIf="modSubmit && mf.whatIDid.errors">
+                                            <div class="text-danger" *ngIf="mf.whatIDid.errors.required">What I Did is
+                                              required.</div>l;m
+                                          </div>
+                                          <span class="mb-1">May contain affiliate URLs</span> -->
+                                </div>
+                              </div>
+                              <div class="col-md-7 pl-0">
+
+                                <div class="form-group ">
+
+                                  <label class="d-block">Upload Doc (Max 5)</label>
+                                  <span *ngFor="let item of mf.documents.value; let j=index">
+                                    <a style="position: relative;z-index: 99;" placement="left"
+                                      ngbTooltip="{{item?.originalName}}" *ngIf="item" target="_blank"
+                                      href="{{_host}}images/modPost/{{item?.doc}}"><i class="fa fa-file-text"></i></a>
+                                    <i class="fa fa-times" (click)="deleteDocument(item?.doc,j)" aria-hidden="true"></i>
+                                  </span>
+                                  <div *ngIf="DocErr">
+                                    <div class="text-danger">{{DocErr}}</div>
+                                  </div>
+                                  <div class="progress" *ngIf="uploadDocLoader" style="max-width:400px;;">
+
+                                    <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success"
+                                      role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                      [ngStyle]="{width: progress + '%'}">
+                                      {{progress}}%</div>
+                                  </div>
+
+
+
+                                  <div class="form-group ">
+                                    <div class="file-upload text-left">
+                                      <div class="file-select">
+                                        <div class="file-select-button" id="fileName">Choose Document</div>
+                                        <div class="file-select-name" *ngIf="!mf.documents.value" id="noFile">No File
+                                          chosen...</div>
+                                        <input #modDocInput (change)="uploadDocument($event.target.files)"
+                                          accept=".pdf,.doc" type="file" name="modDocInput" multiple>
+
+                                      </div>
+                                      <span class="mb-1">(Optional) Upload a document with instructions, manuals,
+                                        receipts
+                                        etc....</span>
+                                    </div>
+                                  </div>
+
+
+
+                                </div>
+                              </div>
+
+                              <!-- <form [formGroup]="toolForm"  *ngFor="let links of productForm.get('productsFormArray')['controls']; let i = index;">
+                                            <div class="form-row"> -->
+
+                              <!-- <div class="form-group w-100" formArrayName="toolsFormArray">
+                                                <div class="d-flex justify-content-between align-items-center input_relative pl-2 pr-2 w-100"
+                                                  [formGroupName]="i">
+                                                  <div class="tools_link w-100">
+                                                    <div class="form-row  w-100">
+                                                      <div class="col-md-4 mb-3">
+                                                        <label>Tool Title<span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" formControlName="tool" />
+                                                       
+                                                      </div>
+                                                      <div class="col-md-8 mb-3">
+                                                        <label>Link to product (optional) - <a class="text-primary fslink">revenue Opportunity with affilate link</a></label>
+                                                        <input type="text" class="form-control" formControlName="affiliateLink" />
+                                                       
+                                                      </div>
+                                                     
+                                                    </div>
+                                                  </div>
+                                      
+                                                </div>
+                                              </div> -->
+                              <h4 class="mb-2 mt-4"><b>Tools Used</b></h4>
+                              <p>Identify the tools you used to accomplish this mod.</p>
+                              <div class="col-md-12 mb-3 pl-0">
+                                <button class="btn btn-primary" type="button" (click)="openTool(toolModal)"> Add Tools
+                                </button>
+
+                              </div>
+                              <div class="col-md-12 pl-0">
+                                <div class="badges" *ngFor="let item of toolArray;let toolindex=index"
+                                  [ngClass]="{'tool-url': item?.affiliateLink!=''}"><span
+                                    (click)="edittool(toolindex)">{{item?.tool}}</span><i title="Delete"
+                                    class="fa fa-times-circle ml-2" aria-hidden="true" (click)="deleteTool(item)"></i>
+                                </div>
+                              </div>
+                              <!-- <div class="text-right w-100 border-top pt-3">
+                                                <button type="button" (click)="submitTool()" class="btn btn-primary">Submit</button>
+                                              </div> -->
+
+                              <!-- </div>
+                                          </form> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div class="card-head" id="headingTwo">
+                          <h2 class="mb-0 sec collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="false" aria-controls="collapseTwo">
+
+                          </h2>
+                        </div>
+                        <div id="collapseTwo" class="collapse accor1" aria-labelledby="headingTwo">
+                          <div class="card-body">
+                            <h3><span class="textclr">Advanced Posting Options</span></h3>
+                            <div class="col-md-12 p-0">
+                              <div class="form-group">
+                                <div class="input-group">
+                                  <label>Tags</label>
+                                  <input type="text" class="form-control w-100" formControlName="tags"
+                                    (keyup.enter)="splitByComma($event.target.value)" placeholder="Tags"><br />
+                                  <small class="mb-1"> Add tags separated by commas then press enter to increase mod
+                                    visibility</small>
+                                </div>
+                                <div class="badges" *ngFor="let item of tagsArray">{{item}}<i title="Delete"
+                                    class="fa fa-times-circle ml-2" aria-hidden="true" (click)="deleteTag(item)"></i>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group mb-2">
+
+                              <input type="checkbox" formControlName="isFeatured" class="mr-1">
+                              <b>Pin this mod to the top of your profile </b>
+                            </div>
+                            <div class="form-group mb-2">
+                              <input type="checkbox" formControlName="isCommentDisabled" class="mr-1">
+                              <b>Disable comments on this mod </b>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-5">
+                    <div class="form-group posAlign">
+                      <label for="size">Eligible Contests </label>
+
+                      <div id="sizes" class="form-control dropdown-toggle disabled" data-toggle="dropdown">
+                        {{getSizeValues()}} <i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                      <div class="dropdown-menu">
+                        <li *ngFor="let item of contents" placement="right" (click)="formPatchs({size:item.id})"
+                          value="{{item?.id}}">
+                          <input type="checkbox" class="mr-2" id="vehicle1" name="vehicle1" value="{{item}}">
+                          <a href="test-contest">{{item?.key}}</a>
+                        </li>
+                      </div>
+                    </div>
+                  </div> -->
+
+                </div>
+
+
+              </div>
+            </div>
+
+
+            <!-- <div class="form-row"> -->
+
+
+
+
+
+
+
+
+
+
+            <!-- <div class="d-flex mb-3">
+                <h4 class="pr-3"><b>Items Used</b></h4>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="check1" name="enable" value="something" checked>
+                  <label class="form-check-label">Advanced Add with affiliate links</label>
+                </div>
+              </div>
+              <div class="col-md-12 mb-3">
+                <div class="form-row border add_used pt-2 pb-2">
+                  <div class="col-md-3">
+                    <label class="mb-0 w-100 d-flex justify-content-between align-items-center used">Tools Used
+                      <button class="btn btn-primary" placement="right" ngbTooltip="Add Tools"
+                        (click)="openTool(toolModal)"> <i class="fa fa-plus"></i>
+                      </button></label>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="badges" *ngFor="let item of toolArray;let toolindex=index"
+                      [ngClass]="{'tool-url': item?.affiliateLink!=''}"><span
+                        (click)="edittool(toolindex)">{{item?.tool}}</span><i class="fa fa-times-circle ml-2"
+                        aria-hidden="true" (click)="deleteTool(item)"></i></div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-12 mb-3">
+                <div class="form-row border add_used pt-2 pb-2">
+                  <div class="col-md-3">
+                    <label class="mb-0 w-100 d-flex justify-content-between align-items-center used">Products Used
+                      <button class="btn btn-primary" placement="right" ngbTooltip="Add Products"
+                        (click)="openTool(productModal)"> <i class="fa fa-plus"></i>
+                      </button></label>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="badges" *ngFor="let item of productArray;let productindex=index"
+                      [ngClass]="{'tool-url': item?.affiliateLink!=''}"><span
+                        (click)="editProduct(productindex)">{{item?.product}}</span><i class="fa fa-times-circle ml-2"
+                        aria-hidden="true" (click)="deleteProduct(item)"></i></div>
+                  </div>
+                </div>
+
+              </div> -->
+
+            <!-- </div> -->
+
+          </form>
+
+          <div class="pl-0 pr-0">
+            <button type="button" (click)="addModPost(ErrorSeriesMake)" class="btn btn-primary mr-2">Publish</button>
+            <button type="button" (click)="draftModPost()" class="btn btn-primary mr-2">{{modPostId? "Save Draft" :"Save
+              As Draft"}}</button>
+            <!-- <button type="button" *ngIf="modDetail" (click)="resetFormData()" class="btn btn-primary mr-2">Add New Post</button> -->
+            <button type="button" *ngIf="isDraftMod==false" (click)="goBack()" class="btn btn-primary">Close</button>
+            <button type="button" *ngIf="modPostId && isDraftMod==true" (click)="closeEditDraft()"
+              class="btn btn-primary">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-md-3">
+      <app-right-sponsored></app-right-sponsored>
+    </div> -->
+  </div>
+</div>
+
+<ng-template #ErrorSeriesMake let-modal>
+
+  <div class="modal-body">
+    <div class="p-2 text-center">
+      <h4>Your RV is pending approval. You can't publish a mod for it until approved. You may save it as a draft or
+        publish a mod
+        for a different RV by clicking the Change button.</h4>
+    </div>
+
+    <button type="button" class="w-100 btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click');">
+      OK
+    </button>
+  </div>
+
+</ng-template>
+
+<ng-template #toolModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Tools Used</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.close('Save click');toolForm.reset()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="toolForm">
+      <div class="form-row">
+
+        <hr />
+        <div class="form-group w-100" formArrayName="toolsFormArray"
+          *ngFor="let links of toolForm.get('toolsFormArray')['controls']; let i = index;">
+          <div class="d-flex justify-content-between align-items-center input_relative w-100" [formGroupName]="i">
+            <div class="tools_link w-100">
+              <div class="form-row  w-100">
+                <div class="col-sm-12 col-lg-4 mb-3">
+                  <label>Tool Title<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="tool" />
+                  <div *ngIf="toolSubmit && links.get('tool').errors">
+                    <div class="text-danger" *ngIf="links.get('tool').errors.required">Tool is
+                      required.</div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-lg-7 mb-3">
+                  <label>Link to Tool (optional) -<span class="text-primary "> revenue opportunity with affiliate link
+                    </span></label>
+                  <input type="text" class="form-control" formControlName="affiliateLink" />
+                  <div *ngIf="toolSubmit && links.get('affiliateLink').errors">
+                    <div class="text-danger" *ngIf="links.get('affiliateLink').errors?.pattern">Invalid link</div>
+                  </div>
+                </div>
+                <div class="col-md-1 mt-4 pt-1 text-center" *ngIf="toolsFormArray?.length > 1">
+                  <button type="button" (click)="delete(i)" placement="top" ngbTooltip="Delete"
+                    class="btn btn-danger "><i class="fa fa-trash"></i></button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-12 mb-3 mt-1">
+          <button class="btn btn-primary" (click)="addTools()">+ Add Another Tool </button>
+        </div>
+        <div class="text-right w-100 border-top pt-3">
+          <button type="button" (click)="submitTool()" class="btn btn-primary">Submit</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template #productModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Products Used</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.close('Save click');productForm.reset()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="productForm">
+      <div class="form-row">
+
+        <hr />
+        <div class="form-group w-100" formArrayName="productsFormArray"
+          *ngFor="let links of productForm.get('productsFormArray')['controls']; let i = index;">
+          <div class="d-flex justify-content-between align-items-center input_relative w-100" [formGroupName]="i">
+            <div class="tools_link w-100">
+              <div class="form-row  w-100">
+                <div class="col-md-4 mb-3">
+                  <label>Product Title <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="product" />
+                  <div *ngIf="productSubmit && links.get('product').errors">
+                    <div class="text-danger" *ngIf="links.get('product').errors.required">Product is
+                      required.</div>
+                  </div>
+                </div>
+                <div class="col-md-7 mb-3">
+                  <label>Link to Product (optional)</label>
+                  <input type="text" class="form-control" formControlName="affiliateLink" />
+                  <div *ngIf="productSubmit && links.get('affiliateLink').errors">
+                    <div class="text-danger" *ngIf="links.get('affiliateLink').errors?.pattern">Invalid link</div>
+                  </div>
+                </div>
+                <div class="col-md-1 mt-4 pt-1" *ngIf="productsFormArray?.length > 1">
+                  <button type="button" placement="top" ngbTooltip="Delete" (click)="deleteProductFromForm(i)"
+                    class="btn btn-danger "><i class="fa fa-trash"></i></button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-12 mb-3 mt-1">
+          <button class="btn btn-primary" type="button" (click)="addProducts()">+ Add another product </button>
+        </div>
+
+        <div class="text-right w-100 border-top pt-3">
+          <button type="button" (click)="submitProduct()" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

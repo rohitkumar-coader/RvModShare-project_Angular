@@ -1,0 +1,57 @@
+
+
+/* .rules h1, h2 {
+  color: #ffffff;
+} */
+
+.rules h1 {
+  font-size: 34px;
+}
+
+/* .rules h2 {
+  font-size: 18px;
+  line-height: 34px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  display: block;
+  background-color: #03e08e;
+  margin: 0;
+  cursor: pointer;
+  padding: 0px 1rem;
+} */
+/* .rules p {
+  color: #000;
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  max-height: 1200px;
+  opacity: 1;
+  transform: translate(0, 0);
+  margin-top: 14px;
+  z-index: 2;
+} */
+/* h1:after {
+  content: "";
+  width: 14rem;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient( 
+25deg, #03e08e, #023870);
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+}  */
+@media (max-width: 991px) {
+  .main-content {
+margin-top: 0px !important;
+padding-top: 0px !important;
+}
+}
+@media (max-width: 767px) {
+.rules h1 {
+  font-size: 26px;
+  margin-top: 2rem;
+}
+}

@@ -1,0 +1,7 @@
+
+<app-header *ngIf="!hideHeader"></app-header>
+<app-sidebar [tooglebutton]="tooglebutton"  (Layout)="layout($event)" *ngIf="hideSidebar"></app-sidebar>
+<div [ngClass]="{'isFull': tooglebutton}">
+    <router-outlet></router-outlet>
+</div>
+<app-footer *ngIf="showFooter" [ngClass]=" currentUser? 'test' : 'test1'"></app-footer>

@@ -1,0 +1,7 @@
+.userItem img {
+    height: 15rem;
+    display: block;
+    margin: auto;
+    object-fit: contain;
+  }
+  

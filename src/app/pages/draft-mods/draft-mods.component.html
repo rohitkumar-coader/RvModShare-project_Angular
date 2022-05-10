@@ -1,0 +1,166 @@
+<div class="container-fluid mt-5 pt-5 main-content" *ngIf="!showTabs">
+</div>
+<div class="container-fluid mt-0 pt-1 main-content">
+  <div class="row">
+
+    <!-- <div class="col-md-3">
+            <app-sponsored></app-sponsored>
+          </div> -->
+    <div class="col-md-12 mb-4 p-0 mx-auto">
+
+      <h1 class="follow-heading text-left mb-4">Draft Mods</h1>
+      <div class="shadow mb-3" *ngFor="let item of favMods; let i=index">
+
+        <div class="row" *ngIf="favMods.length>0">
+          <div class="col-md-4">
+            <a class="pointer-cursor">
+              <img *ngIf="item?.afterImages?.length==0 && item?.beforeImages?.length==0"
+                class="img-responsive roundeds contain" src="assets/img/follow-new1.png">
+              <img *ngIf="item?.afterImages?.length>0 " class="img-responsive roundeds contain"
+                src="{{_host}}images/modPost/{{item?.afterImages[0]}}">
+              <img *ngIf="item?.afterImages?.length==0 && item?.beforeImages?.length>0"
+                class="img-responsive roundeds contain" src="{{_host}}images/modPost/{{item.beforeImages[0]}}">
+            </a>
+          </div>
+          <div class="col-md-8">
+            <div class="bagesSection">
+              <article class="postTop mb-2">
+                <div class="d-flex">
+
+                  <p class="mb-0 pt-1">
+                    <a placement="top" class="title" ngbTooltip="{{item?.name}}"><b>{{item?.name}}</b><span
+                        class="ml-2">{{item?.createdAt | date:'longDate' }}</span></a>
+                  </p>
+                </div>
+
+
+                <div class="text-right-align-btn rightAlignCls">
+                  <!-- <a ngbTooltip="Edit" class="alignmentCopyLink about_edit" [routerLink]="['/share-mod',item?.slug]">
+                                <i class="fa fa-pencil"></i>
+                              </a> -->
+                  <a ngbTooltip="Edit" class="alignmentCopyLink about_edit" (click)=edit(item?.slug)>
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                  <a ngbTooltip="Delete" (click)="deleteModPost(item?.id,i)" class="alignmentCopyLink about_edit">
+                    <i class="fa fa-trash"></i>
+                  </a>
+                </div>
+
+
+              </article>
+            </div>
+              <div class="main_badges">
+                <div class="d-flex align-items-center w-100 inner_prof_badge mb-1 mt-2">
+              
+                  <div class="prof_img">
+                    <img *ngIf="item?.addedBydetails?.image=='' || item?.addedBydetails?.image==null" class="mr-2"
+                      src="assets/img/user.png" alt="profile_img">
+                    <img *ngIf="item?.addedBydetails?.image!='' && item?.addedBydetails?.image!=null" class="mr-2"
+                      src="{{getUrl(item?.addedBydetails?.image,item?.addedBydetails)}}" alt="profile_img">
+                  </div>
+              
+                  <div>
+                    <a href="javascript:void(0)" class="large_font"
+                      (click)="goTouserProfile('/dashboard/profile')">
+                      <b>{{item?.addedBydetails?.fullName}}</b>
+              
+                    </a>
+                    <div class="common_badge">
+                      <p class="mb-2" *ngIf="item?.addedBydetails?.ownRV == false"><b>Dreamer</b></p>
+                      <p class="mb-2" *ngIf="item?.addedBydetails?.ownRV == true"><b>Owner</b></p>
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="row w-100">
+                  <div class="col-md-6 ">
+              
+              
+                    <div class="tagsAlign">
+                      <h4 class="mod-rv-texts"><small> {{item?.year && item?.year!=0 ? item?.year : ""}} {{item?.rvType}}
+                          {{item?.make?.name}}
+                          {{item?.series?.name | titlecase}} {{item?.model}}
+                        </small></h4>
+              
+                    </div>
+                    <h6 class="mb-0">{{item?.catName}}</h6>
+                    <h4><small>{{item?.sizedetails?.name}}</small></h4>
+                  </div>
+                  <div class="col-md-6 border-left">
+                    <div class="rightAlign ">
+                      <b>Summary</b>
+                      <p class="truncate font_normal" [innerHTML]="htmlLength(item?.newW ,100)"></p>
+                    </div>
+                  </div>
+                </div>
+              
+              
+                <!-- <div class="likeShare">
+                  <a><i class="fa fa-thumbs-up" ngbTooltip="Likes" aria-hidden="true"></i>{{item?.likesTotal}}</a>
+                  <a *ngIf="!item?.isCommentDisabled"><i class="fa fa-comment" ngbTooltip="Comments"
+                      aria-hidden="true"></i>{{item?.commentTotal}}</a>
+                  <a><i class="fa fa-share-alt" aria-hidden="true" ngbTooltip="Shares"></i> {{item?.totalShare}}</a>
+                  <a style="width: 23px;" *ngIf="item?.skillLevel=='6193a45efc4c9b3d4ce7ad62'" class="high"><img
+                      src="assets/img/low.png" ngbTooltip="Low" class="skill-ic" alt=""></a>
+                  <a style="width: 23px;" class="high" *ngIf="item?.skillLevel=='6194c77a4d8a1d9518bbe18c'"><img
+                      src="assets/img/medium.png" ngbTooltip="Medium" class="skill-ic" alt=""></a>
+                  <a class="high" *ngIf="item?.skillLevel=='6197d36401d78bc07b538196'"><img src="assets/img/high.png"
+                      ngbTooltip="High" class="skill-ic" alt=""></a>
+                  <a><i class="fa fa-clock-o" ngbTooltip="{{item?.timerange}}" placement="top" aria-hidden="true"></i></a>
+              
+                </div> -->
+              </div>
+            <!-- <div class="main_badges">
+              <div class="d-flex align-items-center w-100 inner_prof_badge mb-1 mt-2">
+<div class="prof_img">
+  <img *ngIf="item?.addedBydetails?.image=='' || item?.addedBydetails?.image==null" class="mr-2"
+    src="assets/img/user.png" alt="profile_img">
+  <img *ngIf="item?.addedBydetails?.image!='' && item?.addedBydetails?.image!=null" class="mr-2"
+    src="{{getUrl(item?.addedBydetails?.image,item?.addedBydetails)}}" alt="profile_img">
+</div>
+            <div class="prof_name">
+              <a href="javascript:void(0)" routerLink="/profile">
+                <strong> {{item?.addedBydetails?.fullName}}</strong></a>
+            </div>
+
+            <div class="common_badge">
+              <p class="mb-2" *ngIf="item?.addedBydetails?.ownRV == false"><b>Dreamer</b></p>
+              <p class="mb-2" *ngIf="item?.addedBydetails?.ownRV == true"><b>Owner</b></p>
+            </div>
+</div>
+            </div>
+            <div class="row w-100">
+              <div class="col-md-6 ">
+
+
+                <div class="tagsAlign">
+                  <h4 class="mod-rv-texts"><small> {{item?.year}} {{item?.rvType}}
+                      {{item?.make?.name}}
+                      {{item?.series?.name | titlecase}} {{item?.model}}
+                    </small></h4>
+                </div>
+                <h6 class="mb-0">{{item?.catName}}</h6>
+                <h4><small>{{item?.sizedetails?.name}}</small></h4>
+              </div>
+              <div class="col-md-6 border-left">
+                <div class="rightAlign ">
+                  <b>Summary</b>
+                  <p class="truncate" [innerHTML]="htmlLength(item?.whatIDid,100)"></p>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+      </div>
+      <div class="text-center text-danger" *ngIf="favMods.length==0">
+        <h4>No Data Found</h4>
+      </div>
+    </div>
+
+    <!-- <div class="col-md-3">
+            <app-right-sponsored></app-right-sponsored>
+          </div> -->
+
+  </div>
+</div>

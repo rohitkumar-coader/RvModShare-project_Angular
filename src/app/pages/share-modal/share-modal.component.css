@@ -1,0 +1,29 @@
+.box img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+  }
+  .box {
+    display: flex;
+    padding: 10px 0px;
+    border-bottom: 1px solid #cccccc69;
+    justify-content: space-between;
+  }
+  .cretDropdown .dropdown-item {
+    padding: 8px 10px !important;
+    transition: all .2s ease-in;
+}
+.shared:hover{
+  color: #03e08e !important;
+}
+.connection_icon img {
+  margin-right: 0px !important;
+}
+.connection_icon .imgBtn {
+  padding: 0px !important;
+}
+.cretDropdown .dropdown-item:hover {
+  color: #03e08e;
+}

@@ -1,0 +1,409 @@
+<div class="modal-welcome">
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-" id="modal-basic-title">
+        Fantastic, you're all set!
+      </h4>
+    </div>
+    <div class="modal-body pb-5">
+      <div class=" d-block m-auto">
+        <div class="d-flex" style="  justify-content: center;">
+          <h1 class="mb-0">Welcome to</h1><img class="logo" src="assets/img/rvmodshare.png">
+        </div>
+      </div>
+      <p style="  text-align: justify; padding: 0px 19px;">Before you jump in, we want to make sure you understand what
+        you're about
+        to see. Here in the community, all sorts of mods get posted by different levels of modders. We can’t guarantee
+        that all mods are
+        good or appropriate for you. So, in that spirit, before trying anything you see here, DO YOUR RESEARCH. The
+        responsibility is
+        fully on you, not us if something goes wrong. If you're cool with that, then please read our Hold Harmless
+        Agreement
+        <a>here</a>, and
+        click agree. So glad you're joining us!
+      </p>
+      <!-- <p style="  text-align: justify; padding: 0px 19px;">Before you jump in, we want to make sure you understand what you're about 
+          to see. Here in the community, all sorts of mods get posted by different levels of modders. We can’t guarantee that all mods are
+           good or appropriate for you. So, in that spirit, before trying anything you see here, DO YOUR RESEARCH. The responsibility is 
+           fully on you, not us if something goes wrong. If you're cool with that, then please read our Hold Harmless Agreement
+          <a  (click)="viewHarmnessPage(content);">here</a>, and 
+          click agree. So glad you're joining us! </p> -->
+      <div class="centered agreeCheck">
+        <input id="chck" [(ngModel)]="isHarmless" type="checkbox" [ngModelOptions]="{standalone: true}">
+        <!-- <input id="chck" [(ngModel)]="isHarmless" (ngModelChange)="markHrmless(isHarmless);" type="checkbox" [ngModelOptions]="{standalone: true}"> -->
+        <label for="chck">Agree<span class="qmark">?</span><span class="fstop">.</span></label>
+        <div class="bg"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+
+      <div class="stepDots">
+        <span></span>
+        <span class="active" (click)="open(content);d('Cross click')"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <button type="button" [disabled]="!isHarmless" (click)="open(content1);d('Cross click')"
+        class="btn nextBtn">Next</button>
+    </div>
+  </ng-template>
+
+  <ng-template #content0 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-" id="modal-basic-title">
+        Just a few more things to finish up your RVmodshare profile...
+      </h4>
+    </div>
+    <div class="modal-body">
+      <div class="col-md-12 mx-auto">
+        <form class="d-contents" [formGroup]="Form">
+          <div class="profile-pic-wrapper">
+            <div class="pic-holder shadow">
+              <!-- uploaded pic shown here -->
+              <img id="profilePic" *ngIf="profileImage==''" class="pic noto-img " src="assets/img/no-img.png">
+              <!-- {{profileImage}} nmbnbmnb  -->
+              <img id="profilePic" *ngIf="profileImage!=''" class="pic" src="{{getUrl(profileImage,user)}}">
+
+
+              <label for="newProfilePhoto" class="upload-file-block">
+                <div class="text-center">
+                  <div class="mb-2">
+                    <i class="fa fa-camera fa-2x"></i>
+                  </div>
+                  <div class="text-uppercase">
+                    UPLOAD <br />PROFILE PHOTO
+                  </div>
+                </div>
+              </label>
+              <input #myInput class="uploadProfileInput" type="file" (change)="uploadImage($event.target.files)"
+                id="newProfilePhoto" accept="image/*" style="display: none;" />
+
+            </div>
+            <div class="progress" *ngIf="imageLoader" style="width:25%;">
+
+              <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success" role="progressbar"
+                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progress + '%'}">
+                {{progress}}%</div>
+            </div>
+          </div>
+
+          <div class="user-detail shadow row">
+            <div class="row">
+              <div class="col-md-12">
+                <h4>Why do we need this info?</h4>
+                <p>We use this information to customize your mod content and make suggestions for connections and groups
+                  based on your RV
+                  type. We also use this to automatically categorize the mods you share. For wannabes, we show you mods
+                  for the RVs you are interested in.</p>
+              </div>
+            </div>
+            <div class="max-width">
+              <div class="row w-100">
+                <div class="col-md-6">
+                  <h4 class="text-left">Choose your RV type below:</h4>
+                  <div class="form-group mb-1 row">
+                    <div class="col-md-6 pr-0">
+                      <input type="radio" [ngModelOptions]="{standalone: true}" [value]="false" [(ngModel)]="ownRV"
+                        class="mr-1">
+                      <label>I don’t own a RV yet</label>
+                    </div>
+                    <div class="col-md-6  pr-0">
+                      <input type="radio" [ngModelOptions]="{standalone: true}" [value]="true" [(ngModel)]="ownRV"
+                        class="mr-1">
+                      <label>I own a RV</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-12">
+                <p *ngIf="!ownRV">Select the RV you are most interested in:</p>
+                <p *ngIf="ownRV">Choose RV data from below :</p>
+              </div>
+              <div class="col-md-12">
+                <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="isSuggestedMakeSeries"
+                  class="mr-1" (change)="onChangeSuggestedMakeSeries()">
+                <b>Click here to add if you don't find your RV Make/Series</b>
+              </div>
+                <div class="col-md-12">
+                  <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="isSuggestedSeries" class="mr-1"
+                    (change)="onChangeSuggestedSeries()">
+                  <b>Click here to add if you don't find your RV Series</b>
+                </div> -->
+
+
+              <div class="row w-100">
+                <div class="col-md-6">
+                  <!-- <form class="d-contents"> -->
+                  <div class="form-group">
+                    <label for="Type">RV Class <span class="text-danger">*</span></label>
+                    <ngx-select-dropdown [config]="config1" [options]="rvTypes" [multiple]="false"
+                      formControlName="rvType" (change)="selectedRVType($event)">
+                    </ngx-select-dropdown>
+                    <div *ngIf="submitted && f.rvType.errors" class="invalid-feedback">
+                      <div *ngIf="f.rvType.errors.required">RV Class is required</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="Make">RV Make <span class="text-danger">*</span></label>
+                    <div class="check_relative">
+
+                      <ngx-select-dropdown *ngIf="!isSuggestedMakeSeries" [config]="config2" [options]="allMakes"
+                        [multiple]="false" formControlName="make" (change)="selectedMake($event)">
+                      </ngx-select-dropdown>
+                      <!-- <input type="text" (keyup)="searchMake($event.target.value)" *ngIf="isSuggestedMakeSeries" formControlName="suggestedMake" class="form-control"
+                placeholder="Enter Your RV Make Name"> -->
+                      <input type="text" *ngIf="isSuggestedMakeSeries"
+                        (keyup)="searchMake($event.target.value,'parent_categories')" formControlName="suggestedMake"
+                        class="form-control" placeholder="Enter Your RV Make Name">
+                      <div *ngIf="makeerr!=''">
+                        <b>{{makeerr}}</b>
+                      </div>
+                      <div class="checkbox_field mt-1">
+                        <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="isSuggestedMakeSeries"
+                          class="mr-1" (change)="onChangeSuggestedMakeSeries()">
+                        <b>Click here to add if you don't find your RV Make.</b>
+                      </div>
+
+                    </div>
+
+                    <div *ngIf="submitted && f.make.errors" class="invalid-feedback">
+                      <div *ngIf="f.make.errors.required">RV Make is required</div>
+                    </div>
+                    <div *ngIf="submitted && f.suggestedMake.errors" class="invalid-feedback">
+                      <div *ngIf="f.suggestedMake.errors.required">RV Make is required</div>
+                    </div>
+
+
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="mobile">RV Series <span class="text-danger">*</span></label>
+                    <div class="check_relative">
+
+                      <ngx-select-dropdown *ngIf="!isSuggestedMakeSeries && !isSuggestedSeries" [config]="config3"
+                        [options]="allModels" [multiple]="false" formControlName="series"
+                        (change)="selectedModel($event)">
+                      </ngx-select-dropdown>
+                      <input type="text" *ngIf="isSuggestedMakeSeries || isSuggestedSeries"
+                        formControlName="suggestedSeries" class="form-control" placeholder="Enter Your RV Series Name"
+                        (keyup)="searchMake($event.target.value,'sub_categories')">
+                      <div class="checkbox_field mt-1" *ngIf="isSuggestedMakeSeries">
+                        <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="isSuggestedMakeSeries"
+                          class="mr-1" (change)="onChangeSuggestedMakeSeries()">
+                        <b>Click here to add if you don't find your RV series.</b>
+                      </div>
+                      <div class="checkbox_field mt-1" *ngIf="!isSuggestedMakeSeries">
+                        <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="isSuggestedSeries"
+                          class="mr-1" (change)="onChangeSuggestedSeries()">
+                        <b>Click here to add if you don't find your RV series.</b>
+                      </div>
+
+                    </div>
+
+
+                    <!-- <select name="Model" id="Model" formControlName="model" class="form-control">
+                <option value="Model" selected disabled>Select Model</option>
+              </select> -->
+                    <div *ngIf="serieserr!=''">
+                      <b>{{serieserr}}</b>
+                    </div>
+                    <div *ngIf="submitted && f.series.errors" class="invalid-feedback">
+                      <div *ngIf="f.series.errors.required">RV Series is required</div>
+                    </div>
+                    <div *ngIf="submitted && f.suggestedSeries.errors" class="invalid-feedback">
+                      <div *ngIf="f.suggestedSeries.errors.required">RV Series is required</div>
+                    </div>
+
+
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">RV Year <span class="text-danger">*</span></label>
+                    <select name="Year" id="Year" *ngIf="Form.get('rvType').value!='wanna-be'" formControlName="year"
+                      class="form-control">
+                      <option value=""> Select Year</option>
+                      <option value="{{item}}" *ngFor="let item of years">{{item}}</option>
+                    </select>
+                    <select name="Year" id="Year" *ngIf="Form.get('rvType').value=='wanna-be'" formControlName="year"
+                      class="form-control">
+                      <option value="wanna-be" selected>I'm wannabe</option>
+                    </select>
+                    <div *ngIf="submitted && f.year.errors" class="invalid-feedback">
+                      <div *ngIf="f.year.errors.required">RV Year is required</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="mobile">RV Model </label>
+                    <input type="text" formControlName="model" class="form-control" placeholder="Enter RV Model Name">
+                    <!-- <ngx-select-dropdown [config]="config3" [options]="allModels" [multiple]="false"  formControlName="series" (change)="selectedModel($event)">
+              </ngx-select-dropdown> -->
+                    <!-- <select name="Model" id="Model" formControlName="model" class="form-control">
+                <option value="Model" selected disabled>Select Model</option>
+              </select> -->
+                    <!-- <div *ngIf="submitted && f.series.errors" class="invalid-feedback">
+                <div *ngIf="f.series.errors.required">Series is required</div>
+              </div> -->
+                  </div>
+                  <!-- <div class="col-md-3"></div> -->
+
+                </div>
+
+
+              </div>
+            </div>
+            <!-- <div class="form-group col-md-6">
+              <label for="age"> Age</label>
+              <input type="number" class="form-control" formControlName="age" id="age" placeholder="Enter Age" name="age">
+              <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+                <div *ngIf="f.age.errors.required">Age is required</div>
+              </div>
+            </div> -->
+            <!-- <div class="form-group col-md-6">
+              <label for="date"> Birth Date <span>*</span></label>
+              <input
+              [bsConfig]="{ rangeInputFormat : 'MM-DD-YYYY', dateInputFormat: 'MM-DD-YYYY', showWeekNumbers: false,customTodayClass: 'custom-today-class' }"
+              [maxDate]="minDate" #dp2="bsDatepicker" type="text" bsDatepicker readonly class="form-control"
+              formControlName="dob" placeholder="MM-DD-YYYY" name="dob">
+              <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                <div *ngIf="f.dob.errors.required">Birth Date is required</div>
+              </div>
+            </div> -->
+            <!-- </form> -->
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+
+      <div class="stepDots">
+        <span class="active"></span>
+        <!-- <span></span> -->
+        <span></span>
+      </div>
+      <!-- <button type="button" [disabled]="Form.invalid" (click)=" onSubmit();open(content1);d('Cross click'); "
+      class="btn nextBtn">Next</button> -->
+      <button type="button" (click)="onSubmit();" class="btn nextBtn">Next</button>
+    </div>
+  </ng-template>
+  <ng-template #content1 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-" id="modal-basic-title">
+        My Followed Interests
+      </h4>
+      <!-- <button type="button" class="closeBtn" aria-label="Close" (click)="open(content2);d('Cross click')">
+        <i class="fa fa-arrow-right"></i>
+      </button> -->
+      <!-- <button type="button" (click)="d('Cross click')" routerLink="/page/timeline" style="  border-radius: 5px;"
+      class="btn btn-primary" aria-label="Close">
+      Finish
+    </button> -->
+
+    </div>
+    <app-rv-interest [fromWelcomePage]="true"></app-rv-interest>
+    <div class="modal-footer">
+      <div class="stepDots">
+        <span></span>
+        <span class="active"></span>
+        <span></span>
+        <!-- <span ></span>
+        <span ></span>
+        <span ></span> -->
+      </div>
+      <!-- <button type="button" (click)="open(content2);d('Cross click'); " class="btn nextBtn">Next</button> -->
+      <!-- <button type="button" [disabled]="!content2ModalValid" (click)="open(content2);d('Cross click'); "
+  class="btn nextBtn">Next</button> -->
+      <button type="button" (click)="open(content2);d('Cross click');updateStepCompleted('interest') "
+        class="btn nextBtn">Next</button>
+    </div>
+  </ng-template>
+  <ng-template #profileData let-c="close" let-d="dismiss">
+    <div class="modal-form" [formGroup]="detailForm">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="swal2-icon swal2-icon-show" style="display: flex;">
+              <div class="swal2-icon-content">
+                <i class="fa fa-thumbs-o-up"></i>
+              </div>
+            </div>
+            <h2 class="swal2-title" id="swal2-title" style="display: block;">Great! You're verified!</h2>
+            <span *ngIf="user.fbId!=null && user.fbId!=undefined && user.fbId!=''">Facebook didn’t share your email
+              address but we need it to create your profile. Don’t worry, we promise to never share
+              your personal information!</span>
+            <span *ngIf="user.aId!=null && user.aId!=undefined && user.aId!=''">Apple didn’t share your full name or
+              email address but we need it to create your profile. Don’t worry, we promise to
+              never share your personal information!</span>
+          </div>
+
+          <div class="form-group col-md-6">
+            <input if type="Text" *ngIf="user.aId!=null && user.aId!=undefined && user.aId!=''"
+              formControlName="firstName" class="form-control" placeholder="First Name">
+          </div>
+          <div class="form-group col-md-6">
+            <input type="Text" *ngIf="user.aId!=null && user.aId!=undefined && user.aId!=''" formControlName="lastName"
+              class="form-control" placeholder="Last Name">
+          </div>
+          <div class="form-group col-md-12">
+            <input type="email" formControlName="email" class="form-control" placeholder="Enter your email">
+          </div>
+          <button type="button" (click)="submitDetail();d('Cross click');updateStepCompleted('email')"
+            class="swal2-confirm swal2-styled">Continue Modding My RVmodshare Profile</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #content2 let-c="close" let-d="dismiss">
+    <div class="modal-header d-block">
+      <h4 class="text-center" id="modal-basic-title" style="font-size: 20px;">
+        Welcome to <span>RVmodshare</span>
+
+      </h4>
+    </div>
+    <div class="modal-body">
+
+      <p class="mt-2">
+        Thanks for joining our beta test team {{credentialsService.credentials.firstName}}. We’re so lucky to have you!
+      </p>
+
+      <p>The goals of beta testing are to test all platform features, functionality and the web browser user experience,
+        then resolve any critical bugs and make updates based on feedback.</p>
+
+      <p>We sent you a Beta testing information email. Be sure to check your spam and promotions folders if you don’t
+        see the email shortly.</p>
+      <p>All the best, </p>
+      <!-- <br> -->
+      <p class="mb-0"><strong><i>Dave Holdan </i></strong></p>
+      <p>Founder</p>
+    </div>
+    <div class="modal-footer">
+
+      <div class="stepDots">
+        <span></span>
+        <span class="active"></span>
+        <!-- <span  ></span>
+        <span ></span>
+        <span ></span> -->
+      </div>
+      <button type="button" (click)="d('Cross click');gotowebsite()" style="  border-radius: 5px;"
+        class="btn btn-primary" aria-label="Close">
+        Finish
+      </button>
+      <!-- <button *ngIf="newUser" type="button" (click)="d('Cross click')" routerLink="/mods" style="  border-radius: 5px;"
+        class="btn btn-primary" aria-label="Close">
+        Finish
+      </button>
+      <button *ngIf="!newUser" type="button" (click)="d('Cross click')" routerLink="/timeline" style="  border-radius: 5px;"
+        class="btn btn-primary" aria-label="Close">
+        Finish
+      </button> -->
+    </div>
+  </ng-template>
+
+</div>

@@ -1,0 +1,52 @@
+.bg-blue  {
+    background: #091030;
+    color: #fff;
+    padding-top: 50px;
+  }
+  .footer-desc.d-flex {
+    width: 100%;
+    justify-content: center;
+    line-height: 5;
+  }
+  .nav-link {
+    display: block;
+    padding: 0rem 7px;
+  }
+  img.img-fluid.logo {
+    width: 100%;
+    max-width: 12rem;
+    display: block;
+    margin: auto;
+  }
+  .social i.fa.fa-facebook.mr-3 {
+    padding: 10px 13px;
+  }
+  
+  .social i {
+    background: #04244f;
+    padding: 10px;
+    cursor: pointer;
+    color: #03e08e;
+  }
+  .row {
+    align-items: center;
+  }
+  @media (max-width: 1100px) {
+  .nav-link  {
+    display: block;
+    padding: 0rem 5px;
+  }
+}
+  @media (max-width: 800px) {
+  .nav-link {
+    display: block;
+    padding: 0rem 3px;
+    font-size: 10px;
+  }
+  .bg-blue {
+    background: #091030;
+    color: #fff;
+    padding-top: 10px;
+    margin-bottom: 0rem;
+  }
+}

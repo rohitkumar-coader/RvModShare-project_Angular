@@ -1,0 +1,253 @@
+<div class="container-fluid mt-5 pt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="shadow p-3 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0"> Filters</h4>
+                            <div>
+                              <button class="btn btn-danger" (click)="reset()">Reset</button>
+                            </div>
+                          </div>
+                          <hr />
+                <div class="border p-2 mb-2">
+
+                        <select name="cars" id="cars5" [ngClass]="{'highlightfilter': modfilters?.rvTypeFilter}"
+                          (change)="modfilters.makeFilter = '';modfilters.modelValue = '';searchValue();getFiltersMake();"
+                          class="form-control mb-2" [(ngModel)]="modfilters.rvTypeFilter">
+                          <!-- <option value="" selected disabled>Select Make</option> -->
+                          <option value="">Choose Class</option>
+                          <option *ngFor="let item of rvTypes" value="{{item.detail.value}}">{{item.description}}</option>
+                
+                        </select>
+                        <select name="cars" [disabled]="!modfilters?.rvTypeFilter"
+                          [ngClass]="{'highlightfilter': modfilters?.makeFilter}" id="cars5"
+                          (change)="modfilters.modelValue = '';searchValue();getFilterModels();" class="form-control mb-2"
+                          [(ngModel)]="modfilters.makeFilter">
+                          <option value="">Choose Make</option>
+                          <option *ngFor="let item of MakesFilters" value="{{item.id}}">{{item.name}}</option>
+                
+                        </select>
+                        <select [disabled]="!modfilters?.makeFilter" [(ngModel)]="modfilters.modelValue"
+                          [ngClass]="{'highlightfilter': modfilters?.modelValue}" (change)="searchValue()" class="form-control"
+                          name="model" id="model">
+                          <option value="">Choose Series</option>
+                          <option *ngFor="let item of filterModels" value="{{item.id}}">{{item.name}}</option>
+                        </select>
+                      </div>
+                      <!-- <div class="border p-2 mt-2"> -->
+                      <select name="Year" id="Year" (change)="searchValue()" [ngClass]="{'highlightfilter': modfilters?.yearValue}"
+                        [(ngModel)]="modfilters.yearValue" class="form-control mb-2">
+                        <option value=""> Choose Year</option>
+                        <option value="{{item}}" *ngFor="let item of years">{{item}}</option>
+                      </select>
+                      <select name="cars" id="cars5" (change)="searchValue()" [ngClass]="{'highlightfilter': modfilters?.size}"
+                        [(ngModel)]="modfilters.size" class="form-control mb-2">
+                        <option value="">Choose Size</option>
+                        <option *ngFor="let item of difficulties" title="{{item.description}}" value="{{item.id}}">{{item.name}}
+                        </option>
+                      </select>
+                      <select name="cars" id="cars5" (change)="searchValue()"
+                        [ngClass]="{'highlightfilter': modfilters?.modCategoryValue}" [(ngModel)]="modfilters.modCategoryValue"
+                        class="form-control mb-2">
+                        <option value="">Choose Category</option>
+                        <option *ngFor="let item of modCategories" value="{{item.id}}">{{item.name}}</option>
+                
+                      </select>
+                      <!-- </div> -->
+                      <!-- <div class="border p-2 mt-2"> -->
+                      <select name="cars" id="cars5" (change)="searchValue()" [ngClass]="{'highlightfilter': modfilters?.skillLevel}"
+                        [(ngModel)]="modfilters.skillLevel" class="form-control mb-2">
+                        <option value="">Choose Difficulty</option>
+                        <option *ngFor="let item of skillLevelNeeded" value="{{item?.id}}">{{item.name}}</option>
+                
+                      </select>
+                      <select name="cars" id="cars5" (change)="searchValue()" [ngClass]="{'highlightfilter': modfilters?.timerange}"
+                        [(ngModel)]="modfilters.timerange" class="form-control mb-2">
+                        <option value="">Choose Total Time</option>
+                        <option *ngFor="let item of timeRanges" value="{{item?.totalHours}}">{{item.totalHours}}</option>
+                      </select>
+                      <div class="date_range padding_input">
+                        <input type="text" name="daterange"
+                          [ngClass]="{'highlightfilter': modfilters?.startDate || modfilters?.endDate }" (change)="searchValue()"
+                          ngxDaterangepickerMd [(ngModel)]="selectedDate" class="form-control" placeholder="Select Date Range" />
+                      </div>
+                      <div class="padding_input">
+                        <input type="text" name="search" [ngClass]="{'highlightfilter': modfilters?.search}"
+                          (keyup.enter)="searchValue()" [(ngModel)]="modfilters.search" class="form-control mt-2"
+                          placeholder="Search Title & Summary (Press Enter to search)" />
+                      </div>
+                    </div>
+        </div>
+        <div class="col-md-6">
+            <h1 class="modHeading">Best Class A RV Mods</h1>
+            <p class="mod-desc">View the best mods for Class A RVs, with all the most popular modifications and upgrades that others have made to their recreational vehicle.</p>
+      
+            <div class="col-md-12 mt-3 search-results p-0" >
+                <div class="shadow mods_box mb-4" >
+          
+                  <div class="row" >
+                    <div class="col-md-4" >
+                      <div class="favourite">
+                        <span class="favorite shadow" (click)="favourite(modDetail?.id,1)">
+                          <input type="checkbox" [checked]="modDetail.isFavourite" />
+                          <i ngbTooltip="Favorite" placement="left" class="fa fa-heart shadow"></i>
+                        </span>
+                      </div>
+                      <div class="mods_img">
+                        <div
+                          *ngIf="modDetail?.registeredRV && modDetail?.addedBydetails?.isrvRental && modDetail?.addedBydetails?.rvRental && ( modDetail?.addedBydetails?.rvRental?.rvShareUrl!='' || modDetail?.addedBydetails?.rvRental?.outdoorsyUrl!='' || modDetail?.addedBydetails?.rvRental?.rvezyUrl!='')"
+                          class="ribbon blue_col">
+                          <a href="javascript:void(0)"
+                            (click)="goTouserProfile(modDetail?.addedBydetails?._id != credentials?.credentials?.id ? '/friend-profile' :'/dashboard/profile',{id:  modDetail?.addedBydetails?._id})"><span>Rent</span></a>
+                        </div>
+                        <a class="pointer-cursor mod_left_img">
+                          <img (click)="goToModDetail('/mods',modDetail?.slug,modDetail?.id)" 
+                            class="img-responsive roundeds contain" src="assets/img/follow-new1.png">
+                          <img (click)="goToModDetail('/mods',modDetail?.slug,modDetail?.id)" *ngIf="modDetail?.afterImages?.length>0 "
+                            class="img-responsive roundeds contain" src="{{_host}}images/modPost/{{modDetail.afterImages[0]}}">
+                          <img (click)="goToModDetail('/mods',modDetail?.slug,modDetail?.id)"
+                            *ngIf="modDetail?.afterImages?.length==0 && modDetail?.beforeImages?.length>0"
+                            class="img-responsive roundeds contain" src="{{_host}}images/modPost/{{modDetail?.beforeImages[0]}}">
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="py-2 px-3">
+                        <div class="bagesSection">
+                          <article class="postTop mb-2">
+                            <div class="d-flex">
+                              <p class="mb-0 pt-1">
+                                <a (click)="goToModDetail('/mods',modDetail?.slug,modDetail?.id)" class="pointer-cursor"><b>
+                                        Dummy Post</b>
+                                  <span class="ml-2">April 7, 2022 </span></a>
+                              </p>
+          
+                            </div>
+          
+                            <div class="text-right-align-btn rightAlignCls" >
+                              <div class="dropdown cretDropdown ml-2 mods_dropdown">
+                                <button class="btn btn-primary dropdown-toggle" (click)="setShareData(modDetail)" type="button"
+                                  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i aria-hidden="true" class="fa fa-ellipsis-v"></i>
+                                </button>
+                                <div class="dropdown-menu mods_drop_list" aria-labelledby="dropdownMenuButton">
+          
+                                  <div class="connection_icon dropdown-item bg-none"> 
+                                    <div class="connection_icon dropdown-item p-0">
+                                      <div class="a2a_kit a2a_kit_size_32 a2a_default_style" (click)="setShareData(modDetail);Onshare(modDetail,'facebookClick')"
+                                        [attr.data-a2a-url]="'https://rvmodshare.com/mods/'+modDetail?.slug"
+                                        [attr.data-a2a-title]="modDetail?.name">
+                                        <a class="a2a_button_facebook"></a>
+                                      </div>
+                                    </div>
+          
+                                  </div>
+                                  <a class="dropdown-item" (click)="likePost(modDetail?.id,'modPost',1,modDetail?.addedBy)"><i
+                                    class="fa fa-thumbs-o-up bg mr-1" [ngClass]="{'text-primary': modDetail?.likestatus}"
+                                    aria-hidden="true"></i>Like</a>
+                                  <a class="dropdown-item" *ngIf=" modDetail?.addedBydetails?._id == credentials?.credentials?.id"
+                                    href="/share-mod/{{modDetail?.slug}}">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    Edit Post
+                                  </a>
+                                  <a class="dropdown-item" *ngIf=" modDetail?.addedBydetails?._id != credentials?.credentials?.id"
+                                    (click)="openReport(modDetail?.id,'modPost')">
+                                    <i class="fa fa-bug" aria-hidden="true"></i>
+                                    Report Post
+                                  </a>
+                                  <a class="dropdown-item" *ngIf=" modDetail?.addedBydetails?._id == credentials?.credentials?.id"
+                                    (click)="deleteModPost(modDetail?.id,1)">
+                                    <i class="fa fa-trash mr-1" aria-hidden="true"></i>
+                                    Delete Post
+                                  </a>
+                                  <a class="dropdown-item" (click)="copyLink(modDetail)"><i class="fa fa-copy"></i> Copy Link</a>
+          
+                                </div>
+                              </div>
+                            </div>
+                          </article>
+                        </div>
+          
+                        <div class="main_badges">
+                          <div class="d-flex align-items-center w-100 inner_prof_badge mb-1 mt-2">
+          
+                            <div class="prof_img">
+                              <img *ngIf="modDetail?.addedBydetails?.image=='' || modDetail?.addedBydetails?.image==null"
+                                class="mr-2" src="assets/img/user.png" alt="profile_img">
+                              <img *ngIf="modDetail?.addedBydetails?.image!='' && modDetail?.addedBydetails?.image!=null"
+                                class="mr-2" src="{{getUrl(modDetail?.addedBydetails?.image,modDetail?.addedBydetails)}}"
+                                alt="profile_img">
+                            </div>
+          
+                            <div>
+                              <a href="javascript:void(0)" class="large_font"
+                                (click)="goTouserProfile(modDetail?.addedBydetails?._id != credentials?.credentials?.id ? '/friend-profile' :'/dashboard/profile',{id:  modDetail?.addedBydetails?._id})">
+                                <b>Rohit  Maurya </b> 
+                              </a>
+                              <div class="common_badge">
+                              
+                                <p class="mb-2" *ngIf="modDetail?.ownRV == false"><b>Dreamer</b></p>
+                                <p class="mb-2"><b>Owner</b></p>
+                              </div>
+                            </div>
+                          </div>
+          
+                          <div class="row w-100">
+                            <div class="col-md-6 ">
+          
+          
+                              <div class="tagsAlign">
+                                <h4 class="mod-rv-texts"><small> 2016 Class B Coachmen Crossfit abc model
+                                  </small></h4>
+          
+                              </div>
+                              <h6 class="mb-0">Kids</h6>
+                              <h4><small>Mega Mod</small></h4>
+                            </div>
+                            <div class="col-md-6 border-left">
+                              <div class="rightAlign ">
+                                <b>Summary</b>
+                                <p class="truncate font_normal">whatIDid summary ,whatIDid summary ,whatIDid summary ,whatIDid summary whatIDid summary whatIDid sum...</p>
+                              </div>
+                            </div>
+                          </div>
+          
+          
+                          <div class="likeShare">
+                            <a><i class="fa fa-thumbs-up" ngbTooltip="Likes" aria-hidden="true"></i>{{modDetail?.likesTotal}}</a>
+                            <a *ngIf="!modDetail?.isCommentDisabled"><i class="fa fa-comment" ngbTooltip="Comments"
+                                aria-hidden="true"></i>{{modDetail?.commentTotal}}</a>
+                            <a><i class="fa fa-share-alt" aria-hidden="true" ngbTooltip="Shares"></i> {{modDetail?.totalShare}}</a>
+                            <a style="width: 23px;" *ngIf="modDetail?.skillLevel=='6193a45efc4c9b3d4ce7ad62'" class="high"><img
+                                src="assets/img/low.png" ngbTooltip="Low" class="skill-ic" alt=""></a>
+                            <a style="width: 23px;" class="high" *ngIf="modDetail?.skillLevel=='6194c77a4d8a1d9518bbe18c'"><img
+                                src="assets/img/medium.png" ngbTooltip="Medium" class="skill-ic" alt=""></a>
+                            <a class="high" *ngIf="modDetail?.skillLevel=='6197d36401d78bc07b538196'"><img
+                                src="assets/img/high.png" ngbTooltip="High" class="skill-ic" alt=""></a>
+                            <a><i class="fa fa-clock-o" ngbTooltip="{{modDetail?.timerange}}" placement="top"
+                                aria-hidden="true"></i></a>
+          
+                          </div>
+                        </div>
+                      </div>
+          
+                    </div> 
+                    <!-- <div class="col-md-12 overFlow" *ngIf="modDetail?.typeOfPost=='google-ad' && seeAllmods" >
+                      <ng2-adsense [adClient]="'ca-pub-7911750406935657'" [adSlot]="9631333463" [display]="'inline-block'"
+                        [width]="565" [height]="238">
+                      </ng2-adsense>
+                    </div> -->
+                    
+                  </div>
+                  
+                </div>
+              
+                <pagination-controls *ngIf="totalModsCount>20" (pageChange)="p = $event;pageChanged($event)"></pagination-controls>
+                
+              </div>
+        </div>
+        <div class="col-md-3">
+                <app-right-sponsored  ></app-right-sponsored>
+        </div>
+    </div>
+</div>

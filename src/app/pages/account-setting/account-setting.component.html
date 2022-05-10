@@ -1,0 +1,208 @@
+<div class="container mt-5 pt-5">
+    <div class="row w-100">
+        <div class="col-md-8 mx-auto pr-0 mb-3"> 
+                        <div class="container">
+                          <div class="col-md-12 pr-0">
+                            <div class="col-md-12 p-0">
+                              <h1 class="account setting">Account Settings</h1>
+                              <p>View and edit the settings for your account</p>
+                            </div>
+                            <div class="shadow p-3 pb-0">
+                              <div class="col-md-12 text-right mb-3">
+        
+                                <h4 class="d-flex justify-content-between align-item-center points">
+                                  Account Details
+                                  <div>
+    
+                                    <div *ngIf="!editPersonalForm">
+                                      <a ngbTooltip="Edit" class="alignmentCopyLink about_edit"
+                                        (click)="editPersonalData()">
+                                        <i class="fa fa-pencil"></i>
+                                      </a>
+                                    </div>
+                                    <div *ngIf="editPersonalForm">
+                                      <button type="button" class="btn btn-primary"
+                                        (click)="updatePersonalData()">Save</button>
+                                    </div>
+                                  </div>
+                                </h4>
+                                <!-- <hr   *ngIf="!editPersonalForm"> -->
+                              </div>
+                              <form [formGroup]="personalForm" class="edit_profile_form edit_tab mt-4 p-2">
+                                <div id="profil-container">
+                               
+                                  <div class="pic-holder">
+                                    <img *ngIf=" !usercoverimg" id="profilePic" class="pic" src="assets/img/rvCoverImage.jpg">
+                                    <img *ngIf="usercoverimg" id="profilePic" class="pic" src="{{_host}}{{usercoverimg}}">
+                                    <label   for="newCoverPhoto" class="upload-file-block">
+                                      <div class="text-center">
+                                        <div class="mb-2">
+                                          <i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>
+                                          <!-- <i class="fa fa-camera fa-2x"></i> -->
+                                        </div>
+                                        <div class="text-uppercase">
+                                          Update Cover Photo
+                                        </div>
+                                      </div>
+                                    </label>
+                                    <input [disabled]="!editPersonalForm" class="uploadProfileInput" type="file"
+                                      name="profile_pic" id="newCoverPhoto" accept="image/*" style="display: none;"
+                                      (change)="uploadCoverImage($event.target.files,'inModel')" />
+                                    <div class="progress-cover group-user" *ngIf="coverImageModalLoader"
+                                      style="max-width:400px;;">
+        
+                                      <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success"
+                                        role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                        [ngStyle]="{width: progress + '%'}">
+                                        {{progress}}%</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="profile-pic-wrapper" > 
+                                  <div class="pic-holder">
+                                    <!-- uploaded pic shown here -->
+                                    <img *ngIf="!userimg" id="profilePic" class="pic" src="assets/img/user.png">
+                                    <img *ngIf="userimg" id="profilePic" class="pic" src="{{_host}}{{userimg}}">
+        
+                                    <label for="newProfilePhoto" class="upload-file-block"  >
+                                      <div class="text-center">
+                                        <div class="mb-2">
+                                          <i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>
+                                          <!-- <i class="fa fa-camera fa-2x"></i> -->
+                                        </div>
+                                        <div class="text-uppercase">
+                                          Upload <br /> Profile Photo
+                                        </div>
+                                      </div>
+                                    </label>
+                                    <Input [disabled]="!editPersonalForm" class="uploadProfileInput"
+                                      (change)="uploadImage($event.target.files,'inModel')" type="file" name="profile_pic"
+                                      id="newProfilePhoto" accept="image/*" style="display: none;" />
+                                    <div class="progress group-user" *ngIf="imageModalLoader" style="max-width:400px;;">
+        
+                                      <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success"
+                                        role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                        [ngStyle]="{width: progress + '%'}">
+                                        {{progress}}%</div>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                                <div class="profile-pic-wrapper mt-4" >
+                                  <p>Email Address <strong>{{data?.email}}</strong></p>
+                                </div>
+                                
+                                <div class="row">
+                                  <div class="col-md-12 pCls">
+                                    <div class="form-group">
+                                      <label>User name </label>
+                                      <input  type="text" pattern="^[a-zA-Z0-9]+$" class="form-control" (keyup)="getUserName($event.target.value)" formControlName="userName"
+                                        placeholder="User name " appOnlyAlphabets>
+                                       <span class="text-danger" *ngIf="massageofuser == true ">This username already in use </span>
+                                       <span class="text-primary" *ngIf="massageofuser == false && personalForm.value.userName!=data?.userName">This username is available for use</span>
+                                      <div *ngIf="personalsubmitted && pf.userName.errors" class="invalid-feedback">
+                                        <div *ngIf="pf.userName.errors.required">User Name is required</div>
+                                    
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6 pCls">
+                                    <div class="form-group">
+                                      <label>First Name </label>
+                                      <input type="text" class="form-control" formControlName="firstName"
+                                        placeholder="First Name">
+                                      <div *ngIf="personalsubmitted && pf.firstName.errors" class="invalid-feedback">
+                                        <div *ngIf="pf.firstName.errors.required">First Name is required</div>
+                                      </div>
+                                    </div>
+                                  </div>
+        
+                                  <div class="col-md-6 pCls">
+                                    <div class="form-group">
+                                      <label>Last Name </label>
+                                      <input type="text" class="form-control" formControlName="lastName"
+                                        placeholder="Last Name">
+                                      <div *ngIf="personalsubmitted && pf.lastName.errors" class="invalid-feedback">
+                                        <div *ngIf="pf.lastName.errors.required">Last Name is required</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4 pCls">
+                                    <div class="form-group">
+                                      <label>Gender </label>
+                                      <select class="form-control" formControlName="gender" id="Gender" name="Gender">
+                                        <option value="" selected disabled>Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                      </select>
+                                    </div>
+                                  </div>
+        
+                                  <div class="col-md-4 pCls">
+                                    <div class="form-group">
+                                      <label>Birth Date </label>
+                                      <input
+                                        [bsConfig]="{ rangeInputFormat : 'MM-DD-YYYY', dateInputFormat: 'MM-DD-YYYY', showWeekNumbers: false,customTodayClass: 'custom-today-class' }"
+                                        [maxDate]="minDate" #dp2="bsDatepicker" type="text" bsDatepicker class="form-control"
+                                        formControlName="dob" placeholder="MM-DD-YYYY" name="dob">
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4 pCls">
+                                    <div class="form-group">
+                                      <label>Address</label>
+                                      <input type="text" class="form-control" formControlName="address" placeholder="Address">
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4 pCls">
+                                    <label>Country</label>
+                                    <select name="cars" (change)="getState($event.target.value)" id="cars1"
+                                      formControlName="country" class="form-control mb-2">
+                                      <option value="" selected disabled>Country</option>
+                                      <option value="USA">USA</option>
+                                      <option value="CA">Canada</option>
+                                    </select>
+        
+                                  </div>
+        
+                                  <div class="col-md-4 pCls">
+                                    <label>State/Province</label>
+                                    <select name="cars" id="cars1" (change)="getCity()" formControlName="state"
+                                      class="form-control mb-2">
+                                      <option value="" selected disabled>State</option>
+                                      <option value="{{item.code}}" *ngFor="let item of states">{{item.name}}</option>
+                                    </select>
+                                  </div>
+        
+                                  <div class="col-md-4 pCls">
+                                    <label>City</label>
+                                    <select name="cars" id="cars1" formControlName="city" class="form-control mb-2">
+                                      <option value="" selected disabled>City</option>
+                                      <option value="{{item.name}}" *ngFor="let item of cities">{{item.name}}</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-md-6 pCls">
+                                    <div class="form-group">
+                                      <label>Zip Code</label>
+                                      <input type="text" class="form-control" formControlName="zipcode" placeholder="Zip Code"
+                                        maxlength="8">
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6 pCls">
+                                    <label>Occupation</label>
+                                    <select name="occupation" id="occupation" formControlName="occupation"
+                                      class="form-control mb-2">
+                                      <option value="" selected disabled>Choose Occupation</option>
+                                      <option value="{{item?.id}}" *ngFor="let item of occupations">{{item?.name}}</option>
+                                    </select>
+                                  </div>
+        
+                                </div>
+        
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      
+        </div>
+    </div>
+</div>

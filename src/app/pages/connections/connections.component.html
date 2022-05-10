@@ -1,0 +1,736 @@
+<ngx-spinner bdColor="#fff" size="" color="#fff">
+  <div class='ajax-spinner-bars'>
+    <div class='bar-1'></div>
+    <div class='bar-2'></div>
+    <div class='bar-3'></div>
+    <div class='bar-4'></div>
+    <div class='bar-5'></div>
+    <div class='bar-6'></div>
+    <div class='bar-7'></div>
+    <div class='bar-8'></div>
+    <div class='bar-9'></div>
+    <div class='bar-10'></div>
+    <div class='bar-11'></div>
+    <div class='bar-12'></div>
+    <div class='bar-13'></div>
+    <div class='bar-14'></div>
+    <div class='bar-15'></div>
+    <div class='bar-16'></div>
+  </div>
+</ngx-spinner>
+<div class="container-fluid  pt-5 main-content">
+  <!-- This is a Login Form -->
+  <section class="dispen-dashboard">
+    <div class="container-flude">
+      <div class="row m-0">
+        <div class="col-sm-12 p-0">
+          <app-user-sidebar></app-user-sidebar>
+          <!-- Chat design -->
+          <div class="tab-content-wrapper clearfix">
+            <div class="tab-pane">
+              <div class="inn-container">
+                <div class="home-page__content messages-page">
+                  <div class="container-fluid h-100 p-0">
+                    <div class="row">
+                      <div class="col-md-6 mx-auto">
+
+
+                        <h1 class="heading-Con">Find and Follow Members Posting Mods</h1>
+                        <p class="Desc-Con">Follow members posting mods that you’re interested in, let them know you like them and discuss the mods with the community.</p>
+                        <!-- <div class="profile_textarea w-100 pb-3 ">
+                          <div class="d-flex">
+                            <img *ngIf="!user?.image" class="img-responsive rounded mr-2" src="assets/img/user.png">
+                            <img *ngIf="user?.image" class="img-responsive rounded mr-2"
+                              src="{{getUrl(user?.image,user)}}">
+                            <form method="post" class="w-100">
+                              <textarea rows="2" readonly class="form-control w-100 border-none"
+                                placeholder="What's happening in your RV life?"
+                                (click)="openEditSocialPost()"></textarea>
+                            </form>
+                          </div>
+                        </div> -->
+
+                        <ul class="nav nav-pills mb-2 filterTabs" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-contact-tab" data-toggle="pill" href="#pills-contact"
+                                  role="tab" aria-controls="pills-contact" (click)="getSuggestedRVfriendList()"
+                                  aria-selected="false">Suggested</a>
+                              </li>
+                          <li class="nav-item">
+                            <a class="nav-link" (click)="focusFollowing()" id="pills-home-tab" data-toggle="pill" href="#pills-home"
+                              role="tab" aria-controls="pills-home" aria-selected="true" (click)="allFriends()
+                              ">Following</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" (click)="focusFollower()" id="pills-mod-contact-tab" data-toggle="pill" href="#pills-mod-contact"
+                              role="tab" aria-controls="pills-mod-contact" (click)="getRVModfriendList()"
+                              aria-selected="false">Followers</a>
+                          </li>
+                          <li class="nav-item" >
+                            <a (click)="focus()"class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
+                              role="tab" aria-controls="pills-profile"aria-selected="false">Find</a>
+                          </li>
+                          
+
+
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                          <div class="tab-pane fade" id="pills-home" role="tabpanel"
+                            aria-labelledby="pills-home-tab">
+                           
+                            <div class="contacts">
+
+                              <div id="custom-search-input" class="mb-3">
+                                <div class="input-group col-md-12">
+
+                                  <input style="border-radius: 50px !important" *ngIf="showFriendList"
+                                    class="form-control input-lg" id="searchFollowing" name="search" placeholder="Search for a member you are following"
+                                    type="text" autocomplete="new-password" [(ngModel)]="addedFriendSearch" (keyup)="allFriends()
+                                      " />
+                                  <i class="fa fa-search frnds"></i>
+
+                                </div>
+                              </div>
+                              <div class="container mods_part" *ngIf="loader" >
+                                <div class="row"> 
+                                    <div class="shadow mods_box mb-4 bg-white p-3 w-100"  *ngFor="let item of loadingContent">  
+                                              <div class="row w-100" style="align-items: center;">
+                                                <div class="col-md-2">
+                                                  <div class="shine" style="height: 80px; width:80px; border-radius: 50px;display: block;
+                                                  margin: auto;"> 
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                  <div class="col-md-6  mb-2">
+                                                      <div class="shine"> 
+                                                      </div>
+                                                     </div> 
+                                                     <div class="col-md-8  mb-2">
+                                                        <div class="shine"> 
+                                                        </div>
+                                                      </div>
+                                                      <div class="col-md-12">
+                                                          <div class="shine"> 
+                                                          </div>
+                                                        </div>
+                                                       </div> 
+                                                       <div class="col-md-1 ml-auto">
+                                                          <div class="shine" style="height: 40px; width:40px;"> 
+                                                            </div>
+                                                       </div>
+                                                 </div>  
+                                     
+                                    </div>  
+                                </div>
+                              </div> 
+                              <span *ngIf="showFriendList">
+                                  <div id="{{item.email}}" 
+                                  *ngFor="let item of ModRVfriends1;let i=index">
+                                      <div  class=" shadow p-3 mb-3 bg-white row align-items-center" *ngIf="item?.id!=user?.id && item?.isUserExist==true && !loader">
+                                        <div class="col-md-2">
+                                            <div class="pic rogers" (click)="selectedUser(item, item?.id);">
+                                                <a [routerLink]="['/profile',item?.slug]" href="javascript:void(0)">
+                                                  <img *ngIf="!item.image" src="assets/img/user.png" class="roundedUser" />
+                                                  <img *ngIf="item?.image" class="roundedUser"
+                                                    src="{{getUrl(item?.image,item)}}" />
+                                                </a> 
+          
+                                              </div>  
+                                        </div>
+                                        <div class="col-md-7"> 
+
+                                            <div class="width_content" (click)="selectedUser(item, item?.id)">
+                                                <h4 class="name" (click)="remove();">
+                                                  <a [routerLink]="['/profile',item?.slug]" href="javascript:void(0)">{{
+                                                    item?.fullName }}</a>
+                                                  </h4>
+                                              
+                                              </div> 
+                                          <h6>{{item?.ownRv ? 'Owner' :'Wannabe'}}</h6>
+                                          
+                                          <p>
+                                            <span  *ngIf="item.year">{{item?.year}}  </span>
+                                            <span  *ngIf="item.rvType">|{{item?.rvType}}  </span>
+                                            <span *ngIf="item.make">|{{item?.make}}  </span>
+                                            <span  *ngIf="item.series">|{{item?.series}}  </span>
+                                            <span *ngIf="item.model">|{{item?.model}} </span><br>
+                                            <span >Posted {{item?.totalMods}} Mods</span>  
+                                          </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                          <button class="btn btn-primary"  *ngIf="!item?.isFollow"
+                                          (click)="followMod(item?.id,'myFriend',i,item?.isFollow,item?.fullName)">Follow</button>
+                                          <button class="btn btn-primary sameSize" *ngIf="item?.isFollow"
+                                              (click)="followMod(item?.id,'myFriend',i,item?.isFollow,item?.fullName)">Following</button> 
+                                        </div>
+                                      </div>
+                                    </div> 
+
+                              </span>
+                             
+
+
+                            </div>
+                            <div class="text-right  mr-3 mb-3">
+                              <a class="active view_more" *ngIf="ModRVfriends1.length != totalFollowing && ModRVfriends1 != 0 && ModRVfriends1.length >= 20
+                              "  href="javascript:void(0)"  (click)="onScrollFollowing()"> View more</a>
+                            </div>
+                            
+                          </div>
+
+                          <!-- find search list -->
+                          <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                            aria-labelledby="pills-profile-tab">
+                          
+                            <div class="contacts">
+                              <div id="custom-search-input" class="mb-3">
+                                <div class="input-group col-md-12">
+                                  <input style="border-radius: 50px !important"  *ngIf="showFriendList"
+                                    class="form-control input-lg search11111" id="search11111" name="search"
+                                    placeholder="Search for a member to follow" type="text" autocomplete="off"
+                                    [(ngModel)]="addFriendSearch" (keyup)="suggestedFriendList()
+                                      " />
+                                  <i class="fa fa-search frnds"></i>
+                                </div>
+                              </div>
+                              <div class="container mods_part" *ngIf="loader">
+                                <div class="row"> 
+                                    <div class="shadow mods_box mb-4 bg-white p-3 w-100"  *ngFor="let item of loadingContent">  
+                                              <div class="row w-100" style="align-items: center;">
+                                                <div class="col-md-2">
+                                                  <div class="shine" style="height: 80px; width:80px; border-radius: 50px;display: block;
+                                                  margin: auto;"> 
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                  <div class="col-md-6  mb-2">
+                                                      <div class="shine"> 
+                                                      </div>
+                                                     </div> 
+                                                     <div class="col-md-8  mb-2">
+                                                        <div class="shine"> 
+                                                        </div>
+                                                      </div>
+                                                      <div class="col-md-12">
+                                                          <div class="shine"> 
+                                                          </div>
+                                                        </div>
+                                                       </div> 
+                                                       <div class="col-md-1 ml-auto">
+                                                          <div class="shine" style="height: 40px; width:40px;"> 
+                                                            </div>
+                                                       </div>
+                                                 </div>  
+                                     
+                                    </div>  
+                                </div>
+                              </div> 
+                              <span *ngIf="showFriendList">
+                                  <div class="shadow p-3 mb-3 bg-white"  
+                                  *ngFor="let item of userList1;let i=index">
+                                      <div class="row align-items-center" *ngIf="!loader">
+                                        <div class="col-md-2">
+                                            <div class="pic rogers conn">
+                                                <a [routerLink]="['/profile',item?.slug]" href="javascript:void(0)">
+                                                  <img *ngIf="!item?.userData?.image" src="assets/img/user.png" class="roundedUser" />
+                                                  <img *ngIf="item?.userData?.image" class="roundedUser"
+                                                    src="{{getUrl(item?.userData?.image,item)}}" />
+                                                </a> 
+                                              </div>  
+                                        </div>
+                                        <div class="col-md-7">  
+                                            <div class="width_content" (click)="selectedUser(item, item?.id)">
+                                                <h4 class="name">
+                                                    <a [routerLink]="['/profile',item?.userData?.slug]" href="javascript:void(0)">{{
+                                                      item?.userData?.fullName }}</a>
+                                                    </h4>  
+                                              </div> 
+                                          <h6>{{item?.ownRv ? 'Owner' :'Wannabe'}}</h6>
+                                          <p>
+                                            <span  *ngIf=" item.year">{{item?.year}}  </span>
+                                            <span  *ngIf=" item.rvType ">|{{item?.rvType}}  </span>
+                                            <span  *ngIf=" item.make ">|{{item?.make}}</span>
+                                            <span  *ngIf=" item.series ">|{{item?.series}}  </span>
+                                            <span  *ngIf=" item.model ">|{{item?.model}} </span><br>
+                                            <span >Posted {{item?.totalMods}} Mods</span>
+                                          </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button class="btn btn-primary" *ngIf="!item?.isFollow"
+                                            (click)="followMod(item?.id,'normalFriend',i,item?.isFollow,item?.userData?.fullName)">Follow</button>  
+                                            <button class="btn btn-primary" *ngIf="item?.isFollow"
+                                              (click)="followMod(item?.id,'normalFriend',i,item?.isFollow,item?.userData?.fullName)">Following</button>
+                                        </div>
+                                      </div>
+                                    </div> 
+
+                               
+                                <div class="button-acc-dec" *ngIf="userList.length == 0">
+                                  <p class="text-center">Start typing to search for a
+                                    member</p>
+                                </div>
+                              </span>
+                            </div>
+                            <div class="text-right mr-3 mb-3">
+                              <a class="active view_more" *ngIf="userList1.length != totalSearch && userList1.length != 0" href="javascript:void(0)"  (click)="onScrollSearch()"> View more</a>
+                            </div>
+                          </div>
+                          <div class="tab-pane fade show active" id="pills-contact" role="tabpanel"
+                            aria-labelledby="pills-contact-tab">
+
+
+                            <div class="container mods_part" *ngIf="loader">
+                              <div class="row"> 
+                                  <div class="shadow mods_box mb-4 bg-white p-3 w-100"  *ngFor="let item of loadingContent">  
+                                            <div class="row w-100" style="align-items: center;">
+                                              <div class="col-md-2">
+                                                <div class="shine" style="height: 80px; width:80px; border-radius: 50px;display: block;
+                                                margin: auto;"> 
+                                                </div>
+                                              </div>
+                                              <div class="col-md-9">
+                                                <div class="col-md-6  mb-2">
+                                                    <div class="shine"> 
+                                                    </div>
+                                                   </div> 
+                                                   <div class="col-md-8  mb-2">
+                                                      <div class="shine"> 
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="shine"> 
+                                                        </div>
+                                                      </div>
+                                                     </div> 
+                                                     <div class="col-md-1 ml-auto">
+                                                        <div class="shine" style="height: 40px; width:40px;"> 
+                                                          </div>
+                                                     </div>
+                                               </div>  
+                                   
+                                  </div>  
+                              </div>
+                            </div> 
+
+
+                            <div class="col-md-12 p-0" *ngIf="showFriendList">
+                              <div class="my-frnd " >
+
+
+                                <!-- <div id="custom-search-input" class="mb-3">
+                                  <div class="input-group col-md-12">
+                                    <input class="form-control input-lg" id="search" name="search"
+                                      placeholder="" type="text" autocomplete="off"
+                                      [(ngModel)]="searchKeyword" (keyup)="getSuggestedRVfriendList()" />
+
+                                    <i class="fa fa-search frnds"></i>
+                                    <div class="button-acc-dec small_font mt-1">
+                                    <p class="mb-0">Suggestions are based on
+                                        common connections, group membership,
+                                        registered with the same type of RV, or
+                                        have similar
+                                        followed interests.</p> 
+                                    </div>
+                                  </div>
+                                </div> -->
+                                <div  class="search-lists loca-trank" >
+                                  <!-- <ul  id="mylist"> -->
+                                    <!-- Suggested -->
+                                      <div class="shadow p-3 mb-3 bg-white" *ngFor="let item of FriendList1;let i=index">
+                                          <div class="row align-items-center" *ngIf="!loader">
+                                            <div class="col-md-2">
+                                                <div class="pic rogers">
+                                                    <a [routerLink]="['/profile',item?.userData?.slug]" href="javascript:void(0)">
+                                                      <img *ngIf="!item?.userData?.image" src="assets/img/user.png" class="roundedUser" />
+                                                      <img *ngIf="item?.userData?.image" class="roundedUser"
+                                                        src="{{getUrl(item?.userData?.image,item?.userData)}}" />
+                                                    </a> 
+                                                  </div>  
+                                            </div>
+                                            <div class="col-md-7"> 
+                                              <h4 class="name">
+                                                <a [routerLink]="['/profile',item?.userData?.slug]" href="javascript:void(0)">
+                                                  {{item?.userData?.fullName }}</a></h4>
+                                              <h6>{{item?.ownRv ? 'Owner' :'Wannabe'}}</h6>
+                                          <p>
+                                            <span *ngIf=" item.year">{{item?.year}} </span>
+                                            <span *ngIf=" item.rvType ">|{{item?.rvType}}  </span>
+                                            <span *ngIf=" item.make ">|{{item?.make}} </span>
+                                            <span *ngIf=" item.series ">|{{item?.series}} </span>
+                                            <span *ngIf=" item.model">|{{item?.model}} </span><br>
+                                            <span >Posted {{item?.totalMods}} Mods</span>
+                                          </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                              <button class="btn btn-primary" *ngIf="!item?.isFollow"
+                                              (click)="followMod(item?.id,'suggestedRvfriend',i,item?.isFollow,item?.userData?.fullName)">Follow</button>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                    <!-- <li class="filter-lop" *ngFor="let item of suggestedRVfriends;let i=index">
+                                      <div class="contact hoverCls">
+                                        <div *ngIf="!item?.isFollow"class="pic rogers">
+                                          <a href="/dashboard/friend-profile?id={{item?.id}}">
+                                            <img *ngIf="!item.image" src="assets/img/user.png" class="dummy-user-img" />
+                                            <img *ngIf="item?.image" class="dummy-user-img"
+                                              src="{{getUrl(item?.image,item)}}" />
+                                          </a> 
+                                        </div>  
+                                        <div  class="ml-2 d-flex flex-wrap align-items-center justify-content-between">
+                                          <div class="width_content">
+                                            <div *ngIf="!item?.isFollow"class="name"><a href="/dashboard/friend-profile?id={{item?.id}}">{{
+                                                item?.fullName }}</a></div>
+                                           
+                                          </div>
+                                          <div>
+                                            <button class="btn btn-primary sameSize" *ngIf="!item?.isFollow"
+                                              (click)="followMod(item?.id,'suggestedRvfriend',i)">Follow</button>
+                                           
+                                          </div>
+
+                                        </div>
+                                      </div>
+                                    </li> -->
+                                    <!-- <div class="button-acc-dec" *ngIf="suggestedRVfriends.length == 0">
+                                      <p class="text-center">Select your profile
+                                        with suggested mods</p>
+                                    </div> -->
+
+                                  <!-- </ul> -->
+                                  
+                                  
+                                </div>
+                               
+                              </div>
+                              <div class="text-right mr-3 mb-3">
+                                <a class="active view_more" *ngIf="FriendList1.length != totalsuggest && FriendList1 != 0 && FriendList1.length >= 20" href="javascript:void(0)"  (click)="onScroll()"> View more</a>
+                              </div>
+                             
+                          </div>
+                          
+                          </div>
+                          <div class="tab-pane fade" id="pills-mod-contact" role="tabpanel"  
+                            aria-labelledby="pills-mod-contact-tab">
+
+                            
+                            <div class="col-md-12 p-0" *ngIf="showModFriendList">
+                              <div class="my-frnd">
+
+
+                                <div id="custom-search-input" class="mb-3">
+                                  <div class="input-group col-md-12">
+                                    <input class="form-control input-lg" id="searchFollowers" name="search"
+                                      placeholder="Search for a member that is following you"style="border-radius: 50px !important" type="text" autocomplete="off"
+                                      [(ngModel)]="modFriendKeyword" (keyup)="getRVModfriendList()" />
+
+                                    <i class="fa fa-search frnds"></i>
+                                  </div>
+                                </div>
+                                <div class="container mods_part" *ngIf="loader">
+                                  <div class="row"> 
+                                      <div class="shadow mods_box mb-4 bg-white p-3 w-100"  *ngFor="let item of loadingContent">  
+                                                <div class="row w-100" style="align-items: center;">
+                                                  <div class="col-md-2">
+                                                    <div class="shine" style="height: 80px; width:80px; border-radius: 50px;display: block;
+                                                    margin: auto;"> 
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-9">
+                                                    <div class="col-md-6  mb-2">
+                                                        <div class="shine"> 
+                                                        </div>
+                                                       </div> 
+                                                       <div class="col-md-8  mb-2">
+                                                          <div class="shine"> 
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="shine"> 
+                                                            </div>
+                                                          </div>
+                                                         </div> 
+                                                         <div class="col-md-1 ml-auto">
+                                                            <div class="shine" style="height: 40px; width:40px;"> 
+                                                              </div>
+                                                         </div>
+                                                   </div>  
+                                       
+                                      </div>  
+                                  </div>
+                                </div> 
+                                <div class="search-lists loca-trank" >
+                                    <div class="shadow p-3 mb-3 bg-white"  
+                                    *ngFor="let item of ModRVfriends2;let i=index">
+                                        <div class="row align-items-center" *ngIf="item?.isUserExist==true && !loader">
+                                          <div class="col-md-2">
+                                              <div class="pic rogers">
+                                                  <a  [routerLink]="['/profile',item?.slug]" href="javascript:void(0)">
+                                                    <img *ngIf="!item.image" src="assets/img/user.png"
+                                                    class="roundedUser" />
+                                                    <img *ngIf="item?.image" class="roundedUser"
+                                                      src="{{getUrl(item?.image,item)}}" />
+                                                  </a>
+                                                </div>  
+                                          </div>
+                                          <div class="col-md-7"> 
+  
+                                              <div class="width_content" (click)="selectedUser(item, item?.id)">
+                                                  <h4 class="name"><a [routerLink]="['/profile',item?.slug]" href="javascript:void(0)">{{
+                                                    item?.fullName }}</a></h4> 
+                                                
+                                                </div> 
+                                                <h6>{{item?.ownRv ? 'Owner' :'Wannabe'}}</h6>
+                                                <p>
+                                                  <span *ngIf=" item.year ">{{item?.year}}  </span>
+                                                  <span *ngIf=" item.rvType ">|{{item?.rvType}}  </span>
+                                                  <span *ngIf=" item.make">|{{item?.make}} </span>
+                                                  <span *ngIf=" item.followedbyseries ">|{{item?.followedbyseries}}  </span>
+                                                  <span *ngIf=" item.model ">|{{item?.model}} </span><br>
+                                                  <span >Posted {{item?.totalMods}} Mods</span>
+                                                </p>
+                                          </div>
+                                          <div class="col-md-3">
+                                              <button class="btn btn-primary"  *ngIf="!item?.isFollow"
+                                              (click)="followMod(item?.id,'myModFriends',i,item?.isFollow,item?.fullName)">Follow</button>
+                                              <button class="btn btn-primary sameSize" *ngIf="item?.isFollow"
+                                              (click)="followMod(item?.id,'myModFriends',i,item?.isFollow,item?.fullName)">Following</button> 
+                                          </div>
+                                        </div>
+                                      </div> 
+
+                                      
+
+                                      
+                                </div>
+                              
+                              </div>
+                            </div >
+                            <div class="text-right mr-3 mb-3">
+                              <a class="active view_more" *ngIf="ModRVfriends2.length != totalFollowes && ModRVfriends2 != 0 && ModRVfriends2.length >= 20" href="javascript:void(0)"  (click)="onScrollFollowers()"> View more</a>
+                            </div>
+                            
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <!-- <div class="col-md-8">
+                        <div class="desk-chat-show mb-4">
+                          <div class="chat-design">
+                            <div class="center">
+
+
+                              <div class="chat" [ngClass]="{'dCls': dnone}" *ngIf="showChat">
+                                <div class="contact bar">
+                                  <div class="pic stark" [routerLink]="['/friend-profile']"
+                                    [queryParams]="{id: selectedUserData?.userId}">
+                                    <img *ngIf="!selectedUserData?.image" src="assets/img/user.png"
+                                      class="rounded-img-user" />
+                                    <img *ngIf="selectedUserData?.image" class="rounded-img-user"
+                                      src="{{getUrl(selectedUserData?.image,selectedUserData)}}" />
+                                    <div class="active-away chat-icon">
+                                      <i class="fa fa-circle" aria-hidden="true"
+                                        *ngIf="selectedUserData?.activityStatus"></i>
+                                      <i class="fa fa-exclamation-circle" aria-hidden="true"
+                                        *ngIf="!selectedUserData?.activityStatus"></i>
+                                    </div>
+                                  </div>
+                                  <div [routerLink]="['/friend-profile']" [queryParams]="{id: selectedUserData?.userId}"
+                                    class="name header" style="  line-height: 3;">
+                                    {{ selectedUserData?.name }}
+                                  </div>
+                                  
+                                  <div class="dropdown ic" *ngIf="showFriendList">
+                                    <a class="AlignCenter" (click)="remove();"><i class="fa fa-times"
+                                        aria-hidden="true"></i></a>
+                                    <button class="btn btn-primary dropdown-toggle" type="button"
+                                      data-toggle="dropdown">
+                                      <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <li *ngIf="selectedUserData?.isFriend">
+                                        <a href="javascript:void(0)" (click)="
+                                                blockFriend(
+                                                  selectedUserData?.id,
+                                                  true
+                                                )
+                                              ">Block</a>
+                                      </li>
+                                      
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="bg">
+                                  <div class="messages" id="chat" #scrollMe [scrollTop]="scrollMe?.scrollHeight">
+                                  
+                                    <div *ngFor="let chat of chat_history">
+                                      <div [ngClass]="{
+                                            'user-left': user.email != msg.from,
+                                            'user-right': user.email === msg.from
+                                          }" *ngFor="let msg of chat.messages">
+                                        {{ msg.message }}
+                                        <div class="timedate">
+                                          {{ msg.date_time | date: "medium" }}
+                                        </div>
+                                        <div class="text attachment shadow bg-white"
+                                          *ngIf="msg.message == 'attachment'">
+                                          <a target="_blank" class="attachement-text"
+                                            *ngIf="msg?.message == 'attachment'" href="{{chat_url}}{{
+                                                msg?.img
+                                              }}"><img class="attachImg" src="{{chat_url}}{{
+                                                  msg?.img
+                                                }}" /></a>
+                                        </div>
+
+                                        <span class="sindal-tick" *ngIf="
+                                              !msg.receiver_readStatus &&
+                                              user.email == msg.from
+                                            ">
+                                          <i class="fa fa-check" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="tick" *ngIf="
+                                              msg.receiver_readStatus &&
+                                              user.email == msg.from
+                                            ">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15"
+                                            id="msg-dblcheck-ack" x="2063" y="2076">
+                                            <path
+                                              d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"
+                                              fill="#4fc3f7" />
+                                          </svg>
+                                        </span>
+
+                                        <div *ngIf="user.email == msg.from" class="action_icon text-right">
+                                          <a (click)="deleteMessage(msg)"><i class="fa fa-trash"></i></a>
+                                        </div>
+
+                                      </div>
+                                      <div class="progress mb-3" *ngIf="progress > 0 && progress < 100">
+                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                                          [style.width.%]="progress"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="input">
+                               
+                                  <input placeholder="Type your message here!" (keyup)="
+                                          $event.keyCode == 13 && sendMessage()
+                                        " [(ngModel)]="newMessage" type="text" />
+                                
+                                  <input type="file" class="d-block" id="file"
+                                    accept="image/gif, image/jpeg, image/png, image/jpg, image/JPG, image/PNG" (change)="
+                                          handleFileInput($event.target.files)
+                                        " />
+                                  <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                  
+                                  <i class="fa fa-paper-plane" aria-hidden="true" (click)="sendMessage()"></i>
+                                </div>
+                              </div>
+                              <div class="chat h-auto text-center mb-4" style="display: grid; justify-content: center"
+                                *ngIf="!showChat">
+
+                                <div class="row align-items-center m-0 p-2">
+
+                                  <div class="col-md-6">
+                                    <img class="no-user" src="assets/img/chatlandingimage.png" />
+                                  </div>
+                                  <div class="col-md-6">
+                                   
+                                    <div class="chat_list text-left">
+                                      <div class="chat_heading mb-4"><span>Social Connections</span></div>
+                                      <ul>
+                                        <li>Social connections allow you to message other members and see their social
+                                          posts on your Home page.
+                                        </li>
+                                        <li>They are a simple version of social network friends.</li>
+                                        <li>You request connecting to a member by clicking the <img
+                                            src="assets/img/add-plus-svgrepo-com.svg" class="img_size" alt=""> icon next
+                                          to their name.</li>
+                                        <li>When you receive a connection request in your notifications, you can accept
+                                          or reject it.</li>
+                                        <li>To message a connection, just click their profile photo.</li>
+                                      </ul>
+                                      <div class="chat_heading mb-4 mt-4"><span>Mod Connections</span></div>
+                                      <ul>
+                                        <li>Mod connections are how you see selected member's mods on your Home page.
+                                        </li>
+                                        <li>You don't have to be socially connected to see a member's mods.</li>
+                                        <li>You follow the mods of members by clicking the <img
+                                            src="assets/img/unfollow.svg" class="img_size" alt=""> icon.</li>
+                                      </ul>
+                                    </div>
+                                  </div>
+
+                                </div>
+                              </div>
+                            </div>
+
+                            
+
+                          </div>
+                        </div>
+                      </div> -->
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- profile modal -->
+  <div class="modal fade" id="profilemodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Blocked Connections</h5>
+        </div>
+        <div class="modal-body" style="padding-top: 0px">
+          <div class="container w-100">
+            <div class="row" *ngFor="let item of blockedUsers" style="
+                display: flex;
+                border-bottom: 1px solid #ccc;
+                padding-bottom: 10px;
+              ">
+              <div class="section-profile d-flex">
+                <div class="col-md-2">
+                  <div class="profile-block-user">
+                    <img *ngIf="!item?.recipientId?.image" src="assets/img/user.png" class="block-user-img" />
+                    <img *ngIf="item?.recipientId?.image" class="block-user-img"
+                      src="{{getUrl(item?.recipientId?.image,item?.recipientId)}}" />
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h6 class="user-name">{{ item?.recipientId?.fullName }}</h6>
+                </div>
+                <div class="col-md-4 text-center">
+                  <button type="button" class="btn btn-primary un-block"
+                    (click)="blockFriend(item.recipientId.id, false)">
+                    Unblock
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="button-acc-dec" *ngIf="blockedUsers.length == 0">
+              <p class="text-center">No data found</p>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" #closeModal class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

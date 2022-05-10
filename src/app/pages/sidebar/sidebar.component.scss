@@ -1,0 +1,111 @@
+body {
+  padding: 0px;
+  margin: auto;
+  background: rgb(0, 0, 0);
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100vw;
+}
+.sidebar-body a div span {
+  text-align: right;
+  width: 100%;
+}
+.sidebar-body a div {
+  width: 100%;
+}
+.sidebar-body a b {
+  text-align: right;
+  width: 100%;
+}
+.container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: sticky !important;
+  top: 70px; 
+ 
+}
+
+.sidebar {
+  min-width: 100%;
+  height: 100vh;
+  background: #f2f2f2;
+  padding-right: 2rem;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  color: rgb(102, 112, 133);
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.sidebar-header {
+  display: flex;
+  gap: 8px;
+  padding: 12px 10px;
+  align-items: center;
+}
+
+.sidebar-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-body > a {
+  text-decoration: none;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0px;
+  color: rgb(102, 112, 133);
+}
+
+.sidebar-body > a.active,
+.sidebar-body a:hover {
+  background: rgb(242, 244, 247);
+  color: rgb(29, 41, 57);
+  border-radius: 8px;
+}
+
+.sidebar-body a:hover .count,
+.sidebar-body > a.active .count {
+  background: #1d2939;
+  color: #ffffff;
+}
+
+.sidebar-body > a > div {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.sidebar-body .count {
+  background: rgb(242, 244, 247);
+  padding: 2.5px 6px;
+  color: rgb(52, 64, 84);
+  border-radius: 6px;
+}
+@media (max-width: 1024px) {
+.sidebar {
+  min-width: 100%;
+  background: #f2f2f2;
+  padding: 24px 6px 0px;
+  display: flex;
+  flex-direction: column;
+  color: #667085;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+}
+.sidebar-body > a > div { 
+  font-size: 14px;
+}
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    display: none !important;
+  }
+}

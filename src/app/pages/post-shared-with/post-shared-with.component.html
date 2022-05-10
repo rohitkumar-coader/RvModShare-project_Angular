@@ -1,0 +1,62 @@
+<div class="modal-header">
+    <h5 class="modal-title">Shared With</h5>
+    <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="text-center" *ngIf="loader">
+        <img src="./assets/img/fav.gif" alt="" class="loader">
+    </div>
+    <article class="likes" *ngIf="!loader">
+        <ng-container>
+            <div class="userItem" *ngFor="let item of users;let i=index">
+                <img src="{{getUrl(item?.image,item)}}" title="" />
+                <div class="content">
+                    <h5>
+                        <a (click)="close()" [routerLink]="[ '/friend-profile']"
+                            [queryParams]="{id: item?.id}">{{item?.fullName ? item?.fullName :'Anonymous'}}</a>
+                    </h5>
+                    <div class="left">
+                        <button class="btn imgBtn mr-2" ngbTooltip="Request Social Connection"
+                            (click)="addFriend(item?.id)"
+                            *ngIf="!item?.isFriend && !item?.isPending && item?.id!=user?.id"><img class="follow-img"
+                                src="assets/img/add-plus-svgrepo-com.svg" alt=""> </button>
+                        <!-- <button class="btn btn-primary mr-2 wdth"
+                            *ngIf="!item?.isFriend && item?.isPending && item?.id != user?.id">Already Sent
+                        </button> -->
+
+                        <button class="btn imgBtn mr-2 " ngbTooltip="Unconnect"
+                            *ngIf="item?.isFriend && !item?.isPending && item?.id!=user?.id"
+                            (click)="unFriend(item?.id,i)"><img class="follow-img"
+                                src="assets/img/delete-user-svgrepo-com.svg" alt=""></button>
+                        <button class="btn imgBtn mr-2 "
+                            *ngIf="!item?.isFriend && item?.isPending && item?.id!=user?.id" ngbTooltip="Cancel request"
+                            (click)="cancelRequest(item?.id,i)"><img class="follow-img"
+                                src="assets/img/CancelRequest.png" alt=""></button>
+                        <!-- <button class="btn btn-primary mr-2 wdth" 
+                            *ngIf="item?.isFriend && !item?.isPending && item?.id!=user?.id">Friend</button> -->
+                        <div *ngIf="item?.isPending && item?.id!=user?.id" class="text-left mr-2"
+                            style="display: inline-block;" ngbTooltip="Pending">
+                            <button class="btn imgBtn"> <img class="follow-img" src="assets/img/pannding.png"
+                                    alt=""></button>
+                        </div>
+                        <button *ngIf="item?.isFollow && item?.id!=user?.id" ngbTooltip="Unfollow"
+                            (click)="followMod(item?.id)" class="btn imgBtn mr-2"><img class="icon"
+                                src="assets/img/unfollow.svg"></button>
+                        <button *ngIf="!item?.isFollow && item?.id!=user?.id" ngbTooltip="Follow"
+                            (click)="followMod(item?.id)" class="btn imgBtn mr-2"><img class="icon"
+                                src="assets/img/follow.svg"></button>
+                        <!-- <div class="btn btn-primary">Friend</div> -->
+                    </div>
+
+
+                </div>
+            </div>
+
+        </ng-container>
+    </article>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+</div>

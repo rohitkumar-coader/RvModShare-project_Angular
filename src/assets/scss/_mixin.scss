@@ -1,0 +1,14 @@
+@import 'fonts';
+@import "./variables";
+
+@mixin btn($bg, $color){
+    background-color: $bg !important;
+    border-color: $bg !important;
+    color: $color !important;
+
+    &:hover, &:focus{
+        background-color: $bg !important;
+    border-color: $bg !important;
+    color:$color !important
+    }
+}

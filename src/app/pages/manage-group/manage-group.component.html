@@ -1,0 +1,1326 @@
+<ngx-spinner bdColor="#fff" size="" color="#fff">
+  <div class='ajax-spinner-bars'>
+    <div class='bar-1'></div>
+    <div class='bar-2'></div>
+    <div class='bar-3'></div>
+    <div class='bar-4'></div>
+    <div class='bar-5'></div>
+    <div class='bar-6'></div>
+    <div class='bar-7'></div>
+    <div class='bar-8'></div>
+    <div class='bar-9'></div>
+    <div class='bar-10'></div>
+    <div class='bar-11'></div>
+    <div class='bar-12'></div>
+    <div class='bar-13'></div>
+    <div class='bar-14'></div>
+    <div class='bar-15'></div>
+    <div class='bar-16'></div>
+  </div>
+</ngx-spinner>
+
+<div class="container-fluid mt-5 pt-5 mb-5">
+  <div class="row">
+    <!-- <div class="col-md-3 p-0 mt-5">
+      <div class="box shadow bg-white p-3">
+        <div class="d-flex">
+          <h2>Manage group</h2>
+        </div>
+        <div class="manage d-flex">
+          <img class="img-responsive roundeds no" src="assets/img/group-no-img.png">
+          <div class="box-align">
+            <h4 class="mb-0">{{groupDetail?.name}}</h4>
+          </div>
+
+
+        </div>
+        <hr />
+        <button class="btn btn-primary w-100" routerLink="/page/timeline"><i class="fa fa-home mr-2"></i>Home</button>
+
+        <hr />
+
+      </div>
+    </div> -->
+    <div class="col-md-3">
+      <app-sponsored></app-sponsored>
+    </div>
+
+    <div class="col-md-6 p-0">
+      <div class="container bg-whit">
+        <div *ngIf="groupDetail?.image" class="bef_aft">
+          <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+            (breakpoint)="breakpoint($event)">
+            <div ngxSlickItem *ngFor="let item of groupDetail?.image" class="slide">
+              <img *ngIf="!groupDetail?.image" src="assets/img/groupbg.jpg" class="group-patner w-100" />
+              <img *ngIf="groupDetail?.image" src="{{_host}}images/group/{{item}}" alt="" class="group-patner w-100">
+            </div>
+          </ngx-slick-carousel>
+        </div>
+
+        <!-- <img *ngIf="!groupDetail.image" src="assets/img/Murtho.jpg" class="user-img" />
+        <div  *ngIf="groupDetail.image">
+          <img *ngFor="let item of groupDetail.image" class="user-img" src="{{_host}}images/group/{{item}}">
+        </div> -->
+        <!-- <div class="alignbtn">
+          <input #groupInput class="file-uploads" multiple (change)="uploadImage($event.target.files)" type="file"
+            accept="image/*" />
+          <div class="progress text-center" *ngIf="imageLoader">
+
+            <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success" role="progressbar"
+              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progress + '%'}">
+              {{progress}}%</div>
+          </div>
+          <button class="btn btn-primary"
+            *ngIf="groupDetail?.userRole == 'admin' && user?.id == groupDetail?.addedBy"><i class="fa fa-camera mr-2"
+              aria-hidden="true"></i>Add Cover Photo</button>
+        </div> -->
+        <div class="container-body">
+          <div class="profile-picture">
+            <div class="name ml-2">
+              <img class="img-responsive roundeds no" src="assets/img/group-no-img.png">
+
+              <strong class="mb-0 mr-3">{{groupDetail?.name}}</strong> <button
+                *ngIf="groupDetail?.isPrivate && groupDetail?.isHidden" ngbTooltip="Copy URL" (click)="copy()"
+                class="btn btn-primary mr-2"><i class="fa fa-link "></i></button>
+              <i class="fa fa-circle mr-2" aria-hidden="true"></i> <b
+                style="    color: #46e08e;">{{groupDetail?.categoryId?.name}}</b>
+              <p class="mb-0"><i class="fa fa-globe mr-2" aria-hidden="true"></i>{{groupDetail?.isPrivate ? 'Private
+                group' : 'Public group'}} {{groupDetail?.isPrivate ? groupDetail?.isHidden ? '. Hidden' : '. Visible'
+                :""}} . {{totalMembers}} {{totalMembers>1 ?'members' :'member'}} </p>
+              <!-- <button class="btn btn-primary mt-4"
+                *ngIf="!groupDetail.isJoin && groupDetail?.addedBy?.id!= credential?.credentials?.id"
+                (click)="joinGroup(groupDetail.id)">Join
+                Group</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="user">
+        <div class="container p-0" style="justify-content: space-between;
+    
+      position: sticky;
+      top: 59px;
+      z-index: 99;
+      background: #fff;
+      border-bottom: 1px solid #f0f2f5;">
+
+          <!-- <div class="mobile_view">
+<div class="d-flex justify-content-between">
+  <div class="mob_btn ml-3">
+    <button *ngIf="groupDetail?.isadmin &&  groupDetail?.addedBy!= user?.id" class="btn btn-primary mr-2" (click)="open(contents);onlyFewDetails()"><i class="fa fa-edit"
+        aria-hidden="true"></i> Group</button>
+    <button class="btn btn-primary mr-2" *ngIf="groupDetail?.addedBy== user?.id"
+      (click)="open(invitecontent);getAllUsers()"><i class="fa fa-plus mr-2"
+        aria-hidden="true"></i>Invite</button>
+    <button class="btn btn-primary mr-2" *ngIf="groupDetail?.isJoin" (click)="leaveGroup()">Leave Group</button>
+      <button class="btn btn-primary mr-2" *ngIf="!groupDetail?.isJoin && groupDetail?.addedBy!= credential?.credentials?.id"
+        (click)="joinGroup(groupDetail.id)">Join Group</button>
+    <button ngbTooltip="Edit" *ngIf="groupDetail?.isadmin &&  groupDetail?.addedBy== user?.id" class="btn btn-primary mr-2"
+      (click)="open(contents)">
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+    </button>
+    <button *ngIf="!groupDetail?.isDeleted && groupDetail?.isadmin &&  groupDetail?.addedBy!= user?.id"
+      class="btn btn-primary" (click)="deleteGroup()">
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="form-group has-search m-0 p-0 shadow-none mr-3">
+    <span class="fa fa-search form-control-feedback text-primary"></span>
+    <input type="text" class="form-control"  [ngModelOptions]="{standalone: true}"  [(ngModel)]="searchPost" placeholder="Search Posts" (keyup)="getGroupPosts()">
+  </div>
+</div>
+</div> -->
+
+          <div class="w-100 pr-2">
+            <div class="topbar_list mb-4 pt-3">
+              <ul class="nav nav-pills justify-content-between">
+                <li class="nav-item fullSpace">
+                  <div class="form-group has-search m-0 p-0 shadow-none ml-3">
+                    <span class="fa fa-search form-control-feedback text-primary"></span>
+                    <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                      [(ngModel)]="searchPost" placeholder="Search Posts" (keyup)="getGroupPosts()">
+                  </div>
+                </li>
+                <li class="nav-item mlCls">
+                  <div class="text-right">
+                    <!-- <button class="btn btn-primary mr-2">
+            <i class="fa fa-photo mr-2"></i>Photo/Video
+          </button>      -->
+                    <button *ngIf="groupDetail?.isadmin &&  groupDetail?.addedBy!= user?.id"
+                      class="btn btn-primary mr-2" (click)="open(contents);onlyFewDetails()"><i class="fa fa-edit"
+                        aria-hidden="true"></i> Group</button>
+                    <button class="btn btn-primary mr-2" *ngIf="groupDetail?.addedBy== user?.id"
+                      (click)="open(invitecontent);getAllUsers()"><i class="fa fa-plus mr-2"
+                        aria-hidden="true"></i>Invite</button>
+                    <button class="btn btn-primary mr-2" *ngIf="groupDetail?.isJoin" (click)="leaveGroup()">Leave
+                      Group</button>
+                    <button class="btn btn-primary mr-2"
+                      *ngIf="!groupDetail?.isJoin && groupDetail?.addedBy!= credential?.credentials?.id"
+                      (click)="joinGroup(groupDetail?.id,groupDetail?.GroupAdmins)">Join Group</button>
+                    <button ngbTooltip="Edit" *ngIf="groupDetail?.isadmin &&  groupDetail?.addedBy== user?.id"
+                      class="btn btn-primary mr-2" (click)="open(contents)">
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                    <button *ngIf="!groupDetail?.isDeleted && groupDetail?.isadmin &&  groupDetail?.addedBy!= user?.id"
+                      class="btn btn-primary" (click)="deleteGroup()">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                    <!-- <button *ngIf="groupDetail?.isDeleted" class="btn btn-primary" >
+          Deleted
+      </button> -->
+
+                    <!-- <button class="btn btn-primary">
+            <i class="fa fa-smile-o mr-2" aria-hidden="true"></i>Felling/Activity
+          </button> -->
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="bottom_list ml-3">
+              <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                <li class="nav-item" *ngIf="groupDetail?.isadmin || groupDetail?.isJoin">
+                  <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                    aria-controls="pills-home" aria-selected="true">Posts</a>
+                </li>
+                <li class="nav-item" *ngIf="groupDetail?.isadmin || groupDetail?.isJoin">
+                  <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                    aria-controls="pills-profile" aria-selected="false">Members</a>
+                </li>
+                <li class="nav-item" *ngIf="groupDetail?.isadmin || groupDetail?.isJoin">
+                  <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
+                    aria-controls="pills-contact" aria-selected="false">Files</a>
+                </li>
+                <li class="nav-item" *ngIf="groupDetail?.role == 'admin'">
+                  <a class="nav-link badge_req" id="pills-join-tab" (click)="getJoinRequest()" data-toggle="pill"
+                    href="#pills-join" role="tab" aria-controls="pills-join" aria-selected="false">Join Requests
+                    <div class="badges-ronded">{{groupDetail?.requestCount}}</div>
+                  </a>
+                </li>
+                <li class="nav-item" *ngIf="groupDetail?.role == 'admin'">
+                  <a class="nav-link badge_req" id="pills-report-tab" data-toggle="pill" href="#pills-report" role="tab"
+                    aria-controls="pills-report" aria-selected="false">Reported Posts
+                    <div class="badges-ronded">{{groupDetail?.reportedCount}}</div>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+
+          </div>
+        </div>
+        <div class="container  mt-3 p-0">
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+              <div class="container p-0">
+                <div class="row">
+                  <div class="col-md-12 mb-4">
+                    <div class="bg-white p-3">
+                      <strong class="mb-2">About</strong>
+                      <p>{{groupDetail?.description}}</p>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-lg-12 pb-3">
+                    <div class="bg-white">
+                      <!-- *ngIf="groupDetail?.userRole == 'admin' || groupDetail?.userRole == 'user'" -->
+                      <div class="d-flex p-3" *ngIf="groupDetail?.isJoin ||  groupDetail?.addedBy== user?.id">
+                        <img *ngIf="user?.image!=''" class="usercreate" src="{{getUrl(user?.image,user)}}">
+                        <img *ngIf="user?.image==''" class="usercreate" src="assets/img/user.png">
+                        <div class="rounded bg-gray pl-3" (click)="open(post)">Post in group....</div>
+                      </div>
+                      <hr style="margin-bottom: 0px">
+
+                    </div>
+                  </div>
+
+                  <div class="col-md-12" *ngIf="groupDetail?.isadmin || groupDetail?.isJoin">
+
+                    <div class="bg-white mt-3 p-3" *ngFor="let item of allPosts; let i=index">
+                      <div class="d-flex">
+                        <img *ngIf="item?.userImage==''" class="usercreate" src="assets/img/user.png">
+
+                        <img *ngIf="item?.userImage!=''" class="usercreate" src="{{getUrl(item?.userImage,item)}}">
+                        <div class="user-name-rule">
+                          <a href="javascript:void(0)" *ngIf="item?.userId != credential?.credentials?.id"
+                            [routerLink]="['/friend-profile']" [queryParams]="{id: item?.userId}">
+                            <strong>{{item?.userFullName | titlecase}}</strong>
+                          </a>
+                          <a href="javascript:void(0)" *ngIf="item.userId == credential.credentials.id"
+                            [routerLink]="['/dashboard/profile']">
+                            <strong>{{item?.userFullName | titlecase}}</strong>
+                          </a>
+                          <div class="common_badge">
+                            <a href="javascript:;">{{item?.addedBy?.rankBadgeImage?.title}}</a>
+                            <ul class="tooltiptext">
+                              <li><b>Points:</b> {{item?.addedBy?.rankPoints}}</li>
+                              <li><a
+                                  href="https://endpoint.rvmodshare.com/images/modPost/f7b737b8-d7f2-4361-8ed3-d0a30cea6a1f1642682372997.pdf"
+                                  target="_blank"><b>Badges & Rewards: </b> {{item?.addedBy?.rankBadgeImage?.title}}</a>
+                              </li>
+                            </ul>
+                          </div>
+                          <!-- <img *ngIf="item?.addedBy?.isFoundingMember" ngbTooltip="Founding Member" class="badges tab" src="{{_host}}images/badges/{{item?.addedBy?.foundingMemberImage}}" (click)="getMagnifyImage(item?.addedBy?.foundingMemberImage)">
+                          <img *ngIf="item?.addedBy?.rankBadgeImage" ngbTooltip="{{item?.addedBy?.rankBadgeImage?.title}}" class="badges tab" src="{{_host}}images/badges/{{item?.addedBy?.rankBadgeImage?.image}}" (click)="getMagnifyImage(item?.addedBy?.rankBadgeImage?.image)">
+                       
+                      
+                        <img *ngIf="item?.addedBy?.modderBadgeImage"  class="badges tab" ngbTooltip="{{item?.addedBy?.modderBadgeImage?.title}}"  src="{{_host}}images/badges/{{item?.addedBy?.modderBadgeImage?.image}}" (click)="getMagnifyImage(item?.addedBy?.modderBadgeImage?.image)">
+                        <img *ngIf="item?.addedBy?.networkerImage" ngbTooltip="{{item?.addedBy?.networkerImage?.title}}" class="badges tab" src="{{_host}}images/badges/{{item?.addedBy?.networkerImage?.image}}" (click)="getMagnifyImage(item?.addedBy?.networkerImage?.image)">
+                        <img *ngIf="item?.addedBy?.ambassadorBadgeImage" ngbTooltip="{{item?.addedBy?.ambassadorBadgeImage?.title}}" class="badges tab" src="{{_host}}images/badges/{{item?.addedBy?.ambassadorBadgeImage?.image}}" (click)="getMagnifyImage(item?.addedBy?.ambassadorBadgeImage?.image)"> -->
+
+                          <p class="mb-0"> <a class="public-bgs">{{item?.createdAt | date:'short' }}
+                              <!-- <i class="fa fa-globe ml-2"
+                            aria-hidden="true"></i> -->
+                            </a></p>
+
+                        </div>
+
+                        <div class="ml-auto">
+
+                          <li class="nav-item dropdown" routerLinkActive="active" style="width: 5rem;">
+                            <div class="dropdown cretDropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i aria-hidden="true" class="fa fa-ellipsis-v"></i>
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item  pl-2" (click)="openshare(item)">
+                                  <i class="fa fa-share bg mr-1" aria-hidden="true"></i>
+                                  Share
+                                </a>
+                                <a class="dropdown-item  pl-2" (click)="addLike(item?.id)"><i
+                                    class="fa fa-thumbs-o-up bg mr-1" [ngClass]="{'text-primary': item?.likestatus}"
+                                    aria-hidden="true"></i>Like</a>
+
+                                <a class="dropdown-item" *ngIf="item?.userId== user?.id"
+                                  (click)="openEditGroupPost(item,'manageGroupPost')">Edit post</a>
+                                <a class="dropdown-item"
+                                  *ngIf="((item?.userId== user?.id) || (groupDetail?.isadmin ||  groupDetail?.addedBy== user?.id))"
+                                  (click)="deletePost(item?.id,i)">Delete Post</a>
+                                <a class="dropdown-item"
+                                  (click)="openReport(item?.id,'groupPost',item,'rvreport')">Report to RVmodshare</a>
+                                <a class="dropdown-item"
+                                  (click)="openReport(item?.id,'groupPost',item,'groupAdmin')">Report Post to Admin</a>
+                                <!-- <a class="dropdown-item" routerLink="/page/terms">Share Group</a> -->
+                                <!-- <a class="dropdown-item" routerLink="/page/privacy">Privacy Policy</a> -->
+                              </div>
+                            </div>
+                          </li>
+                          <!-- <button class="btn btn-primary" (click)="open(report)">Report</button> -->
+                        </div>
+                      </div>
+                      <p class="title pre_line" (click)="viewPost(item?.id)"><a
+                          class="cursor-pointor">{{item?.postTitle}}</a></p>
+
+                      <div class="postImage bef_aft" *ngIf='item?.postImage'>
+                        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+                          (breakpoint)="breakpoint($event)">
+                          <div ngxSlickItem *ngFor="let pstImg of item?.postImage" class="slide">
+                            <img src="{{_host}}images/group/{{pstImg}}" alt="" class="group-post w-100 fullWdth">
+                          </div>
+                        </ngx-slick-carousel>
+                      </div>
+                      <div class="post-img">
+
+
+
+                        <div class="like-share d-flex pt-2 pb-2 justify-content-between">
+                          <p class="mb-0 pt-2 cursor-pointers" (click)="openLikeModal(item)"><a
+                              class="cursor-pointer"><i class="fa fa-thumbs-up mr-1"
+                                aria-hidden="true"></i>{{item?.likes}}</a>
+                            Likes</p>
+                          <div class="d-flex">
+                            <p class="mb-0 pt-2 cursor-pointers mr-3" *ngIf="!item?.isCommentDisabled"
+                              (click)="readmoreLess(i);getComments(item?.id)"><a
+                                class="cursor-pointer">{{item?.commentTotal}}
+                                Comments</a></p>
+                            <p class="mb-0 pt-2 cursor-pointers" (click)="OpenListingOfSharedUsers(item)"><a
+                                class="cursor-pointer">{{item?.totalShare}}
+                                Shares</a></p>
+                          </div>
+
+
+                        </div>
+
+                      </div>
+                      <!-- <div class="postImage" *ngIf='item?.postImage'>
+                      <img *ngFor="let pstImg of item?.postImage" src="{{_host}}images/group/{{pstImg}}">
+                    </div> -->
+                      <hr style="margin: 5px" *ngIf="groupDetail?.role == 'admin' || groupDetail?.role == 'user'">
+                      <div class="footer-area" *ngIf="groupDetail?.role == 'admin' || groupDetail?.role == 'user'">
+
+                        <div class="post-section d-flex justify-content-between con">
+                          <span class="mb-0" (click)="addLike(item?.id)"><i class="fa fa-thumbs-o-up bg mr-2"
+                              [ngClass]="{'text-primary': item?.likestatus}" aria-hidden="true"></i>
+                            Like
+                          </span>
+                          <!-- <span class="mb-0 likeHover" (click)="addLike(item?.id)"><i class="fa fa-thumbs-o-up bg mr-2"
+                              [ngClass]="{'text-primary': item?.likestatus}" aria-hidden="true"></i>
+                            Like
+                            <div class="overlay">
+                              <span ngbTooltip="Like" id="testq"(click)="getdata(item.id)"  style='font-size:19px; color:blue' class="text">👍 </span>
+                              <span ngbTooltip="HAHA" style='font-size:20px;' class="text">😀 </span>
+                              <span ngbTooltip="Love"  style='font-size:32px;color:red'>&#10084;</span>
+                              <span ngbTooltip="Wow" style='font-size:20px;' class="text">😮 </span>
+                              <span ngbTooltip="Sad" style='font-size:20px;' class="text">😒 </span>
+                              <span ngbTooltip="Angry" style='font-size:20px;' class="text">😡 </span>
+                            </div>
+                          </span> -->
+                          <span class="mb-0" *ngIf="!item?.isCommentDisabled"
+                            (click)="readmoreLess(i);getComments(item?.id)"><i class="fa fa-commenting-o bg mr-2"
+                              aria-hidden="true"></i>
+                            Comment</span>
+                          <span class="mb-0" (click)="openshare(item)"><i class="fa fa-share bg mr-2"
+                              aria-hidden="true"></i>
+                            Share</span>
+                        </div>
+
+                      </div>
+                      <!-- comments code started -->
+                      <article class="comments shadow p-3 mt-3" *ngIf="item?.showMore">
+                        <textarea *ngIf="!editComment" (keyup.enter)="addComment(item?.id,null,item?.addedBy?.id)"
+                          [(ngModel)]="commentOnPost" placeholder="Post a comment..."
+                          class="form-control commentInput"></textarea>
+                        <label *ngIf="!editComment && commentOnPost">Press Enter to post.</label>
+
+                        <article class="allComments mt-2" [ngClass]="{'isLoading': loader}">
+                          <div class="loaderDiv text-center" *ngIf="loader"> <img style="width: 50px;"
+                              src="assets/img/loader-img.gif"></div>
+                          <h5 *ngIf="allComments?.length==0">No Comments</h5>
+                          <div class="commentItem" *ngFor="let comment of allComments;let i=index">
+                            <div class="d-flex mb-2">
+                              <img *ngIf="!comment?.userImage" class="usercreate" src="assets/img/no-img.png">
+                              <img *ngIf="comment?.userImage" class="usercreate"
+                                src="{{getUrl(comment?.userImage,comment)}}">
+                              <div class="user-name-rule bg-gray">
+                                <strong
+                                  [routerLink]="[comment?.userId != user?.id ? '/friend-profile' :'/dashboard/profile']"
+                                  [queryParams]="{id: comment?.userId}">{{comment?.userFullName | titlecase}}</strong>
+                                <span class="ml-1">{{comment?.createdAt | date:'short' }}</span>
+                                <p *ngIf="!editComment" class="public-bg">{{comment?.comment}}</p>
+                                <div *ngIf="editComment && commentData?.id==comment?.id">
+                                  <textarea [(ngModel)]="commentOnPost"
+                                    (keyup.enter)="submiteditComment(commentData,'comment',item?.id)"
+                                    class="form-control reply"> </textarea>
+                                  <label>Press Enter to post.</label>
+                                </div>
+                              </div>
+
+                            </div>
+                            <div class="action_comment text-right mb-2">
+                              <a ngbTooltip="Reply" class="reply mr-2" (click)="replyClick(comment?.id)"><i
+                                  class="fa fa-reply"></i></a>
+                              <a ngbTooltip="Edit" class="edit mr-2" (click)="oneditComment(comment,'comment')"><i
+                                  class="fa fa-edit"></i></a>
+                              <a *ngIf="((comment?.userId== user?.id) || (groupDetail?.isadmin ||  groupDetail?.addedBy== user?.id))"
+                                ngbTooltip="Delete" (click)="deleteComment(comment?.id,i,null,null,'comment',item)"
+                                class="delete mr-2"><i class="fa fa-trash"></i></a>
+                            </div>
+
+                            <article class="replyList">
+                              <div class="replyForm" *ngIf="!editReply && replyForm == comment?.id">
+                                <textarea [(ngModel)]="replyOnPost"
+                                  (keyup.enter)="replyComment(item?.id,comment?.id,'comment',item?.addedBy?.id)"
+                                  placeholder="Post a reply..." class="form-control"></textarea>
+                                <label *ngIf="replyOnPost">Press Enter to post.</label>
+                              </div>
+                              <article class="replyItem align" *ngFor="let itm of comment?.reply;let j=index">
+                                <div class="d-flex subReply">
+                                  <img class="usercreate" src="{{getUrl(itm?.userImage,itm)}}">
+                                  <div class="user-name-rule bg-gray">
+                                    <strong
+                                      [routerLink]="[itm?.userId != credential?.credentials?.id ? '/friend-profile' :'/dashboard/profile']"
+                                      [queryParams]="{id: itm?.userId}"><a class="pointer-cursor">{{itm?.userFullName |
+                                        titlecase}} </a><span style="font-weight: 300">{{itm?.createdAt | date:'short'
+                                        }}</span></strong>
+                                    <p class="mb-0 pt-1"></p>
+                                    <a *ngIf="!editReply  || commentData?.id!=itm?.id" class="public-bg">
+                                      {{itm?.comment}}</a>
+                                    <div *ngIf="editReply && commentData?.id==itm?.id">
+                                      <textarea [(ngModel)]="replyOnPost"
+                                        (keyup.enter)="submiteditComment(commentData,'reply',item?.id)"
+                                        class="form-control reply"> </textarea>
+                                      <label>Press Enter to post.</label>
+                                    </div>
+                                    <div class="action_comment text-right mb-2">
+                                      <a ngbTooltip="Reply" class="reply mr-2" (click)="replyClick(itm?.id)"><i
+                                          class="fa fa-reply"></i></a>
+                                      <a *ngIf="itm?.userId == user?.id" ngbTooltip="Edit" class="edit mr-2"
+                                        (click)="oneditComment(itm,'reply')"><i class="fa fa-edit"></i></a>
+                                      <a *ngIf="((itm?.userId== user?.id) || (groupDetail?.isadmin ||  groupDetail?.addedBy== user?.id))"
+                                        (click)="deleteComment(itm?.id,i,j,null,'reply',item)" ngbTooltip="Delete"
+                                        class="delete mr-2"><i class="fa fa-trash"></i></a>
+                                    </div>
+                                  </div>
+                                </div>
+                                <article class="replyList">
+                                  <div class="replyForm" *ngIf="!editReply && replyForm == itm?.id">
+                                    <textarea [(ngModel)]="replyOnPost2"
+                                      (keyup.enter)="replyComment(item?.id,itm?.id,'reply',item?.addedBy?.id)"
+                                      placeholder="Post a reply..." class="form-control"></textarea>
+                                    <label>Press Enter to post.</label>
+                                  </div>
+                                  <article class="replyItem align" *ngFor="let reply of itm?.reply;let k=index">
+                                    <div class="d-flex subReply">
+                                      <img *ngIf="!reply?.userImage" class="usercreate img-small noto-img"
+                                        src="assets/img/user.png">
+                                      <img *ngIf="reply?.userImage" class="usercreate"
+                                        src="{{getUrl(reply?.userImage,reply)}}">
+                                      <div class="user-name-rule bg-gray">
+                                        <strong
+                                          [routerLink]="[reply?.userId != credential?.credentials?.id ? '/friend-profile' :'/dashboard/profile']"
+                                          [queryParams]="{id: reply?.userId}"><a
+                                            class="pointer-cursor">{{reply?.userFullName |
+                                            titlecase}} </a><span style="font-weight: 300">{{reply?.createdAt |
+                                            date:'short'
+                                            }}</span></strong>
+                                        <p class="mb-0 pt-1"></p>
+                                        <a *ngIf="!editReply || commentData?.id!=reply?.id" class="public-bg">
+                                          {{reply?.comment}}</a>
+                                        <div *ngIf="editReply && commentData?.id==reply?.id">
+                                          <textarea [(ngModel)]="replyOnPost"
+                                            (keyup.enter)="submiteditComment(commentData,'reply',item?.id)"
+                                            class="form-control reply"> </textarea>
+                                          <label>Press Enter to post.</label>
+                                        </div>
+                                        <div class="action_comment text-right mb-2">
+                                          <a ngbTooltip="Reply" class="reply mr-2" (click)="replyClick(reply?.id)"><i
+                                              class="fa fa-reply"></i></a>
+                                          <a *ngIf="reply?.userId == user?.id" ngbTooltip="Edit" class="edit mr-2"
+                                            (click)="oneditComment(reply,'reply')"><i class="fa fa-edit"></i></a>
+                                          <a *ngIf="((reply?.userId== user?.id) || (groupDetail?.isadmin ||  groupDetail?.addedBy== user?.id))"
+                                            (click)="deleteComment(reply?.id,i,j,k,'replyonreply',item)"
+                                            ngbTooltip="Delete" class="delete mr-2"><i class="fa fa-trash"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="replyForm" *ngIf="!editReply && replyForm == reply?.id">
+                                      <textarea [(ngModel)]="replyOnPost3"
+                                        (keyup.enter)="replyComment(item?.id,itm?.id,'replyonreply',item?.addedBy?.id)"
+                                        placeholder="Post a reply..." class="form-control"></textarea>
+                                      <label>Press Enter to post.</label>
+                                    </div>
+                                  </article>
+                                </article>
+                              </article>
+                            </article>
+                          </div>
+                        </article>
+
+                      </article>
+                      <!-- <article class="comments" *ngIf="item.showMore">
+                      <textarea *ngIf="!editComment" (keyup.enter)="addComment(item?.id,null,item?.addedBy?.id)" [(ngModel)]="commentOnPost"
+                        placeholder="Post a comment..." class="form-control commentInput"> </textarea>
+                      <label *ngIf="!editComment">Press Enter to post.</label>
+                      <div class="loaderDiv text-center" *ngIf="loader"> <img style="width: 50px;"
+                          src="assets/img/loader-img.gif"></div>
+                      <article class="" *ngIf="!loader">
+                        <div class="commentItem" *ngFor="let comment of allComments;let i=index">
+                          <div class="d-flex mb-2">
+                            <img *ngIf="!comment?.userImage" class="usercreate" src="assets/img/user.png">
+                            <img *ngIf="comment?.userImage" class="usercreate"
+                              src="{{getUrl(comment?.userImage,comment)}}">
+                            <div class="user-name-rule bg-gray">
+                              <a class="pointer-cursor"><strong
+                                [routerLink]="[comment?.userId != user.id ? '/friend-profile' :'/dashboard/profile']"
+                                [queryParams]="{id: comment?.userId}">{{comment?.userFullName | titlecase}}</strong></a>
+                                <span class="ml-1">{{comment?.createdAt | date:'short' }}</span>
+                              <a *ngIf="!editComment" class="public-bg d-block"> {{comment?.comment}}</a>
+                              <div *ngIf="editComment && commentData?.id==comment?.id">
+                                <textarea [(ngModel)]="commentOnPost"
+                                  (keyup.enter)="submiteditComment(commentData,'comment',item?.id)"class="form-control reply"> </textarea>
+                                <label>Press Enter to post.</label>
+                              </div>
+                             <div class="action_comment text-right mb-2 mt-2">
+                              <a ngbTooltip="Reply"  class="reply mr-2" (click)="replyClick(comment?.id)"><i class="fa fa-reply"></i></a>
+                              <a   *ngIf="comment?.userId == user?.id" ngbTooltip="Edit" class="edit mr-2" (click)="oneditComment(comment,'comment')" ><i class="fa fa-edit"></i></a>
+                              <a *ngIf="comment?.userId == user?.id" ngbTooltip="Delete" (click)="deleteComment(comment?.id,i,null,'comment')" class="delete mr-2"><i class="fa fa-trash"></i></a>
+                            </div>
+                            </div>
+                          </div>
+
+                          <article class="replyList">
+                            <div class="replyForm" *ngIf="!editReply && replyForm == comment?.id">
+                              <textarea  *ngIf="!editReply"[(ngModel)]="replyOnPost"
+                                (keyup.enter)="replyComment(item?.id,comment?.id,'comment',item?.addedBy?.id)" placeholder="Post a reply..."
+                                class="form-control reply" > </textarea>
+                              <label *ngIf="!editReply">Press Enter to post.</label>
+                            </div>
+                            <article class="replyItem align" *ngFor="let itm of comment?.reply;let j=index">
+                              <div class="d-flex subReply">
+                                <img *ngIf="!itm?.userImage" class="usercreate" src="assets/img/user.png">
+                                <img *ngIf="itm?.userImage" class="usercreate"
+                                  src="{{getUrl(itm?.userImage,itm)}}">
+                                <div class="user-name-rule bg-gray">
+                                  <strong
+                                    [routerLink]="[itm?.userId != user.id ? '/friend-profile' :'/dashboard/profile']"
+                                    [queryParams]="{id: itm?.userId}">{{itm?.userFullName | titlecase}}</strong>
+                                    <span class="ml-1">{{itm?.createdAt | date:'short' }}</span>
+                                  <a *ngIf="!editReply"class="public-bg d-block">{{itm?.comment}}</a>
+                                  <div *ngIf="editReply && commentData?.id==itm?.id">
+                                    <textarea [(ngModel)]="replyOnPost" (keyup.enter)="submiteditComment(commentData,'reply',item?.id)"
+                                      class="form-control reply"> </textarea>
+                                    <label>Press Enter to post.</label>
+                                  </div>
+                                  <div class="action_comment text-right mb-2 mt-2">
+                                    <a ngbTooltip="Reply"  class="reply mr-2" (click)="replyClick(itm?.id)"><i class="fa fa-reply"></i></a>
+                                    <a *ngIf="itm?.userId == user?.id" ngbTooltip="Edit" class="edit mr-2" (click)="oneditComment(itm,'reply')" ><i class="fa fa-edit"></i></a>
+                                    <a *ngIf="itm?.userId == user?.id" (click)="deleteComment(comment?.id,i,j,'reply')" ngbTooltip="Delete"  class="delete mr-2" ><i class="fa fa-trash"></i></a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="replyForm mt-2" *ngIf="!editReply && replyForm == itm?.id">
+                                <textarea   [(ngModel)]="replyOnPost2"
+                                  (keyup.enter)="replyComment(item?.id,comment?.id,'reply',item?.addedBy?.id)" placeholder="Post a reply..."
+                                  class="form-control reply" > </textarea>
+                                <label >Press Enter to post.</label>
+                              </div>
+                            </article>
+                          </article>
+                        </div>
+                      </article>
+                    </article> -->
+                      <!-- comments code ended -->
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12 bg-white pt-3 pb-3">
+                    <h4>Members · <b>{{totalMembers}}</b></h4>
+                    <div class="user-profile d-flex pt-3" *ngFor="let item of joinedGroupMembers">
+                      <img *ngIf="item?.image!='' && item?.image && item?.image!=undefined " class="userImg"
+                        src="{{getUrl(item?.image,item)}}">
+                      <img *ngIf="item?.image=='' || !item?.image || item?.image==undefined" class="userImg"
+                        src="assets/img/user.png">
+                      <div class="vertical-center">
+                        <strong>{{item?.fullName}}</strong>
+                        <div class="common_badge">
+                          <a href="javascript:;">{{item?.userDetail?.rankBadgeImage?.title}}</a>
+                          <ul class="tooltiptext">
+                            <li><b>Points:</b> {{item?.userDetail?.rankPoints}}</li>
+                            <li><a
+                                href="https://endpoint.rvmodshare.com/images/modPost/f7b737b8-d7f2-4361-8ed3-d0a30cea6a1f1642682372997.pdf"
+                                target="_blank"><b>Badges & Rewards: </b>
+                                {{item?.userDetail?.rankBadgeImage?.title}}</a></li>
+                          </ul>
+                        </div>
+                        <span class="d-block">{{item?.time}}</span>
+                      </div>
+
+                      <!-- <img *ngIf="  item?.userDetail?.isFoundingMember" ngbTooltip="Founding Member" class="badges tab" src="{{_host}}images/badges/{{item?.userDetail?.foundingMemberImage}}" (click)="getMagnifyImage(item?.userDetail?.foundingMemberImage)">
+                    <img *ngIf="  item?.userDetail?.rankBadgeImage" ngbTooltip="{{  item?.userDetail?.rankBadgeImage?.title}}" class="badges tab" src="{{_host}}images/badges/{{  item?.userDetail?.rankBadgeImage?.image}}" (click)="getMagnifyImage(item?.userDetail?.rankBadgeImage?.image)">
+               <img *ngIf="item?.userDetail?.ambassadorBadgeImage?.image" ngbTooltip="{{item?.userDetail?.ambassadorBadgeImage?.title}}" class="badges tab" src="{{_host}}images/badges/{{item?.userDetail?.ambassadorBadgeImage?.image}}" (click)="getMagnifyImage(item?.userDetail?.ambassadorBadgeImage?.image)">
+             
+               <img *ngIf="  item?.userDetail?.modderBadgeImage" ngbTooltip="{{item?.userDetail?.modderBadgeImage?.title}}" class="badges tab" src="{{_host}}images/badges/{{item?.userDetail?.modderBadgeImage?.image}}" (click)="getMagnifyImage(item?.userDetail?.modderBadgeImage?.image)">
+               <img *ngIf="  item?.userDetail?.networkerImage" ngbTooltip="{{  item?.userDetail?.networkerImage?.title}}" class="badges tab" src="{{_host}}images/badges/{{item?.userDetail?.networkerImage?.image}}" (click)="getMagnifyImage(item?.userDetail?.networkerImage?.image)"> -->
+
+                      <div class="ml-auto d-flex align-items-center"
+                        *ngIf="groupDetail?.isadmin ||  groupDetail?.addedBy== user?.id">
+
+                        <!-- <li class="nav-item dropdown pr-2">
+                          <button class="btn btn-secondary" ngbTooltip="Message Member" data-toggle="modal" data-target="#memberModal"><i class="fa fa-comments-o"></i></button>
+                        </li> -->
+
+                        <li class="nav-item dropdown" routerLinkActive="active">
+                          <div class="dropdown cretDropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i aria-hidden="true" class="fa fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" (click)="removeGroupMember(item?.userDetail?._id)"><i
+                                  class="fa fa-minus-circle mr-2"></i>Remove Member</a>
+                              <!-- <a class="dropdown-item"><i class="fa fa-comment-o mr-2"></i>Message Member</a> -->
+
+                            </div>
+                          </div>
+                        </li>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+              <div class="shadow p-3">
+                <div class="header">
+                  <h4>Files</h4>
+                  <div class="search d-flex">
+                    <!-- <input type="text" placeholder="Search files" class="border-radius form-control"> -->
+                    <span>
+                      <div class="upload-btn-wrapper mr-2"
+                        *ngIf="groupDetail?.isJoin || groupDetail?.addedBy==credential?.credentials?.id">
+                        <button class="btn btn-primary file">Upload a file</button>
+                        <input type="file" #docInput class="file-uploads" multiple id="upload-doc-image"
+                          (change)="uploadFileImage($event.target.files)" type="file" />
+                      </div>
+                      <div class="progress" *ngIf="groupFileLoader" style="max-width:100%;">
+
+                        <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success"
+                          role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                          [ngStyle]="{width: progress + '%'}">
+                          {{progress}}%</div>
+                      </div>
+                    </span>
+                  </div>
+
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-md-5">
+                    <div class="bghed"><b>File Name</b></div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="bghed"><b>Last modified</b></div>
+                  </div>
+                </div>
+                <div *ngIf="groupdocuments && groupdocuments.length>0">
+                  <div class="row" *ngFor="let item of groupdocuments; let i=index">
+                    <div class="col-md-5">
+                      <!-- <div class="bghed"><b>File Name</b></div> -->
+                      <div class="file-align">
+                        <img class="thumbnail-icon" src="{{getDocIconFromType(item?.type)}}" alt="">
+                        <p><strong>{{item?.originalName}}</strong></p>
+                      </div>
+                    </div>
+                    <!-- <div class="col-md-3">
+                   <div class="bghed"><b>Type</b></div>
+                   <p class="pdf-name">PDF</p>
+                </div> -->
+                    <div class="col-md-5">
+
+                      <p class="date">{{item?.createdAt | date : 'short'}}</p>
+                      <!-- <small class="hoverShow" (click)="opens(i)">By {{item?.addedByName}}</small> -->
+                      <small *ngIf="user?.id==item?.addedByid" [routerLink]="['/friend-profile']"
+                        [queryParams]="{id: item?.addedByid}" class="hoverShow">By {{item?.addedByName}}</small>
+                      <small *ngIf="user?.id!=item?.addedByid" [routerLink]="['/dashboard/profile']"
+                        [queryParams]="{id: item?.addedByid}" class="hoverShow">By {{item?.addedByName}}</small>
+                    </div>
+
+                    <div class="col-md-2"
+                      *ngIf="groupDetail?.isJoin || groupDetail?.addedBy==credential?.credentials?.id">
+                      <div class="dropdown mtCls">
+
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a href="{{_host}}images/group/{{item?.doc}}" class="dropdown-item" target="_blank"
+                            download>Download</a>
+                          <!-- <a class="dropdown-item" href="#">Download</a> -->
+                          <a class="dropdown-item" *ngIf="item?.addedById==credential?.credentials?.id"
+                            (click)="deleteDocument(item?.doc,i)">Delete</a>
+                          <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="pills-join" role="tabpanel" aria-labelledby="pills-join-tab">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12 bg-white pt-3 pb-3">
+                    <h4>Join Request</h4>
+                    <!-- <hr /> -->
+                    <div *ngIf="joinRequest && joinRequest.length>0">
+                      <div class="join-profile d-flex pt-3" *ngFor="let item of joinRequest">
+
+                        <div class="vertical-center pt-0 ml-0 d-flex align-item-center">
+                          <img *ngIf="item?.image!='' && item?.image && item?.image!=undefined " class="userImg mr-2"
+                            src="{{getUrl(item?.userId?.image,item?.userId)}}">
+                          <img *ngIf="item?.image=='' || !item?.image || item?.image==undefined" class="userImg mr-2"
+                            src="assets/img/user.png">
+
+                          <div class="common_badge">
+                            <strong>{{item?.fullName}}</strong>
+                            <p class="mb-0">{{item?.rankBadgeImage?.title}}</p>
+
+                          </div>
+                        </div>
+                        <div>
+                          <button class="btn btn-primary mr-1"><a href="{{item?.acceptedlink}}">Accept</a>
+
+                          </button>
+                          <button class="btn btn-danger">
+                            <a href="{{item?.rejectedlink}}">Reject</a>
+                          </button>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div *ngIf="joinRequest && joinRequest.length==0">
+                      <div class="join d-flex flex-column justify-content-center text-center pt-2">
+                        <i class="fa fa-user-times mb-2"></i>
+                        No requests
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-report" role="tabpanel" aria-labelledby="pills-report-tab">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12 bg-white pt-3 pb-3">
+                    <h4>Reported Posts</h4>
+                    <!-- <hr /> -->
+                    <div *ngIf="reportedPosts && reportedPosts.length>0">
+                      <div class="join-profile d-flex pt-3" *ngFor="let item of reportedPosts">
+
+                        <div class="vertical-center pt-0 ml-0 d-flex align-item-center">
+                          <img *ngIf="item?.image!='' && item?.image && item?.image!=undefined " class="userImg mr-2"
+                            src="{{getUrl(item?.userId?.image,item?.userId)}}">
+                          <img *ngIf="item?.image=='' || !item?.image || item?.image==undefined" class="userImg mr-2"
+                            src="assets/img/user.png">
+
+                          <div class="common_badge">
+                            <strong>{{item?.fullName}}</strong>
+                            <p class="mb-0">{{item?.rankBadgeImage?.title}}</p>
+                            <p class="mb-0">{{item?.postdata?.name}}</p>
+                          </div>
+                        </div>
+                        <div>
+                          <button class="btn btn-danger pointer-cursor mr-1" (click)="deleteReport(item?.id)">Delete
+                            Report
+
+                          </button>
+                          <button class="btn btn-danger pointer-cursor"
+                            (click)="deleteReportedPost(item?.postId,item?.id)">Delete Post
+                          </button>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div *ngIf="reportedPosts && reportedPosts.length==0">
+                      <div class="join d-flex flex-column justify-content-center text-center pt-2">
+                        <i class="fa fa-user-times mb-2"></i>
+                        No Reports Found
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="col-md-3">
+      <app-right-sponsored></app-right-sponsored>
+    </div>
+  </div>
+
+
+  <!-- post -->
+  <ng-template #post let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title text-center" id="modal-basic-title">Create Post</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="bg-whites">
+        <div class="d-flex">
+          <img *ngIf="user?.image==''" class="usercreate" src="assets/img/user.png">
+          <img *ngIf="user?.image!=''" class="usercreate" src="{{getUrl(user?.image,user)}}">
+          <div class="user-name-rule">
+            <strong>{{user?.fullName}}</strong>
+            <!-- <a class="public-bg"><i class="fa fa-globe mr-2" aria-hidden="true"></i>Public group</a> -->
+          </div>
+        </div>
+
+        <div class="modal_toggle mt-2 d-flex">
+          <label class="switch ">
+            <input type="checkbox" [(ngModel)]="isCommentDisabled" checked>
+            <span class="slider round"></span>
+          </label>
+          <span class="public">Comments (Select to disable comments on this post)</span>
+        </div>
+
+        <textarea class="form-control w-100 mt-3" (click)="onFocus()" [(ngModel)]="message"
+          [ngModelOptions]="{standalone: true}" rows="4" cols="50" placeholder="Post in this group..."></textarea>
+
+        <div class="poll-section" *ngIf="poll">
+          <form [formGroup]="pollForm" (ngSubmit)="onSubmit()">
+            <div class="modal_toggle mt-2 d-flex">
+              <label class="switch ">
+                <input id="poll-input" type="checkbox" formControlName="isCommentDisabled" class="form-control" checked>
+                <span class="slider round"></span>
+              </label>
+              <span class="public">Comments (Select to disable comments on this post)</span>
+            </div>
+            <input id="poll-input" class="form-control" formControlName="post"
+              [ngClass]="{ 'is-invalid': pollSubmitted && pf.post.errors }" type="text" placeholder="Question"
+              maxlength="500" value="">
+            <div *ngIf="pollSubmitted && pf.post.errors" class="invalid-feedback">
+              <div *ngIf="pf.post.errors.required">This field is required</div>
+            </div>
+            <ul class="_UuSG _1eWAm">
+
+
+              <li class="w-100 mt-2">
+                <input id="poll-input" formControlName="choice1" class="form-control" type="text" placeholder="Choice 1"
+                  [ngClass]="{ 'is-invalid': pollSubmitted && pf.choice1.errors }" maxlength="160" value="">
+                <div *ngIf="pollSubmitted && pf.choice1.errors" class="invalid-feedback">
+                  <div *ngIf="pf.choice1.errors.required">This field is required</div>
+                </div>
+              </li>
+
+              <li class="w-100 mt-2 mb-2">
+                <input id="poll-input" formControlName="choice2" class="form-control" type="text" placeholder="Choice 2"
+                  maxlength="160" [ngClass]="{ 'is-invalid': pollSubmitted && pf.choice2.errors }" value="">
+                <div *ngIf="pollSubmitted && pf.choice2.errors" class="invalid-feedback">
+                  <div *ngIf="pf.choice2.errors.required">This field is required</div>
+                </div>
+              </li>
+            </ul>
+            <div formArrayName="choices">
+              <div class="mb-2" *ngFor="let employee of choices().controls; let empIndex=index">
+                <div [formGroupName]="empIndex">
+                  <ul class="_UuSG _1eWAm">
+
+
+                    <li class="w-100">
+                      <input id="poll-input" formControlName="choices" class="form-control" type="text"
+                        placeholder="Choice {{empIndex}}" maxlength="160" value="">
+                      <div *ngIf="pollSubmitted && employee.get('choices').errors">
+                        <div class="text-danger" *ngIf="employee.get('choices').errors.required">This field is
+                          required.</div>
+                      </div>
+                    </li>
+
+
+                  </ul>
+
+                </div>
+                <i class="fa fa-times remove-poll" ngbTooltip="Remove" aria-hidden="true"
+                  (click)="removeChoice(empIndex)" *ngIf="choices().length==1 || choices().length==2"></i>
+
+              </div>
+            </div>
+
+
+            <div class="d-flex">
+              <button class="btn btn-primary mt-2 mb-1 mr-1" *ngIf="choices().length==0 || choices().length==1"
+                (click)="addChoice()">
+                Add a choice
+              </button>
+              <div class="_UuSG _1E64f mt-2" style="  width:50%;">
+                <div class="_UuSG">
+                  <select class="form-control" formControlName="isValidTime">
+                    <option value="3600">1 hour</option>
+                    <option value="21600">6 hours</option>
+                    <option value="86400">1 day</option>
+                    <option value="259200">3 days</option>
+                    <option value="604800">7 days</option>
+                  </select>
+                  <div *ngIf="pollSubmitted && pf.isValidTime.errors" class="invalid-feedback">
+                    <div *ngIf="pf.isValidTime.errors.required">This field is required</div>
+                  </div>
+                  <i class="" style="font-size: 14px;">
+                  </i>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- <div *ngIf="groupImage">
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+          (breakpoint)="breakpoint($event)">
+          <div ngxSlickItem *ngFor="let item of groupImage" class="slide">
+            <img src="{{_host}}images/group/{{item}}" alt="" class="group-post w-100">
+          </div>
+        </ngx-slick-carousel>
+      </div> -->
+        <!-- <div  > <img class="postImg"  src="{{_host}}images/group/{{item}}"></div> -->
+        <div class="d-flex mr-2">
+          <div *ngFor="let item of postImages;let i=index" class="slide rounded">
+            <i class="fa fa-times" (click)="removeImage(item,i,'postImage')" aria-hidden="true"></i>
+            <img src="{{_host}}images/group/{{item}}" alt="" class="group-post w-100" style="  height: 5rem;">
+
+          </div>
+          <!-- <div *ngFor="let item of postImages" class="slide">
+        <img src="{{_host}}images/group/{{item}}" alt="" class="group-post w-100">
+      </div> -->
+        </div>
+        <div class="progress" *ngIf="postImageLoader" style="max-width:100%;">
+
+          <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success" role="progressbar"
+            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progress + '%'}">
+            {{progress}}%</div>
+        </div>
+        <!-- <div class="inbox mt-2">
+        <input class="mr-2" type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+        <label for="vehicle1"><b>Share on Facebook</b></label>
+      </div> -->
+        <div class="justify-content-beetween position-relative">
+
+          <div class="text-poll-sec">
+            <b>Add to your post</b>
+            <div class="socialBtn">
+
+              <input #postInput class="file-uploads" multiple id="upload-post-image"
+                (change)="uploadImage2($event.target.files)" type="file" accept="image/*" />
+
+
+              <label class="imageIcon" ngbTooltip="Upload Image" for="upload-post-image">
+                <img src="./assets/img/image.png" />
+              </label>
+
+              <img src="./assets/img/emoji.jpg" class="emojiIcon" [ngClass]="{'active': showEmojiPicker}"
+                (click)="toggleEmojiPicker()" />
+
+              <!-- <img (click)="poll = !poll" [ngClass]="{'active': poll}" class="poll" src="./assets/img/poll.png" /> -->
+
+              <emoji-mart class="emoji-mart" set="{{set}}" *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)"
+                ngbTooltip="Pick your emoji…"></emoji-mart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary w-100" (click)="savePost();">Post</button>
+    </div>
+  </ng-template>
+
+
+  <!-- <ng-template #report let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title text-center" id="modal-basic-title">Report Post</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body p-4">
+    <div class="search active">
+      <small>Do you want to report this?</small>
+      <div class="input mb-3">
+        <label>Type</label>
+        <select name="role" id="role" class="form-control">
+          <option value="admin">Amit</option>
+          <option value="member">Mohit</option>
+        </select>
+      </div>
+
+      <div class="overlap-box">
+        <label>Description</label>
+        <textarea col="5" class="form-control"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="c('Save click')">Send</button>
+  </div>
+</ng-template> -->
+
+
+
+  <ng-template #invitecontent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title text-center" id="modal-basic-title">Invite a member to this group</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+          <label>Role</label>
+          <select name="role" id="role" [(ngModel)]="selected_role" class="form-control">
+            <option value="sub_admin">Admin</option>
+            <option value="member">Member</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label>Member</label>
+          <input *ngIf="allUsers" class="form-control input-lg" id="search" name="search" placeholder="Search User"
+            type="text" autocomplete="off" [(ngModel)]="member" [ngModelOptions]="{standalone: true}"
+            (ngModelChange)="getAllUsers(member)" />
+          <div class="sholist-align" *ngIf="showList">
+            <div class="contact hoverCls" *ngFor="let item of allUsers;let i=index">
+              <!-- <div class="badge">14</div> -->
+              <div class="dropdown ic" *ngIf="showList">
+                <div class="ml-3" (click)="selectedMember(item)">
+                  <div [ngClass]="{'active': item?.id==invited_member_id}" class="name">
+                    {{ item?.description }}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="button-acc-dec" *ngIf="allUsers.length == 0">
+              <p class="text-center">No data found</p>
+            </div>
+          </div>
+          <!-- <ngx-select-dropdown [config]="config1" [options]="allUsers" [multiple]="false" [(ngModel)]="member"
+          [ngModelOptions]="{standalone: true}" (ngModelChange)="selectedMember(member)">
+        </ngx-select-dropdown> -->
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" [disabled]="!invited_member_id" class="btn btn-primary"
+        (click)="c('Save click');SendInvite()">Send</button>
+    </div>
+  </ng-template>
+
+
+  <ng-template #groupContent let-c="close" let-dg="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title text-center" id="modal-basic-title">Edit Group</h4>
+      <button type="button" class="close" aria-label="Close" (click)="dg('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label>Title</label>
+          <input type="text" class="form-control" />
+        </div>
+
+        <div class="col-md-12">
+          <label>Description</label>
+          <textarea class="form-control"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary">Send</button>
+    </div>
+  </ng-template>
+
+
+
+
+
+  <ng-template #contents let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title"><b>{{groupId ? 'Edit' : 'Create'}} Group</b></h4>
+      <button type="button" class="close" aria-label="Close" (click)="modalReference.close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="groupForm">
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-md-12">
+              <div class="form-check_flex">
+                <input disabled="groupId!='' && groupForm.value.isPrivate" class="form-control"
+                  (change)="changeprivacyOfEvent()" formControlName="isPrivate" type="checkbox" checked>
+                <label>Private Group</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" *ngIf="groupForm.value.isPrivate">
+          <div class="form-row">
+            <div class="col-md-12">
+              <div class="form-check_flex">
+                <input class="form-control" formControlName="isHidden" type="checkbox" checked>
+                <label>Hidden</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="modal_toggle mt-2 d-flex">
+    <label class="switch ">
+      <input id="poll-input" type="checkbox"  (change)="changeprivacyOfEvent()" formControlName="isPrivate" class="form-control" checked>
+      <span class="slider round"></span>
+    </label>
+    <span class="public">Public/Private</span>
+  </div>
+  <div class="form-group" *ngIf="groupForm.value.isPrivate">
+    <div class="form-row">
+      <div class="col-md-12">
+  
+        <input type="checkbox" formControlName="isHidden" class="form-control" checked class="mr-1">
+        <label>Hidden</label>
+      </div>
+    </div>
+  </div> -->
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-md-12">
+              <label>Title <span class="text-red">*</span></label>
+              <input type="text" class="form-control" formControlName="name" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }" required="" placeholder="New group title...">
+            </div>
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">title is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-md-12">
+              <label>Description <span class="text-red">*</span></label>
+              <textarea class="form-control" formControlName="description" required="" cols="50" rows="2"
+                placeholder="Description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+            </div>
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+              <div *ngIf="f.description.errors.required">Description is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" *ngIf="!onlyFewDetailEdit">
+          <div class="input-group">
+            <label>Tags</label>
+            <input type="text" class="form-control" formControlName="tags" class="form-control w-100"
+              (change)="splitByComma($event.target.value)" placeholder="Tags"><br />
+            <small class="mb-1">(Optional) Add tags separated by commas then press enter to increase group
+              visibility</small>
+          </div>
+          <div class="badges" *ngFor="let item of tagsArray">{{item}}<i class="fa fa-times-circle ml-2"
+              aria-hidden="true" (click)="deleteTag(item)"></i></div>
+        </div>
+        <div class="form-group" *ngIf="!onlyFewDetailEdit">
+          <label>Category <span class="text-red">*</span></label>
+          <select name="cars" id="cars" [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }"
+            formControlName="categoryId" class="form-control">
+            <option selected disabled>{{categories.length>0 ? 'Choose Category' : 'No Data Found'}}</option>
+            <option *ngFor="let item of categories" value="{{item.id}}">{{item.name}}</option>
+          </select>
+          <div *ngIf="submitted && f.categoryId.errors" class="invalid-feedback">
+            <div *ngIf="f.categoryId.errors.required">Category is required</div>
+          </div>
+        </div>
+        <div class="col-sm-12 p-0" *ngIf="!onlyFewDetailEdit">
+          <div class="form-group center-nail">
+            <div class="mt-2">
+              <div class="postImage" *ngIf="groupImage">
+
+                <div *ngFor="let grpimg of groupImage;let i=index" class="slide rounded">
+                  <i class="fa fa-times" (click)="removeImage(grpimg,i,'groupImage')" aria-hidden="true"></i>
+                  <img src="{{_host}}images/group/{{grpimg}}" alt="" class="group-post w-100" style="  height: 5rem;">
+
+                </div>
+
+              </div>
+
+              <!-- <img *ngIf="!groupImage" src="assets/img/Murtho.jpg" class="user-img" />
+            <div *ngIf="groupImage">
+              <img *ngFor="let grpimg of groupImage" class="user-img" src="{{_host}}images/group/{{grpimg}}">
+            </div> -->
+
+              <!-- <img *ngIf="loaderImage" class="img-upload-loader" src="assets/img/loader-img.gif"> -->
+
+            </div>
+            <div class="text-center">
+              <input #myInput multiple type="file" id="file-7" class="d-none"
+                (change)="uploadImage($event.target.files)" accept="image/jpg, image/jpeg, image/png,.png,.jpg,.jpeg" />
+              <small>(Optional) Max: 5MB. Accepted image types: .jpg, .png, .jpeg</small><br />
+              <label class="btn btn-secondary p-2 mb-0 mt-2" for="file-7">
+                <i class="fa fa-photo mr-2"></i>
+                {{groupImage ? 'Change' : 'Upload'}} Image
+              </label>
+              <div class="progress group" *ngIf="imageLoader" style="max-width:400px;;">
+
+                <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success" role="progressbar"
+                  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progress + '%'}">
+                  {{progress}}%</div>
+              </div>
+              <!-- <span class="btn btn-danger ml-2 p-2" (click)="removeImage(groupImage)">
+              <i class="fa fa-trash"></i>
+            </span> -->
+
+            </div>
+          </div>
+        </div>
+        <hr />
+
+        <div class="form-group text-right">
+          <button type="button" ngbTooltip="Delete" *ngIf="groupId" (click)="deleteGroup()" class="btn btn-danger mr-2">
+            <i class="fa fa-trash" aria-hidden="true"></i></button>
+          <button type="button" (click)="updateGroupDetail()" [disabled]="groupForm.invalid"
+            class="btn join-us bottom btn-primary">{{ groupId ? 'Update' : 'Add' }}</button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+  <!-- Modal -->
+  <div class="member_manage modal right fade" id="memberModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="box">
+
+            <div class="message hoverCls d-flex justify-content-between">
+              <div class="d-flex">
+                <div class="pic rogers conn">
+                  <img src="assets/img/user.png" class="dummy-user-img" />
+                </div>
+                <div class="ml-2 d-flex flex-wrap align-items-center">
+                  <div class="width_content">
+                    <div class="name">
+                      John Doe
+                    </div>
+                    <div class="message_icon">
+                      <!-- <span *ngIf="!item?.isOnline">
+                          <i class="fa fa-exclamation-circle" aria-hidden="true"></i>Offline
+                        </span> -->
+                      <span>
+                        <i class="fa fa-circle" aria-hidden="true"></i>Online
+                      </span>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="close">
+                <i class="fa fa-times close" data-dismiss="modal" aria-label="Close"></i>
+              </div>
+
+            </div>
+
+            <hr>
+
+            <div class="text_chat">
+              <ul>
+                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
+                <li>T Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type specimen book. </li>
+                <li>it is a long established fact that a reader will be distracted by the readable content of a page
+                  when looking at its layout. </li>
+                <li>ontrary to popular belief, Lorem Ipsum is not simply random text</li>
+                <li>There are many variations of passages of Lorem Ipsum available, but the majority have suffered
+                  alteration in some form,</li>
+              </ul>
+            </div>
+
+            <div class="typing">
+              <div class="chat_box">
+                <textarea placeholder="Type your message"></textarea>
+              </div>
+              <div class="send">
+                <i class="fa fa-paper-plane-o"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>

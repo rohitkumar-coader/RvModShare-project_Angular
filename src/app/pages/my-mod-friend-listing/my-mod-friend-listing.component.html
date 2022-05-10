@@ -1,0 +1,20 @@
+<div class="container mt-5 pt-5">
+        <div class="row">
+                    <div class="col-md-3" *ngFor="let item of firendsList">
+                            <div class="shadow bg-white p-2 mb-3">
+                                <div class="box-img">
+                                       <img class="friend-img" *ngIf="!item.image" src="assets/img/user.png" alt="">
+                                       <img class="friend-img" *ngIf="item.image" src="{{_host}}{{item.image}}" alt="">
+                                <!-- <img src="https://scontent.fluh1-1.fna.fbcdn.net/v/t1.6435-1/86720033_127787138769753_6910259292981428224_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=7206a8&_nc_ohc=5SmIt_tC1fcAX-LWYwu&_nc_ht=scontent.fluh1-1.fna&oh=9ca8fff2e0a0a85f48d9575335290a70&oe=61A1BD0B" alt=""> -->
+                            </div>
+                                <div class="p-2 text-center">
+                                    <strong>{{item.fullName}}</strong> <br />
+                                    <button class="btn btn-primary mt-2 mr-2 pl-4 pr-4">View </button>
+                                    <button class="btn btn-primary mt-2"><i class="fa fa-user-plus mr-1"></i>Follow</button>   
+                                     <button class="btn btn-primary mt-2"><i class="fa fa-user-plus mr-1"></i>Follow Mods</button>
+                                </div>
+                            </div>
+                        </div>
+       
+        </div>
+    </div>

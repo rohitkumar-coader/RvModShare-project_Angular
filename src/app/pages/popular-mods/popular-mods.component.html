@@ -1,0 +1,324 @@
+<div class="row">
+  <div class="col-md-12 mt-3">
+    <h1 class="popular-heading mt-4">Browse Popular Mods</h1>
+    <div class="shadow mods_box mb-4" *ngFor="let modDetail of allMods;let i=index">
+
+      <div class="row" *ngIf="i<=2">
+        <div class="col-md-4" *ngIf="modDetail?.typeOfPost=='mod'">
+          <div class="favourite">
+            <span class="favorite shadow" (click)="favourite(modDetail?.id,i)">
+              <input type="checkbox" [checked]="modDetail.isFavourite" />
+              <i ngbTooltip="Favorite" placement="left" class="fa fa-heart shadow"></i>
+            </span>
+          </div>
+          <div class="mods_img">
+            <div
+              *ngIf="modDetail?.registeredRV && modDetail?.addedBydetails?.isrvRental && modDetail?.addedBydetails?.rvRental && ( modDetail?.addedBydetails?.rvRental?.rvShareUrl!='' || modDetail?.addedBydetails?.rvRental?.outdoorsyUrl!='' || modDetail?.addedBydetails?.rvRental?.rvezyUrl!='')"
+              class="ribbon blue_col">
+                <a *ngIf="modDetail?.addedBydetails?._id != credentials?.credentials?.id" href="javascript:void(0)"
+                   [routerLink]="['/profile',modDetail?.addedBydetails?.slug]"><span>Rent</span></a>
+              <a *ngIf="modDetail?.addedBydetails?._id == credentials?.credentials?.id" href="javascript:void(0)"
+                 [routerLink]="['/dashboard/profile']"><span>Rent</span></a>
+            </div>
+            <a class="pointer-cursor mod_left_img">
+              <img (click)="goToModDetail('/mods',modDetail?.slug)"
+                *ngIf="modDetail?.afterImages?.length==0 && modDetail?.beforeImages?.length==0"
+                class="img-responsive roundeds contain" src="assets/img/follow-new1.png">
+              <img (click)="goToModDetail('/mods',modDetail?.slug)" *ngIf="modDetail?.afterImages?.length>0 "
+                class="img-responsive roundeds contain" src="{{_host}}images/modPost/{{modDetail.afterImages[0]}}">
+              <img (click)="goToModDetail('/mods',modDetail?.slug)"
+                *ngIf="modDetail?.afterImages?.length==0 && modDetail?.beforeImages?.length>0"
+                class="img-responsive roundeds contain" src="{{_host}}images/modPost/{{modDetail?.beforeImages[0]}}">
+            </a>
+          </div>
+        </div>
+        <div class="col-md-8" *ngIf="modDetail?.typeOfPost=='mod'">
+          <div class="py-2 px-3">
+            <div class="bagesSection">
+              <article class="postTop mb-2">
+                <div class="d-flex">
+                  <p class="mb-0 pt-1">
+                    <a (click)="goToModDetail('/mods',modDetail?.slug)" class="pointer-cursor"><b>
+                        {{modDetail?.name}}</b>
+                      <span class="ml-2">{{modDetail?.createdAt | date:'longDate' }}</span></a>
+                  </p>
+
+                </div>
+
+                <div class="text-right-align-btn rightAlignCls" *ngIf="credentials?.credentials?.id">
+                  <div class="dropdown cretDropdown ml-2 mods_dropdown">
+                    <button class="btn btn-primary dropdown-toggle" (click)="setShareData(modDetail)" type="button"
+                      id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i aria-hidden="true" class="fa fa-ellipsis-v"></i>
+                    </button>
+                    <div class="dropdown-menu mods_drop_list" aria-labelledby="dropdownMenuButton">
+
+                      <div class="connection_icon dropdown-item bg-none">
+
+                        <!-- <button class="btn imgBtn mr-2"
+                          *ngIf="!modDetail?.isFriend && !modDetail?.isPending && modDetail?.addedBydetails?._id != credentials?.credentials?.id "
+                          (click)="followFriend(modDetail,i)" ngbTooltip="Request Social Connection"><img
+                            class="follow-img" src="assets/img/add-plus-svgrepo-com.svg" alt=""> </button> -->
+                        <!-- <button class="btn imgBtn mr-2"
+                          *ngIf="modDetail?.isFriend && modDetail?.addedBydetails?._id != credentials?.credentials?.id "
+                          (click)="unFriend(modDetail,i)" ngbTooltip="Unconnect"><img class="follow-img"
+                            src="assets/img/delete-user-svgrepo-com.svg" alt=""></button> -->
+                        <!-- <button class="btn imgBtn mr-2"
+                          *ngIf="modDetail?.isPending && modDetail?.addedBydetails?._id != credentials?.credentials?.id "
+                          (click)="cancelRequest(modDetail,i)" ngbTooltip="Cancel Request"><img class="follow-img"
+                            src="assets/img/CancelRequest.png" alt=""></button> -->
+                        <!-- <button class="btn imgBtn mr-2" *ngIf="modDetail?.isPending " ngbTooltip="Pending"><img
+                            class="follow-img" src="assets/img/pannding.png" alt=""> </button> -->
+                        <!-- <button class="btn imgBtn mr-2"
+                          *ngIf="!modDetail?.isFollow && modDetail?.addedBydetails?._id != credentials?.credentials?.id "
+                          (click)="followMod(modDetail,i)" ngbTooltip="Make Mod Connection"> <img class="followIcon"
+                            src="assets/img/follow.svg" alt=""></button> -->
+                        <!-- <button class="btn imgBtn mr-2"
+                          *ngIf="modDetail?.isFollow && modDetail?.addedBydetails?._id != credentials?.credentials?.id "
+                          (click)="followMod(modDetail,i)" ngbTooltip="Unconnect"><img class="followIcon"
+                            src="assets/img/unfollow.svg" alt=""></button> -->
+
+                        <div class="connection_icon dropdown-item p-0">
+                          <div class="a2a_kit a2a_kit_size_32 a2a_default_style" (click)="setShareData(modDetail);Onshare(modDetail,'facebookClick')"
+                            [attr.data-a2a-url]="'https://rvmodshare.com/mods/'+modDetail?.slug"
+                            [attr.data-a2a-title]="modDetail?.name">
+                            <a class="a2a_button_facebook"></a>
+                              <a class="a2a_button_twitter"></a>
+                          </div>
+                        </div>
+
+                      </div>
+                      <!-- <a class="dropdown-item" *ngIf=" modDetail?.addedBydetails?._id == credentials?.credentials?.id"
+                        href="/share-mod/{{modDetail?.slug}}">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                        Edit Post
+                      </a> -->
+                     
+                      <a class="dropdown-item" (click)="likePost(modDetail?.id,'modPost',i,modDetail?.addedBy)"><i
+                          class="fa fa-thumbs-o-up bg" [ngClass]="{'text-primary': modDetail?.likestatus}"
+                          aria-hidden="true"></i>Like</a>
+                      
+                      
+                      
+                      <a class="dropdown-item" *ngIf=" modDetail?.addedBydetails?._id != credentials?.credentials?.id"
+                        (click)="openReport(modDetail?.id,'modPost')">
+                        <i class="fa fa-bug" aria-hidden="true"></i>
+                        Report Post
+                      </a>
+                      <a class="dropdown-item" *ngIf="modDetail?.addedBydetails?._id==credentials?.credentials?.id"
+                        (click)="deletePost(modDetail?.id,i)"><i class="fa fa-trash mr-1" aria-hidden="true"></i>
+                        Delete Post
+                      </a>
+                      <a class="dropdown-item" (click)="copyLink(modDetail)"><i class="fa fa-copy"></i> Copy Link</a>
+                      <!-- <a class="dropdown-item" *ngIf=" modDetail?.addedBydetails?._id == credentials?.credentials?.id"
+                        (click)="deleteModPost(modDetail?.id,i)">
+                        <i class="fa fa-trash mr-1" aria-hidden="true"></i>
+                        Delete Post
+                      </a> -->
+
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="main_badges">
+              <div class="d-flex align-items-center w-100 inner_prof_badge mb-1 mt-2">
+
+                <div class="prof_img">
+                  <img *ngIf="modDetail?.addedBydetails?.image=='' || modDetail?.addedBydetails?.image==null"
+                    class="mr-2" src="assets/img/user.png" alt="profile_img">
+                  <img *ngIf="modDetail?.addedBydetails?.image!='' && modDetail?.addedBydetails?.image!=null"
+                    class="mr-2" src="{{getUrl(modDetail?.addedBydetails?.image,modDetail?.addedBydetails)}}"
+                    alt="profile_img">
+                </div>
+
+                <div>
+                  <a href="javascript:void(0)" class="large_font" *ngIf="modDetail?.addedBydetails?._id != credentials?.credentials?.id" [routerLink]="['/profile',modDetail?.addedBydetails?.slug]">
+                    <b>{{modDetail?.addedBydetails?.fullName}}</b>
+
+
+                  </a>
+                  <a href="javascript:void(0)" class="large_font" *ngIf="modDetail?.addedBydetails?._id == credentials?.credentials?.id"
+                    [routerLink]="['/dashboard/profile']">
+                    <b>{{modDetail?.addedBydetails?.fullName}}</b>
+                  
+                  
+                  </a>
+                  <div class="common_badge">
+
+                    <p class="mb-2" *ngIf="modDetail?.addedBydetails?.ownRV == false"><b>Dreamer</b></p>
+                    <p class="mb-2" *ngIf="modDetail?.addedBydetails?.ownRV == true"><b>Owner</b></p>  
+                    <!-- <a href="javascript:;">{{modDetail?.addedBydetails?.rankBadgeImage?.title}}</a>
+                    <ul class="tooltiptext">
+                      <li><b>Points:</b> {{modDetail?.addedBydetails?.rankPoints}}</li>
+                      <li><a
+                          href="https://endpoint.rvmodshare.com/images/modPost/f7b737b8-d7f2-4361-8ed3-d0a30cea6a1f1642682372997.pdf"
+                          target="_blank"><b>Badges & Rewards: </b>
+                          {{modDetail?.addedBydetails?.rankBadgeImage?.title}}</a></li>
+                    </ul> -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="row w-100">
+                <div class="col-md-6 ">
+
+
+                  <div class="tagsAlign">
+                    <h4 class="mod-rv-texts"><small> {{modDetail?.year}} {{modDetail?.rvType}}
+                        {{modDetail?.make?.name}}
+                        {{modDetail?.series?.name | titlecase}} {{modDetail?.model}}
+                      </small></h4>
+
+                  </div>
+                  <h6 class="mb-0">{{modDetail?.catName}}</h6>
+                  <h4><small>{{modDetail?.sizedetails?.name}}</small></h4>
+                </div>
+                <div class="col-md-6 border-left">
+                  <div class="rightAlign ">
+                    <b>Summary</b>
+                    <p class="truncate font_normal" [innerHTML]="htmlLength(modDetail?.newW,100)"></p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="likeShare">
+                <a><i class="fa fa-thumbs-up" ngbTooltip="Likes" aria-hidden="true"></i>{{modDetail?.likesTotal}}</a>
+                <a *ngIf="!modDetail?.isCommentDisabled"><i class="fa fa-comment" ngbTooltip="Comments"
+                    aria-hidden="true"></i>{{modDetail?.commentTotal}}</a>
+                <a><i class="fa fa-share-alt" aria-hidden="true" ngbTooltip="Shares"></i> {{modDetail?.totalShare}}</a>
+                <a style="width: 23px;" *ngIf="modDetail?.skillLevel=='6193a45efc4c9b3d4ce7ad62'" class="high"><img
+                    src="assets/img/low.png" ngbTooltip="Low" class="skill-ic" alt=""></a>
+                <a style="width: 23px;" class="high" *ngIf="modDetail?.skillLevel=='6194c77a4d8a1d9518bbe18c'"><img
+                    src="assets/img/medium.png" ngbTooltip="Medium" class="skill-ic" alt=""></a>
+                <a class="high" *ngIf="modDetail?.skillLevel=='6197d36401d78bc07b538196'"><img src="assets/img/high.png"
+                    ngbTooltip="High" class="skill-ic" alt=""></a>
+                <a><i class="fa fa-clock-o" ngbTooltip="{{modDetail?.timerange}}" placement="top"
+                    aria-hidden="true"></i></a>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <div>
+      <a class="active"  [routerLink]="['/mods']" href="javascript:void(0)" [hidden]="!showViewMore">
+        <span>
+          View more mods
+        </span>
+      </a>
+
+    </div>
+    <div class="col-md-12 p-0 mt-5">
+      <h1 class="popular-heading"> Suggested Members to Follow</h1>
+    </div>
+
+    <div class="search-lists loca-trank" *ngFor="let item of suggestedRVfriends;let i=index">
+      <!-- <ul  id="mylist"> -->
+
+      <div class="shadow p-3 mb-3 bg-white" *ngIf="i<=2">
+        <div class="row align-items-center">
+          <div class="col-md-2">
+            <div *ngIf="!item?.isFollow" class="pic rogers">
+              <a [routerLink]="['/profile',item?.userData?.slug]">
+                <img *ngIf="!item.userData?.image" src="assets/img/user.png" class="roundedUser" />
+                <img *ngIf="item?.userData?.image" class="roundedUser" src="{{getUrl(item?.userData?.image,item?.userData)}}" />
+              </a>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <h4 *ngIf="!item?.isFollow" class="name">
+              <a [routerLink]="['/profile',item?.userData?.slug]">
+                {{item?.userData?.fullName }}</a>
+            </h4>
+            <!-- <h6>Owner</h6>
+            <p><span>Class B |</span>
+              <span>Storyletter Overland |</span>
+              <span>Mode 4 |</span>
+              <span>Classic |</span>
+              <span>2021 Posted 3 mods |</span>
+            </p> -->
+            <h6>{{item?.ownRv ? 'Owner' :'Wannabe'}}</h6>
+              <p>
+                <span *ngIf=" item.year ">{{item?.year}}  </span>
+                <span *ngIf=" item.rvType">|{{item?.rvType}}  </span>
+                <span *ngIf=" item.make ">|{{item?.make}}  </span>
+                <span *ngIf=" item.series ">|{{item?.series}}  </span>
+                <span *ngIf=" item.model ">|{{item?.model}}  </span><br>
+                <span>Posted {{item?.totalMods}} Mods</span>
+              </p>
+</div>
+          <div class="col-md-3">
+            <button class="btn btn-primary" *ngIf="!item?.isFollow" (click)="followMod(item?.id,i)">Follow</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- <li class="filter-lop" *ngFor="let item of suggestedRVfriends;let i=index">
+          <div class="contact hoverCls">
+            <div *ngIf="!item?.isFollow"class="pic rogers">
+              <a href="/dashboard/friend-profile?id={{item?.id}}">
+                <img *ngIf="!item.image" src="assets/img/user.png" class="dummy-user-img" />
+                <img *ngIf="item?.image" class="dummy-user-img"
+                  src="{{getUrl(item?.image,item)}}" />
+              </a> 
+            </div>  
+            <div  class="ml-2 d-flex flex-wrap align-items-center justify-content-between">
+              <div class="width_content">
+                <div *ngIf="!item?.isFollow"class="name"><a href="/dashboard/friend-profile?id={{item?.id}}">{{
+                    item?.fullName }}</a></div>
+               
+              </div>
+              <div>
+                <button class="btn btn-primary sameSize" *ngIf="!item?.isFollow"
+                  (click)="followMod(item?.id,'suggestedRvfriend',i)">Follow</button>
+               
+              </div>
+
+            </div>
+          </div>
+        </li> -->
+      <div class="button-acc-dec" *ngIf="suggestedRVfriends.length == 0">
+        <p class="text-center">Select your profile
+          with suggested mods</p>
+      </div>
+
+
+      <!-- </ul> -->
+    </div>
+    <div class="mb-5">
+      <a class="active" href="/connections " [hidden]="!showViewMoreFollowings">
+        <span>
+          View more
+        </span>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal d-block" *ngIf="viewModal">
+  <div class="modal-overlay" (click)="viewModal=false"></div>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--- <div class="modal-header">
+              <h3 class="modal-title"></h3>
+             <button type="button" class="close" (click)="viewModal=false">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>--->
+      <div class="modal-body mt-3">
+        Copied URL to clipboard!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" (click)="viewModal=false">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

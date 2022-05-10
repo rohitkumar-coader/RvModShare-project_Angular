@@ -1,0 +1,169 @@
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center" id="modal-basic-title">{{postId ? 'Edit' :'Add'}} Post</h4>
+                <button type="button" class="close" (click)="close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="bg-white">
+                    <div class="d-flex">
+                        <img *ngIf="user?.image==''" class="usercreate noto-img" src="assets/img/no-img.png">
+                        <img *ngIf="user?.image!=''" class="usercreate" src="{{getUrl(user?.image,user)}}">
+                        <div class="user-name-rule">
+                            <strong>{{user?.fullName}}</strong>
+                            <!-- <a class="public-bg"><i class="fa fa-globe mr-2" aria-hidden="true"></i>Public group</a> -->
+                        </div>
+                    </div>
+
+                    <div class="modal_toggle mt-2 d-flex">
+                        <label class="switch ">
+                          <input type="checkbox" [(ngModel)]="isCommentDisabled" checked> 
+                          <span class="slider round"></span>
+                        </label>
+                        <span class="public">Comments (Select to disable comments on this post)</span>
+                      </div>
+
+                    <textarea class="form-control w-100 mt-3" (click)="onFocus()" [(ngModel)]="message"
+                        [ngModelOptions]="{standalone: true}" rows="4" cols="50"
+                        placeholder="Create a public post..."></textarea>
+
+                    <hr />
+                    <div *ngIf="postImage" class="mt-3">
+                        <span class="imgThumb" *ngFor="let img of postImage;let i=index">
+                            <i class="fa fa-times" (click)="removePostImage(img,i)" aria-hidden="true"></i>
+                            <img class="shadow" src="{{_host}}images/posts/{{img}}"></span>
+
+                    </div>
+
+                    <div class="progress" *ngIf="postimageLoader" style="max-width:100%;">
+
+                        <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success"
+                            role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                            [ngStyle]="{width: progress + '%'}">
+                            {{progress}}%</div>
+                    </div>
+
+                    <div class="poll-section" *ngIf="poll">
+                        <form [formGroup]="pollForm">
+                            <div class="modal_toggle mt-2 d-flex">
+                                <label class="switch ">
+                                    <input id="poll-input" type="checkbox" formControlName="isCommentDisabled" class="form-control" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                                <span class="public">Comments (Select to disable comments on this post)</span>
+                            </div>
+                            <input  id="poll-input" class="form-control" formControlName="post"
+                                [ngClass]="{ 'is-invalid': pollSubmitted && pf.post.errors }" type="text"
+                                placeholder="Question" maxlength="500" value="">
+                            <div *ngIf="pollSubmitted && pf.post.errors" class="invalid-feedback">
+                                <div *ngIf="pf.post.errors.required">This field is required</div>
+                            </div>
+                            <ul class="_UuSG _1eWAm">
+
+
+                                <li class="w-100 mt-2">
+                                    <input id="poll-input" formControlName="choice1" class="form-control" type="text"
+                                        placeholder="Choice 1"
+                                        [ngClass]="{ 'is-invalid': pollSubmitted && pf.choice1.errors }" maxlength="160"
+                                        value="">
+                                    <div *ngIf="pollSubmitted && pf.choice1.errors" class="invalid-feedback">
+                                        <div *ngIf="pf.choice1.errors.required">This field is required</div>
+                                    </div>
+                                </li>
+
+                                <li class="w-100 mt-2 mb-2">
+                                    <input id="poll-input" formControlName="choice2" class="form-control" type="text"
+                                        placeholder="Choice 2" maxlength="160"
+                                        [ngClass]="{ 'is-invalid': pollSubmitted && pf.choice2.errors }" value="">
+                                    <div *ngIf="pollSubmitted && pf.choice2.errors" class="invalid-feedback">
+                                        <div *ngIf="pf.choice2.errors.required">This field is required</div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div formArrayName="choices">
+                                <div class="mb-2" *ngFor="let employee of choices().controls; let empIndex=index">
+                                    <div [formGroupName]="empIndex">
+                                        <ul class="_UuSG _1eWAm">
+
+
+                                            <li class="w-100">
+                                                <input id="poll-input" formControlName="choices" class="form-control"
+                                                    type="text" placeholder="Choice {{empIndex}}" maxlength="160"
+                                                    value="">
+                                                <div *ngIf="pollSubmitted && employee.get('choices').errors">
+                                                    <div class="text-danger"
+                                                        *ngIf="employee.get('choices').errors.required">This field is
+                                                        required.</div>
+                                                </div>
+                                            </li>
+
+
+                                        </ul>
+
+                                    </div>
+                                    <i class="fa fa-times remove-poll" title="Remove" aria-hidden="true"
+                                        (click)="removeChoice(empIndex)"
+                                        *ngIf="choices().length==1 || choices().length==2"></i>
+
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary mt-2 mb-1 mr-1"
+                                *ngIf="choices().length==0 || choices().length==1" (click)="addChoice()">
+                                Add a choice
+                            </button>
+                            <div class="d-flexs">
+
+                                <div class="_UuSG _1E64f mt-2">
+                                    <div class="_UuSG">
+                                        <label>Poll Duration</label>
+                                        <select class="form-control" formControlName="isValidTime">
+                                            <option value="3600">1 hour</option>
+                                            <option value="21600">6 hours</option>
+                                            <option value="86400">1 day</option>
+                                            <option value="259200">3 days</option>
+                                            <option value="604800">7 days</option>
+                                        </select>
+                                        <div *ngIf="pollSubmitted && pf.isValidTime.errors" class="invalid-feedback">
+                                            <div *ngIf="pf.isValidTime.errors.required">This field is required</div>
+                                        </div>
+                                        <i class="" style="font-size: 14px;">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="text-poll-sec mt-3">
+                        <div class="alignment" (click)="poll = false">Add to your post</div>
+                        <div class="icon-post">
+
+                            <input #postInput class="d-none" id="upload-post-image" multiple type="file" accept="image/*"
+                                (change)="uploadPostImage($event.target.files)" />
+
+                            <label class="imageIcon" title="Upload Image" for="upload-post-image">
+                                <img src="./assets/img/image.png" />
+                            </label>
+
+
+
+                            <img src="./assets/img/emoji.jpg" class="emojiIcon" [ngClass]="{'active': showEmojiPicker}"
+                                (click)="toggleEmojiPicker()" />
+                            <!-- <img (click)="poll = !poll" [ngClass]="{'active': poll}" class="poll"
+                                src="./assets/img/poll.png" /> -->
+                        </div>
+                        <emoji-mart class="emoji-mart" set="{{set}}" *ngIf="showEmojiPicker"
+                            (emojiSelect)="addEmoji($event)" title="Pick your emoji…"></emoji-mart>
+                    </div>
+                    <div *ngIf="posterr!=''" class="invalid-feedback">
+                        {{posterr}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="postId ? savePost():addPost()" class="btn btn-primary w-100">{{postId ? 'Update' :'Add'}}</button>
+            </div>
+        </div>
+  

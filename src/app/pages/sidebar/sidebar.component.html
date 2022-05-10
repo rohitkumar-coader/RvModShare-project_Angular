@@ -1,0 +1,33 @@
+<div class="container p-0">
+  <div class="sidebar">
+
+    <div>
+      <div class="sidebar-body">
+        <a class="active" routerLink="/timeline" href="javascript:void(0)"><b>Activity Feed</b></a>
+        <a routerLink ="/dashboard/profile" href="javascript:void(0)">
+          <div> <span>Your Profile</span></div>
+        </a>
+        <a (click)="goToPage('follwedInterest')">
+          <div> <span>Followed Interests Mods</span></div>
+        </a>
+        <a>
+          <div> <span (click)="goToPage('FollowedMembers')" href="javascript:void(0)">Followed Members Mods</span></div>
+        </a>
+        <a (click)="goToPage('LikedMods')">
+          <div> <span>Liked Mods</span></div>
+        </a>
+        <a (click)="goToPage('FavoriteMods')">
+          <div> <span>Favorite Mods</span></div>
+        </a>
+
+        <a routerLink ="/followed-interests"href="javascript:void(0)" >
+          <div> <span > My Followed Interests </span></div>
+        </a>
+        <a>
+          <div> <span  (click)="goTofollowing()" [routerLink]="['/connections']" href="javascript:void(0)"> My Followed Members </span></div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>

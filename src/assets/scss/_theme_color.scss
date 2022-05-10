@@ -1,0 +1,53 @@
+body{
+    color: $textColor;
+}
+
+a{
+    color: $primaryColor;
+    &:hover{
+        color: $primaryColor;
+    }
+}
+
+.bg-primary, .inn-title{
+    background-color: $primaryColor !important;
+}
+
+// .dropdown-item{
+//     &:active{
+//         outline:none !important;
+//         background-color: $primaryColor !important;
+//         color: #fff !important;
+//     }
+// }
+
+.btn-primary{
+ @include  btn($primaryColor, #fff);
+}
+
+.btn-secondary{
+    @include  btn($secondaryColor, #fff);
+   }
+
+.text-primary, a.text-primary:focus, a.text-primary:hover{
+    color: $primaryColor!important;
+}
+
+
+.btn-login{
+    @include  btn($primaryColor, #fff);
+}
+
+.btn-noti span{
+    background-color: $primaryColor !important;
+    border-color: $primaryColor !important;
+    box-shadow: 0 0 0 1px $primaryColor !important;
+}
+
+.top-not-cen{
+    >a{
+        &:hover{
+            color:$textColor !important;
+        }
+    }
+}

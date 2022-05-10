@@ -1,0 +1,955 @@
+<!-- <section class="homeBanner" style="background-image: url('assets/img/landing.jpg');">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="left-section">
+                    <img src="assets/img/rvmodshare1.png">
+                    <h2 class="heading">A better way to discover <br />and share RV mods!</h2>
+                    <a class="step-mods">See Mods - Share Mods - Talk Mods</a>
+                <h4 class="note">We’re the RV industry's newest and only community dedicated to sharing mods! We’re currently in phase 1 of our private beta testing. If you would like to join us, sign up to receive an exclusive invitation to phase 2.
+                    </h4>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h6 class="app-heading"> You get:</h6>
+                            <ul class="app-text">
+                                <li><i class="fa fa-check mr-2" aria-hidden="true"></i>You talk, we listen, we build
+                                </li>
+                                <li><i class="fa fa-check mr-2" aria-hidden="true"></i>Exclusive early access to apps
+                                </li>
+                              <li><i class="fa fa-check mr-2" aria-hidden="true"></i>Innovative growing community
+                                </li>
+
+
+                                <li><i class="fa fa-check mr-2" aria-hidden="true"></i>Exclusive founding member badge
+                                </li>
+                                <li><i class="fa fa-check mr-2" aria-hidden="true"></i>Influence user experience,
+                                    features and functionality </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="signup mt-3">
+                        <div class="text-center mb-2">
+                            <b>Sign up to receive a beta invite!</b>
+                        </div>
+
+                        <form [formGroup]="subscriberForm" class="subscriberForm" (ngSubmit)="onSubmit()">
+                            <div class="imput_form">
+                              <input type="email" formControlName="email"
+                              [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="Email Address"
+                              class="form-control header-leading">
+                          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                              <div *ngIf="f.email.errors.required">Email is required</div>
+                              <div *ngIf="f.email.errors.email">Email is invalid</div>
+                          </div> 
+                            </div>
+                            
+  
+                              <div class="text-center text-md-right mt-2">
+                                  <button class="btn btn-primary" type="submit">Sign up, it's free!</button>
+                              </div>
+                          </form>
+
+
+                    </div>
+
+                    <div class="social-img pl-4 mt-0">
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="bg-white" style="background-image: url('assets/img/join.png');">
+    <div class="join-section py-5">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="box top">
+                        <div class="bg-over"></div>
+                        <div class="text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" id="Layer_1"
+                                viewBox="0 0 100 100">
+                                <defs>
+                                    <style>
+                                        .cls-1 {
+                                            fill-rule: evenodd;
+                                        }
+                                    </style>
+                                </defs>
+                                <path class="cls-1"
+                                    d="M5.249,38.2a2.37,2.37,0,0,0,.219,2.472L43.876,92.1a2.363,2.363,0,1,0,3.786-2.827L12.076,41.618h4.55l8.684,6.6a2.333,2.333,0,0,0,1.427.483,2.363,2.363,0,0,0,1.432-4.244l-3.736-2.84H27.2l63.848,32.63a2.364,2.364,0,0,0,2.151-4.21L82.3,64.466V36.9A15.07,15.07,0,1,0,65.463,17.819a12.8,12.8,0,0,0-23.222,2.558A9.205,9.205,0,1,0,32.149,34.27v4.567l-3.3-1.686a2.35,2.35,0,0,0-1.076-.26H7.364a2.369,2.369,0,0,0-2.115,1.3Zm29.264-17.3a4.481,4.481,0,1,1-4.482,4.481,4.486,4.486,0,0,1,4.482-4.481Zm8.216,8.624a12.853,12.853,0,0,0,9.336,7.38V49.016L36.876,41.252V34.27a9.235,9.235,0,0,0,5.853-4.755Zm11.7-13.287a8.081,8.081,0,1,1-8.083,8.082,8.093,8.093,0,0,1,8.083-8.082ZM90.276,22.02A10.343,10.343,0,1,1,79.933,11.676,10.356,10.356,0,0,1,90.276,22.02ZM77.568,62.051,56.79,51.432V36.9a12.856,12.856,0,0,0,9.659-8.159A15.109,15.109,0,0,0,77.568,36.9Z">
+                                </path>
+                                <path class="cls-1"
+                                    d="M60.478,70.228l17.307,14A2.363,2.363,0,0,1,74.812,87.9l-17.307-14a2.364,2.364,0,1,1,2.973-3.677Z">
+                                </path>
+                                <path class="cls-1"
+                                    d="M32.434,54.111A2.365,2.365,0,0,1,35.359,50.4L50.978,62.684A2.364,2.364,0,0,1,48.056,66.4Z">
+                                </path>
+                            </svg>
+                            <h2 class="heading-see">See Mods</h2>
+                        </div>
+                        <ul>
+                            <div class="d-flex mb-2">
+                                <i class="fa fa-check mr-2 mt-1" aria-hidden="true"></i>
+                                <li>
+                                    Search mods for any make or model RV
+                                </li>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="fa fa-check mr-2 mt-1" aria-hidden="true"></i>
+                                <li>Follow RV makes, models, mod types,
+                                    sizes and members</li>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="fa fa-check mr-2 mt-1" aria-hidden="true"></i>
+                                <li>View mod photos, videos and
+                                    instructions</li>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="box top">
+                        <div class="bg-over"></div>
+                        <div class="text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                id="Layer_1" style="enable-background:new 0 0 96 96;" viewBox="0 0 96 96"
+                                xml:space="preserve">
+                                <path
+                                    d="M73.5,32.2c8.9,0,16.1-7.2,16.1-16.1C89.5,7.2,82.3,0,73.5,0c-8.9,0-16.1,7.2-16.1,16.1C57.4,25,64.6,32.2,73.5,32.2z   M73.5,4c6.7,0,12.1,5.4,12.1,12.1s-5.4,12.1-12.1,12.1c-6.7,0-12.1-5.4-12.1-12.1C61.4,9.4,66.8,4,73.5,4z M14.4,29  c5.5,0,10-4.5,10-10.1c0-5.6-4.5-10.1-10-10.1c-5.5,0-10,4.5-10,10.1C4.3,24.5,8.8,29,14.4,29z M14.4,12.9c3.4,0,6,2.7,6,6.1  s-2.7,6.1-6,6.1c-3.3,0-6-2.7-6-6.1C8.3,15.6,11,12.9,14.4,12.9z M73.5,34.4L73.5,34.4c-7.5,0-14.1,3.8-18,9.6  c-1.4-7.3-7.9-12.9-15.6-12.9h0c-5.5,0-10.3,2.8-13.2,7.1c-2.2-4.6-6.9-7.8-12.3-7.8C6.9,30.4,0.8,36.5,0.8,44v24.9h13.6H24V76h15.9  h11.9v20h21.7h21.8V56.2C95.2,44.2,85.4,34.4,73.5,34.4z M24,47v17.9H4.8h0h0V44c0-5.3,4.3-9.6,9.6-9.6S24,38.7,24,44V47z   M51.7,56.2V72H28v-3.1V47c0-6.5,5.3-11.9,11.9-11.9S51.7,40.5,51.7,47V56.2z M91.2,92H55.7V76V56.2c0-9.8,8-17.8,17.8-17.8  c9.8,0,17.8,8,17.8,17.8V92z M39.9,29.5c6.5,0,11.7-5.2,11.7-11.7S46.3,6,39.9,6c-6.5,0-11.7,5.3-11.7,11.7S33.4,29.5,39.9,29.5z   M39.9,10c4.3,0,7.7,3.5,7.7,7.7c0,4.3-3.4,7.7-7.7,7.7c-4.3,0-7.7-3.5-7.7-7.7C32.1,13.5,35.6,10,39.9,10z">
+                                </path>
+                            </svg>
+                            <h2 class="heading-see">Share Mods</h2>
+                        </div>
+                        <ul>
+                            <div class="d-flex mb-2">
+                                <i class="fa fa-check mr-2 mt-1" aria-hidden="true"></i>
+                                <li>
+
+                                    Give back and contribute to the
+                                    community
+
+                                </li>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="fa fa-check mr-2 mt-1" aria-hidden="true"></i>
+                                <li>Monetize the products in your mods
+                                    with affiliate links</li>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="fa fa-check mr-2 mt-1" aria-hidden="true"></i>
+                                <li>Participate in contests, earn badges,
+                                    prizes and discounts
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="box top">
+                        <div class="bg-over"></div>
+                        <div class="text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                                <title></title>
+                                <g data-name="wa whatsapp message communication chat"
+                                    id="wa_whatsapp_message_communication_chat">
+                                    <path
+                                        d="M16,3A13,13,0,0,0,4.53,22.13L3,27.74a1,1,0,0,0,.27,1A1,1,0,0,0,4,29a.84.84,0,0,0,.27,0l5.91-1.65a1,1,0,0,0-.53-1.93L5.42,26.56l1.15-4.3a1,1,0,0,0-.1-.76A11,11,0,1,1,16,27a11.23,11.23,0,0,1-1.84-.15,1,1,0,0,0-1.15.82,1,1,0,0,0,.82,1.15A13,13,0,1,0,16,3Z">
+                                    </path>
+                                    <path
+                                        d="M15,11.21l-1.16-1.6a2.06,2.06,0,0,0-1.5-.84,2.08,2.08,0,0,0-1.62.6l-1.2,1.2a2.81,2.81,0,0,0-.8,2.08c0,1.77,1.36,4,4,6.6,3.09,3,5.23,4,6.69,4a2.7,2.7,0,0,0,2-.81l1.2-1.2a2,2,0,0,0-.24-3.11L20.8,17a2.09,2.09,0,0,0-1.83-.3l-1.49.47a.53.53,0,0,1-.26-.09,11.42,11.42,0,0,1-2.35-2.26.31.31,0,0,1,0-.11c.13-.44.35-1.15.5-1.64A2,2,0,0,0,15,11.21Zm1.29,7.63a2.33,2.33,0,0,0,1.75.2l1.54-.46,1.61,1.25L20,21c-.48.47-2.25.33-5.86-3.21-3-2.91-3.41-4.5-3.41-5.18A.89.89,0,0,1,11,12l1.28-1.19,1.18,1.65c-.16.49-.39,1.22-.51,1.65A2.12,2.12,0,0,0,13,15.51,11.24,11.24,0,0,0,16.33,18.84Z">
+                                    </path>
+                                </g>
+                            </svg>
+                            <h2 class="heading-see">Talk Mods</h2>
+                        </div>
+                        <ul>
+                            <div class="d-flex mb-2">
+                                <i class="fa fa-check mr-2 mt-1" aria-hidden="true"></i>
+                                <li>
+                                    Learn from and help the community
+                                </li>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="fa fa-check mr-2 mt-1" aria-hidden="true"></i>
+                                <li>Join and create groups</li>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="fa fa-check mr-2 mt-1" aria-hidden="true"></i>
+                                <li>Chat in real-time</li>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div> -->
+
+<!-- 
+<div class="container">
+
+    <div class="text-center w-100 pt-4 mt-5 free_signup">
+        <div class="signup mt-3">
+            <div class="text-center mb-2">
+                <b>Sign up to receive a beta invite! </b>
+            </div>
+
+            <form [formGroup]="subscriberForm2" (ngSubmit)="onSubmit2()" class="subscriberForm">
+                <div class="imput_form">
+                    <input type="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted2 && f2.email.errors }"
+                    placeholder="Email Address" class="form-control header-leading">
+                <div *ngIf="submitted2 && f2.email.errors" class="invalid-feedback">
+                    <div *ngIf="f2.email.errors.required">Email is required</div>
+                    <div *ngIf="f2.email.errors.email">Email is invalid</div>
+                </div>
+                </div>
+               
+
+                <div class="text-center text-md-right mt-2">
+                    <button class="btn btn-primary" type="submit">Sign up, it's free!</button>
+                </div>
+            </form>
+      </div>
+  </div>
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <h2 class="community-heading">Come For The Mods <br />Stay For The Community.</h2>
+        </div>
+        <div class="col-md-6 pr-5">
+            <img class="screen" src="assets/img/home-new.png" (click)="openImage('Home', 'home-new.png')">
+            <ul class="text-black">
+                <div class="d-flex">
+                    <i class="fa fa-check mr-2" aria-hidden="true"></i>
+                    <li>Be as social as you want. Share your mods and
+                        RV lifestyle.</li>
+                </div>
+                <div class="d-flex">
+                    <i class="fa fa-check mr-2" aria-hidden="true"></i>
+                    <li>Curate your newsfeed by following your
+                        connections' mod posts and/or social posts.</li>
+                </div>
+                <div class="d-flex">
+                    <i class="fa fa-check mr-2" aria-hidden="true"></i>
+                    <li>Follow your favorite RVs and types of mods.
+                        Like and share mods with your connections on Facebook too!</li>
+                </div>
+            </ul>
+        </div>
+
+        <div class="col-md-6 pl-5">
+            <img class="screen" src="assets/img/seeMods.png" (click)="openImage('See Mods', 'seeMods.png')">
+            <ul class="text-black">
+                <div class="d-flex">
+                    <i class="fa fa-check mr-2" aria-hidden="true"></i>
+                    <li>Explore our categorized mod database, we even
+                        include a class for custom builds!</li>
+                </div>
+                <div class="d-flex">
+                    <i class="fa fa-check mr-2" aria-hidden="true"></i>
+                    <li>Filter search results based on the RV class,
+                        make, model, year, type of mod and size.</li>
+                </div>
+                <div class="d-flex">
+                    <i class="fa fa-check mr-2" aria-hidden="true"></i>
+                    <li>Learn what it takes to tackle any mod that
+                        inspires you.</li>
+                </div>
+            </ul>
+        </div>
+
+        <div class="col-md-6 mt-4 pr-5">
+            <img class="screen" src="assets/img/share.png" (click)="openImage('Share Mods', 'share.png')">
+            <ul class="text-black">
+                <div class="d-flex">
+                    <i class="fa fa-check mr-2" aria-hidden="true"></i>
+                    <li>Provide real value to the community and help
+                        others by sharing your mods. You never known how someone else will be inspired by your mod.</li>
+                </div>
+                <div class="d-flex">
+                    <i class="fa fa-check mr-2" aria-hidden="true"></i>
+                    <li>Have fun and be recognized for your
+                        contributions.</li>
+                </div>
+                <div class="d-flex">
+                    <i class="fa fa-check mr-2" aria-hidden="true"></i>
+                    <li>No mod is too small or large to share.</li>
+                </div>
+            </ul>
+        </div>
+        <div class="col-md-6 mt-4 pl-5">
+            <img class="screen" src="assets/img/talk.png" (click)="openImage('Talk Mods', 'talk.png')">
+            <ul class="text-black">
+                <div class="d-flex">
+                    <i class="fa fa-check mr-2" aria-hidden="true"></i>
+                    <li>Join or create groups dedicated to your RV
+                        lifestyle, RV make, model or types of mods you are interested in.</li>
+                </div>
+                <div class="d-flex">
+                    <i class="fa fa-check mr-2" aria-hidden="true"></i>
+                    <li>Share your expertise and knowledge with the
+                        community.</li>
+                </div>
+                <div class="d-flex">
+                    <i class="fa fa-check mr-2" aria-hidden="true"></i>
+                    <li>Feel confident knowing that help and answers
+                        are easy and fast to get.</li>
+                </div>
+            </ul>
+        </div>
+        <div class="col-md-12 mt-5 free_signup">
+            <div class="signup mt-3 free_signup">
+                <div class="text-center mb-2">
+                    <b>Sign up to receive a beta invite!</b>
+                </div>
+                <form [formGroup]="subscriberForm3" (ngSubmit)="onSubmit3()" class="subscriberForm">
+                    <div class="imput_form">
+                    <input type="email" formControlName="email"
+                        [ngClass]="{ 'is-invalid': submitted3 && f3.email.errors }" placeholder="Email Address"
+                        class="form-control header-leading">
+                    <div *ngIf="submitted3 && f3.email.errors" class="invalid-feedback">
+                        <div *ngIf="f3.email.errors.required">Email is required</div>
+                        <div *ngIf="f3.email.errors.email">Email is invalid</div>
+                    </div>
+</div>
+                    <div class="text-center text-md-right mt-2">
+                        <button class="btn btn-primary" type="submit">Sign up, it's free!</button>
+                    </div>
+                </form>
+            </div>
+      </div>
+    </div>
+</div> -->
+
+<!-- <div class="our-section mt-5" style="background-image: url('assets/img/our.png');">
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h2 class="founding-heading pt-4 mb-4">What People Are Saying </h2>
+            </div>
+            <div class="col-md-4 mb-4">
+                <img class="coma" src="assets/img/coma.png">
+                <div class="box mt-Clss">
+                    <div class="text-center">
+                        <img src="assets/img/landing-no-user.png">
+                        <h4 class="heading-see">"Contributing makes me feel like i'm being useful to the planet."
+                        </h4>
+                        <small class="bold-text"> Member name</small> <br />
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div> -->
+
+<section class="home-banner mt-5 pt-5 main-content" style="background-image: url('assets/img/landing.jpg');">
+    <div class="container">
+        <div class="pos-top">
+            <h1 class="top-Heading text-white">Welcome to RVmodshare!</h1>
+            <h2 class="bottom-desc text-white mb-4">Share Mods, See Mods, Talk Mods</h2>
+            <div class="banner-btn">
+                <a  href="#" class="button btn btn-primary mr-3">Browse Mods</a>
+                <a href="#" class="button btn btn-primary">Join</a>
+            </div>
+          </div>
+        </div>
+</section>
+
+<section class="what-is py-5">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-title mb-5 text-center">
+                <h2 class="mb-3">What is RVmodshare</h2>
+                <p>Easily share your mods, see mods that offers have posted, and talk mods with like-minded RVers just like you!</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 shadow rounded rv_box text-center d-flex align-items-center justify-content-start flex-column m-2">
+                <h2 class="w-100 mb-4">Share Mods</h2>
+                <p class="mb-4">Post your own mods and easily share with our community and your social network!</p>
+                <ul class="mb-4">
+                    <li><i class="fa fa-check"></i>Easily post your mods</li>
+                    <li><i class="fa fa-check"></i>Easily share your mods</li>
+                    <li><i class="fa fa-check"></i>Grow affiliate link revenue</li>
+                </ul>
+                <div class="mb-4">
+                <a href="#">Learn more</a>
+                </div>
+                <a class="button btn btn-primary absolute"><i class="fa fa-plus mr-1"></i> Post a Mod </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 shadow rounded rv_box text-center d-flex align-items-center justify-content-start flex-column m-2">
+                <h2 class="w-100 mb-4">See Mods</h2>
+                <p class="mb-4">Browse mods to see before and after photos, how to instructions, and materials used</p>
+                <ul class="mb-4">
+                    <li><i class="fa fa-check"></i>Browse popular mods</li>
+                    <li><i class="fa fa-check"></i>Filter by class, make, etc.</li>
+                    <li><i class="fa fa-check"></i>Save your favorite mods</li>
+                </ul>
+                <a class="button btn btn-primary absolute"><i class="fa fa-binoculars mr-1"></i> Browse Mods </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 shadow rounded rv_box text-center d-flex align-items-center justify-content-start flex-column m-2">
+                <h2 class="w-100 mb-4">Talk Mods</h2>
+                <p class="mb-4">Follow popular members of the community as they post their mods and comment on them!</p>
+                <ul class="mb-4">
+                    <li><i class="fa fa-check"></i>Follow popular members</li>
+                    <li><i class="fa fa-check"></i>Get notified about new mods</li>
+                    <li><i class="fa fa-check"></i>Discuss mods with others</li>
+                </ul>
+                <a class="button btn btn-primary absolute"><i class="fa fa-user mr-1"></i> Find RVers </a>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="testimonial">
+    <div class="container">
+
+        <div class="heading white-heading">
+            <h2 class="community-heading mt-0">What People Are Saying</h2>
+        </div>
+
+        <div id="testimonial4"
+            class="carousel slide testimonial4_indicators testimonial4_control_button thumb_scroll_x swipe_x"
+            data-ride="carousel" data-pause="hover" data-interval="5000" data-duration="2000">
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                    <div class="row" style="  align-items: center;">
+
+                        <div class="col-md-2">
+                            <div class="testimonial4_slide">
+                                <img src="assets/img/client5.jpg" class="img-circle img-responsive" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-10 ph">
+                            <p class="mb-3">“Besides being a place for RV mod enthusiasts to share mods they’ve done,
+                                RVmodshare will be a great tool for RVers looking for mod inspiration for their own
+                                RVs.”</p>
+                            <p>James and Stef Adinaro – The FitRV <a class="colorA" target="_blank"
+                                    href="https://www.thefitrv.com ">www.thefitrv.com </a></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#testimonial4" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#testimonial4" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+
+</section>
+
+<div class="popular-mods py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title mb-5">
+                <h2>Browse Popular Mods</h2>
+            </div>
+                <div class="shadow mods_box mb-4" *ngFor="let modDetail of allMods;let i=index">
+            
+                  <div class="row" *ngIf="i<=2">
+                    <div class="col-md-4" *ngIf="modDetail?.typeOfPost=='mod'">
+                      <div class="favourite">
+                        <span class="favorite shadow">
+                          <input type="checkbox" [checked]="modDetail.isFavourite" />
+                          <i ngbTooltip="Favorite" placement="left" class="fa fa-heart shadow"></i>
+                        </span>
+                      </div>
+                      <div class="mods_img">
+                        <div
+                          *ngIf="modDetail?.registeredRV && modDetail?.addedBydetails?.isrvRental && modDetail?.addedBydetails?.rvRental && ( modDetail?.addedBydetails?.rvRental?.rvShareUrl!='' || modDetail?.addedBydetails?.rvRental?.outdoorsyUrl!='' || modDetail?.addedBydetails?.rvRental?.rvezyUrl!='')"
+                          class="ribbon blue_col">
+                          <a href="javascript:void(0)"
+                            (click)="goTouserProfile(modDetail?.addedBydetails?._id != credentials?.credentials?.id ? '/friend-profile' :'/dashboard/profile',{id:  modDetail?.addedBydetails?._id})"><span>Rent</span></a>
+                        </div>
+                        <a class="pointer-cursor mod_left_img">
+                          <img (click)="goToModDetail('/mods',modDetail?.slug)"
+                            *ngIf="modDetail?.afterImages?.length==0 && modDetail?.beforeImages?.length==0"
+                            class="img-responsive roundeds contain" src="assets/img/follow-new1.png">
+                          <img (click)="goToModDetail('/mods',modDetail?.slug)" *ngIf="modDetail?.afterImages?.length>0 "
+                            class="img-responsive roundeds contain" src="{{_host}}images/modPost/{{modDetail.afterImages[0]}}">
+                          <img (click)="goToModDetail('/mods',modDetail?.slug)"
+                            *ngIf="modDetail?.afterImages?.length==0 && modDetail?.beforeImages?.length>0"
+                            class="img-responsive roundeds contain" src="{{_host}}images/modPost/{{modDetail?.beforeImages[0]}}">
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-md-8" *ngIf="modDetail?.typeOfPost=='mod'">
+                      <div class="py-2 px-3">
+                        <div class="bagesSection">
+                          <article class="postTop mb-2">
+                            <div class="d-flex">
+                              <p class="mb-0 pt-1">
+                                <a (click)="goToModDetail('/mods',modDetail?.slug)" class="pointer-cursor"><b>
+                                    {{modDetail?.name}}</b>
+                                  <span class="ml-2">{{modDetail?.createdAt | date:'longDate' }}</span></a>
+                              </p>
+            
+                            </div>
+            
+                            <div class="text-right-align-btn rightAlignCls" *ngIf="credentials?.credentials?.id">
+                              <div class="dropdown cretDropdown ml-2 mods_dropdown">
+                                <button class="btn btn-primary dropdown-toggle" (click)="setShareData(modDetail)" type="button"
+                                  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i aria-hidden="true" class="fa fa-ellipsis-v"></i>
+                                </button>
+                                <div class="dropdown-menu mods_drop_list" aria-labelledby="dropdownMenuButton">
+            
+                                  <div class="connection_icon dropdown-item bg-none">
+            
+                                    <!-- <button class="btn imgBtn mr-2"
+                                      *ngIf="!modDetail?.isFriend && !modDetail?.isPending && modDetail?.addedBydetails?._id != credentials?.credentials?.id "
+                                      (click)="followFriend(modDetail,i)" ngbTooltip="Request Social Connection"><img
+                                        class="follow-img" src="assets/img/add-plus-svgrepo-com.svg" alt=""> </button> -->
+                                    <!-- <button class="btn imgBtn mr-2"
+                                      *ngIf="modDetail?.isFriend && modDetail?.addedBydetails?._id != credentials?.credentials?.id "
+                                      (click)="unFriend(modDetail,i)" ngbTooltip="Unconnect"><img class="follow-img"
+                                        src="assets/img/delete-user-svgrepo-com.svg" alt=""></button> -->
+                                    <!-- <button class="btn imgBtn mr-2"
+                                      *ngIf="modDetail?.isPending && modDetail?.addedBydetails?._id != credentials?.credentials?.id "
+                                      (click)="cancelRequest(modDetail,i)" ngbTooltip="Cancel Request"><img class="follow-img"
+                                        src="assets/img/CancelRequest.png" alt=""></button> -->
+                                    <!-- <button class="btn imgBtn mr-2" *ngIf="modDetail?.isPending " ngbTooltip="Pending"><img
+                                        class="follow-img" src="assets/img/pannding.png" alt=""> </button> -->
+                                    <!-- <button class="btn imgBtn mr-2"
+                                      *ngIf="!modDetail?.isFollow && modDetail?.addedBydetails?._id != credentials?.credentials?.id "
+                                      (click)="followMod(modDetail,i)" ngbTooltip="Make Mod Connection"> <img class="followIcon"
+                                        src="assets/img/follow.svg" alt=""></button> -->
+                                    <!-- <button class="btn imgBtn mr-2"
+                                      *ngIf="modDetail?.isFollow && modDetail?.addedBydetails?._id != credentials?.credentials?.id "
+                                      (click)="followMod(modDetail,i)" ngbTooltip="Unconnect"><img class="followIcon"
+                                        src="assets/img/unfollow.svg" alt=""></button> -->
+            
+                                    <div class="connection_icon dropdown-item p-0">
+                                      <div class="a2a_kit a2a_kit_size_32 a2a_default_style" (click)="setShareData(modDetail);Onshare(modDetail,'facebookClick')"
+                                        [attr.data-a2a-url]="'https://rvmodshare.com/mods/'+modDetail?.slug"
+                                        [attr.data-a2a-title]="modDetail?.name">
+                                        <a class="a2a_button_facebook"></a>
+                                      </div>
+                                    </div>
+            
+                                  </div>
+                                  <!-- <a class="dropdown-item" *ngIf=" modDetail?.addedBydetails?._id == credentials?.credentials?.id"
+                                    href="/share-mod/{{modDetail?.slug}}">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    Edit Post
+                                  </a> -->
+                                 
+                                  <a class="dropdown-item"><i
+                                      class="fa fa-thumbs-o-up bg" [ngClass]="{'text-primary': modDetail?.likestatus}"
+                                      aria-hidden="true"></i>Like</a>
+                                  
+                                  
+                                  
+                                  <a class="dropdown-item" *ngIf=" modDetail?.addedBydetails?._id != credentials?.credentials?.id">
+                                    <i class="fa fa-bug" aria-hidden="true"></i>
+                                    Report Post
+                                  </a>
+                                  <a class="dropdown-item" *ngIf="modDetail?.addedBydetails?._id==credentials?.credentials?.id"><i class="fa fa-trash mr-1" aria-hidden="true"></i>
+                                    Delete Post
+                                  </a>
+                                  <a class="dropdown-item"><i class="fa fa-copy"></i> Copy Link</a>
+                                  <!-- <a class="dropdown-item" *ngIf=" modDetail?.addedBydetails?._id == credentials?.credentials?.id"
+                                    (click)="deleteModPost(modDetail?.id,i)">
+                                    <i class="fa fa-trash mr-1" aria-hidden="true"></i>
+                                    Delete Post
+                                  </a> -->
+            
+                                </div>
+                              </div>
+                            </div>
+                          </article>
+                        </div>
+            
+                        <div class="main_badges">
+                          <div class="d-flex align-items-center w-100 inner_prof_badge mb-1 mt-2">
+            
+                            <div class="prof_img">
+                              <img *ngIf="modDetail?.addedBydetails?.image=='' || modDetail?.addedBydetails?.image==null"
+                                class="mr-2" src="assets/img/user.png" alt="profile_img">
+                              <img *ngIf="modDetail?.addedBydetails?.image!='' && modDetail?.addedBydetails?.image!=null"
+                                class="mr-2" src="{{getUrl(modDetail?.addedBydetails?.image,modDetail?.addedBydetails)}}"
+                                alt="profile_img">
+                            </div>
+            
+                            <div>
+                              <a href="javascript:void(0)" class="large_font"
+                                (click)="goTouserProfile(modDetail?.addedBydetails?._id != credentials?.credentials?.id ? '/friend-profile' :'/dashboard/profile',{id:  modDetail?.addedBydetails?._id})">
+                                <b>{{modDetail?.addedBydetails?.fullName}}</b>
+            
+            
+                              </a>
+                              <div class="common_badge">
+                                <a href="javascript:;">{{modDetail?.addedBydetails?.rankBadgeImage?.title}}</a>
+                                <ul class="tooltiptext">
+                                  <li><b>Points:</b> {{modDetail?.addedBydetails?.rankPoints}}</li>
+                                  <li><a
+                                      href="https://endpoint.rvmodshare.com/images/modPost/f7b737b8-d7f2-4361-8ed3-d0a30cea6a1f1642682372997.pdf"
+                                      target="_blank"><b>Badges & Rewards: </b>
+                                      {{modDetail?.addedBydetails?.rankBadgeImage?.title}}</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+            
+                          <div class="row w-100">
+                            <div class="col-md-6 ">
+            
+            
+                              <div class="tagsAlign">
+                                <h4 class="mod-rv-texts"><small> {{modDetail?.year}} {{modDetail?.rvType}}
+                                    {{modDetail?.make?.name}}
+                                    {{modDetail?.series?.name | titlecase}} {{modDetail?.model}}
+                                  </small></h4>
+            
+                              </div>
+                              <h6 class="mb-0">{{modDetail?.catName}}</h6>
+                              <h4><small>{{modDetail?.sizedetails?.name}}</small></h4>
+                            </div>
+                            <div class="col-md-6 border-left">
+                              <div class="rightAlign ">
+                                <b>What I Did</b>
+                                <p class="truncate font_normal" [innerHTML]="htmlLength(modDetail?.whatIDid,40)"></p>
+                              </div>
+                            </div>
+                          </div>
+            
+            
+                          <div class="likeShare">
+                            <a><i class="fa fa-thumbs-up" ngbTooltip="Likes" aria-hidden="true"></i>{{modDetail?.likesTotal}}</a>
+                            <a *ngIf="!modDetail?.isCommentDisabled"><i class="fa fa-comment" ngbTooltip="Comment"
+                                aria-hidden="true"></i>{{modDetail?.commentTotal}}</a>
+                            <a><i class="fa fa-share-alt" aria-hidden="true" ngbTooltip="Share"></i> {{modDetail?.totalShare}}</a>
+                            <a style="width: 23px;" *ngIf="modDetail?.skillLevel=='6193a45efc4c9b3d4ce7ad62'" class="high"><img
+                                src="assets/img/low.png" ngbTooltip="Low" class="skill-ic" alt=""></a>
+                            <a style="width: 23px;" class="high" *ngIf="modDetail?.skillLevel=='6194c77a4d8a1d9518bbe18c'"><img
+                                src="assets/img/medium.png" ngbTooltip="Medium" class="skill-ic" alt=""></a>
+                            <a class="high" *ngIf="modDetail?.skillLevel=='6197d36401d78bc07b538196'"><img src="assets/img/high.png"
+                                ngbTooltip="High" class="skill-ic" alt=""></a>
+                            <a><i class="fa fa-clock-o" ngbTooltip="{{modDetail?.timerange}}" placement="top"
+                                aria-hidden="true"></i></a>
+            
+                          </div>
+                        </div>
+                      </div>
+            
+                    </div>
+            
+                  </div>
+            
+                </div>
+                <div>
+                  <a class="active view_more"  [routerLink]="['/mods']" href="javascript:void(0)" [hidden]="!showViewMore">
+                    <span>
+                      View more mods
+                    </span>
+                  </a>
+            
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-gray py-4 partner">
+
+    <div class="container-fluid pl-4 pr-4">
+        <div class="row align-items-center justify-content-center my-0 p-0">
+            <div class="col-md-3">
+                <h2 class="text-left community-heading mb-0 mt-0 font_small_slider">Our Partners</h2>
+            </div>
+            <div class="col-md-9">
+                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+                    (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+                    (beforeChange)="beforeChange($event)">
+                    <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+                        <a href="{{slide?.url}}" target="_blank"> <img src="{{ slide.image }}" alt=""
+                                class="logo-patner"></a>
+                    </div>
+                </ngx-slick-carousel>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="suggested-mods py-5">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="section-title mb-5">
+                    <h2> Suggested Members to Follow</h2>
+                </div>
+              </div>
+          
+              <div class="search-lists loca-trank w-100" *ngFor="let item of suggestedRVfriends;let i=index">
+                <!-- <ul  id="mylist"> -->
+          
+                <div class="shadow p-3 mb-3 bg-white" *ngIf="i<=2">
+                  <div class="row align-items-center">
+                      <div class="col-md-10">
+                      <div class="d-flex">
+                      <div *ngIf="!item?.isFollow" class="pic rogers mr-4">
+                        <a href="/dashboard/friend-profile?id={{item?.userData?.id}}">
+                          <img *ngIf="!item.userData?.image" src="assets/img/user.png" class="roundedUser" />
+                          <img *ngIf="item?.userData?.image" class="roundedUser" src="{{getUrl(item?.userData?.image,item?.userData)}}" />
+                        </a>
+                      </div>
+                    <div class="suggested-text">
+                      <h4 *ngIf="!item?.isFollow" class="name">
+                        <a href="/dashboard/friend-profile?id={{item?.userData?.id}}">
+                          {{item?.userData?.fullName }}</a>
+                      </h4>
+                      <!-- <h6>Owner</h6>
+                      <p><span>Class B |</span>
+                        <span>Storyletter Overland |</span>
+                        <span>Mode 4 |</span>
+                        <span>Classic |</span>
+                        <span>2021 Posted 3 mods |</span>
+                      </p> -->
+                      <h6>{{item?.ownRv ? 'Owner' :'Wannabe'}}</h6>
+                        <p><span>{{item?.rvType}} |</span>
+                          <span>{{item?.make}} |</span>
+                          <span>{{item?.series}}|</span>
+                          <span>{{item?.model}} |</span>
+                          <span>{{item?.year}}</span><br>
+                          <span>Posted {{item?.totalMods}} Mods</span>
+                        </p>
+          </div>
+        </div>
+    </div>
+                    <div class="col-md-2">
+                      <button class="btn btn-primary" *ngIf="!item?.isFollow" (click)="followMod(item?.id,i)">Follow</button>
+                    </div>
+                  </div>
+                </div>
+          
+                <!-- <li class="filter-lop" *ngFor="let item of suggestedRVfriends;let i=index">
+                    <div class="contact hoverCls">
+                      <div *ngIf="!item?.isFollow"class="pic rogers">
+                        <a href="/dashboard/friend-profile?id={{item?.id}}">
+                          <img *ngIf="!item.image" src="assets/img/user.png" class="dummy-user-img" />
+                          <img *ngIf="item?.image" class="dummy-user-img"
+                            src="{{getUrl(item?.image,item)}}" />
+                        </a> 
+                      </div>  
+                      <div  class="ml-2 d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="width_content">
+                          <div *ngIf="!item?.isFollow"class="name"><a href="/dashboard/friend-profile?id={{item?.id}}">{{
+                              item?.fullName }}</a></div>
+                         
+                        </div>
+                        <div>
+                          <button class="btn btn-primary sameSize" *ngIf="!item?.isFollow"
+                            (click)="followMod(item?.id,'suggestedRvfriend',i)">Follow</button>
+                         
+                        </div>
+          
+                      </div>
+                    </div>
+                  </li> -->
+                <div class="button-acc-dec" *ngIf="suggestedRVfriends.length == 0">
+                  <p class="text-center">Select your profile
+                    with suggested mods</p>
+                </div>
+          
+          
+                <!-- </ul> -->
+              </div>
+              <div class="mb-5">
+                <a class="active view_more" href="/connections " [hidden]="!showViewMoreFollowings">
+                  <span>
+                    View more
+                  </span>
+                </a>
+          
+              </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="py-5 ambassador">
+
+    <div class="container">
+        <div class="row align-items-center justify-content-center mt-4 mb-2">
+            <div class="col-md-12">
+                <h2 class="text-center  community-heading mt-0 font_small_slider">Social Media Ambassadors</h2>
+            </div>
+            <div class="col-md-12">
+                <ngx-slick-carousel class="carousel" 
+                        #slickModal="slick-carousel" 
+                        [config]="slideAmbassadorConfig" 
+                        (init)="slickInit($event)"
+                        (breakpoint)="breakpoint($event)"
+                        (afterChange)="afterChange($event)"
+                        (beforeChange)="beforeChange($event)">
+        <div ngxSlickItem *ngFor="let slide of ambassador_slides" class="slide">
+              <img src="{{ slide }}" alt="" class="ambassador">
+        </div>
+    </ngx-slick-carousel>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>       -->
+
+
+<div class="pb-5 ambassador pt-0">
+
+    <div class="container">
+        <div class="row  justify-content-center my-4">
+            <div class="col-md-12">
+                <h2 class="text-center  community-heading mt-0 font_small_slider">Social Media Ambassadors</h2>
+            </div>
+            <div class="col-md-4">
+                <div class="hoverbox mb-4">
+                    <div class="hoverbox-inner">
+                        <div class="hoverbox-front hoverbox-block"
+                            style="background-image: url('/assets/img/ambassador.jpg');">
+                            <div class="hoverbox-block-inner hoverbox-front-inner"> </div>
+                        </div>
+                        <div class="hoverbox-back hoverbox-block">
+                            <div class="hoverbox-block-inner hoverbox-back-inner">
+                                <!-- <h4 class="mb-3">Loream Ipsum</h4> -->
+                                <div class="hoverbox_logo">
+                                    <a href="https://www.youtube.com/mathersonthemap" target="_blank"> <img
+                                            src="/assets/img/Mathers_On_The_Map_logo.png" alt=""></a>
+                                </div>
+                                <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p> -->
+                                <!-- <p class="mb-0"><a href="https://www.mathersonthemap.com/" target="_blank">Read more</a></p>  -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hoverbox">
+                    <div class="hoverbox-inner">
+                        <div class="hoverbox-front hoverbox-block"
+                            style="background-image: url('/assets/img/ambassador2.jpg');">
+                            <div class="hoverbox-block-inner hoverbox-front-inner"> </div>
+                        </div>
+                        <div class="hoverbox-back hoverbox-block">
+                            <div class="hoverbox-block-inner hoverbox-back-inner">
+                                <!-- <h4 class="mb-3">Loream Ipsum</h4> -->
+                                <div class="hoverbox_logo">
+                                    <a href="https://www.thefitrv.com/" target="_blank"> <img class="fit_rv_img"
+                                            src="/assets/img/fit_rv_logo.PNG" alt=""></a>
+                                </div>
+                                <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p> -->
+                                <!-- <p class="mb-0"><a href="https://www.thefitrv.com/" target="_blank">Read more</a></p>  -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+<div class="bg-blue pb-4">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4"> 
+                <div class="footer-desc d-flex">
+                    <a class="nav-link" routerLink="/terms-of-service"> Terms of Service</a>
+                    <a class="nav-link" routerLink="/privacy-policy"> Privacy Policy</a>
+                    <a class="nav-link" routerLink="/about-us"> About Us</a>
+                    <a class="nav-link" routerLink="/contact-us"> Contact Us</a>
+
+
+                </div>
+            </div> 
+            <div class="col-md-4 text-center">
+                <img class="img-fluid logo" src="assets/img/rvmodshare.png">
+                <p class="mb-0 mt-2">Copyright {{date}} RVmodshare</p>
+                <span>all right reserved.</span>
+            </div>
+
+            <div class="col-md-4 text-center">
+                <div class=" social mt-4">
+                    <a href="https://www.facebook.com/Rvmodshare-102595902166973/" target="_blank">
+                        <i class="fa fa-facebook mr-3" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UC-VGbqJ1PCvjhwEORmo7UhQ" target="_blank">
+                        <i class="fa fa-youtube-play mr-3" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/rvmodshare/" target="_blank">
+                        <i class="fa fa-instagram mr-3" aria-hidden="true"></i>
+                    </a> 
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div> -->
+
+
+
+<!-- sign up modal -->
+
+<!-- <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Youtube Video</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/bNW4PkifvoA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </ng-template> -->
+
+
+<div class="modal imagemodal" [ngClass]="{'d-block':imagemodal}">
+    <div class="modal-overlay" (click)="close()"></div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{imageData?.title}}</h5>
+                <button type="button" class="close" (click)="close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="./assets/img/{{imageData?.img}}" alt="" class="w-100" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

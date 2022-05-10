@@ -1,0 +1,475 @@
+<!-- <div class="container mt-5 pt-5 main-content" *ngIf="!showTabs">
+</div> -->
+<ngx-spinner bdColor="#fff" size="" color="#fff">
+  <div class='ajax-spinner-bars'>
+    <div class='bar-1'></div>
+    <div class='bar-2'></div>
+    <div class='bar-3'></div>
+    <div class='bar-4'></div>
+    <div class='bar-5'></div>
+    <div class='bar-6'></div>
+    <div class='bar-7'></div>
+    <div class='bar-8'></div>
+    <div class='bar-9'></div>
+    <div class='bar-10'></div>
+    <div class='bar-11'></div>
+    <div class='bar-12'></div>
+    <div class='bar-13'></div>
+    <div class='bar-14'></div>
+    <div class='bar-15'></div>
+    <div class='bar-16'></div>
+  </div>
+</ngx-spinner>
+<div class="container-fluid main-content mt-5 pt-5">
+  <div class="row ">
+    <div class="col-md-3">
+      <div class="filter_top">
+        <div class="container p-0">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <h1 class="follow-heading mb-0">My Favorite Mods</h1>
+            <div class="mylink_filter_btn">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPBottom"
+                ngbTooltip="Filter"><i class=" fa fa-sliders"></i></button>
+            </div>
+          </div>
+
+          <div class="shadow bg-white p-2 filter_left mb-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="mb-0"> Filters</h4>
+              <div>
+                <button class="btn btn-danger" (click)="reset()">Reset</button>
+              </div>
+            </div>
+
+            <div class="border p-2 mb-2">
+
+              <select name="cars" id="cars5" (change)="resetMakeSeries('both');searchValue();" class="form-control mb-2"
+                [(ngModel)]="modfilters.rvTypeFilter" [ngClass]="{'highlightfilter': modfilters?.rvTypeFilter}">
+                <option value="">Choose Class</option>
+                <option *ngFor="let item of filterrvTypes" value="{{item.detail.value}}">{{item.description}}</option>
+
+              </select>
+              <select name="cars" id="cars5" [disabled]="!modfilters?.rvTypeFilter"
+                (change)="resetMakeSeries('series');searchValue();" class="form-control mb-2"
+                [(ngModel)]="modfilters.makeFilter" [ngClass]="{'highlightfilter': modfilters?.makeFilter}"
+                class="form-control mb-2">
+                <option value="">Choose Make</option>
+                <option *ngFor="let item of MakesFilters" value="{{item?.id}}">{{item?.name}}</option>
+
+              </select>
+              <select class="form-control" [disabled]="!modfilters?.makeFilter" [(ngModel)]="modfilters.modelValue"
+                [ngClass]="{'highlightfilter': modfilters?.modelValue}" (change)="searchValue()" name="model"
+                id="model">
+                <option value="">Choose Series</option>
+                <option *ngFor="let item of filterModels" value="{{item?.id}}">{{item.name}}</option>
+              </select>
+            </div>
+            <select name="Year" id="Year" (change)="searchValue()" [(ngModel)]="modfilters.yearValue"
+              [ngClass]="{'highlightfilter': modfilters?.yearValue}" class="form-control mb-2">
+              <option value=""> Choose Year</option>
+              <option value="{{item?.id}}" *ngFor="let item of rvYears">{{item?.id}}</option>
+            </select>
+            <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.size"
+              [ngClass]="{'highlightfilter': modfilters?.size}" class="form-control mb-2">
+              <option value="">Choose Size</option>
+              <option *ngFor="let item of difficulties" title="{{item?.description}}" value="{{item.id}}">{{item.name}}
+              </option>
+            </select>
+            <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.modCategoryValue"
+              [ngClass]="{'highlightfilter': modfilters?.modCategoryValue}" class="form-control mb-2">
+              <option value="">Choose Category</option>
+              <option *ngFor="let item of modCategories" value="{{item?.id}}">{{item?.name}}({{item?.count}})</option>
+            </select>
+
+            <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.skillLevel"
+              [ngClass]="{'highlightfilter': modfilters?.skillLevel}" class="form-control mb-2">
+              <option value="">Choose Difficulty</option>
+              <option *ngFor="let item of skillLevelNeeded" value="{{item?.id}}">{{item?.name}}</option>
+
+            </select>
+            <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.timerange"
+              [ngClass]="{'highlightfilter': modfilters?.timerange}" class="form-control mb-2">
+              <option value="">Choose Total Time</option>
+              <option *ngFor="let item of timeRanges" value="{{item?.id}}">{{item?.id}}</option>
+            </select>
+            <div class="date_range padding_input">
+              <input type="text" name="daterange" (change)="searchValue()" ngxDaterangepickerMd
+                [(ngModel)]="selectedDate" [ngClass]="{'highlightfilter': modfilters?.startDate || modfilters?.endDate}"
+                class="form-control" placeholder="Select Date Range" />
+            </div>
+            <div class="padding_input">
+              <input type="text " name="search" (keyup.enter)="searchValue()" [(ngModel)]="modfilters.search"
+                [ngClass]="{'highlightfilter': modfilters?.search}" class="form-control mt-2"
+                placeholder="Search Title & Summary (Press Enter to search)" />
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <app-sponsored></app-sponsored>
+      <!-- <app-explore [favourite]="true"></app-explore> -->
+    </div>
+    <div class="col-md-6 p-0 mods_box">
+      <div class="container">
+        <div class="row">
+          <div class="loadersmall" *ngIf="isLoading"></div>
+          <div class="col-md-12 mb-4" *ngFor="let item of favMods; let i=index">
+            <div class="shadow" *ngIf="!isLoading">
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="favourite">
+
+                    <span class="favorite shadow" (click)="favourite(item.postId,i)">
+                      <input type="checkbox" [checked]="item?.isFavourite" />
+                      <i ngbTooltip="Favorite" placement="left" class="fa fa-heart shadow"></i>
+                    </span>
+                  </div>
+                  <div class="mods_img">
+                    <div
+                      *ngIf="item?.postdata?.registeredRV && item?.userDetails?.isrvRental && item?.userDetails?.rvRental && ( item?.userDetails?.rvRental?.rvShareUrl!='' || item?.userDetails?.rvRental?.outdoorsyUrl!='' || item?.userDetails?.rvRental?.rvezyUrl!='')"
+                      class="ribbon blue_col">
+                      <a href="javascript:void(0)"
+                        (click)="goTouserProfile(item?.userDetails?._id != credentials?.credentials?.id ? '/friend-profile' :'/dashboard/profile',{id:  item?.userDetails?._id})"><span>Rent</span></a>
+                    </div>
+                    <!-- <img class="img-responsive roundeds contain" src="assets/img/follow-new1.png"> -->
+                    <a class="pointer-cursor mod_left_img">
+                      <img href="'/mods',item?.slug"
+                        *ngIf="item?.postdata?.afterImages?.length==0 && item?.postdata?.beforeImages?.length==0"
+                        class="img-responsive roundeds contain" src="assets/img/follow-new1.png">
+                      <img href="'/mods',item?.slug " *ngIf="item?.postdata?.afterImages?.length>0 "
+                        class="img-responsive roundeds contain"
+                        src="{{_host}}images/modPost/{{item?.postdata?.afterImages[0]}}">
+                      <img href="'/mods',item?.slug"
+                        *ngIf="item?.postdata?.afterImages?.length==0 && item?.postdata?.beforeImages?.length>0"
+                        class="img-responsive roundeds contain"
+                        src="{{_host}}images/modPost/{{item.postdata?.beforeImages[0]}}">
+
+
+
+                      <!-- <img [routerLink]="['/page/mod-details']"
+                          [queryParams]="{id: modDetail?.id,uid:credentials?.credentials?.id}"
+                          *ngIf="modDetail?.afterImages?.length==0 && modDetail?.beforeImages?.length==0"
+                          class="img-responsive roundeds contain" src="assets/img/follow-new1.png">
+                        <img [routerLink]="['/page/mod-details']"
+                          [queryParams]="{id: modDetail?.id,uid:credentials?.credentials?.id}"
+                          *ngIf="modDetail?.afterImages?.length>0 " class="img-responsive roundeds contain"
+                          src="{{_host}}images/modPost/{{modDetail.afterImages[0]}}">
+                        <img [routerLink]="['/page/mod-details']"
+                          [queryParams]="{id: modDetail?.id,uid:credentials?.credentials?.id}"
+                          *ngIf="modDetail?.afterImages?.length==0 && modDetail?.beforeImages?.length>0"
+                          class="img-responsive roundeds contain" src="{{_host}}images/modPost/{{modDetail?.beforeImages[0]}}"> -->
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="py-2 px-3">
+                    <div class="bagesSection">
+                      <article class="postTop mb-2 mt-0">
+                        <div class="d-flex">
+
+                          <div class="mb-0 pr-5">
+                            <a placement="top" class="title" ngbTooltip="{{item?.postdata?.name}}"
+                              (click)="goToModDetail('/mods',item?.slug)"><b>{{item?.postdata?.name}}</b><span
+                                class="ml-2">{{item?.postdata?.createdAt | date:'short' }}</span></a>
+                            <!-- <a placement="top" class="title text-truncate" ngbTooltip="{{item?.userDetails?.fullName}}"
+                              routerLink="/page/friend-profile"
+                              [queryParams]="{id:item?.userDetails?._id}"><b>{{item?.userDetails?.fullName}}</b></a> -->
+                          </div>
+                        </div>
+
+                        <div class="text-right-align-btn rightAlignCls">
+                          <div class="dropdown cretDropdown ml-2 mods_dropdown" (click)="setShareData(item)">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i aria-hidden="true" class="fa fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <div class="connection_icon dropdown-item bg-none">
+                                <!-- <button class="btn imgBtn mr-2"
+                                  *ngIf="!item?.isFriend && !item?.isPending && item.userDetails?._id != credentials?.credentials?.id"
+                                  (click)="followFriend(item,i)" ngbTooltip="Request Social Connection"><img
+                                    class="follow-img" src="assets/img/add-plus-svgrepo-com.svg" alt=""> </button>
+                                <button class="btn imgBtn mr-2"
+                                  *ngIf="item?.isFriend && item.userDetails?._id != credentials?.credentials?.id"
+                                  (click)="unFriend(item,i)" ngbTooltip="Unconnect"><img class="follow-img"
+                                    src="assets/img/delete-user-svgrepo-com.svg" alt=""></button>
+                                <button class="btn imgBtn mr-2"
+                                  *ngIf="item?.isPending && item.userDetails?._id != credentials?.credentials?.id"
+                                  (click)="cancelRequest(item,i)" ngbTooltip="Cancel Request"><img class="follow-img"
+                                    src="assets/img/CancelRequest.png" alt=""></button>
+                                <button class="btn imgBtn mr-2" *ngIf="item?.isPending" ngbTooltip="Pending"><img
+                                    class="follow-img" src="assets/img/pannding.png" alt=""> </button>
+                                <button class="btn imgBtn mr-2"
+                                  *ngIf="!item?.isFollow && item.userDetails?._id != credentials?.credentials?.id"
+                                  (click)="followMod(item,i)" ngbTooltip="Make Mod Connection">
+                                  <img class="followIcon" src="assets/img/follow.svg" alt="">
+                                </button>
+
+                                <button class="btn imgBtn mr-2"
+                                  *ngIf="item?.isFollow && item.userDetails?._id != credentials?.credentials?.id"
+                                  (click)="followMod(item,i)" ngbTooltip="Unconnect">
+                                  <img class="followIcon" src="assets/img/unfollow.svg" alt="">
+                                </button> -->
+
+                                <div class="connection_icon dropdown-item p-0">
+                                  <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
+                                    [attr.data-a2a-url]="'https://rvmodshare.com/mods/'+item?.slug"
+                                    [attr.data-a2a-title]="item.postdata?.name">
+                                    <a class="a2a_button_facebook"></a>
+                                    <a class="a2a_button_twitter"></a>
+                                  </div>
+                              </div>
+
+                              </div>
+                              <!-- <a class="dropdown-item"  *ngIf=" item.userDetails?._id == credentials?.credentials?.id" [routerLink]="['/page/share-mods']"
+                                      [queryParams]="{id: item.postdata?.id}">
+                                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                                      Edit Post
+                                    </a> -->
+                                    <!-- <a class="dropdown-item" (click)="likePost(item?.postId,'modPost',i,item?.addedById)"><i
+                                        class="fa fa-thumbs-o-up bg mr-1" [ngClass]="{'text-primary': modDetail?.likestatus}"
+                                        aria-hidden="true"></i>Like</a> -->
+                              <a class="dropdown-item" *ngIf=" item.userDetails?._id != credentials?.credentials?.id"
+                                (click)="openReport(item.postdata?.id,'modPost')">
+                                <i class="fa fa-bug" aria-hidden="true"></i>
+                                Report Post
+                              </a>
+                              <a class="dropdown-item"  *ngIf=" item.userDetails?._id == credentials?.credentials?.id"
+                                (click)="deletePost(item?.postId,i)"><i class="fa fa-trash mr-1" aria-hidden="true"></i>
+                                Delete Post
+                              </a>
+                              <!-- <a class="dropdown-item" *ngIf=" item.userDetails?._id == credentials?.credentials?.id"
+                                      (click)="deleteModPost(item.postdata?.id,i)">
+                                      <i class="fa fa-trash mr-1" aria-hidden="true"></i>
+                                      Delete Post
+                                    </a> -->
+
+                            </div>
+                          </div>
+                        </div>
+
+                      </article>
+                    </div>
+                    <div class="mb-0 prof_name"><a href="javascript:void(0)"
+                        (click)="goTouserProfile(item.userDetails?._id != credentials?.credentials?.id ? '/friend-profile' :'/dashboard/profile',{id:  item.userDetails?._id})">
+                        <strong> {{item?.userDetails?.fullName}}</strong>
+                        <!-- <img ngbTooltip="Founding Member" class="badgeIcon tab"
+                    src="{{_host}}images/badges/{{item?.userDetails?.foundingMemberImage}}"
+                    (click)="getMagnifyImage(item?.userDetails?.foundingMemberImage)">
+
+                  <img *ngIf="item?.userDetails?.rankBadgeImage"
+                    ngbTooltip="{{item?.userDetails?.rankBadgeImage?.title}}" class="badgeIcon tab"
+                    src="{{_host}}images/badges/{{item?.userDetails?.rankBadgeImage?.image}}"
+                    (click)="getMagnifyImage(item?.userDetails?.rankBadgeImage?.image)">
+
+
+                  <img *ngIf="item?.userDetails?.modderBadgeImage" class="badgeIcon tab"
+                    ngbTooltip="{{item?.userDetails?.modderBadgeImage?.title}}"
+                    src="{{_host}}images/badges/{{item?.userDetails?.modderBadgeImage?.image}}"
+                    (click)="getMagnifyImage(item?.userDetails?.modderBadgeImage?.image)">
+
+                  <img *ngIf="item?.userDetails?.networkerImage"
+                    ngbTooltip="{{item?.userDetails?.networkerImage?.title}}" class="badgeIcon tab"
+                    src="{{_host}}images/badges/{{item?.userDetails?.networkerImage?.image}}"
+                    (click)="getMagnifyImage(item?.userDetails?.networkerImage?.image)">
+
+                  <img *ngIf="item?.userDetails?.ambassadorBadgeImage"
+                    ngbTooltip="{{item?.userDetails?.ambassadorBadgeImage?.title}}" class="badgeIcon tab"
+                    src="{{_host}}images/badges/{{item?.userDetails?.ambassadorBadgeImage?.image}}"
+                    (click)="getMagnifyImage(item?.userDetails?.ambassadorBadgeImage?.image)"> -->
+
+                      </a>
+                    </div>
+                    <div class="common_badge">
+                      <a href="javascript:;">{{item?.userDetails?.rankBadgeImage?.title}}</a>
+                      <ul class="tooltiptext">
+                        <li><b>Points:</b> {{item?.userDetails?.rankPoints}}</li>
+                        <li><a
+                            href="https://endpoint.rvmodshare.com/images/modPost/f7b737b8-d7f2-4361-8ed3-d0a30cea6a1f1642682372997.pdf"
+                            target="_blank"><b>Badges & Rewards: </b> {{item?.userDetails?.rankBadgeImage?.title}}</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="row w-100">
+                      <div class="col-md-6 ">
+
+
+
+                        <!-- <span class="pr-1"><a (click)="goTouserProfile(modDetail?.addedBydetails?._id != credentials?.credentials?.id ? '/page/friend-profile' :'/dashboard/profile',{id:  modDetail?.addedBydetails?._id})" class="pointer-cursor"><b>{{modDetail?.addedBydetails?.fullName}}</b></a><span class="ml-2">{{modDetail?.createdAt | date:'short' }}</span></span> -->
+                        <div class="tagsAlign">
+                          <h4 class="mod-rv-texts"><small> {{item?.postdata?.year}}
+                              {{_sharedService.getRvType(item?.postdata?.rvType)}}
+                              {{item?.makeDetails?.name}}
+                              {{item?.seriesDetails?.name | titlecase}}
+                              {{item?.postdata?.model}}
+                            </small></h4>
+                          <!-- <span> Year</span><span>Class</span><span>Make</span><span>Series</span><span>Model</span> -->
+                        </div>
+                        <h6 class="mb-0">{{item?.modCategoryDetails?.name}}</h6>
+                        <h4><small>{{item?.sizeDetails?.name}}</small></h4>
+                      </div>
+                      <div class="col-md-6 border-left">
+                        <div class="rightAlign ">
+                          <b>Summary</b>
+                          <p class="truncate font_normal" [innerHTML]="htmlLength(item?.whatIDid,65)"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="likeShare">
+                      <a><i class="fa fa-thumbs-up" ngbTooltip="Likes"
+                          aria-hidden="true"></i>{{item?.postdata?.likesTotal}}</a>
+                      <a *ngIf="!item?.postdata?.isCommentDisabled"><i class="fa fa-comment" ngbTooltip="Comment"
+                          aria-hidden="true"></i>{{item?.postdata?.commentTotal}}</a>
+                      <a><i class="fa fa-share-alt" aria-hidden="true" ngbTooltip="Share"></i>
+                        {{item?.postdata?.totalShare}}</a>
+                      <a style="width: 23px;" *ngIf="item?.postdata?.skillLevel=='6193a45efc4c9b3d4ce7ad62'"
+                        class="high"><img src="assets/img/low.png" ngbTooltip="Low" class="skill-ic" alt=""></a>
+                      <a style="width: 23px;" class="high"
+                        *ngIf="item?.postdata?.skillLevel=='6194c77a4d8a1d9518bbe18c'"><img src="assets/img/medium.png"
+                          ngbTooltip="Medium" class="skill-ic" alt=""></a>
+                      <a class="high" *ngIf="item?.postdata?.skillLevel=='6197d36401d78bc07b538196'"><img
+                          src="assets/img/high.png" ngbTooltip="High" class="skill-ic" alt=""></a>
+                      <a><i class="fa fa-clock-o" ngbTooltip="{{item?.postdata?.timerange}}" placement="top"
+                          aria-hidden="true"></i></a>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="bg-white p-1 mb-3 ">
+        <h4 class="heading pt-1 pl-2">My Favorite Mods</h4>
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+          (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+          (beforeChange)="beforeChange($event)">
+          <div ngxSlickItem *ngFor="let item of favMods; let i=index" class="slide">
+            {{item?.isFavourite}}
+            <div class="shadow bg-white">
+              <div class="img">
+                <span tooltip="Favorite" placement="bottom" class="favorite shadow" (click)="favourite(item.postId,i)">
+                  <input type="checkbox" [checked]="item?.isFavourite" />
+                  <i class="fa fa-heart"></i>
+
+                </span>
+                <img [routerLink]="['/page/mod-details']" [queryParams]="{id:item.postId,uid:credentials?.credentials?.id}" *ngIf="item?.postdata?.afterImages?.length==0 && item?.postdata?.beforeImages?.length==0" class="img-responsive roundeds contain"
+                  src="assets/img/follow-new1.png">
+                <img [routerLink]="['/page/mod-details']" [queryParams]="{id:item.postId,uid:credentials?.credentials?.id}" *ngIf="item?.postdata?.afterImages?.length>0 " class="img-responsive roundeds"
+                  src="{{_host}}images/modPost/{{item?.postdata?.afterImages[0]}}">
+                  <img [routerLink]="['/page/mod-details']" [queryParams]="{id:item.postId,uid:credentials?.credentials?.id}" *ngIf="item?.postdata?.afterImages?.length==0 && item?.postdata?.beforeImages?.length>0" class="img-responsive roundeds"
+                  src="{{_host}}images/modPost/{{item.postdata?.beforeImages[0]}}">
+              </div>
+              <div class="mt-2 p-2">
+                <p class="mb-0 font-weight-bold"><a placement="top" class="title text-truncate" ngbTooltip="{{item?.postdata?.name}}" routerLink="/page/mod-details"
+                    [queryParams]="{id:item.postId,uid:credentials?.credentials?.id}">{{item?.postdata?.name}}</a></p>
+                <p class="mb-0">by<a class="by-link ml-2" href="javascript:void(0)"
+                    [routerLink]="['/page/friend-profile']"
+                    [queryParams]="{id: item?.userDetails?.id}">{{item?.userDetails?.fullName| titlecase}}</a></p>
+                <div class="social-icon">
+                 <a> <i class="fa fa-thumbs-up mr-1" aria-hidden="true"  ngbTooltip="Like"></i>{{item?.postdata?.likesTotal}}</a>
+                <a><i class="fa fa-comment mr-1" aria-hidden="true" ngbTooltip="Comment"></i> {{item?.postdata?.commentTotal}}</a>        
+                  <a *ngIf="item?.postdata?.skillLevel=='6193a45efc4c9b3d4ce7ad62'" class="high"><img src="assets/img/low.png" ngbTooltip="Low" class="skill-ic" alt=""></a>
+                    <a class="high" *ngIf="item?.postdata?.skillLevel=='6194c77a4d8a1d9518bbe18c'" ><img src="assets/img/medium.png" ngbTooltip="Medium" class="skill-ic" alt=""></a>
+                    <a *ngIf="item?.postdata?.skillLevel=='6197d36401d78bc07b538196'" class="high"><img src="assets/img/high.png"  ngbTooltip="High" class="skill-ic" alt=""></a>
+               
+                    <a><i class="fa fa-clock-o" aria-hidden="true" ngbTooltip="{{item?.postdata?.timerange}}"></i></a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </ngx-slick-carousel>
+      </div> -->
+    </div>
+    <div class="col-md-3">
+      <app-right-sponsored></app-right-sponsored>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade modal-p-bottom" id="modalPBottom">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="box shadow bg-white" *ngIf="hideDefault">
+
+          <h4 class="d-flex justify-content-between top_head"> Filters <i class="fa fa-times close" data-dismiss="modal"
+              aria-label="Close"></i></h4>
+
+
+          <div class="border p-2 mb-2">
+
+            <select name="cars" id="cars5" (change)="resetMakeSeries('both');searchValue();" class="form-control mb-2"
+              [(ngModel)]="modfilters.rvTypeFilter" [ngClass]="{'highlightfilter': modfilters?.rvTypeFilter}">
+              <option value="">Choose Class</option>
+              <option *ngFor="let item of filterrvTypes" value="{{item.detail.value}}">{{item.description}}</option>
+
+            </select>
+            <select name="cars" id="cars5" [disabled]="!modfilters?.rvTypeFilter"
+              (change)="resetMakeSeries('series');searchValue();" class="form-control mb-2"
+              [(ngModel)]="modfilters.makeFilter" [ngClass]="{'highlightfilter': modfilters?.makeFilter}"
+              class="form-control mb-2">
+              <option value="">Choose Make</option>
+              <option *ngFor="let item of MakesFilters" value="{{item?.id}}">{{item?.name}}</option>
+
+            </select>
+            <select class="form-control" [disabled]="!modfilters?.makeFilter" [(ngModel)]="modfilters.modelValue"
+              [ngClass]="{'highlightfilter': modfilters?.modelValue}" (change)="searchValue()" name="model" id="model">
+              <option value="">Choose Series</option>
+              <option *ngFor="let item of filterModels" value="{{item?.id}}">{{item.name}}</option>
+            </select>
+          </div>
+          <select name="Year" id="Year" (change)="searchValue()" [(ngModel)]="modfilters.yearValue"
+            [ngClass]="{'highlightfilter': modfilters?.yearValue}" class="form-control mb-2">
+            <option value=""> Choose Year</option>
+            <option value="{{item?.id}}" *ngFor="let item of rvYears">{{item?.id}}</option>
+          </select>
+          <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.size"
+            [ngClass]="{'highlightfilter': modfilters?.size}" class="form-control mb-2">
+            <option value="">Choose Size</option>
+            <option *ngFor="let item of difficulties" title="{{item?.description}}" value="{{item.id}}">{{item.name}}
+            </option>
+          </select>
+          <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.modCategoryValue"
+            [ngClass]="{'highlightfilter': modfilters?.modCategoryValue}" class="form-control mb-2">
+            <option value="">Choose Category</option>
+            <option *ngFor="let item of modCategories" value="{{item?.id}}">{{item?.name}}({{item?.count}})</option>
+          </select>
+
+          <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.skillLevel"
+            [ngClass]="{'highlightfilter': modfilters?.skillLevel}" class="form-control mb-2">
+            <option value="">Choose Difficulty</option>
+            <option *ngFor="let item of skillLevelNeeded" value="{{item?.id}}">{{item?.name}}</option>
+
+          </select>
+          <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.timerange"
+            [ngClass]="{'highlightfilter': modfilters?.timerange}" class="form-control mb-2">
+            <option value="">Choose Total Time</option>
+            <option *ngFor="let item of timeRanges" value="{{item?.id}}">{{item?.id}}</option>
+          </select>
+          <div class="date_range padding_input">
+            <input type="text" name="daterange" (change)="searchValue()" ngxDaterangepickerMd [(ngModel)]="selectedDate"
+              [ngClass]="{'highlightfilter': modfilters?.startDate || modfilters?.endDate}" class="form-control"
+              placeholder="Select Date Range" />
+          </div>
+          <div class="padding_input">
+            <input type="text " name="search" (keyup.enter)="searchValue()" [(ngModel)]="modfilters.search"
+              [ngClass]="{'highlightfilter': modfilters?.search}" class="form-control mt-2"
+              placeholder="Search Title & Summary (Press Enter to search)" />
+          </div>
+          <div class="text-right mt-4">
+            <button class="btn btn-danger" (click)="reset()">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

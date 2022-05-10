@@ -1,0 +1,497 @@
+.text-lights {
+  color: rgb(111, 110, 110);
+}
+.container-fluid.mt-5.pt-5.main-content.mb-5 {
+  min-height: 100vh;
+}
+span.textclr {
+  color: #023870;
+}
+p.phViewDesc {
+  display: block;
+  margin-left: 4rem;
+  width: 100%;
+}
+option p {
+  width: 100%;
+}
+span.textClr {
+    color: #0c3870;
+}
+i.fa.fa-times-circle.ml-2 {
+  cursor: pointer;
+}
+small.text-primary.green {
+  color: #008b06 !important;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-size: 14px;
+}
+h2.mb-0.chnage.collapsed {
+  display: flex;
+}
+small.text-green {
+  color: #008b06 !important; 
+}
+.col-md-6.p-0.mx-auto {
+  min-height: calc(100vh - 200px);
+  margin-bottom: 1rem; 
+}
+.file-upload {
+  display: block;
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+}
+h1.headingPost {
+  font-size: 24px;
+  font-weight: 700;
+}
+ul#pills-tab {
+  display: inline-flex;
+}
+button.btn.btn-outline-primary.w-100.tab.active {
+  border-radius: 5px 5px 0px 0px;
+}
+button.btn.btn-outline-primary.w-100.tab {
+  border-radius: 5px 5px 0px 0px;
+  border: none;
+  border-bottom: 1px solid #03e08e;
+}
+select option:first-child {
+  display: none;
+}
+.file-upload .file-select {
+  display: block;
+  border: 2px solid #dce4ec;
+  color: #fff;
+  cursor: pointer;
+  height: 36.99px;
+  line-height: 36.99px;
+  text-align: left;
+  background: #ffffff;
+  overflow: hidden;
+  position: relative;
+}
+.file-upload .file-select .file-select-button {
+  background: #03e08e;
+  padding: 0 10px;
+  display: inline-block;
+  height: 36.99px;
+  line-height: 36.99px;
+}
+.file-upload .file-select .file-select-name {
+  line-height: 40px;
+  display: inline-block;
+  padding: 0 10px;
+}
+.file-upload .file-select:hover {
+  border-color: #03e08e;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+.file-upload .file-select:hover .file-select-button {
+  background: #03e08e;
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+.file-upload.active .file-select {
+  border-color: #3fa46a;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+.file-upload.active .file-select .file-select-button {
+  background: #3fa46a;
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+.file-upload .file-select input[type="file"] {
+  z-index: 100;
+  cursor: pointer;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.file-upload .file-select.file-select-disabled {
+  opacity: 0.65;
+}
+.file-upload .file-select.file-select-disabled:hover {
+  cursor: default;
+  display: block;
+  border: 2px solid #dce4ec;
+  color: #34495e;
+  cursor: pointer;
+  height: 40px;
+  line-height: 40px;
+  margin-top: 5px;
+  text-align: left;
+  background: #ffffff;
+  overflow: hidden;
+  position: relative;
+}
+.file-upload .file-select.file-select-disabled:hover .file-select-button {
+  background: #dce4ec;
+  color: #666666;
+  padding: 0 10px;
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+}
+.file-upload .file-select.file-select-disabled:hover .file-select-name {
+  line-height: 40px;
+  display: inline-block;
+  padding: 0 10px;
+}
+img.img-after {
+  width: 2.5rem;
+  margin: 9px;
+  border-radius: 50px;
+  height: 2.5rem;
+}
+i.fa.fa-file-text {
+  font-size: 30px;
+  margin-bottom: 5px;
+  color: red;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px) !important;
+  color: #495057;
+  background-color: #fff !important;
+  background: #fff !important;
+  padding: 6px 6px;
+  /* font-size: 12px; */
+  position: relative;
+  overflow: hidden;
+}
+i.fa.fa-times {
+  position: relative;
+  bottom: 26px;
+  right: 0px;
+  cursor: pointer;
+}
+.form-row.ng-star-inserted h4 {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+}
+/* .col-md-4.ml-auto.top {
+  position: absolute;
+  top: 80px;
+  right: 20px;
+} */
+
+.badges {
+  background: #03e08e;
+  width: fit-content;
+  display: inline-block;
+  margin: 2px 4px;
+  padding: 3px 16px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+/* li {
+  cursor: pointer;
+  padding: 0px 10px;
+} */
+i.fa.fa-chevron-down {
+  position: absolute;
+  top: 3px;
+  left: auto;
+  font-size: 11px;
+  right: 0;
+  background-color: #fff;
+  height: 26px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .show>.btn-outline-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #03e08e;
+  border-color: #03e08e;
+}
+.btn-outline-primary:hover {
+  color: #000;
+ 
+  border-color: #03e08e;
+}
+/* .dropdown-menu.show {
+  width: 97%;
+} */
+/* li:hover {
+  background: #007bff;
+  color: #fff;
+} */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+.modal_toggle .switch {
+  margin-left: 0px;
+}
+/* .modal-footer {
+  text-align: right;
+  padding-left: 0px;
+  padding-right: 0px;
+} */
+/* textarea {
+  width: 600px;
+  height: 180px;
+} */
+
+.common_width {
+  padding: 0px 5px;
+  flex: 0 20%;
+}
+.form-group .disabled i.fa.fa-chevron-down,
+.form-group .disabled {
+  background-color: #e3e3e3 !important; 
+}
+/* .mod_size li:hover {
+  background: #e14a10 !important;
+} */
+// .badges.tool-url span,
+// .badges.tool-url span + i {
+//   color: #454545;
+// }
+.used button {
+  padding: 1px 6px !important;
+}
+.form-row.mod_details {
+  padding: 0px 5px;
+}
+
+@media (max-width: 768px) {
+  .ph-block{
+    display: block !important;
+  }
+  .deskTop{
+    display: none;
+  }
+  .container-fluid.mt-5.pt-5.main-content.mb-5 {
+    margin-top: 6rem !important;
+  }
+  .d-flex.justify-content-between.align-items-center.shadow.input_relative.p-3.w-100 {
+    text-align: left;
+  }
+  li.nav-item.w-50 {
+    width: 50% !important;
+  }
+  
+  .d-flex.mb-3 {
+    display: block !important;
+  }
+  .d-flex.mod_details.w-100 {
+    display: block !important;
+  }
+  .shadow.p-3.bg-white {
+    margin-bottom: 8rem;
+  }
+}
+@media (max-width: 767px) {
+  .container-fluid.mt-5.pt-5.main-content.mb-5 {
+    margin-top: 0rem !important;
+  }
+  button.btn.btn-primary.ml-3 {
+    display: block;
+    margin-left: 0px !important;
+    margin-top: 10px;
+  }
+  .container.pl-1.pr-1 {
+    width: 100%;
+    max-width: 20rem;
+  }
+.col-md-6.p-0.mx-auto div.col-md-12.p-0 {
+  padding: 0px 14px !important;
+}
+}
+.loadersmall {
+  border: 5px solid #f3f3f3;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+  border-top: 5px solid #555;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: block;
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.card-body h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+.accordion {
+  margin-top: 10px;
+  .card {
+    border: none;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #a0a0a0 !important;
+  padding: 12px 0px;
+  border-radius: 0px !important;
+    h2 {
+    //   background: url(https://cdn0.iconfinder.com/data/icons/entypo/91/arrow56-512.png) no-repeat calc(100% - 10px) center;
+    // background-size: 20px;
+    font-size: 15px;
+      margin-right: 10px; 
+      &.collapsed::before {
+            // background-image: url(https://cdn0.iconfinder.com/data/icons/arrows-android-l-lollipop-icon-pack/24/expand2-256.png);
+  //           float: left !important;
+  font-family: FontAwesome;
+  // content: "\f068";
+  // padding-right: 5px;
+  float: left !important;
+    content: "\f067";
+      color: #023870;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+      &.collapsed::after {
+        // background-image: url(https://cdn0.iconfinder.com/data/icons/arrows-android-l-lollipop-icon-pack/24/expand2-256.png);
+//           float: left !important;
+ 
+float: left !important;
+content: 'Add Step by Step "How To" information (Additional revenue generating opportunities)';
+  color: #023870;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+    }
+    &-body {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+.accordion {
+  margin-top: 10px;
+  .card {
+    border: none;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #a0a0a0 !important;
+  padding: 12px 0px;
+  border-radius: 0px !important;
+    h2 {
+    //   background: url(https://cdn0.iconfinder.com/data/icons/entypo/91/arrow56-512.png) no-repeat calc(100% - 10px) center;
+    // background-size: 20px;
+    font-size: 15px;
+      margin-right: 10px; 
+      &.sec.collapseds::before {
+            // background-image: url(https://cdn0.iconfinder.com/data/icons/arrows-android-l-lollipop-icon-pack/24/expand2-256.png);
+  //           float: left !important;
+  font-family: FontAwesome;
+  // content: "\f068";
+  // padding-right: 5px;
+  float: left !important;
+    content: "\f067";
+      color: #023870;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+      &.sec.collapsed::after {
+        // background-image: url(https://cdn0.iconfinder.com/data/icons/arrows-android-l-lollipop-icon-pack/24/expand2-256.png);
+//           float: left !important;
+ 
+float: left !important;
+content: "Show Advanced Posting Options";
+  color: #023870;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+    }
+    
+  }
+}
+
+ h2.mb-0::before{
+  float: left !important;
+  content: "\f068";
+  font-family: FontAwesome;
+    color: #023870;
+      cursor: pointer;
+      font-size: 15px;
+      margin-right: 10px; 
+ }
+ h2.mb-0::after {
+  color: #023870;
+  content: "Hide Advanced Posting Options";
+  cursor: pointer;
+  float: left !important;
+  margin-right: 10px;
+}
+h2.chnage.mb-0::after {
+  color: #023870;
+  content: 'Hide Step by Step "How To" Options';
+  cursor: pointer;
+  float: left !important;
+  margin-right: 10px;
+}
+
+ h2.mb-0.collapsed {
+  font-size: 15px;
+}
+
+h4.mb-2.mt-4 {
+  font-size: 16px;
+}
+h4.mb-2.mt-2 {
+  font-size: 16px;
+}
+h4.mb-4.mt-2 {
+  font-size: 18px;
+}
+textarea.w-100.control {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

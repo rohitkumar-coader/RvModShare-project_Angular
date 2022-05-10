@@ -1,0 +1,280 @@
+<ngx-spinner bdColor="#fff" size="" color="#fff">
+    <div class='ajax-spinner-bars'>
+        <div class='bar-1'></div>
+        <div class='bar-2'></div>
+        <div class='bar-3'></div>
+        <div class='bar-4'></div>
+        <div class='bar-5'></div>
+        <div class='bar-6'></div>
+        <div class='bar-7'></div>
+        <div class='bar-8'></div>
+        <div class='bar-9'></div>
+        <div class='bar-10'></div>
+        <div class='bar-11'></div>
+        <div class='bar-12'></div>
+        <div class='bar-13'></div>
+        <div class='bar-14'></div>
+        <div class='bar-15'></div>
+        <div class='bar-16'></div>
+    </div>
+</ngx-spinner>
+
+<section class="signup-section pt-5 mt-5 pb-5 main_page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <img class="signLogo" src="assets/img/rvmodshare.png">
+                    <br />
+                    <a class="step-mods"> Share Mods- Browse Mods - Follow Members</a>
+                    <h2 class="mt-2">Sign up here to join our Community</h2>
+                    <p>It's quick, easy and free.</p>
+                    <p class="big_font">Already a member? Welcome back! <a [routerLink]="['/auth/login']" class="primary"><b>CLICK
+                                HERE.</b></a></p>
+                </div>
+                <div class="signup-area">
+                    <div class="row">
+                        <div class="col-lg-6 mx-auto">
+                            <div class="signup-left-area">
+                                <h2 class="title mb-0 pt-5">Sign Up</h2>
+                                <div class="sign-up-form-area mt-3">
+                                    <div class="social-icon">
+                                        <button class="btn btn-outline-primary" (click)="socialSignIn('facebook')"> <img style="  width: 23px;"
+                                                src="assets/img/Facebook.png" alt=""> Continue with Facebook</button>
+                                        <button (click)="socialSignIn('google')" class="btn btn-outline-primary"> <img src="assets/img/google.png"
+                                                alt="">Continue with Google</button>
+                                        <button (click)="signInWithApple()" class="btn btn-outline-primary"> <img style="  width: 24px;"
+                                                src="assets/img/apple.png" alt="" >Continue with Apple</button>
+                                    </div>
+                                    <div class="or">
+                                        <article>
+                                            <h1>or</h1>
+                                        </article>
+                                    </div>
+                                    <div class="text-center">
+                                        <h3>Sign Up Using Email</h3>
+                                    </div>
+                                    <!-- <div class="row">
+                                        <div class="col-md-12">
+                                          <div class="form-group mb-1">
+                                            <input  type="radio" [ngModelOptions]="{standalone: true}"   [value]="false" [(ngModel)]="ownedRV" class="mr-1" style="width: auto">
+                                            <label>I don’t own a RV yet, I’m a wannabe</label> <br />
+                                            <input  type="radio" [ngModelOptions]="{standalone: true}"  [value]="true" [(ngModel)]="ownedRV" class="mr-1" style="width: auto">
+                                            <label>I own a RV</label>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <p *ngIf="!ownedRV">Select the RV you are most interested in:</p>
+                                                <p *ngIf="ownedRV">Choose RV data from below :</p>
+                                            </div>
+                                           
+                                      </div> -->
+                                    <form [formGroup]="userRegisterForm" (ngSubmit)="onSubmit()" class="signup-form">
+                                        <div class="row">
+                                            <!-- <div class="col-lg-12 form-group">
+                                                <input type="text"  [ngStyle]="{'border-color' : submitted && f.displayName.errors?'#dc3545':''}"
+                                                [ngClass]="{ 'is-invalid': submitted && f.displayName.errors }" formControlName="displayName" name="displayName"
+                                                    id="name" placeholder="Create Your Display Name" required /><span><i
+                                                        class="fa fa-user all"></i></span>
+                                                        <div *ngIf="submitted && f.displayName.errors" class="invalid-feedback">
+                                                            <div *ngIf="f.displayName.errors.required">Display name is required
+                                                            </div>
+                                                        </div>
+
+                                            </div> -->
+
+
+                                            <div class="col-lg-12 form-group">
+                                                <input type="text"
+                                                    [ngStyle]="{'border-color' : submitted && f.firstName.errors?'#dc3545':''}"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+                                                    formControlName="firstName" name="firstName" id="firstName"
+                                                    placeholder="First Name" required /><span><i
+                                                        class="fa fa-user all"></i></span>
+                                                <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.firstName.errors.required">First name is required
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 form-group">
+                                                <input type="text"
+                                                    [ngStyle]="{'border-color' : submitted && f.lastName.errors?'#dc3545':''}"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+                                                    formControlName="lastName" name="lastName" id="lastName"
+                                                    placeholder="Last Name" required /><span><i
+                                                        class="fa fa-user all"></i></span>
+                                                <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.lastName.errors.required">Last name is required</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 form-group">
+                                                <input type="email"
+                                                    [ngStyle]="{'border-color' : submitted && f.email.errors?'#dc3545':''}"
+                                                    formControlName="email" name="email" id="email" placeholder="Email"
+                                                    email="true" required /><span><i
+                                                        class="fa fa-envelope all"></i></span>
+                                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.email.errors.required">Email is required</div>
+                                                    <div *ngIf="f.email.errors.email || f.email.errors?.pattern">Email
+                                                        is invalid</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 form-group">
+                                                <input [type]="passwordType ? 'text' : 'password'" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                                                    formControlName="password" name="password" placeholder="Password"
+                                                    required />
+                                                <i class="fa fa-eye pointer"
+                                                    [ngClass]="{'fa-eye':passwordType, 'fa-eye-slash':!passwordType}"
+                                                    (click)="passwordType = !passwordType"></i>
+                                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.password.errors.required">Password is required</div>
+                                                    <div *ngIf="f.password.errors?.pattern">Use 8 or more characters
+                                                        with a mix of letters, numbers & symbols</div>
+                                                    <div *ngIf="f.password.errors.minlength">Min Length should be 8
+                                                        character</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 form-group">
+                                                <input [type]="confirmPasswordType ? 'text' : 'password'"
+                                                    class="form-control"
+                                                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                    maxlength="20"
+                                                    [ngStyle]="{'border-color' : submitted && f.confirmPassword.errors?'#dc3545':''}"
+                                                    formControlName="confirmPassword" name="confirmPassword"
+                                                    id="confirmPassword" placeholder="Reenter Password" required />
+                                                <span class="fa pointer" [ngClass]="{
+                                        				'fa-eye-slash': !confirmPasswordType,
+                                        				'fa-eye': confirmPasswordType
+                                        			  }" (click)="toggleConfirmPassword()"></span>
+                                                <div *ngIf="submitted && f.confirmPassword.errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="f.confirmPassword.errors.required">Confirm Password is
+                                                        required</div>
+                                                    <div *ngIf="f.confirmPassword.errors.confirmMatch">Passwords must
+                                                        match</div>
+                                                </div>
+                                            </div>
+                                            <div class="captcha mb-2 ml-3 mr-3">
+                                                <recaptcha formControlName="myRecaptcha" name="myRecaptcha" (scriptLoad)="onScriptLoad()"
+                                                    (scriptError)="onScriptError()"></recaptcha>
+                                            </div>
+                                            <div class="col-md-12 mb-2">
+                                                <input type="checkbox" formControlName="termService" name="terms"
+                                                    id="terms__checkbox"
+                                                    [ngStyle]="{'border-color' : submitted && f.termService.errors?'#dc3545':''}"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.termService.errors }"
+                                                    class="input input__checkbox" required />
+
+                                                <span class="message">
+                                                    I agree to RVmodshare
+                                                    <a class="link terms-anchor" target="_blank"
+                                                        [routerLink]="['/terms-of-service']">Terms of service</a> and <a
+                                                        target="_blank" [routerLink]="['/privacy-policy']">Privacy
+                                                        Policy</a>
+                                                    <!-- <a class="link pp-anchor" href="#">Privacy Policy</a>  -->
+                                                </span>
+                                                <div *ngIf="submitted && f.termService.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.termService.errors.required">
+                                                        You must agree to our Terms of Service and Privacy Policy before
+                                                        registering
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 form-group text-left">
+                                                <!-- <span class="control">Already registered ? <a
+                                                        [routerLink]="['/auth/login']"> Sign In</a></span> -->
+                                                <!-- <p class="mt-2 mb-0"><a [routerLink]="['/auth/resend']">Didn’t receive
+                                                        confirmation instructions?</a></p> -->
+                                                <!-- <p class="mt-2 mb-0"><a (click)="resendConfirmation()">Didn’t receive an
+                                                        email? Click Here.
+                                                    </a></p> -->
+
+                                            </div>
+
+                                            <div class="col-lg-12 form-group">
+                                                <input type="submit" class="cmn-btn mt-2" value="Register">
+                                            </div>
+
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- <input type="submit" (click)="open(content)" class="cmn-btn mt-2" value="Register"> -->
+
+<div class="toster" *ngIf="appleErrorCode">
+    <div class="d-flex">
+        <i class="fa fa-times-circle" (click)="removeToast()" aria-hidden="true"></i>
+        <p class="mb-0"> {{appleErrorMessage}} </p>
+    </div>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="text-center p-3">
+      <img src="assets/img/success.png" class="iconSignup">
+
+        <div class="modal-body">
+         <h2 style="color: #595959; font-size: 1.875em;">Glad you'll be joining us! You're almost there.</h2>
+         <h4 style="  color: #545454; font-size: 1.125em; font-weight: 400;"><b>Next Step:</b> Verify Your Email.
+                We’ve sent you an email. Click the link in the email to continue setting up your account.</h4>
+        </div>
+        <button type="button" class="swal2-confirm swal2-styled" aria-label="" style="display: inline-block;" (click)="d('Cross click');">OK</button>
+        <p class="mt-2">Didn’t receive an email? <a class="text-primary" (click)="d('Cross click'); resendConfirmation()" >Click Here.</a></p>
+        <p class="mt-2">Be sure to check your spam and promotions folders if you don’t see your verification email shortly.</p>
+    </div>
+
+    <!-- <div class="next-step p-3 text-center">
+            <h2 class="swal2-title" id="swal2-title" style="display: block;">Oh bummer. No email?!</h2>
+            <div id="swal2-content" class="swal2-html-container" style="display: block;"><b>Note:</b>
+                 It can take a few minutes! <br> Also, you checked your spam folder, right?<br>Let's Try This Again.</div>
+                 <button type="button" class="swal2-confirm swal2-styled" aria-label="" style="display: inline-block;">Yes</button>
+                 <button type="button" class="swal2-cancel swal2-styled" aria-label="" style="display: inline-block;">No</button>
+    </div> -->
+      </ng-template>
+
+      <ng-template #contents let-c="close" let-d="dismiss">
+        <div class="text-center">  
+            <div class="modal-body text-center">
+                <h2 class="swal2-title mb-3" id="swal2-title" style="display: block;">Enter email address</h2>
+                <label> Your email adderss</label>
+                <form [formGroup]="emailForm" (ngSubmit)="onSubmitEmail()">
+                    <div class="form-group pl-4 pr-4">
+                        <input type="text"  placeholder="Enter your email address" formControlName="email" class="form-control border" [ngClass]="{ 'is-invalid': submitted && fg.email.errors }" />
+                        <div *ngIf="submitted && fg.email.errors" class="invalid-feedback">
+                            <div *ngIf="fg.email.errors.required">Email is required</div>
+                            <div *ngIf="fg.email.errors.email">Email must be a valid email address</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group mb-0 mt-4 pt-2">
+                        <button type="button"type="submit" class="swal2-confirm swal2-styled" aria-label="" style="display: inline-block;" >OK</button>
+                    </div>
+                </form>
+
+
+
+<!-- 
+                <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+                    <div>
+                      <input id="email" type="email" formControlName="email">
+                    </div>
+                    <button type="button"type="submit" class="swal2-confirm swal2-styled" aria-label="" style="display: inline-block;" >OK</button>
+                  
+                  </form> -->
+            </div>
+        
+           
+        </div> 
+          </ng-template>

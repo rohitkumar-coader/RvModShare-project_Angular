@@ -1,0 +1,51 @@
+<div class="right_side_sponsors">
+
+  <div class="mb-3" >
+    <h4 class="heading pt-1">Sponsored</h4>
+
+    <div class="slider row mb-3" *ngFor="let item of rightAdvertisements">
+      <div class="col-md-12">
+        <a target="_blank" href="{{item.redirectURL}}" (click)="addClickCount(item.id)">
+          <img class="img-responsive high" src="{{_host}}images/advertisement/{{item.image}}">
+        </a>
+        <!-- src="{{_host}}images/advertisement/{{item.image}}"  -->
+      </div>
+      <div class="col-md-12 ">
+        <p class="email mt-2">{{item.description}}
+        </p>
+      </div>
+    </div>
+    <div #myIdentifierdata>
+        <div class="col-md-12 overFlow p-0">
+          <ng2-adsense [adClient]="'ca-pub-7911750406935657'" [adSlot]="9631333463" [display]="'inline-block'" [width]="290"
+            [height]="238">
+          </ng2-adsense>
+        </div>
+    </div>
+    <!-- <div #myIdentifierdata>
+    <div *ngFor="let n of numSequence(seeModcount)">
+    <div class="col-md-12 overFlow p-0" *ngIf="n%2==0">
+      <ng2-adsense [adClient]="'ca-pub-7911750406935657'" [adSlot]="9631333463" [display]="'inline-block'" [width]="290"
+        [height]="238">
+      </ng2-adsense>
+    </div>
+    <div class="col-md-12 overFlow p-0" *ngIf="n%2!=0">
+      <ng2-adsense [adClient]="'ca-pub-7911750406935657'" [adSlot]="1821684686" [display]="'inline-block'" [width]="290"
+        [height]="238">
+      </ng2-adsense>
+    </div>
+    </div>
+  </div> -->
+  </div>
+  <hr />
+  <div class="footer-section p-2">
+    <a class="footer-link" routerLink="/about-us">. About</a>
+    <a class="footer-link" routerLink="/terms-of-service">. Terms of Service</a>
+    <a class="footer-link" routerLink="/privacy-policy">. Privacy Policy</a> <br />
+    <a class="footer-link" routerLink="/getting-started">. Getting Started</a>
+    <a class="footer-link" routerLink="/community-guidelines">. Community Guidelines</a> <br />
+    <a class="footer-link" routerLink="/points">. Points & Badges</a>
+    <a class="footer-link" routerLink="/faq">. FAQ</a> <br />
+    <p class="footer-link pl-2 mt-2 text-center">© 2022 RVmodshare Inc.</p>
+  </div>
+</div>

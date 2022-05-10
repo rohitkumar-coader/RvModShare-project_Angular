@@ -1,0 +1,1290 @@
+<ngx-spinner bdColor="#fff" size="" color="#fff">
+  <div class='ajax-spinner-bars'>
+    <div class='bar-1'></div>
+    <div class='bar-2'></div>
+    <div class='bar-3'></div>
+    <div class='bar-4'></div>
+    <div class='bar-5'></div>
+    <div class='bar-6'></div>
+    <div class='bar-7'></div>
+    <div class='bar-8'></div>
+    <div class='bar-9'></div>
+    <div class='bar-10'></div>
+    <div class='bar-11'></div>
+    <div class='bar-12'></div>
+    <div class='bar-13'></div>
+    <div class='bar-14'></div>
+    <div class='bar-15'></div>
+    <div class='bar-16'></div>
+  </div>
+</ngx-spinner>
+
+
+<div class="container-fluid bg-white px-0">
+  <div class="container-head">
+    <!-- <div class="menu">
+                          <p>___ <br>___<br>___</p>
+                          </div> -->
+
+    <img *ngIf="!friendDetail.coverPhoto" class="pic" src="assets/img/rvCoverImage.jpg">
+    <img *ngIf="friendDetail.coverPhoto" class="pic" src="{{_host}}{{friendDetail.coverPhoto}}">
+    <!-- <img *ngIf="data?.coverPhoto" class="pic" src="{{_host}}{{data?.coverPhoto}}"> -->
+
+
+    <!-- <button class="btn btn-primary"><i class="fa fa-camera mr-2" aria-hidden="true"></i>Add Cover Photo</button> -->
+  </div>
+  <div class="container-body container">
+    <div class="profile-picture d-flex">
+      <!-- <img *ngIf="userImage" src="{{_host}}{{userImage}}"> -->
+      <img *ngIf="!friendDetail.image" src="assets/img/user.png">
+      <img *ngIf="friendDetail.image" src="{{getUrl(friendDetail.image,friendDetail)}}">
+
+
+      <div class="name ml-2 align-item-center">
+        <div class="d-flex justify-content-between mt-2">
+          <div class="align">
+            <div class="alignmentStep">
+              <div class="nameCLS">
+                <strong>{{friendDetail.fullName}}</strong>
+                <div class="common_badge">
+                  <!-- <a href="javascript:;">{{friendDetail?.rankBadge?.name}}</a>
+                  <ul class="tooltiptext">
+                    <li><b>Points:</b> {{friendDetail?.rankPoints}}</li>
+                    <li><a
+                        href="https://endpoint.rvmodshare.com/images/modPost/f7b737b8-d7f2-4361-8ed3-d0a30cea6a1f1642682372997.pdf"
+                        target="_blank"><b>Badges & Rewards: </b> {{friendDetail?.rankBadge?.name}}</a></li>
+                  </ul> -->
+                  <p class="mb-2" *ngIf="friendDetail.ownRV == false"><b>Dreamer</b></p>
+                <p class="mb-2" *ngIf="friendDetail.ownRV == true"><b>Owner</b></p>
+                </div>
+
+              </div>
+
+              <div class="text-center d-flex ml-2">
+                <!-- <div class="step" ngbTooltip="Connections">
+                  <span>{{friendDetail?.totalfriends}} </span><br />
+                  <b>Connections</b>
+                </div> -->
+                <div class="step" ngbTooltip="Followers" (click)="openfollower()">
+                  <span>{{friendDetail?.totalFollower}}</span><br />
+                  <b>Followers</b>
+                </div>
+                <div class="step" ngbTooltip="Following" (click)="openfollow()">
+                  <span>{{friendDetail?.totalfollowing}}</span><br />
+                  <b>Following</b>
+                </div>
+                <!-- <div class="step" ngbTooltip="Posts">
+                  <span>{{friendDetail?.totalpost}}</span><br />
+                  <b>Posts</b>
+                </div> -->
+                <div class="step" ngbTooltip="Mods Shared">
+                  <span>{{friendDetail?.totalModPost}} </span><br />
+                  <b>Mods Shared</b>
+                </div>
+              </div>
+
+            </div>
+            <!-- <p class="mb-0">{{friendDetail.email}}</p> -->
+            <!-- <div class="d-flex align-item-center mt-3">
+        
+      
+      </div> -->
+          </div>
+
+          <div class="right ml-1" *ngIf="credentials?.credentials?.id">
+            <!-- <span
+            tooltip="Favorite"
+            placement="bottom"
+            class="favorite shadow bg-white"
+            (click)="favourite(item.id)"
+          >
+            <input type="checkbox"  [checked]="item.likestatus" />
+            <i  class="fa fa-heart" ></i>
+          
+          </span> -->
+
+            <button class="btn btn-primary mr-2" *ngIf="!friendDetail.isFollow && credentials?.credentials?.id != this.friendId" (click)="followFriend()">Follow</button>
+            <button class="btn btn-primary mr-2" *ngIf="friendDetail.isFollow && credentials?.credentials?.id != this.friendId" (click)="followFriend()"
+              (click)="followFriend()">Following</button>
+            <!-- <button class="btn imgBtn mr-2 mt-2" *ngIf="!friendDetail.isFriend && !friendDetail.isPending"
+              (click)="addFriend()" ngbTooltip="Request Social Connection"><img class="follow-img"
+                src="assets/img/add-plus-svgrepo-com.svg" alt=""> </button>
+            <button class="btn imgBtn mr-2 mt-2" *ngIf="friendDetail.isFriend" (click)="unFriend()"
+              ngbTooltip="Unconnect"> <img class="follow-img" src="assets/img/delete-user-svgrepo-com.svg"
+                alt=""></button>
+            <button class="btn imgBtn mr-2 mt-2" *ngIf="!friendDetail.isFriend && friendDetail.isPending"
+              (click)="cancelFriendRequest()" ngbTooltip="Cancel Request"><img class="follow-img"
+                src="assets/img/CancelRequest.png" alt=""></button>
+            <button class="btn imgBtn mr-2 mt-2" *ngIf="friendDetail?.isPending" ngbTooltip="Pending">
+              <img class="follow-img" src="assets/img/pannding.png" alt="">
+            </button>
+
+            <button class="btn imgBtn mt-2 mr-2" *ngIf="!friendDetail.isFollow" (click)="followFriend()"
+              ngbTooltip="Make Mod Connection"> <img src="assets/img/follow.svg" alt=""></button>
+            <button class="btn imgBtn mr-2 mt-2" *ngIf="friendDetail.isFollow" (click)="followFriend()"
+              ngbTooltip="Unconnect"><img src="assets/img/unfollow.svg" alt=""></button> -->
+
+
+          </div>
+        </div>
+        <div class="row mt-3 mb-2 badge_icon"
+          *ngIf="friendDetail?.rankBadge  || friendDetail?.ambassadorBadge || friendDetail?.modderBadge || friendDetail?.networkerBadge">
+          <!-- <div class="flex_badge"
+            [ngClass]="[(friendDetail?.rvRental &&  friendDetail?.rvRental?.rvShareUrl=='' && friendDetail?.rvRental?.outdoorsyUrl=='' && friendDetail?.rvRental?.rvezyUrl=='') ? 'col-md-6 flex_no_url' : '' ||  (friendDetail?.rvRental &&  (friendDetail?.rvRental?.rvShareUrl!='' || friendDetail?.rvRental?.outdoorsyUrl!='' || friendDetail?.rvRental?.rvezyUrl!='')) ? 'col-md-4' : '']"
+            *ngIf="friendDetail?.rankBadge  || friendDetail?.ambassadorBadge || friendDetail?.modderBadge || friendDetail?.networkerBadge">
+            <p> <b>Badges: </b> </p>
+            <img *ngIf="friendDetail?.isFoundingMember" ngbTooltip="Founding Member" class="badges"
+              (click)="getMagnifyImage(friendDetail?.foundingMemberImage)"
+              src="{{_host}}images/badges/{{friendDetail?.foundingMemberImage}}">
+
+            <img *ngIf="friendDetail?.rankBadge" ngbTooltip="{{friendDetail?.rankBadge?.name}}" class="badges"
+              (click)="getMagnifyImage(friendDetail?.rankBadge?.image)"
+              src="{{_host}}images/badges/{{friendDetail?.rankBadge?.image}}">
+
+          <img *ngIf="friendDetail?.modderBadge" ngbTooltip="{{friendDetail?.modderBadge?.name}}" class="badges"
+              (click)="getMagnifyImage(friendDetail?.modderBadge?.image)"
+              src="{{_host}}images/badges/{{friendDetail?.modderBadge?.image}}">
+
+            <img *ngIf="friendDetail?.networkerBadge" (click)="getMagnifyImage(friendDetail?.networkerBadge?.image)"
+              ngbTooltip="{{friendDetail?.networkerBadge?.name}}" class="badges"
+              src="{{_host}}images/badges/{{friendDetail?.networkerBadge?.image}}">
+
+
+            <img *ngIf="friendDetail?.ambassadorBadge" (click)="getMagnifyImage(friendDetail?.ambassadorBadge?.image)"
+              ngbTooltip="{{friendDetail?.ambassadorBadge?.name}}" class="badges"
+              src="{{_host}}images/badges/{{friendDetail?.ambassadorBadge?.image}}"> 
+          </div> -->
+          <div class="col-md-4 flex_badge"
+            *ngIf=" friendDetail?.isrvRental && friendDetail?.rvRental &&  (friendDetail?.rvRental?.rvShareUrl!='' || friendDetail?.rvRental?.outdoorsyUrl!='' || friendDetail?.rvRental?.rvezyUrl!='')">
+            <p> <b>My RV Rental: </b></p>
+            <a ngbTooltip="Outdoorsy" *ngIf="friendDetail?.rvRental?.outdoorsyUrl!=''"
+              href="{{friendDetail?.rvRental?.outdoorsyUrl}}" target="_blank"><img class="socialICON pointer-cursor"
+                src="assets/img/Rent_on_Outdoorsy.png" alt=""></a>
+            <a ngbTooltip="RVezy" *ngIf="friendDetail?.rvRental?.rvezyUrl!=''"
+              href="{{friendDetail?.rvRental?.rvezyUrl}}" target="_blank"><img class="socialICON pointer-cursor"
+                src="assets/img/Rent_on_RVezy.png" alt=""></a>
+            <a ngbTooltip="RVshare" *ngIf="friendDetail?.rvRental?.rvShareUrl!=''"
+              href="{{friendDetail?.rvRental?.rvShareUrl}}" target="_blank"><img class="socialICON pointer-cursor"
+                src="assets/img/Rent_on_RV_Share.png" alt=""></a>
+          </div>
+
+          <div class="socialIcon flex_badge"
+            [ngClass]="[(friendDetail?.rvRental &&  friendDetail?.rvRental?.rvShareUrl=='' && friendDetail?.rvRental?.outdoorsyUrl=='' && friendDetail?.rvRental?.rvezyUrl=='') ? 'col-md-6 flex_no_url' : '' ||  (friendDetail?.rvRental &&  (friendDetail?.rvRental?.rvShareUrl!='' || friendDetail?.rvRental?.outdoorsyUrl!='' || friendDetail?.rvRental?.rvezyUrl!='')) ? 'col-md-4' : '']">
+            <p> <b>Social Accounts: </b></p>
+            <a href="{{friendDetail?.instagramLink}}" target="_blank"><img *ngIf="friendDetail?.instagramLink"
+                class="socialICON pointer-cursor" src="assets/img/Instagram.png" alt=""></a>
+            <a href="{{friendDetail?.youTubeLink}}" target="_blank"><img *ngIf="friendDetail?.youTubeLink"
+                class="socialICON pointer-cursor" src="assets/img/you.png" alt=""></a>
+            <a href="{{friendDetail?.facebookLink}}" target="_blank"><img *ngIf="friendDetail?.facebookLink"
+                class="socialICON pointer-cursor" src="assets/img/facebook.png" alt=""></a>
+
+            <a href="{{friendDetail?.twitterLink}}" target="_blank"><img *ngIf="friendDetail?.twitterLink"
+                class="socialICON pointer-cursor" src="assets/img/twitter1.png" alt=""></a>
+
+            <a href="{{friendDetail?.yourWebsite}}" target="_blank"><img *ngIf="friendDetail?.yourWebsite"
+                class="socialICON pointer-cursor" src="assets/img/www.png" alt=""></a>
+            <a href="{{friendDetail?.blogLink}}" target="_blank"><img *ngIf="friendDetail?.blogLink"
+                class="socialICON pointer-cursor" src="assets/img/blogger.png" alt=""></a>
+            <!-- <a href="{{friendDetail?.youTubeLink}}" target="_blank"><img *ngIf="friendDetail?.youTubeLink" class="socialICON pointer-cursor"
+                src="assets/img/youtube.png" alt=""></a>
+            <a href="{{friendDetail?.facebookLink}}" target="_blank"><img *ngIf="friendDetail?.facebookLink" class="socialICON pointer-cursor"
+                src="assets/img/facebook-email.png" alt=""></a>
+            <a href="{{friendDetail?.instagramLink}}" target="_blank"><img *ngIf="friendDetail?.instagramLink" class="socialICON pointer-cursor"
+                src="assets/img/InstagramIcon.png" alt=""></a>
+            <a href="{{friendDetail?.twitterLink}}" target="_blank"><img *ngIf="friendDetail?.twitterLink" class="socialICON pointer-cursor"
+                src="assets/img/twitter.png" alt=""></a>
+            <a href="{{friendDetail?.blogLink}}" target="_blank"><img *ngIf="friendDetail?.blogLink" class="socialICON pointer-cursor"
+                src="assets/img/chatBlog.png" alt=""></a>
+            <a href="{{friendDetail?.yourWebsite}}" target="_blank"><img *ngIf="friendDetail?.yourWebsite" class="socialICON pointer-cursor"
+                src="assets/img/www.jpg" alt=""></a> -->
+          </div>
+          <!-- <div class="alignToogle">
+              <a ngbTooltip="Copy URL" (click)="copy()" class="alignmentCopyLink">
+                <i class="fa fa-link"></i>
+              </a>
+            
+            </div> -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="container mt-4">
+    <div class="row">
+
+      <div class="col-md-3">
+        <div class="d-flex justify-content-between align-items-center mb-3  desk-none">
+          <h4 class="mb-0"> Filters</h4>
+          <div> 
+            <div>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPBottom"
+                ngbTooltip="Filter"><i class="fa fa-sliders"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="shadow bg-white p-2 pt-0 mb-4 ph-none">
+
+          <div class="embed-responsive embed-responsive-16by9 mb-4"
+            *ngIf="friendDetail?.featuredYouTubeLink && friendDetail?.featuredYouTubeLink!=''">
+            <iframe [src]="urlSafe" class="embed-responsive-item" frameborder="0" allowfullscreen></iframe>
+            <!-- <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe> -->
+          </div>
+         
+
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="mb-0"> Filters</h4>
+            <div>
+              <button class="btn btn-danger" (click)="reset()">Reset</button>
+            </div>
+          </div>
+
+          <div class="border p-2 mb-2">
+
+            <select name="cars" id="cars5" (change)="searchValue();resetMakeSeries('both')" class="form-control mb-2"
+              [(ngModel)]="modfilters.rvTypeFilter" [ngClass]="{'highlightfilter': modfilters?.rvTypeFilter}">
+              <option value="">Choose Class</option>
+              <option *ngFor="let item of filterrvTypes" value="{{item.detail.value}}">{{item.description}}</option>
+
+            </select>
+            <select name="cars" id="cars5" [disabled]="!modfilters?.rvTypeFilter"
+              (change)="searchValue();resetMakeSeries('series')" class="form-control mb-2"
+              [(ngModel)]="modfilters.makeFilter" [ngClass]="{'highlightfilter': modfilters?.makeFilter}"
+              class="form-control mb-2">
+              <option value="">Choose Make</option>
+              <option *ngFor="let item of MakesFilters" value="{{item?.id}}">{{item?.name}}</option>
+
+            </select>
+            <select class="form-control" [disabled]="!modfilters?.makeFilter" [(ngModel)]="modfilters.modelValue"
+              [ngClass]="{'highlightfilter': modfilters?.modelValue}" (change)="searchValue()" name="model" id="model">
+              <option value="">Choose Series</option>
+              <option *ngFor="let item of filterModels" value="{{item?.id}}">{{item.name}}</option>
+            </select>
+          </div>
+          <!-- <div class="border p-2 mt-2"> -->
+          <select name="Year" id="Year" (change)="searchValue()" [(ngModel)]="modfilters.yearValue"
+            [ngClass]="{'highlightfilter': modfilters?.yearValue}" class="form-control mb-2">
+            <option value=""> Choose Year</option>
+            <option value="{{item.id}}" *ngFor="let item of rvYears">{{item.id}}</option>
+          </select>
+          <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.size"
+            [ngClass]="{'highlightfilter': modfilters?.size}" class="form-control mb-2">
+            <option value="">Choose Size</option>
+            <option *ngFor="let item of difficulties" title="{{item?.description}}" value="{{item.id}}">{{item.name}}
+            </option>
+          </select>
+          <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.modCategoryValue"
+            [ngClass]="{'highlightfilter': modfilters?.modCategoryValue}" class="form-control mb-2">
+            <option value="">Choose Category</option>
+            <option *ngFor="let item of modCategories" value="{{item?.id}}">{{item?.name}}({{item?.count}})</option>
+          </select>
+
+          <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.skillLevel"
+            class="form-control mb-2" [ngClass]="{'highlightfilter': modfilters?.skillLevel}">
+            <option value="">Choose Difficulty</option>
+            <option *ngFor="let item of skillLevelNeeded" value="{{item?.id}}">{{item?.name}}</option>
+
+          </select>
+          <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.timerange"
+            class="form-control mb-2" [ngClass]="{'highlightfilter': modfilters?.timerange}">
+            <option value="">Choose Total Time</option>
+            <option *ngFor="let item of timeRanges" value="{{item.id}}">{{item.id}}</option>
+          </select>
+
+          <div class="date_range padding_input">
+            <input type="text" name="daterange" (change)="searchValue()" ngxDaterangepickerMd [(ngModel)]="selectedDate"
+              [ngClass]="{'highlightfilter': modfilters?.startDate ||  modfilters?.endDate}" class="form-control"
+              placeholder="Select Date Range" />
+          </div>
+          <div class="padding_input">
+            <input type="text " name="search" (keyup.enter)="searchValue()" [(ngModel)]="modfilters.search"
+              [ngClass]="{'highlightfilter': modfilters?.search}" class="form-control mt-2"
+              placeholder="Search Title & Summary (Press Enter to search)" />
+          </div>
+          <!-- <div class="text-right mt-2">
+            <button class="btn btn-danger" (click)="reset()">Reset</button>
+          </div> -->
+        </div>
+
+      </div>
+
+      <div class="col-md-9">
+        <ul class="nav nav-pills mb-3 mt-0" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+              aria-controls="pills-home" aria-selected="true">Mods</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-rv-tab" data-toggle="pill" href="#pills-rv" role="tab"
+              aria-controls="pills-rv" aria-selected="false">My RV</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+              aria-controls="pills-profile" aria-selected="false">My Points</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-personal-tab" data-toggle="pill" href="#pills-personal" role="tab"
+              aria-controls="pills-personal" aria-selected="false">Personal</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab"
+              aria-controls="pills-about" aria-selected="false">About Me</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" (click)="getAllPhotos()" href="#pills-contact"
+              role="tab" aria-controls="pills-contact" aria-selected="false">Photos</a>
+          </li> -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" id="pills-social-tab" data-toggle="pill" href="#pills-social" role="tab"
+              aria-controls="pills-social" (click)="getAllPhotos()" aria-selected="false">Social</a>
+          </li> -->
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="container ">
+
+              <!-- <div class="col-md-3 ml-auto mb-2">
+                            <div class="text-right">
+                                <select [(ngModel)]="filterBy" (change)="getallNormalPosts()" class="form-control">
+                                    <option value="" disabled>Select to Filter Posts</option>
+                                    <option value="modPost">Mod Posts</option>
+                                    <option value="normalPost">Social Posts</option>
+                                    <option value="groupPost">Group Posts</option>
+                                  </select>
+                                </div>
+                              </div> -->
+              <div class="row">
+                <!-- <div class="col-md-1"></div> -->
+
+                <div class="col-md-12 mb-5">
+
+                  <div class="p-2">
+                    <div class="bg-white mb-3" *ngIf="featuredMods.length>0">
+
+                      <h4 class="heading pt-1 pl-2">Featured</h4>
+                      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+                        (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+                        (beforeChange)="beforeChange($event)">
+                        <div ngxSlickItem *ngFor="let item of featuredMods;let i=index" class="slide mr-3">
+                          <div class="shadow bg-white mb-4">
+                            <div class="alignmentSocial">
+
+                              <!-- <span class="d-inline-block mt-2 overlap" *ngIf="credentials?.credentials?.id">
+                              <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
+                                [attr.data-a2a-url]="'https://rvmodshare.com/mod-details?id='+item?.id+'&uid='+item?.addedBydetails?._id"
+                                [attr.data-a2a-title]="item?.name">
+                                <a class="a2a_button_facebook"></a>
+                              </div>
+                            </span> -->
+                              <div class="dropdown cretDropdown ml-2"
+                                *ngIf="item?.addedBydetails?._id == credentials?.credentials?.id">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i aria-hidden="true" class="fa fa-ellipsis-v"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  <a class="dropdown-item"
+                                    *ngIf="item?.addedBydetails?._id == credentials?.credentials?.id"
+                                    [routerLink]="['/share-mod',item?.slug]">Edit</a>
+                                  <a class="dropdown-item"
+                                    *ngIf="item?.addedBydetails?._id == credentials?.credentials?.id"
+                                    (click)="deleteModPost(item?.id,i)">Delete
+                                    Post</a>
+
+                                </div>
+                              </div>
+                            </div>
+                            <div class="img " *ngIf="credentials?.credentials?.id">
+                              <a class="pointer-cursor">
+                                <img [routerLink]="['/mods',item?.slug]"
+                                  *ngIf="item?.afterImages?.length==0 && item?.beforeImages?.length==0"
+                                  class="img-responsive roundeds containe" src="assets/img/follow-new1.png">
+                                <img [routerLink]="['/mods',item?.slug]"
+                                  *ngIf="item?.afterImages?.length>0 " class="img-responsive roundeds"
+                                  src="{{_host}}images/modPost/{{item.afterImages[0]}}">
+                                <img [routerLink]="['/mods',item?.slug]"
+                                  *ngIf="item?.afterImages?.length==0 && item?.beforeImages?.length>0"
+                                  class="img-responsive roundeds"
+                                  src="{{_host}}images/modPost/{{item?.beforeImages[0]}}">
+                              </a>
+                            </div>
+                            <div class="img " *ngIf="!credentials?.credentials?.id">
+                              <a class="pointer-cursor">
+                                <img (click)="onClickImage()"
+                                  *ngIf="item?.afterImages?.length==0 && item?.beforeImages?.length==0"
+                                  class="img-responsive roundeds containe" src="assets/img/follow-new1.png">
+                                <img (click)="onClickImage()" *ngIf="item?.afterImages?.length>0 "
+                                  class="img-responsive roundeds" src="{{_host}}images/modPost/{{item.afterImages[0]}}">
+                                <img (click)="onClickImage()"
+                                  *ngIf="item?.afterImages?.length==0 && item?.beforeImages?.length>0"
+                                  class="img-responsive roundeds"
+                                  src="{{_host}}images/modPost/{{item?.beforeImages[0]}}">
+                              </a>
+                            </div>
+                            <div class="mt-2 p-2">
+                              <p class="mb-0 font-weight-bold"><a class="truncate"
+                                  (click)="goToModDetail('/mods',item.slug)"
+                                  ngbTooltip="{{item?.name}}">{{item.name}}</a></p>
+                              <!-- <p class="mb-0 font-weight-bold"><a class="truncate" routerLink="/mod-details"
+                                                      [queryParams]="{id:item.id,uid:credentials?.credentials?.id}"
+                                                      ngbTooltip="{{item?.name}}">{{item.name}}</a></p> -->
+                              <p class="mb-0">by<a class="by-link ml-2" href="javascript:void(0)"
+                                  (click)="goTouserProfile('/friend-profile',{id: item?.addedBydetails?.id})">{{item?.addedBydetails?.fullName}}</a>
+                              </p>
+                              <div class="social-icon">
+                                <a><i class="fa fa-thumbs-up" ngbTooltip="Likes"
+                                    aria-hidden="true"></i>{{item?.likeTotal}}</a>
+                                <a *ngIf="!item?.isCommentDisabled"><i class="fa fa-comment" ngbTooltip="Comment"
+                                    aria-hidden="true"></i>{{item?.commentTotal}}</a>
+                                <a *ngIf="item?.skillLevel=='6193a45efc4c9b3d4ce7ad62'" class="high pt-1"><img
+                                    src="assets/img/low.png" ngbTooltip="Low" class="skill-ic" alt=""></a>
+                                <a class="high pt-1" *ngIf="item?.skillLevel=='6194c77a4d8a1d9518bbe18c'"><img
+                                    src="assets/img/medium.png" ngbTooltip="Medium" class="skill-ic" alt=""></a>
+                                <a *ngIf="item?.skillLevel=='6197d36401d78bc07b538196'" class="high pt-1"><img
+                                    src="assets/img/high.png" ngbTooltip="High" class="skill-ic" alt=""></a>
+                                <a><i class="fa fa-clock-o" ngbTooltip="{{item.timerange}}" placement="top"
+                                    aria-hidden="true"></i></a>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ngx-slick-carousel>
+                    </div>
+
+                    <!-- <div class="box shadows bg-white p-2 ">
+                                  <div class="shadow p-3 mb-3" *ngFor="let item of posts; let i=index">
+                                    <div class="header-post">
+                    
+                                      <article class="postTop">
+                                        <div class="d-flex">
+                                          <img *ngIf="item?.addedByImage==''" class="img-responsive round mr-3" src="assets/img/user.png">
+                                          <img *ngIf="item?.addedByImage!=''" class="img-responsive round mr-3"
+                                          src="{{getUrl(item?.addedByImage,item?.addedByName)}}">
+                                          <div  >
+                                            <p class="mb-0 pt-1">
+                                                {{item?.addedByName.fullName | titlecase}}
+                                              
+                                            </p>
+                                            <h4 class="mod-rv-texts"><small> {{item?.year}} {{item?.rvType}} {{item?.make?.name}} {{item?.model}}
+                                                {{item?.series?.name | titlecase}} | {{item?.createdAt | date:'short' }}</small></h4>
+                                             <p class="mb-0 pt-1">{{item.updatedAt | date:'short' }}</p> -->
+                    <!-- <strong style="position: relative; bottom: 8px;">Sponsored.
+                                              <i class="fa fa-See"></i></strong> --
+                                          </div>
+                                        </div>
+                    
+                                        <div class="dropdown cretDropdown">
+                                          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                          </button>
+                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <!- <a class="dropdown-item"><i class="fa fa-share-alt mr-1" aria-hidden="true"></i>Share
+                                              on Facebook</a> -->
+                    <!-- <a class="dropdown-item" href="#">Save
+                                              Post</a> -->
+                    <!-- <a class="dropdown-item" href="#">Post
+                                              Link</a> -->
+                    <!-- <a class="dropdown-item" href="#">Turn
+                                              off notification
+                                              for this post
+                                              thread</a> -->
+                    <!-- <a class="dropdown-item" href="#">Hide</a> --
+                                            <a class="dropdown-item" (click)="openReport(item?.id,'modPost')"><i class="fa fa-bug mr-1" aria-hidden="true"></i>Report
+                                              Post</a>
+                                            <hr class="my-2" />
+                                            <!- <a *ngIf="item?.addedByName?.id==credential.credentials.id" class="dropdown-item" (click)="deletePost(item?.id)">Delete
+                                              Post</a> --
+        
+                                              <a *ngIf="item?.addedByName?.id==credential?.credentials?.id" class="dropdown-item"><i class="fa fa-trash mr-1" aria-hidden="true"></i>Delete
+                                                Post</a>
+                                            <!- <a class="dropdown-item" href="#">Hide
+                                              all by
+                                              Candimom2</a> -->
+                    <!-- <a class="dropdown-item" href="#">Hide
+                                              all by Group: RV
+                                              pets</a> --
+                                          </div>
+                                        </div>
+                    
+                                      </article>
+                    
+                                      <p class="mt-2" *ngIf="item?.posttype!='postPoll'" (click)=viewPost(item?.id,item?.activityType)><a class="pointer-cursor">{{item?.post}}</a></p>
+                                      <p class="mt-2" *ngIf="item?.posttype=='postPoll'"><a class="pointer-cursor">{{item?.post}}</a></p>
+                                      <div class="border justify-poll" *ngIf="item?.choice1">
+        
+                                        <div class="text-percent">
+                                          <input class="mr-2" *ngIf="item.addedByName.id != credential?.credentials?.id" type="radio" id="{{item?.id}}html1" 
+                                            name="{{item?.id}}{{i}}fav_language" [(ngModel)]="item.isVotedValue" (change)="pollVoting=$event.target.value" value="1">
+                                          <label for="{{item?.id}}html1"><strong>{{item.choice1}}</strong> </label>
+                  
+                                        </div>
+                                        <div class="persent" *ngIf="item?.addedByName?.id == credential?.credentials?.id">
+                                          <strong>{{calculateWeightage(item?.totalChoice1)}}</strong>
+                                        </div>
+                                      </div>
+                  
+                                      <div class="border justify-poll mt-2" *ngIf="item?.choice2">
+                                        <div class="text-percent">
+                                          <input class="mr-2" *ngIf="item?.addedByName?.id != credential?.credentials?.id" type="radio"
+                                            id="{{item?.id}}html2" (change)="pollVoting=$event.target.value" [(ngModel)]="item.isVotedValue" name="{{item?.id}}{{i}}fav_language"
+                                            value="2">
+                                          <label for="{{item?.id}}html2"><strong>{{item.choice2}}</strong> </label>
+                                        </div>
+                                        <div class="persent" *ngIf="item?.addedByName?.id == credential?.credentials?.id">
+                                          <strong>{{calculateWeightage(item?.totalChoice2)}}</strong>
+                                        </div>
+                  
+                                      </div>
+                                      <div class="border justify-poll mt-2" *ngIf="item?.choice3">
+                                        <div class="text-percent">
+                                          <input class="mr-2" *ngIf="item?.addedByName?.id != credential?.credentials?.id" type="radio"
+                                            id="{{item?.id}}html3" (change)="pollVoting=$event.target.value"  [(ngModel)]="item.isVotedValue" name="{{item?.id}}{{i}}fav_language"
+                                            value="3">
+                                          <label for="{{item?.id}}html3"> <strong>{{item.choice3}}</strong></label>
+                                        </div>
+                                        <div class="persent" *ngIf="item?.addedByName?.id == credential?.credentials?.id">
+                                          <strong>{{calculateWeightage(item?.totalChoice3)}}</strong>
+                                        </div>
+                  
+                                      </div>
+                                      <div class="border justify-poll mt-2" *ngIf="item?.choice4">
+                                        <div class="text-percent">
+                                          <input class="mr-2" *ngIf="item?.addedByName?.id != credential?.credentials?.id" type="radio"
+                                            id="{{item?.id}}html4" (change)="pollVoting=$event.target.value" [(ngModel)]="item.isVotedValue" name="{{item?.id}}{{i}}fav_language"
+                                            value="4">
+                                          <label for="{{item?.id}}html4"><strong>{{item.choice4}}</strong> </label>
+                                        </div>
+                                        <div class="persent" *ngIf="item?.addedByName?.id == credential?.credentials?.id">
+                                          <strong>{{calculateWeightage(item?.totalChoice4)}}</strong>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-12 text-center mt-2" *ngIf="item?.addedByName?.id != credential?.credentials?.id">
+                                        <button type="button" class="btn btn-primary" *ngIf="item.isVotedValue && !item?.isVoted"
+                                          (click)="pollVote(item?.id,item?.activityType,i)">Vote</button>
+                                          <button type="button" class="btn btn-primary" *ngIf="item?.isVoted">Voted</button>
+                                      </div>
+                                    </div>
+                                    <div class="post-img"  *ngIf="item?.image && item?.image?.length>0">
+                                        <ngx-slick-carousel class="carousel" 
+                                        #slickModal="slick-carousel" 
+                                        [config]="slideConfig" 
+                                        
+                                        (breakpoint)="breakpoint($event)"
+                                       >
+                        <div ngxSlickItem *ngFor="let postimg of item?.image" class="slide">
+                          <a class="pointer-cursor">
+                              <img (click)=viewPost(item?.id,item?.activityType) *ngIf="item.activityType=='modPost'" src="{{_host}}images/modPost/{{postimg}}" alt="" class="logo-patner">
+                              <img  (click)=viewPost(item?.id,item?.activityType) *ngIf="item.activityType=='groupPost'" src="{{_host}}images/group/{{postimg}}" alt="" class="logo-patner">
+                              <img (click)=viewPost(item?.id,item?.activityType) *ngIf="item.activityType=='normalPost'" src="{{_host}}images/posts/{{postimg}}" alt="" class="logo-patner">
+                            </a>
+                        </div>
+                    </ngx-slick-carousel>
+                                     
+                                    </div>
+                                    <div class="like-share d-flex pt-2 pb-2 justify-content-between">
+                                      <p class="mb-0 pt-2" (click)="openLikeModal(item)"><i class="fa fa-thumbs-up mr-1" aria-hidden="true"></i>{{item?.likes}}
+                                        Likes</p>
+                                      <div class="pull-right pt-2">
+                                        <small class="mr-3" (click)="readmoreLess(i);this.getComments(item?.id,item?.activityType)">{{item?.comments}}
+                                          Comments</small>
+                                        <small (click)="OpenListingOfSharedUsers(item)">{{item?.totalShare}} Shares</small>
+                                      </div>
+                  
+                  
+                                    </div>
+                                    <hr style="margin: 0rem;" />
+                                    <div class="post-section pt-2 d-flex justify-content-between">
+                                      <span class="mb-0 mr-4" (click)="likePost(item?.id,i,item?.activityType)"><i class="fa fa-thumbs-o-up bg mr-1"
+                                          [ngClass]="{'text-primary': item?.likestatus}" aria-hidden="true"></i>Like</span>
+                                      <span class="mb-0 mr-4" (click)="readmoreLess(i);this.getComments(item?.id,item?.activityType)"><i
+                                          class="fa fa-commenting-o bg mr-1" aria-hidden="true"></i>Comment</span>
+                                          <span class="mb-0 mr-1" (click)="openshare(item?.id,item?.activityType,i)"><i class="fa fa-share bg mr-1" aria-hidden="true"></i>
+                                            Share</span>
+                                      <!- <span class="mb-0 mr-4"><i class="fa fa-repeat bg" aria-hidden="true"></i> Repost</span> -->
+                    <!-- <span class="mb-0 mr-4"><i class="fa fa-user-plus bg" aria-hidden="true"></i>Follow</span> -->
+                    <!-- <span class="mb-0 mr-1"><i class="fa fa-share bg" aria-hidden="true"></i>
+                                        Share</span> --
+                                    </div>
+                                    <article class="comments shadow p-3 mt-3" *ngIf="item.showMore">
+                                      <input type="text" (keyup.enter)="addComment(item?.id,null,i,item?.activityType,item?.addedByName?.id)" [(ngModel)]="commentOnPost"
+                                        placeholder="Post a comment..." class="form-control commentInput" />
+                                      <label *ngIf="commentOnPost">Press Enter to post.</label>
+                    
+                                      <article class="allComments mt-2" [ngClass]="{'isLoading': loader}">
+                                        <div class="loaderDiv text-center" *ngIf="loader"> <img style="width: 50px;"
+                                            src="assets/img/loader-img.gif"></div>
+                                        <h5 *ngIf="allComments?.length==0">No Comments</h5>
+                                        <div class="commentItem" *ngFor="let comment of allComments">
+                                          <div class="d-flex mb-2">
+                                            <img *ngIf="!comment?.userImage" class="usercreate" src="assets/img/user.png">
+                                            <img *ngIf="comment?.userImage" class="usercreate" src="{{getUrl(comment?.userImage,comment)}}">
+                                            <div class="user-name-rule bg-gray">
+                                              <strong [routerLink]="[comment?.userId != credential?.credentials?.id ? '/friend-profile' :'/dashboard/profile']" [queryParams]="{id: comment?.userId}"><a class="pointer-cursor">{{comment?.userFullName | titlecase}}</a></strong>
+                                              <span class="ml-1">{{comment.createdAt | date:'short' }}</span>
+                                              <a class="public-bg  d-block">{{comment?.comment}}</a>
+                                           
+                                            </div>
+                    
+                                          </div>
+                                          <div class="reply" (click)="replyClick(comment?.id)">Reply</div>
+                    
+                                          <article class="replyList">
+                                            <div class="replyForm" *ngIf="replyForm == comment?.id">
+                                              <input type="text" [(ngModel)]="replyOnPost"
+                                                (keyup.enter)="replyComment(item?.id,comment.id,'comment',i,item?.activityType,item?.addedByName?.id)" placeholder="Post a reply..."
+                                                class="form-control" />
+                                              <label *ngIf="replyOnPost">Press Enter to post.</label>
+                                            </div>
+                                            <article class="replyItem align" *ngFor="let itm of comment?.reply">
+                                              <div class="d-flex subReply">
+                                                <img class="usercreate img-small" src="assets/img/user.png">
+                                                <div class="user-name-rule bg-gray">
+                                                  <strong [routerLink]="[itm?.userId != credential?.credentials?.id ? '/friend-profile' :'/dashboard/profile']" [queryParams]="{id: itm?.userId}"><a class="pointer-cursor">{{itm?.userFullName | titlecase}}</a></strong>
+                                                  <span class="ml-1">{{itm?.createdAt | date:'short' }}</span>
+                                                  <a class="public-bg d-block">{{itm?.comment}}</a>
+                                                </div>
+                                              </div>
+                                              <div class="reply " (click)="replyClick(itm.id)">Reply</div>
+                                              <div class="replyForm" *ngIf="replyForm == itm.id">
+                                                <input type="text" [(ngModel)]="replyOnPost2"
+                                                  (keyup.enter)="replyComment(item?.id,comment?.id,'reply',i,item?.activityType,item?.addedByName?.id)" placeholder="Post a reply..."
+                                                  class="form-control" />
+                                                <label *ngIf="replyOnPost2">Press Enter to post.</label>
+                                              </div>
+                                            </article>
+                                          </article>
+                                        </div>
+                                      </article>
+                    
+                                    </article>
+                                  </div>
+                                      </div> -->
+
+                    <app-mods [userId]="friendId" [modfilters]="modfilters" [featured]="false"></app-mods>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-rv" role="tabpanel" aria-labelledby="pills-rv-tab">
+            <div class="container">
+              <div class="row mb-5">
+                <!-- <div class="col-md-1"></div> -->
+                <div class="col-md-12">
+                  <div class="box-shadow bg-white p-2 mt-2 shadow my_rv_tab">
+                    <h4 class="heading-rv">My RV</h4>
+                    <div class="">
+                      <div class="details d_list">
+                        <p>Type of RV</p>
+                        : {{_sharedService.getRvType(friendDetail?.rvType)}}
+                      </div>
+                      <div class="details d_list">
+                        <p>Make</p>
+                        : {{friendDetail?.make?.name}}
+                      </div>
+                      <div class="details d_list">
+                        <p>Series</p>
+                        : {{friendDetail?.series?.name}}
+                      </div>
+                      <div class="details d_list">
+                        <p>Model</p>
+                        : {{friendDetail?.model}}
+                      </div>
+                      <div class="details d_list">
+                        <p>Year</p>
+                        : {{friendDetail?.year}}
+                      </div>
+                    </div>
+
+
+                    <!-- <h4 class="heading-rv">RV Rental URL</h4>
+
+                    <div class="details d_list">
+                      <p>RVshare URL</p>
+                  <a href="{{friendDetail?.rvRental?.rvShareUrl}}" target="_blank">    <strong>: {{friendDetail?.rvRental?.rvShareUrl}}</strong></a>
+                    </div>
+
+                  <div class="details d_list">
+                    <p>Outdoorsy URL</p>
+                <a href="{{friendDetail?.rvRental?.outdoorsyUrl}}" target="_blank">    <strong>: {{friendDetail?.rvRental?.outdoorsyUrl}}</strong></a>
+                  </div>
+
+                <div class="details d_list">
+                  <p>RVezy URL</p>
+                  <a href="{{friendDetail?.rvRental?.rvezyUrl}}" target="_blank"><strong>: {{friendDetail?.rvRental?.rvezyUrl}}</strong></a>
+                </div> -->
+
+                    <h4 class="heading-rv">RV Photos</h4>
+
+                    <div class="details">
+                      <div class="row w-100">
+                        <div class="col-md-3" *ngFor="let item of friendDetail.RVImages">
+                          <div class="rv_image">
+                            <span> <img class="img-after" (click)="openLg(content)"
+                                src="{{_host}}images/modPost/{{item}}"></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="container">
+              <div class="row mb-5">
+                <!-- <div class="col-md-4">
+                <div class="shadow bg-white d-flex text-center">
+                  <div class="step">
+                    <span>{{data?.totalfriends}}</span><br />
+                    <b>Connections</b>
+                  </div>
+                  <div class="step">
+                    <span>{{data?.totalFollower}}</span><br />
+                    <b>Followers</b>
+                  </div>
+                  <div class="step">
+                    <span>{{data?.totalfollowing}}</span><br />
+                    <b>Following</b>
+                  </div>
+                  <div class="step">
+                    <span>{{data?.totalModPost}}</span><br />
+                    <b>Mods Shared</b>
+                  </div>
+                  <div class="step">
+                    <span>{{data?.totalpost}}</span><br />
+                    <b>Posts</b>
+                  </div>
+                </div>
+              </div> -->
+                <div class="col-md-12">
+                  <div class="mt-2 shadow bg-white p-2 friend_points">
+                    <h4 class="heading-rv">My Points</h4>
+                    <div class="details d_list">
+                      <p>Modder Badge Points </p> :{{friendDetail?.modderPoints | number:'1.0-0'}}
+                    </div>
+                    <div class="details d_list">
+                      <p>Networker Badge Points</p> : {{friendDetail?.networkerPoints | number:'1.0-0'}}
+
+                    </div>
+                    <div class="details d_list">
+                      <p>Ambassador Badge Points</p> : {{friendDetail?.ambassadorPoints | number:'1.0-0'}}
+
+                    </div>
+                    <div class="details d_list">
+                      <p>Community Rank Badge Points</p> : {{friendDetail?.rankPoints | number:'1.0-0'}}
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="tab-pane fade" id="pills-personal" role="tabpanel" aria-labelledby="pills-personal-tab">
+            <div class="container">
+              <div class="row mb-5">
+                <!-- <div class="col-md-1"></div> -->
+                <div class="col-md-12">
+                  <div class="box-shadow bg-white p-2 mt-2 shadow my_personal_tab">
+                    <h4 class="heading-rv">My RV</h4>
+                    <div class="">
+                      <div class="details d_list">
+                        <p>Name</p>
+                        : {{friendDetail?.firstName}} {{friendDetail?.lastName}}
+                      </div>
+                      <div class="details d_list">
+                        <p>Gender</p>
+                        : {{friendDetail?.gender}}
+                      </div>
+                      <div class="details d_list">
+                        <p>Birth Date</p>
+                        : {{friendDetail?.dob}}
+                      </div>
+                      <div class="details d_list">
+                        <p>Address</p>
+                        : {{friendDetail?.address}} {{friendDetail?.city}} {{friendDetail?.state}}
+                        {{friendDetail?.zipcode}} {{friendDetail?.country}}
+                      </div>
+                      <div class="details d_list">
+                        <p>Occupation</p>
+                        : {{friendDetail?.occupation?.name}}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+            <div class="container">
+              <div class="row">
+                <!-- <div class="col-md-1"></div> -->
+                <div class="col-md-12">
+                  <div class="widget bg-white">
+                    <h4 class="d-flex justify-content-between mt-0">My Media</h4>
+                    <ul class="nav nav-pills mb-2 media-nav" id="pills-tab" role="tablist">
+                      <!-- <li class="nav-item">
+                                <a class="nav-link active">Photos</a>
+                              </li> -->
+                      <!-- <li class="nav-item">
+                                <a class="nav-link">Videos</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link">All</a>
+                              </li> -->
+                    </ul>
+                    <div class="media-content">
+                      <div class="photos-row" *ngIf="userPostImages.length>0">
+                        <a *ngFor="let img of userPostImages"><img src="{{_host}}images/posts/{{img}}">
+                        </a>
+                        <!-- <a><img src="http://198.251.65.146:4502/images/posts/78ff7edb-7aa2-4407-9d60-9feea918e1dc-1619023626920.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a> -->
+                      </div>
+                      <div class="photos-row" *ngIf="userPostImages.length==0">
+                        No Images Exist!
+                      </div>
+                      <!-- <div class="text-right mt-2">
+                                <a class="text-primary">View More</a>
+                              </div> -->
+                    </div>
+                  </div>
+
+                  <!-- <div class="widget bg-white">
+                            <h4 class="d-flex justify-content-between mt-0">My Posts</h4>
+                           
+                            <div class="media-content">
+                              <div class="photos-row">
+                                <a><img src="http://198.251.65.146:4502/images/posts/78ff7edb-7aa2-4407-9d60-9feea918e1dc-1619023626920.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a>
+                              </div>
+                      
+                              <div class="text-right mt-2">
+                                <a class="text-primary">View More</a>
+                              </div>
+                            </div>
+                          </div>
+                      
+                          <div class="widget bg-white">
+                            <h4 class="d-flex justify-content-between mt-0">My Favorites</h4>
+                           
+                            <div class="media-content">
+                              <div class="photos-row">
+                                <a><img src="http://198.251.65.146:4502/images/posts/78ff7edb-7aa2-4407-9d60-9feea918e1dc-1619023626920.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a>
+                                <a>
+                                  <img src="http://198.251.65.146:4502/images/posts/41d00f27-c359-46ea-a64c-39a69b5b8353-1621442829937.jpeg">
+                                </a>
+                              </div>
+                      
+                              <div class="text-right mt-2">
+                                <a class="text-primary">View More</a>
+                              </div>
+                            </div>
+                          </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab">
+            <div class="container mb-4">
+              <div class="row">
+                <!-- <div class="col-md-1"></div> -->
+
+                <div class="col-md-12">
+                  <article class="sidebarLeft border">
+                    <h5 class="d-flex justify-content-between">About Me</h5>
+                    <div>{{data?.aboutme}}</div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-social" role="tabpanel" aria-labelledby="pills-social-tab">
+            <div class="container">
+              <div class="row mb-5">
+                <!-- <div class="col-md-1"></div> -->
+                <div class="col-md-12">
+                  <div class="box-shadow bg-white p-2 mt-2 shadow my_social_tab">
+                    <h4 class="heading-rv">Social </h4>
+                    <div class="">
+                      <div class="details d_list">
+                        <p>Instagram Account Link</p>
+                        <a href="{{friendDetail?.instagramLink}}" target="_blank">: {{friendDetail?.instagramLink}}</a>
+                      </div>
+                      <div class="details d_list">
+                        <p>YouTube Account Link</p>
+                        <a href="{{friendDetail?.youTubeLink}}" target="_blank"> : {{friendDetail?.youTubeLink}}</a>
+                      </div>
+                      <div class="details d_list">
+                        <p>Featured YouTube Link</p>
+                        <a href="{{friendDetail?.featuredYouTubeLink}}" target="_blank"> :
+                          {{friendDetail?.featuredYouTubeLink}}</a>
+                      </div>
+                      <div class="details d_list">
+                        <p>Facebook Account Link</p>
+                        <a href="{{friendDetail?.facebookLink}}" target="_blank"> : {{friendDetail?.facebookLink}}</a>
+                      </div>
+                      <div class="details d_list">
+                        <p>Twitter Account Link</p>
+                        <a href="{{friendDetail?.twitterLink}}" target="_blank"> : {{friendDetail?.twitterLink}}</a>
+                      </div>
+                      <div class="details d_list">
+                        <p>My Website</p>
+                        <a href="{{friendDetail?.yourWebsite}}" target="_blank"> : {{friendDetail?.yourWebsite}}</a>
+                      </div>
+                      <div class="details d_list">
+                        <p>Blog Link</p>
+                        <a href="{{friendDetail?.blogLink}}" target="_blank"> : {{friendDetail?.blogLink}}</a>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<ng-template #profilecontent let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Profile</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <main>
+      <form [formGroup]="Form">
+        <div id="profil-container">
+          <div class="pic-holder">
+            <img *ngIf=" !usercoverimg" id="profilePic" class="pic" src="https://source.unsplash.com/random/150x150">
+            <img *ngIf="usercoverimg" id="profilePic" class="pic" src="{{_host}}{{usercoverimg}}">
+            <label for="newCoverPhoto" class="upload-file-block">
+              <div class="text-center">
+                <div class="mb-2">
+                  <i class="fa fa-camera fa-2x"></i>
+                </div>
+                <div class="text-uppercase">
+                  Update Cover Photo
+                </div>
+              </div>
+            </label>
+            <input class="uploadProfileInput" type="file" name="profile_pic" id="newCoverPhoto" accept="image/*"
+              style="display: none;" (change)="uploadCoverImage($event.target.files,'inModel')" />
+            <div class="progress-cover group-user" *ngIf="coverImageModalLoader" style="max-width:400px;;">
+
+              <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success" role="progressbar"
+                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progress + '%'}">
+                {{progress}}%</div>
+            </div>
+          </div>
+        </div>
+        <div class="profile-pic-wrapper">
+          <div class="pic-holder">
+            <!-- uploaded pic shown here -->
+            <img *ngIf=" !userimg" id="profilePic" class="pic" src="assets/img/noImg.png">
+            <img *ngIf="userimg" id="profilePic" class="pic" src="{{_host}}{{userimg}}">
+
+            <label for="newProfilePhoto" class="upload-file-block">
+              <div class="text-center">
+                <div class="mb-2">
+                  <i class="fa fa-camera fa-2x"></i>
+                </div>
+                <div class="text-uppercase">
+                  Upload <br /> Profile Photo
+                </div>
+              </div>
+            </label>
+            <Input class="uploadProfileInput" (change)="  uploadImage($event.target.files,'inModel')" type="file"
+              name="profile_pic" id="newProfilePhoto" accept="image/*" style="display: none;" />
+            <div class="progress group-user" *ngIf="imageModalLoader" style="max-width:400px;;">
+
+              <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success" role="progressbar"
+                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progress + '%'}">
+                {{progress}}%</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>RV Type</label>
+              <ngx-select-dropdown [config]="config2" [options]="rvTypes" [multiple]="false" formControlName="rvType"
+                (change)="selectedRVType($event)">
+              </ngx-select-dropdown>
+              <div *ngIf="submitted && f.rvType.errors" class="invalid-feedback">
+                <div *ngIf="f.rvType.errors.required">RV Type is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>RV Make</label>
+              <ngx-select-dropdown [config]="config2" [options]="allMakes" [multiple]="false" formControlName="make"
+                (change)="selectedMake($event,make)">
+              </ngx-select-dropdown>
+              <div *ngIf="submitted && f.make.errors" class="invalid-feedback">
+                <div *ngIf="f.make.errors.required">Make is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>RV Series </label>
+              <ngx-select-dropdown [config]="config3" [options]="allModels" [multiple]="false" formControlName="model"
+                (change)="selectedModel($event)">
+              </ngx-select-dropdown>
+              <div *ngIf="submitted && f.series.errors" class="invalid-feedback">
+                <div *ngIf="f.series.errors.required">Series is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label>RV Modal</label>
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="series" placeholder="RV Model">
+            </div>
+          </div>
+          <!-- <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Model </label>
+                    <input type="text" class="form-control" placeholder="">
+                    <div *ngIf="submitted && f.model.errors" class="invalid-feedback">
+                      <div *ngIf="f.model.errors.required">Model is required</div>
+                    </div>
+                  </div>
+                </div> -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>RV Year </label>
+              <select name="Year" id="Year" formControlName="year" class="form-control">
+                <!-- <option value="" disabled selected>RV year</option> -->
+                <option value="{{item}}" *ngFor="let item of years">{{item}}</option>
+              </select>
+              <div *ngIf="submitted && f.year.errors" class="invalid-feedback">
+                <div *ngIf="f.year.errors.required">Year is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Gender </label>
+              <select class="form-control" formControlName="gender" id="Gender" name="Gender">
+                <option disabled="" selected="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                <div *ngIf="f.gender.errors.required">Gender is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Birth Date </label>
+              <input
+                [bsConfig]="{ rangeInputFormat : 'MM-DD-YYYY', dateInputFormat: 'MM-DD-YYYY', showWeekNumbers: false,customTodayClass: 'custom-today-class' }"
+                [maxDate]="minDate" #dp2="bsDatepicker" type="text" bsDatepicker readonly class="form-control"
+                formControlName="dob" placeholder="MM-DD-YYYY" name="dob">
+              <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                <div *ngIf="f.dob.errors.required">Birth Date is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label>Country</label>
+            <select name="cars" id="cars1" class="form-control mb-2">
+              <option value="" selected disabled>Country</option>
+              <option value="India">India</option>
+              <option value="usa">USA</option>
+              <!-- <option class="text-right">See All</option> -->
+            </select>
+
+          </div>
+
+          <div class="col-md-6">
+            <label>State</label>
+            <select name="cars" id="cars1" class="form-control mb-2">
+              <option value="" selected disabled>State</option>
+              <option value="saab">Punjab</option>
+              <option value="mercedes">Chandighar</option>
+              <!-- <option class="text-right">See All</option> -->
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label>My Website</label>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="My Website">
+            </div>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="updateUser(Form.value)">Save</button>
+  </div>
+</ng-template>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">RV Photos</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body hght">
+    <ngb-carousel>
+      <ng-template ngbSlide *ngFor="let item of friendDetail.RVImages">
+        <div class="picsum-img-wrapper">
+          <img class="w-100" src="{{_host}}images/modPost/{{item}}">
+        </div>
+      </ng-template>
+    </ngb-carousel>
+
+    <!-- <div class="rvPhoto" >
+               <img class="w-100" src="{{_host}}images/modPost/{{item}}">
+              </div> -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+
+
+
+<div class="modal fade modal-p-bottom" id="modalPBottom">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="box bg-white p-2">
+          <h4 class="d-flex justify-content-between top_head"> Filters <i class="fa fa-times close" data-dismiss="modal"
+              aria-label="Close"></i></h4>
+              <hr />
+               
+              <div class="border p-2 mb-2">
+
+                <select name="cars" id="cars5" (change)="searchValue();resetMakeSeries('both')" class="form-control mb-2"
+                  [(ngModel)]="modfilters.rvTypeFilter" [ngClass]="{'highlightfilter': modfilters?.rvTypeFilter}">
+                  <option value="">Choose Class</option>
+                  <option *ngFor="let item of filterrvTypes" value="{{item.detail.value}}">{{item.description}}</option>
+    
+                </select>
+                <select name="cars" id="cars5" [disabled]="!modfilters?.rvTypeFilter"
+                  (change)="searchValue();resetMakeSeries('series')" class="form-control mb-2"
+                  [(ngModel)]="modfilters.makeFilter" [ngClass]="{'highlightfilter': modfilters?.makeFilter}"
+                  class="form-control mb-2">
+                  <option value="">Choose Make</option>
+                  <option *ngFor="let item of MakesFilters" value="{{item?.id}}">{{item?.name}}</option>
+    
+                </select>
+                <select class="form-control" [disabled]="!modfilters?.makeFilter" [(ngModel)]="modfilters.modelValue"
+                  [ngClass]="{'highlightfilter': modfilters?.modelValue}" (change)="searchValue()" name="model" id="model">
+                  <option value="">Choose Series</option>
+                  <option *ngFor="let item of filterModels" value="{{item?.id}}">{{item.name}}</option>
+                </select>
+              </div>
+              <!-- <div class="border p-2 mt-2"> -->
+              <select name="Year" id="Year" (change)="searchValue()" [(ngModel)]="modfilters.yearValue"
+                [ngClass]="{'highlightfilter': modfilters?.yearValue}" class="form-control mb-2">
+                <option value=""> Choose Year</option>
+                <option value="{{item.id}}" *ngFor="let item of rvYears">{{item.id}}</option>
+              </select>
+              <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.size"
+                [ngClass]="{'highlightfilter': modfilters?.size}" class="form-control mb-2">
+                <option value="">Choose Size</option>
+                <option *ngFor="let item of difficulties" title="{{item?.description}}" value="{{item.id}}">{{item.name}}
+                </option>
+              </select>
+              <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.modCategoryValue"
+                [ngClass]="{'highlightfilter': modfilters?.modCategoryValue}" class="form-control mb-2">
+                <option value="">Choose Category</option>
+                <option *ngFor="let item of modCategories" value="{{item?.id}}">{{item?.name}}({{item?.count}})</option>
+              </select>
+    
+              <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.skillLevel"
+                class="form-control mb-2" [ngClass]="{'highlightfilter': modfilters?.skillLevel}">
+                <option value="">Choose Difficulty</option>
+                <option *ngFor="let item of skillLevelNeeded" value="{{item?.id}}">{{item?.name}}</option>
+    
+              </select>
+              <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.timerange"
+                class="form-control mb-2" [ngClass]="{'highlightfilter': modfilters?.timerange}">
+                <option value="">Choose Total Time</option>
+                <option *ngFor="let item of timeRanges" value="{{item.id}}">{{item.id}}</option>
+              </select>
+    
+              <div class="date_range padding_input">
+                <input type="text" name="daterange" (change)="searchValue()" ngxDaterangepickerMd [(ngModel)]="selectedDate"
+                  [ngClass]="{'highlightfilter': modfilters?.startDate ||  modfilters?.endDate}" class="form-control"
+                  placeholder="Select Date Range" />
+              </div>
+              <div class="padding_input">
+                <input type="text " name="search" (keyup.enter)="searchValue()" [(ngModel)]="modfilters.search"
+                  [ngClass]="{'highlightfilter': modfilters?.search}" class="form-control mt-2"
+                  placeholder="Search Title & Summary (Press Enter to search)" />
+              </div>
+           
+          <div class="text-right mt-4">
+            <button class="btn btn-danger" (click)="reset()">Reset</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>

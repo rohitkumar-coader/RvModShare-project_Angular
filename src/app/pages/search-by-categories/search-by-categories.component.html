@@ -1,0 +1,37 @@
+<ngx-spinner bdColor="#fff" size="" color="#fff">
+  <div class='ajax-spinner-bars'>
+    <div class='bar-1'></div>
+    <div class='bar-2'></div>
+    <div class='bar-3'></div>
+    <div class='bar-4'></div>
+    <div class='bar-5'></div>
+    <div class='bar-6'></div>
+    <div class='bar-7'></div>
+    <div class='bar-8'></div>
+    <div class='bar-9'></div>
+    <div class='bar-10'></div>
+    <div class='bar-11'></div>
+    <div class='bar-12'></div>
+    <div class='bar-13'></div>
+    <div class='bar-14'></div>
+    <div class='bar-15'></div>
+    <div class='bar-16'></div>
+  </div>
+</ngx-spinner>
+<div class="container-fluid mt-5 pt-5 main-content">
+  <div class="row">
+    <!-- <div class="col-md-12">
+      <h1 class="top_title text-center mb-4"> The Best RV Mods</h1>
+    </div> -->
+    <div class="col-md-3">
+      <app-explore></app-explore>
+      <!-- <app-sponsored [seeModcount]="seeModcount"></app-sponsored> -->
+    </div>
+    <div class="col-md-6">
+      <app-mods (seemodCount)="showAllMods($event)" [modfilters]="filters" [seeAllmods]="true"></app-mods>
+    </div>
+    <div class="col-md-3">
+      <app-right-sponsored [seeModcount]="seeModcount"></app-right-sponsored>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="modal-header">
+  <h4 class="modal-title">Share with RVmodshare Connection</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="search">
+    <div class="p-1  shadow-sm mb-4">
+      <div class="input-group">
+        <input type="search" [(ngModel)]="searchFriend" (keyup)="getFriendList()"
+          placeholder="Search Social Connections" aria-describedby="button-addon1"
+          class="form-control border-0 bg-light">
+        <div class="input-group-append">
+          <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i
+              class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box" *ngFor="let item of friendsList;let i=index">
+    <div class="align">
+      <!-- <img class="noto-img" *ngIf="item.image==''" src="assets/img/no-img.png"> -->
+      <img src="{{getUrl(item?.image,item)}}">
+      <!-- <img src="assets/img/no-img.png"> -->
+      <strong>{{item?.fullName}}</strong>
+    </div>
+    <div class="text-right">
+
+      <!-- <div class="connection_icon"> -->
+      <!-- <button class="btn imgBtn mr-2" ngbTooltip="Request Social Connection" (click)="addFriend(item?.id)"
+          *ngIf="!item?.isFriend && !item?.isPending && item?.id!=user?.id"><img class="follow-img"
+            src="assets/img/add-plus-svgrepo-com.svg" alt=""> </button>
+
+        <button class="btn imgBtn mr-2" *ngIf="item?.isPending && item?.id!=user?.id" ngbTooltip="Cancel Request"
+          (click)="cancelRequest(item?.id,i)"><img class="follow-img" src="assets/img/CancelRequest.png"
+            alt=""></button>
+
+        <button class="btn imgBtn mr-2" *ngIf="item?.isPending && item?.id!=user?.id" ngbTooltip="Pending"> <img
+            class="follow-img" src="assets/img/pannding.png" alt=""></button>
+
+        <button class="btn imgBtn mr-2" *ngIf="item?.isFriend && item?.id!=user?.id" ngbTooltip="Unconnect"
+          (click)="unFriend(item?.id,i)">
+          <img src="assets/img/delete-user-svgrepo-com.svg" />
+        </button>
+
+        <button *ngIf="!item?.isFollow  && item?.id!=user?.id" class="btn imgBtn mr-2" (click)="followMod(item?.id,i)"
+          ngbTooltip="Make Mod Connection"><img src="assets/img/follow.svg" /> </button>
+
+
+        <button *ngIf="item?.isFollow" ngbTooltip="Unconnect" (click)="followMod(item?.id,i)"
+          class="btn imgBtn mr-2"><img src="assets/img/unfollow.svg" /> </button> -->
+
+      <button *ngIf="!item?.isshared" class="btn btn-primary" (click)="share(item?.id)"> <i class="fa fa-share"></i>
+        Share</button>
+      <button *ngIf="item?.isshared" class="btn btn-primary"> <i class="fa fa-share-alt"></i> Shared</button>
+
+      <!-- </div> -->
+
+
+
+      <!-- <div class="dropdown cretDropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i aria-hidden="true" class="fa fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-item connection_icon">
+              <button class="btn imgBtn mr-2" ngbTooltip="Request Social Connection" (click)="addFriend(item?.id)"
+              *ngIf="!item?.isFriend && !item?.isPending && item?.id!=user?.id"><img class="follow-img"
+                src="assets/img/add-plus-svgrepo-com.svg" alt=""> </button>
+          
+                <button class="btn imgBtn mr-2" *ngIf="item?.isPending && item?.id!=user?.id" 
+                ngbTooltip="Cancel Request" (click)="cancelRequest(item?.id,i)"><img class="follow-img" src="assets/img/CancelRequest.png" alt=""></button>
+
+                <button class="btn imgBtn mr-2" *ngIf="item?.isPending && item?.id!=user?.id" 
+                ngbTooltip="Pending"> <img class="follow-img" src="assets/img/pannding.png" alt=""></button>
+
+                <button class="btn imgBtn mr-2"*ngIf="item?.isFriend && item?.id!=user?.id" 
+                ngbTooltip="Unconnect" (click)="unFriend(item?.id,i)">
+                  <img src="assets/img/delete-user-svgrepo-com.svg" />
+                </button>
+
+                <button *ngIf="!item?.isFollow  && item?.id!=user?.id" class="btn imgBtn mr-2" (click)="followMod(item?.id,i)"
+                ngbTooltip="Make Mod Connection"><img src="assets/img/follow.svg" /> </button>
+
+
+                <button *ngIf="item?.isFollow" ngbTooltip="Unconnect" (click)="followMod(item?.id,i)" class="btn imgBtn mr-2"><img
+                  src="assets/img/unfollow.svg" /> </button>
+
+
+              </div>
+           
+              <a *ngIf="!item?.isshared" class="dropdown-item" (click)="share(item?.id)"> <i class="fa fa-share"></i> Share</a>
+
+
+              <a *ngIf="item?.isshared" class="dropdown-item"> <i class="fa fa-share-alt"></i> Shared</a>
+      
+            </div>
+          </div> -->
+
+
+    </div>
+  </div>
+  <!-- <div class="box">
+            <div class="align">
+                    <img src="assets/img/no-img.png">
+                    <strong>Name here</strong>
+            </div>
+            <div class="text-right">
+                <button class="btn btn-primary mr-2">Send</button>
+                <button class="btn btn-outline-primary">Undo</button>
+            </div>
+        </div>
+        <div class="box">
+                <div class="align">
+                        <img src="assets/img/no-img.png">
+                        <strong>Name here</strong>
+                </div>
+                <div class="text-right">
+                    <button class="btn btn-primary mr-2">Send</button>
+                    <button class="btn btn-outline-primary">Undo</button>
+                </div>
+            </div> -->
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
+</div>

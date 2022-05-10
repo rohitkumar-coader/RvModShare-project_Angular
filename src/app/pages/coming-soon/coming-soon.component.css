@@ -1,0 +1,135 @@
+.coming_soon {
+    height: calc(100vh - 55.5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.coming_soon h1 {
+    font-size: 64px;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin-bottom: 2.5rem;
+
+    text-align: center;
+}
+.coming_soon p {
+    font-size: 20px;
+    margin-bottom: 2rem;
+
+    text-align: center;
+}
+.social i {
+    background: #04244f;
+    padding: 10px;
+    cursor: pointer;
+    color: #03e08e;
+}
+.social i.fa.fa-facebook.mr-3 {
+    padding: 10px 13px;
+}
+ span.dot {
+    color: #03e08e;
+}
+.icon i.fa.fa-calendar {
+    font-size: 50px;
+    color: #727272;
+}
+
+@media(max-width: 767px){
+    .coming_soon h1 {
+        font-size: 50px;
+        margin-bottom: 1.5rem;
+    }
+    .coming_soon p {
+        font-size: 17px;
+        margin-bottom: 1rem;
+    }
+    .icon i.fa.fa-calendar {
+        font-size: 40px;
+    }
+    .coming_soon {
+        height: calc(100vh - 150px);
+    }
+}
+
+.picsum-img-wrapper {
+    position: relative;
+    background-image: url('/assets/img/customize.jpg');
+    height: 32rem;
+    background-position: 100% 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index: -1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+  }
+  .bgAfter:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.34);
+    z-index: -1;
+  }
+ 
+  
+ 
+  .pos-top {
+    color: #fff;
+    z-index: 10;
+    margin-top: -50px    ;
+   
+  }
+  h1.top-Headign {
+    font-size: 61.9573px;
+    font-weight: 700;
+  }
+  h2.bottom-desc {
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 2rem;
+  }
+h2.community-heading {
+    color: #1a3450;
+    font-family: "Poppins", Sans-serif;
+    font-size: 45px;
+    font-weight: 600;
+    text-transform: capitalize;
+    line-height: 1.1em;
+}
+.isotope {
+    position: relative;
+}
+.isotope:before {
+    content: "";
+    display: block;
+    width: 1px;
+    position: absolute;
+    top: 40px;
+    bottom: 40px;
+    left: 50%;
+    background-color: #c8ced5;
+}
+.item-left {
+    padding-right: 30px !important;
+}
+.item-left:after, .item-left:before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    right: 16px;
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-left: 15px solid #fbfbfb;
+    border-bottom: 15px solid transparent;
+    z-index: 2;
+}

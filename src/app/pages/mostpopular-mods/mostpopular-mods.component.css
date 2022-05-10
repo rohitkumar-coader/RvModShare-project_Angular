@@ -1,0 +1,128 @@
+img.img-responsive.roundeds.contain  {
+    height: 14rem;
+    width: 100%;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 10px 0px 0px 10px;
+    transition: all .3s ease-in-out;
+  }
+  .favorite > input:checked + i {
+    font-weight: bold;
+    color: #ff5200;
+  }
+  
+  i.fa.fa-heart {
+    position: absolute;
+    top: 4px;
+    cursor: pointer;
+    background: #fff;
+    padding: 6px;
+    border-radius: 6px;
+    z-index: 99;
+  }
+  i.fa {
+    margin: 2px 3px;
+  }
+  .inner_prof_badge img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+  .inner_prof_badge a.large_font {
+    font-size: 16px;
+    text-transform: capitalize;
+  }
+  .common_badge {
+    position: relative;
+  }
+  
+  h1.modHeading {
+    font-size: 22px;
+    font-weight: 600;
+  }  
+  span.favorite.shadow input {
+    position: absolute;
+    right: -19px;
+    z-index: 9;
+    opacity: 0;
+    top: 13px;
+    cursor: pointer;
+  }
+  span.favorite.shadow input {
+    position: absolute;
+    right: -19px;
+    z-index: 9;
+    opacity: 0;
+    top: 13px;
+    cursor: pointer;
+  }
+  span.favorite.shadow {
+    display: table-row-group;
+    position: relative;
+    float: right;
+    right: 35px;
+  }
+  .rightAlign  {
+    padding-top: 6px;
+  }
+  .rightAlignCls  {
+    display: flex;
+    align-items: flex-end;
+    position: absolute;
+    top: 12px;
+    left: auto;
+    right: 25px;
+    bottom: auto;
+  }
+  .likeShare  a  {
+    margin: 0px 8px;
+  }
+  .rightAlign p {
+    font-size: 12px;
+  }
+  .mods_dropdown  .dropdown-item  {
+    padding: 8px 10px;
+    left: 0 !important;
+    transition: all .2s ease-in;
+    display: flex;
+    align-items: center;
+  }
+  small  {
+    font-size: 12px;
+  }
+  .col-md-6 h6 {
+    font-size: 13px;
+    font-weight: 500;
+    font-style: italic;
+  }
+  .text-right-align-btn  button  {
+    width: 30px;
+    height: 30px;
+    padding: 0px !important;
+  }
+  img.img-responsive.roundeds.contain:hover {
+    transform: scale(1.1);
+  }
+  .mod_left_img {
+    display: block;
+    overflow: hidden;
+  }
+  .a2a_default_style  {
+    line-height: inherit !important;
+    left: 0 !important;
+  }
+  .mods_dropdown .dropdown-item {
+    padding: 8px 10px;
+    left: 0 !important;
+    transition: all .2s ease-in;
+    display: flex;
+    align-items: center;
+  }
+  .connection_icon.dropdown-item.p-0 {
+    width: 1.9rem !important;
+  }
+  .bg-none  {
+    background-image: none;
+    width: auto !important;
+    height: auto !important;
+  }

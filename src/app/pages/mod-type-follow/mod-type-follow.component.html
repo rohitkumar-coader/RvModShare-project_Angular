@@ -1,0 +1,439 @@
+<ngx-spinner bdColor="#fff" size="" color="#fff">
+  <div class='ajax-spinner-bars'>
+    <div class='bar-1'></div>
+    <div class='bar-2'></div>
+    <div class='bar-3'></div>
+    <div class='bar-4'></div>
+    <div class='bar-5'></div>
+    <div class='bar-6'></div>
+    <div class='bar-7'></div>
+    <div class='bar-8'></div>
+    <div class='bar-9'></div>
+    <div class='bar-10'></div>
+    <div class='bar-11'></div>
+    <div class='bar-12'></div>
+    <div class='bar-13'></div>
+    <div class='bar-14'></div>
+    <div class='bar-15'></div>
+    <div class='bar-16'></div>
+  </div>
+</ngx-spinner>
+<div class="container mt-5 pt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- <app-header></app-header> -->
+      <div class="bg-white p-3 mb-3 mtCls d-none">
+        <h4 class="heading pt-1">Mod for the day</h4>
+        <p>Mod you might br interested in.</p>
+        <div class="row mt-1">
+
+          <div class="col-md-4">
+            <div class="shadow bg-white">
+
+              <div class="img">
+                <img class="product-img" src="assets/img/2.jpg">
+                <i class="fa fa-heart"></i>
+              </div>
+              <div class="mt-2 p-2">
+                <a routerLink="/group-details">
+                  <p class="mb-0">The Great Indian Biographies</p>
+                  <small>16k members * 4 posts a week</small>
+                </a>
+                <button class="btn btn-primary w-100 mt-4">View Details</button>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="shadow bg-white">
+
+              <div class="img">
+                <img class="product-img" src="assets/img/2.jpg">
+                <i class="fa fa-heart"></i>
+              </div>
+              <div class="mt-2 p-2">
+                <a routerLink="/group-details">
+                  <p class="mb-0">The Great Indian Biographies</p>
+                  <small>16k members * 4 posts a week</small>
+                </a>
+                <button class="btn btn-primary w-100 mt-4">View Details</button>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="shadow bg-white">
+              <div class="img">
+                <img class="product-img" src="assets/img/2.jpg">
+                <i class="fa fa-heart"></i>
+              </div>
+              <div class="mt-2 p-2">
+
+                <p class="mb-0">The Great Indian Biographies</p>
+                <small>16k members * 4 posts a week</small>
+                <button class="btn btn-primary w-100 mt-4">View Details</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- <div class="bg-white p-1 mb-3">
+          <h4 class="heading pt-1 pl-2">My Mods</h4>
+          <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
+        (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+        <div ngxSlickItem *ngFor="let item of myModes" class="slide">
+          <div class="shadow bg-white">
+            <div class="img">
+              <img *ngIf="item?.beforeImages?.length==0" class="img-responsive roundeds"
+                src="https://www.extremetech.com/wp-content/uploads/2019/12/SONATA-hero-option1-764A5360-edit-640x354.jpg">
+              <img *ngIf="item?.beforeImages?.length>0" class="img-responsive roundeds" src="{{_host}}images/modPost/{{item.beforeImages[0]}}">
+            </div>
+            <div class="mt-2 p-2">
+              <p class="mb-0"><a routerLink="/page/mod-details" [queryParams]="{id:item.id}">{{item.name}}</a></p>
+              <small>Last Active {{item.time}}</small>
+            </div>
+          </div>
+        </div>
+      </ngx-slick-carousel>
+     </div> -->
+
+
+
+      <!-- <div class="text-center heading">
+         <h2>The Newest Mods:</h2> 
+         <strong style="font-size: 18px;">RV<span class="text-primary">mod</span>lifers been busy! Check it out:</strong>
+        </div>
+        <hr /> -->
+      <!-- <div class="bg-white p-1 mb-3" *ngIf="microModes.length>0">
+            <h4 class="heading pt-1 pl-2">Micro Mods</h4>
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
+            (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+            <div ngxSlickItem *ngFor="let item of microModes" class="slide">
+              <div class="shadow bg-white">
+                
+                <div class="img">
+                  <span
+              tooltip="Favorite"
+              placement="bottom"
+              class="favorite shadow"
+              (click)="favourite(item.id)"
+            >
+              <input type="checkbox"  [checked]="item.likestatus" />
+              <i *ngIf="!loader[i]" class="fa fa-heart shadow" ></i>
+              <img *ngIf="loader[i]" class="loader" src="assets/img/fav.gif">
+            </span>
+                  <img *ngIf="item?.beforeImages?.length==0" class="img-responsive roundeds"
+                    src="https://www.extremetech.com/wp-content/uploads/2019/12/SONATA-hero-option1-764A5360-edit-640x354.jpg">
+                  <img *ngIf="item?.beforeImages?.length>0" class="img-responsive roundeds" src="{{_host}}images/modPost/{{item.beforeImages[0]}}">
+                </div>
+                <div class="mt-2 p-2">
+                  <p class="mb-0"><a routerLink="/page/mod-details" [queryParams]="{id:item.id}">{{item.name}}</a></p>
+                  <small>Last Active {{item.time}}</small>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+            
+       </div> -->
+
+      <!-- mini mods -->
+
+      <div class="bg-white p-1 mb-3" *ngIf="miniModes.length>0">
+        <h4 class="heading pt-1 pl-2">Mini Mods</h4>
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+          (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+          (beforeChange)="beforeChange($event)">
+          <div ngxSlickItem *ngFor="let item of miniModes" class="slide">
+            <div class="shadow bg-white">
+              <div class="img">
+                <span *ngIf="item.addedBy != credentials?.credentials?.id" tooltip="Favorite" placement="bottom"
+                  class="favorite shadow" (click)="favourite(item.id)">
+                  <input type="checkbox" [checked]="item.isFavourite" />
+                  <i class="fa fa-heart shadow"></i>
+
+                </span>
+                <!-- <i class="fa fa-heart pt-2" (click)="favourite(item.id)"></i> -->
+                <img *ngIf="item?.beforeImages?.length==0" class="img-responsive roundeds"
+                  src="https://www.extremetech.com/wp-content/uploads/2019/12/SONATA-hero-option1-764A5360-edit-640x354.jpg">
+                <img *ngIf="item?.beforeImages?.length>0" class="img-responsive roundeds"
+                  src="{{_host}}images/modPost/{{item.beforeImages[0]}}">
+              </div>
+              <div class="mt-2 p-2">
+                <p class="mb-0"><a routerLink="/mod-details" [queryParams]="{id:item.id,uid:credentials?.credentials?.id}">{{item?.name}}</a></p>
+                <!-- <small>Last Active {{item.time}}</small> -->
+                <div class="social-icon">
+                  <a><i class="fa fa-heart-o" aria-hidden="true"></i>{{item?.likesTotal}}</a>
+                  <a><i class="fa fa-comment" aria-hidden="true"></i>{{item?.commentTotal}}</a>
+                  <!-- <a><i class="fa fa-users" aria-hidden="true"></i></a> -->
+                  <a><img src="assets/img/skill.png" class="skill-ic" alt=""></a>
+                  <a><i class="fa fa-clock-o" aria-hidden="true"></i>{{item?.totalTime}}</a>
+                </div>
+                <!-- <div class="text-right mt-2 follow" *ngIf="item.addedBy != credential.credentials.id">
+                  <button class="btn btn-primary" (click)="followMods(item)"><i class="fa fa-user-plus"></i> Follow</button>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </ngx-slick-carousel>
+        <!-- <ngu-carousel #carousel
+          [inputs]="carouselConfig" [dataSource]="carouselTileItems">
+    
+                <ngu-tile  *nguCarouselDef="let item;">
+                  <div class="box space shadow bg-white">
+                    <img
+                      src="https://images.hdqwalls.com/download/volkswagen-van-je-2560x1080.jpg"
+                    />
+                    <div class="text-area p-1">
+                      <h5 class="title mb-0"                     
+                      > Mini Mods </h5>
+                      <p class="bold-text mb-0"                   
+                      > Lorem Ipsum has been the industry's</p>
+                      <a class="bottom-align text-right" 
+                        >Read More...</a
+                      >
+                    </div>
+                  </div>
+                </ngu-tile>
+    
+              <button NguCarouselPrev class='leftRs'>&lt;</button>
+              <button NguCarouselNext class='rightRs'>&gt;</button>
+        </ngu-carousel> -->
+        <!-- <ngx-carousel *ngIf="carouselTileItems.length>0"
+       [inputs]="carouselTile" 
+       (carouselLoad)="carouselTileLoad($event)">
+  
+             <ngx-tile NgxCarouselItem *ngFor="let Tile of carouselTileItems">
+                <div class="box space shadow bg-white">
+                    <img
+                      src="https://images.hdqwalls.com/download/volkswagen-van-je-2560x1080.jpg"
+                    />
+                    <div class="text-area p-1">
+                      <h5 class="title mb-0"                     
+                      > Mini Mods </h5>
+                      <p class="bold-text mb-0"                   
+                      > Lorem Ipsum has been the industry's</p>
+                      <a class="bottom-align text-right" 
+                        >Read More...</a
+                      >
+                    </div>
+                  </div>
+             </ngx-tile>
+  
+           <button NgxCarouselPrev class='leftRs'>&lt;</button>
+           <button NgxCarouselNext class='rightRs'>&gt;</button>
+     </ngx-carousel> -->
+      </div>
+
+
+      <!-- Medium mods -->
+
+      <div class="bg-white p-1 mb-3" *ngIf="mediumModes.length>0">
+        <h4 class="heading pt-1 pl-2">Medium Mods</h4>
+        <!-- <ngu-carousel #carousel
+          [inputs]="carouselConfig" [dataSource]="carouselTileItems">
+    
+                <ngu-tile *nguCarouselDef="let item;">
+                  <div class="box space shadow bg-white">
+                   
+                    <div class="text-area p-1">
+                      <h5 class="title mb-0"                     
+                      > Medium Mods </h5>
+                      <p class="bold-text mb-0"                   
+                      > Lorem Ipsum has been the industry's</p>
+                      <a class="bottom-align text-right" 
+                        >Read More...</a
+                      >
+                    </div>
+                  </div>
+                </ngu-tile>
+    
+              <button NguCarouselPrev class='leftRs'>&lt;</button>
+              <button NguCarouselNext class='rightRs'>&gt;</button>
+        </ngu-carousel> -->
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+          (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+          (beforeChange)="beforeChange($event)">
+          <div ngxSlickItem *ngFor="let item of mediumModes" class="slide">
+            <div class="shadow bg-white">
+              <div class="img">
+                <span *ngIf="item.addedBy != credentials?.credentials?.id" tooltip="Favorite" placement="bottom"
+                  class="favorite shadow" (click)="favourite(item.id)">
+                  <input type="checkbox" [checked]="item.isFavourite" />
+                  <i class="fa fa-heart shadow"></i>
+
+                </span>
+                <!-- <i class="fa fa-heart pt-2" (click)="favourite(item.id)"></i> -->
+                <img *ngIf="item?.beforeImages?.length==0" class="img-responsive roundeds"
+                  src="https://www.extremetech.com/wp-content/uploads/2019/12/SONATA-hero-option1-764A5360-edit-640x354.jpg">
+                <img *ngIf="item?.beforeImages?.length>0" class="img-responsive roundeds"
+                  src="{{_host}}images/modPost/{{item.beforeImages[0]}}">
+              </div>
+              <div class="mt-2 p-2">
+                <p class="mb-0"><a routerLink="/mod-details" [queryParams]="{id:item.id,uid:credentials?.credentials?.id}">{{item?.name}}</a></p>
+                <!-- <small>Last Active {{item.time}}</small> -->
+                <div class="social-icon">
+                  <a><i class="fa fa-heart-o" aria-hidden="true"></i>{{item?.likesTotal}}</a>
+                  <a><i class="fa fa-comment" aria-hidden="true"></i>{{item?.commentTotal}}</a>
+                  <!-- <a><i class="fa fa-users" aria-hidden="true"></i></a> -->
+                  <a><img src="assets/img/skill.png" class="skill-ic" alt=""></a>
+                  <a><i class="fa fa-clock-o" aria-hidden="true"></i>{{item?.totalTime}}</a>
+                </div>
+                <!-- <div class="text-right mt-2 follow" *ngIf="item.addedBy != credential.credentials.id">
+                <button class="btn btn-primary" (click)="followMods(item)"><i class="fa fa-user-plus"></i> Follow</button>
+              </div> -->
+              </div>
+            </div>
+          </div>
+        </ngx-slick-carousel>
+      </div>
+      <!-- <ngx-carousel *ngIf="carouselTileItems.length>0"
+       [inputs]="carouselTile"  
+       (carouselLoad)="carouselTileLoad($event)">
+  
+             <ngx-tile NgxCarouselItem *ngFor="let Tile of carouselTileItems">
+                <div class="box space shadow bg-white">
+  
+                    <div class="text-area p-1">
+                      <h5 class="title mb-0"                     
+                      > Medium Mods </h5>
+                      <p class="bold-text mb-0"                   
+                      > Lorem Ipsum has been the industry's</p>
+                      <a class="bottom-align text-right" 
+                        >Read More...</a
+                      >
+                    </div>
+                  </div>
+             </ngx-tile>
+  
+           <button NgxCarouselPrev class='leftRs'>&lt;</button>
+           <button NgxCarouselNext class='rightRs'>&gt;</button>
+     </ngx-carousel> -->
+
+
+      <!-- Medium mods -->
+      <div class="bg-white p-1 mb-3" *ngIf="megaModes.length>0">
+        <h4 class="heading pt-1 pl-2">Mega Mods</h4>
+        <!-- <ngu-carousel #carousel
+        [inputs]="carouselConfig" [dataSource]="carouselTileItems">
+  
+              <ngu-tile *nguCarouselDef="let item;">
+                <div class="box space shadow bg-white">
+   
+                  <div class="text-area p-1">
+                    <h5 class="title mb-0"                     
+                    > Medium Mods </h5>
+                    <p class="bold-text mb-0"                   
+                    > Lorem Ipsum has been the industry's</p>
+                    <a class="bottom-align text-right" 
+                      >Read More...</a
+                    >
+                  </div>
+                </div>
+              </ngu-tile>
+  
+            <button NguCarouselPrev class='leftRs'>&lt;</button>
+            <button NguCarouselNext class='rightRs'>&gt;</button>
+      </ngu-carousel> -->
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+          (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+          (beforeChange)="beforeChange($event)">
+          <div ngxSlickItem *ngFor="let item of megaModes" class="slide">
+            <div class="shadow bg-white">
+              <div class="img">
+                <span *ngIf="item.addedBy != credentials?.credentials?.id" tooltip="Favorite" placement="bottom"
+                  class="favorite shadow" (click)="favourite(item.id)">
+                  <input type="checkbox" [checked]="item.isFavourite" />
+                  <i class="fa fa-heart shadow"></i>
+                  <!-- <img *ngIf="loader[i]" class="loader" src="assets/img/fav.gif"> -->
+                </span>
+                <!-- <i class="fa fa-heart pt-2" (click)="favourite(item.id)"></i> -->
+                <img *ngIf="item?.beforeImages?.length==0" class="img-responsive roundeds"
+                  src="https://www.extremetech.com/wp-content/uploads/2019/12/SONATA-hero-option1-764A5360-edit-640x354.jpg">
+                <img *ngIf="item?.beforeImages?.length>0" class="img-responsive roundeds"
+                  src="{{_host}}images/modPost/{{item.beforeImages[0]}}">
+              </div>
+              <div class="mt-2 p-2">
+                <p class="mb-0"><a routerLink="/mod-details" [queryParams]="{id:item?.id,uid:credentials?.credentials?.id}">{{item.name}}</a></p>
+                <!-- <small>Last Active {{item.time}}</small> -->
+                <div class="social-icon">
+                  <a><i class="fa fa-heart-o" aria-hidden="true"></i>{{item.likesTotal}}</a>
+                  <a><i class="fa fa-comment" aria-hidden="true"></i>{{item.commentTotal}}</a>
+                  <!-- <a><i class="fa fa-users" aria-hidden="true"></i></a> -->
+                  <a><img src="assets/img/skill.png" class="skill-ic" alt=""></a>
+                  <a><i class="fa fa-clock-o" aria-hidden="true"></i>{{item.totalTime}}</a>
+                </div>
+                <!-- <div class="text-right mt-2 follow" *ngIf="item.addedBy != credential.credentials.id">
+              <button class="btn btn-primary" (click)="followMods(item)"><i class="fa fa-user-plus"></i> Follow</button>
+            </div> -->
+              </div>
+            </div>
+          </div>
+        </ngx-slick-carousel>
+      </div>
+
+      <!-- Medium mods -->
+      <div class="bg-white p-1 mb-3" *ngIf="massiveModes.length>0">
+        <h4 class="heading pt-1 pl-2">Massive Mods</h4>
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+          (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+          (beforeChange)="beforeChange($event)">
+          <div ngxSlickItem *ngFor="let item of massiveModes;let i=index;" class="slide">
+            <div class="shadow bg-white">
+
+              <div class="img">
+
+                <span *ngIf="item.addedBy != credentials?.credentials?.id" tooltip="Favorite" placement="bottom"
+                  class="favorite shadow" (click)="favourite(item.id)">
+                  <input type="checkbox" [checked]="item.isFavourite" />
+                  <i class="fa fa-heart shadow"></i>
+                  <!-- <img *ngIf="loader[i]" class="loader" src="assets/img/fav.gif"> -->
+                </span>
+                <!-- <i class="fa fa-heart-o  text-red" [ngClass]="{'fa-heart': item.likestatus}" (click)="favourite(item.id)"></i> -->
+                <img *ngIf="item?.beforeImages?.length>0" class="img-responsive roundeds" src="assets/img/no-img.jpg">
+                <!-- <img *ngIf="item?.beforeImages?.length>0" class="img-responsive roundeds" src="{{_host}}images/modPost/{{item.beforeImages[0]}}"> -->
+              </div>
+              <div class="mt-2 p-2">
+                <p class="mb-0"><a routerLink="/mod-details" [queryParams]="{id:item?.id,uid:credentials?.credentials?.id}">{{item?.name}}</a></p>
+                <!-- <small>Last Active {{item.time}}</small> -->
+                <div class="social-icon">
+                  <a><i class="fa fa-heart-o" aria-hidden="true"></i>{{item?.likesTotal}}</a>
+                  <a><i class="fa fa-comment" aria-hidden="true"></i>{{item?.commentTotal}}</a>
+                  <!-- <a><i class="fa fa-users" aria-hidden="true"></i></a> -->
+                  <a><img src="assets/img/skill.png" class="skill-ic" alt=""></a>
+                  <a><i class="fa fa-clock-o" aria-hidden="true"></i>{{item?.totalTime}}</a>
+                </div>
+                <!-- <div class="text-right mt-2 follow" *ngIf="item.addedBy != credential.credentials.id">
+              <button class="btn btn-primary" (click)="followMods(item)"><i class="fa fa-user-plus"></i> Follow</button>
+            </div> -->
+              </div>
+            </div>
+          </div>
+        </ngx-slick-carousel>
+        <!-- <ngu-carousel #carousel
+      [inputs]="carouselConfig" [dataSource]="carouselTileItems">
+  
+            <ngu-tile *nguCarouselDef="let item;">
+              <div class="box space shadow bg-white">
+  
+                <div class="text-area p-1">
+                  <h5 class="title mb-0"                     
+                  > Medium Mods </h5>
+                  <p class="bold-text mb-0"                   
+                  > Lorem Ipsum has been the industry's</p>
+                  <a class="bottom-align text-right" 
+                    >Read More...</a
+                  >
+                </div>
+              </div>
+            </ngu-tile>
+  
+          <button NguCarouselPrev class='leftRs'>&lt;</button>
+          <button NguCarouselNext class='rightRs'>&gt;</button>
+    </ngu-carousel> -->
+      </div>
+
+    </div>
+  </div>
+</div>

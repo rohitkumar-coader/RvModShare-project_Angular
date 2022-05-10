@@ -1,0 +1,793 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light " id="navbar">
+    <div class="container-fluid before_login" *ngIf="!token && homeMenu">
+      <div class="left-side">
+        <a class="navbar-brand" href="/" *ngIf="!token">
+          <img src="assets/img/beta-logo.png" alt="" class="img-fluid desktop_version"> 
+        </a>
+        <a class="navbar-brand" *ngIf="token" routerLink="/timeline" href="javascript:void(0)">
+          <!-- <img src="assets/img/rvmodshare1.png" alt="" class="img-fluid desktop_version">  -->
+          <img src="assets/img/beta-logo.png" alt="" class="img-fluid desktop_version"> 
+        </a>
+
+        <form class="search-container phView" *ngIf="!token">
+            <input type="text" (click)="notifActive=false;activeParam='talkMods' ; redirectToModPage('talk-mods',$event)" id="search-bar" placeholder="Search for mods and members..">
+            <a href="javascript:void(0)"  ><i id="search-bar1" class="fa fa-search"></i></a>
+          </form>
+        </div>
+
+        <div class="d-flex my-auto desktop_view w-100 desktopNone">
+          <div class="alignHader">
+            
+              <a class="navbar-brand" href="/">
+                <img src="assets/img/beta-logo.png" alt="" class="img-fluid phone_version"> 
+              </a>
+              <div class="searchradus">
+                  <a class="nav-link" (click)="notifActive=false;activeParam='shareMods' ;redirectToModPage('share-mod',$event)">
+                    <i class="fa fa-search"></i> 
+                  </a>
+                </div>
+          </div>
+          
+          <div class="icon">
+            <ul class="nav nav-tabs modTabs" id="myTab" role="tablist">
+                 
+              <li class="nav-item" placement="bottom" ngbTooltip="See and search mods">
+                
+                <a class="nav-link bgGray" href="/mods"  [ngClass]="{'active': activeParam=='seeMods'}" id="pills-See-tab"><i class="fa fa-binoculars" aria-hidden="true"></i></a>
+              </li>
+              <li class="nav-item" placement="bottom" ngbTooltip="Engage in mods">
+                  
+                  <a class="nav-link bgGray"
+                    (click)="notifActive=false;activeParam='talkMods' ; redirectToModPage('talk-mods',$event)"
+                    id="pills-Talk-tab" [ngClass]="{'active': activeParam=='talkMods'}"><i class="fa fa-users"
+                      aria-hidden="true"></i></a>
+                </li>
+              <li class="nav-item" placement="bottom" ngbTooltip="Post your mods">
+                
+                <a class="nav-link btn-primary" id="tab2"[ngClass]="{'active': activeParam=='shareMods'}"
+                  (click)="notifActive=false;activeParam='shareMods' ;redirectToModPage('share-mod',$event)">
+                  <i class="fa fa-plus" aria-hidden="true"></i> 
+                </a>
+
+              </li>
+              <li class="nav-item mr-1" style=" margin-top: 0px;" >
+                  <a class="nav-link border alignBtn" href='/auth/login'>Login</a>
+                </li>
+                <li class="nav-item " style="margin-top: 0px;" ><a class="nav-link border fill alignBtn"
+                    href='/auth/signup'>Sign
+                    up</a></li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="d-flex my-auto ph_view w-100">
+          
+            <div class="icon">
+              <ul class="nav nav-tabs modTabs" id="myTab" role="tablist">
+                 
+                <li class="nav-item" placement="bottom" ngbTooltip="See and search mods">
+                  
+                  <a class="nav-link" href="/mods" [ngClass]="{'active': activeParam=='seeMods'}" id="pills-See-tab">
+                    <i class="fa fa-binoculars" aria-hidden="true"></i> Browse Mods</a>
+                </li>
+                <li class="nav-item" placement="bottom" ngbTooltip="Engage in mods">
+                    
+                    <a class="nav-link "
+                      (click)="notifActive=false;activeParam='talkMods' ; redirectToModPage('talk-mods',$event)"
+                      id="pills-Talk-tab" [ngClass]="{'active': activeParam=='talkMods'}"><i class="fa fa-users"
+                        aria-hidden="true"></i> Follow Members</a>
+                  </li>
+                <li class="nav-item" placement="bottom" ngbTooltip="Post your mods">
+                  
+                  <a class="nav-link btn-primary" id="tab2"[ngClass]="{'active': activeParam=='shareMods'}"
+                    (click)="notifActive=false;activeParam='shareMods' ;redirectToModPage('share-mod',$event)">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Post a Mod
+                  </a>
+  
+                </li> 
+              </ul>
+            </div>
+  
+          </div>
+        <div class="navbar-collapse nav_mobile">
+
+          <ul class="navbar-nav ml-auto rightMenu none align-items-center">
+  
+            <li   (click)="notifActive=false;activeParam='talkMods' ; redirectToModPage('talk-mods',$event)" class="nav-item rounded-bg tooltips invite_tooltip cursor-pointer" style="width: 180px">
+              <a class="invite " title="" style="padding: 10px 10px;margin-right: 0.5rem;" ><i
+                  class="fa fa-user-plus" aria-hidden="true">
+                  <span class="tooltiptext right-align">Invite a friend</span></i> 
+              </a>
+              <span class="cursor-pointer" ><b>Invite a friend</b></span>
+              <span class="tooltiptext right-align">Invite a friend</span>
+            </li>
+  
+              <li class="nav-item mr-3" style=" margin-top: 0px;" *ngIf="!token && homeMenu">
+                <a class="nav-link border" href='/auth/login'>Login</a>
+              </li>
+              <li class="nav-item" style="margin-top: 0px;" *ngIf="!token && homeMenu"><a class="nav-link border fill"
+                  href='/auth/signup'>Sign
+                  up</a></li>
+                  </ul>
+                  </div>
+
+    </div>
+    <div class="container-fluid"  *ngIf="token && homeMenu">
+      <div class="left-side">
+      <a class="navbar-brand" href="/" *ngIf="!token">
+        <img src="assets/img/beta-logo.png" alt="" class="img-fluid desktop_version">
+        <img src="assets/img/RVLogo.png" alt="" class="img-fluid mobile_version">
+      </a>
+      <a class="navbar-brand" *ngIf="token" routerLink="/timeline" href="javascript:void(0)">
+        <img src="assets/img/beta-logo.png" alt="" class="img-fluid desktop_version">
+        <!-- <img src="assets/img/RVLogo.png" alt="" class="img-fluid mobile_version"> -->
+      </a>
+      
+      <div class="none" *ngIf="showSearch">
+        
+          <form class="search-container" *ngIf="token && homeMenu">
+            <input type="text" [(ngModel)]="searchKeyword" [ngModelOptions]="{standalone: true}"
+              (keyup.enter)="getSearchResult();" id="search-bar" placeholder="Search for mods and members...">
+            <a href="javascript:void(0)" (click)="getSearchResult()"><i id="search-bar1" class="fa fa-search"></i></a>
+          </form>
+          <!-- <div class="box-search" *ngIf="searchKeyword">
+            <div class="mod-post">
+              <h4><i class="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>Mod Posts</h4>
+
+              <a href="javascript:void(0)" *ngFor="let item of modPosts"
+                (click)="redirect(item.id,'mods')">{{item.name}} | {{item?.year}} {{item?.rvType}} {{item?.make}} {{item?.model}} {{item?.series | titlecase}} | {{item?.createdAt | date :'short'}}</a>
+            </div>
+            <div class="friend-post">
+              <h4><i class="fa fa-users mr-2"></i> Connections</h4>
+              <div class="connectionItem" *ngFor="let item of friendsList">
+                <a href="javascript:void(0)" class="text-truncate"
+                  (click)="redirect(item.id,'friends')">{{item?.fullName}}</a>
+                <div class="text-right-align-btn">
+                  <button *ngIf="!item?.isFriend && !item?.isPending" class="btn imgBtn"
+                    (click)="followFriend(item?.id)" placement="left" ngbTooltip="Add Connection"><img
+                      class="follow-img" src="assets/img/add-plus-svgrepo-com.svg" alt=""> </button>
+                  <button class="btn imgBtn" *ngIf="item?.isFriend" (click)="unFriend(item?.id)" placement="left"
+                    ngbTooltip="Unconnect"><img class="follow-img" src="assets/img/delete-user-svgrepo-com.svg"
+                      alt=""></button>
+                  <button class="btn imgBtn" *ngIf="item?.isPending" (click)="cancelRequest(item?.id)" placement="left"
+                    ngbTooltip="Cancel Request"><img class="follow-img" src="assets/img/CancelRequest.png"
+                      alt=""></button>
+                  <button class="btn imgBtn" (click)="cancelRequest(item?.id)" *ngIf="item?.isPending" placement="left"
+                    ngbTooltip="Pending"> <img class="follow-img" src="assets/img/pannding.png" alt=""></button>
+                  <button *ngIf="!item?.isFollow" class="btn imgBtn" (click)="followMod(item?.id)" placement="left"
+                    ngbTooltip="Make Mod Connection"> <img src="assets/img/follow.svg" alt=""> </button>
+                  <button class="btn imgBtn" *ngIf="item?.isFollow" (click)="followMod(item?.id)" placement="left"
+                    ngbTooltip="Unconnect"><img src="assets/img/unfollow.svg" alt=""></button>
+                </div>
+              </div>
+
+            </div>
+            <div class="friend-post">
+              <h4><i class="fa fa-users mr-2"></i> Groups</h4>
+              <a href="javascript:void(0)" *ngFor="let item of groups"
+                (click)="redirect(item?.id,'groups')">{{item?.name}}</a>
+            </div>
+          </div> -->
+        </div>
+      </div>
+      <!-- <a class="navbar-brand" *ngIf="token" href="javascript:void(0)" [routerLink]="['/timeline']"> -->
+     
+      <div class="PhoneView text-right">
+        <ul class="responsive_account">
+          <li class="nav-item mr-2" style="  margin-top: 0px;" *ngIf="!token && homeMenu">
+            <a class="nav-link border" href="/auth/login">Login</a>
+          </li>
+          <li class="nav-item" style="margin-top: 0px;" *ngIf="!token && homeMenu"><a class="nav-link border fill"
+              href="/auth/signup">Sign
+              up</a></li>
+        </ul>
+      </div>
+
+      <div class="d-flex my-auto desktop_view w-100">
+          <div class="icon">
+            <ul class="nav nav-tabs modTabs desktop-show" id="myTab" role="tablist">
+              <li class="nav-item rounded-bg Home">
+                <a routerLink="/timeline"  routerLinkActive="active" (click)="notifActive=false;" href="javascript:void(0)" class="nav-link text-center homeBg">
+                  <i class="fa fa-home col-bg"></i>
+                  <p class="mb-0 col-bg">Home</p>
+                </a>
+              </li>
+              <li class="nav-item" placement="bottom" ngbTooltip="See and search mods">
+             
+                <a class="nav-link"  [ngClass]="{'active': activeParam=='seeMods'}"
+                  (click)="notifActive=true;activeParam='seeMods';redirectToModPage('mods',$event)" id="pills-See-tab"><i class="fa fa-binoculars mr-1" aria-hidden="true"></i>Browse
+                  Mods</a>
+              </li>
+              <li class="nav-item" placement="bottom" ngbTooltip="Engage in mods">
+                  
+                  <a class="nav-link "
+                    (click)="notifActive=false;activeParam='talkMods' ; redirectToModPage('talk-mods',$event)"
+                    id="pills-Talk-tab" [ngClass]="{'active': activeParam=='talkMods'}"><i class="fa fa-users mr-1"
+                      aria-hidden="true"></i>Follow Members</a>
+                </li>
+              <li class="nav-item" placement="bottom" ngbTooltip="Post your mods">
+                 
+                <a class="nav-link btn btn-primary" id="tab2"[ngClass]="{'active': activeParam=='shareMods'}"
+                  (click)="notifActive=false;activeParam='shareMods' ;redirectToModPage('share-mod',$event)">
+                  <i class="fa fa-plus mr-1" aria-hidden="true"></i>
+                  Post a Mod
+                </a>
+
+              </li>
+             
+            </ul>
+            <ul class="nav nav-tabs modTabs ph-tab-show" id="myTab" role="tablist">
+                <div class="alignHader">
+            
+                    <a class="navbar-brand" href="/">
+                      <img src="assets/img/beta-logo.png" alt="" class="img-fluid phone_version"> 
+                    </a>
+                    <div class="searchradus" *ngIf="showSearch">
+                        <a class="nav-link" data-toggle="modal" data-target="#searchPBottom">
+                          <i class="fa fa-search"></i> 
+                        </a>
+                      </div>
+                </div>
+                <div class="d-flex w-100 justify-content-between">
+              <li class="nav-item" placement="bottom" ngbTooltip="See and search mods">
+             
+                <a class="nav-link bgGray"  [ngClass]="{'active': activeParam=='seeMods'}"
+                  (click)="notifActive=true;activeParam='seeMods';redirectToModPage('mods',$event)" id="pills-See-tab"><i class="fa fa-binoculars" aria-hidden="true"></i> 
+                   </a>
+              </li>
+              <li class="nav-item" placement="bottom" ngbTooltip="Engage in mods">
+                  
+                  <a class="nav-link bgGray"
+                    (click)="notifActive=false;activeParam='talkMods' ; redirectToModPage('talk-mods',$event)"
+                    id="pills-Talk-tab" [ngClass]="{'active': activeParam=='talkMods'}"><i class="fa fa-users"
+                      aria-hidden="true"></i>  </a>
+                </li>
+              <li class="nav-item" placement="bottom" ngbTooltip="Post your mods">
+                 
+                <a class="nav-link btn btn-primary " id="tab2"[ngClass]="{'active': activeParam=='shareMods'}"
+                  (click)="notifActive=false;activeParam='shareMods' ;redirectToModPage('share-mod',$event)">
+                  <i class="fa fa-plus mr-1" aria-hidden="true"></i> 
+                </a>
+
+              </li>
+              <li class="nav-item dropdown rounded-bg" *ngIf="token">
+                <button class="dropdown-toggle bgGray" id="dropdownForm1" data-toggle="modal" data-target="#notificationPBottom"
+                  (click)="notifActive=!notifActive;getAllNotification()"> 
+                    <i class="fa fa-bell col-bg" aria-hidden="true"></i>  
+                  <span class="blink" *ngIf="notificationsList?.length>0"></span>
+                </button>
+              </li> 
+              <li class="nav-item dropdown bars d-flex align-items-center" *ngIf="token">
+                <button class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="modal"
+                  data-target="#menuPBottom" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-bars" aria-hidden="true"></i> 
+                </button>
+              </li>
+            </div>
+            </ul>
+          </div>
+
+        </div>
+ 
+
+
+      <div class="navbar-collapse nav_mobile">
+
+        <ul class="navbar-nav ml-auto rightMenu none align-items-center">
+ 
+                <li  (click)="open(invitecontent)" class="nav-item rounded-bg tooltips invite_tooltip cursor-pointer" *ngIf="token && homeMenu" style="width: 180px">
+                  <a class="invite " title="" style="padding: 10px 10px;margin-right: 0.5rem;"  ><i
+                      class="fa fa-user-plus" aria-hidden="true">
+                      <span class="tooltiptext right-align">Invite a friend</span></i> 
+                  </a>
+                  <span class="cursor-pointer" ><b>Invite a friend</b></span>
+                  <span class="tooltiptext right-align">Invite a friend</span>
+                </li>
+
+            <li class="nav-item dropdown tooltips userDdropdown" style="margin: 0px;" routerLinkActive="active"
+              *ngIf="token && homeMenu">
+              <a class="nav-link dropdown-toggle "  [routerLink]="['/dashboard/profile']">
+                <!-- <img *ngIf="updateData" class="user-img"  title=""  src="{{getUrl(updateData?.image)}}" /> -->
+                <img *ngIf="user" class="user-img" title="" src="{{getUrl(user?.image,user)}}" />
+                <span class="tooltiptext">User Profile</span>
+                <!-- <span class="userName">John</span> -->
+                <span class="userName">{{credentials?.credentials?.firstName}}</span>
+              </a>
+               
+            </li>
+            <li class="nav-item dropdown rounded-bg tooltips" ngbDropdown *ngIf="token && homeMenu">
+                <a class="dropdown-toggle" style="padding: 0px;" id="dropdownForm1" ngbDropdownToggle
+                  (click)="notifActive=!notifActive;getAllNotification()">
+                <i class="fa fa-bell col-bg" aria-hidden="true"></i> 
+                  <span class="tooltiptext">Notifications</span>
+                  <span class="blink" *ngIf="notificationsList?.length>0"></span>
+                </a>
+                <div class="dropdown-menu align-bottom noti" ngbDropdownMenu aria-labelledby="dropdownForm1">
+                  <div class="overflow" *ngIf="notificationsList && notificationsList.length>0">
+                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                    <h4 class="headign text-center"><b>Notifications</b></h4>
+  
+                    <div class="notification" *ngFor="let item of notificationsList">
+  
+                      <span *ngIf="item?.type=='friendRequest' && item?.type!='comment'  && item?.type!='CommentReply'">
+  
+                        <span class="noti-text"><img class="noto-img"
+                            src="{{getUrl(item?.userFromDetails?.image,item?.userFromDetails)}}" alt="">
+                          <a class="pointer-cursor">
+                            <p class="truncateCls mb-0" [innerHTML]="item?.description"></p>
+                          </a><i class="fa fa-times-circle ml-2" (click)="updateNotification(item?.id,item)"
+                            aria-hidden="true"></i>
+                        </span>
+                        <div class="text-right">
+                          <button *ngIf="item?.acceptedBtnURL!=''" class="btn btn-primary ml-2"
+                            (click)="friendRequest(item?.acceptedBtnURL,item?.id,item?.from)">Accept</button>
+                          <button *ngIf="item?.rejectedBtnURL!=''" class="btn btn-primary ml-2"
+                            (click)="friendRequest(item?.rejectedBtnURL,item?.id,item?.from)">Reject</button>
+                        </div>
+                      </span>
+                      <span *ngIf="item?.type=='groupInvite'">
+  
+                        <span class="noti-text"><img class="noto-img"
+                            src="{{getUrl(item?.userFromDetails?.image,item?.userFromDetails)}}" alt="">
+                          <a class="pointer-cursor">
+                            <p class="truncateCls mb-0" [innerHTML]="item?.description"></p>
+                          </a><i class="fa fa-times-circle ml-2" (click)="updateNotification(item?.id,item)"
+                            aria-hidden="true"></i>
+                        </span>
+                        <div class="text-right">
+                          <button *ngIf="item?.acceptedBtnURL!=''" class="btn btn-primary ml-2"
+                            (click)="friendRequest(item?.acceptedBtnURL,item?.id,item?.from)">Accept</button>
+                          <button *ngIf="item?.rejectedBtnURL!=''" class="btn btn-primary ml-2"
+                            (click)="friendRequest(item?.rejectedBtnURL,item?.id,item?.from)">Reject</button>
+                        </div>
+                      </span>
+                      <span *ngIf="item.type!='friendRequest' && item?.type!='CommentReply' && item.type!='comment' && item?.type!='groupInvite'">
+                        <span class="noti-text">
+                          <img class="noto-img" src="{{getUrl(item?.userFromDetails?.image,item?.userFromDetails)}}"
+                            alt="">
+                          <a class="cursor-pointer">
+                            <p class="truncateCls mb-0" [innerHTML]="item?.description" *ngIf="item?.type!='groupPost'">
+                            </p>
+  
+                            <p class="truncateCls mb-0" [innerHTML]="item?.description" *ngIf="item?.type=='groupPost'">
+                            </p>
+                          </a><i class="fa fa-times-circle ml-2" (click)="updateNotification(item?.id,item)"
+                            aria-hidden="true"></i>
+                        </span>
+                      </span>
+                      <span *ngIf="item?.type=='comment' && item?.type!='friendRequest' && item?.type!='groupInvite'">
+                        <span class="noti-text">
+                          <img class="noto-img" src="{{getUrl(item?.userFromDetails?.image,item?.userFromDetails)}}"
+                            alt="">
+                          <a class="pointer-cursor">
+                            <p class="truncateCls mb-0" [innerHTML]="item?.description">
+                              <span></span>
+                            </p>
+                          </a>
+                          <i class="fa fa-times-circle ml-2" (click)="updateNotification(item?.id,item)"
+                            aria-hidden="true"></i>
+                        </span>
+                      </span>
+                        <span *ngIf="item?.type=='CommentReply' && item?.type!='friendRequest' && item?.type!='groupInvite'">
+                          <span class="noti-text">
+                            <img class="noto-img" src="{{getUrl(item?.userFromDetails?.image,item?.userFromDetails)}}" alt="">
+                            <a class="pointer-cursor">
+                              <p class="truncateCls mb-0">
+                                <span [innerHTML]="item?.description"></span>
+                                <span class="ml-1" [routerLink]="['/mods',item?.postSlug]" (click)="gotoModPageFromNotif(item)">{{item?.notifText}}</span>
+                              </p>
+                             
+                            </a>
+                            <i class="fa fa-times-circle ml-2" (click)="updateNotification(item?.id,item)" aria-hidden="true"></i>
+                          </span>
+                        </span>
+                          <span *ngIf="item?.type=='newComment' && item?.type!='friendRequest' && item?.type!='groupInvite'">
+                            <span class="noti-text">
+                              <img class="noto-img" src="{{getUrl(item?.userFromDetails?.image,item?.userFromDetails)}}" alt="">
+                              <a class="pointer-cursor">
+                                <p class="truncateCls mb-0">
+                                  <span [innerHTML]="item?.description"></span>
+                                  <span class="ml-1" [routerLink]="['/mods',item?.postSlug]"
+                                    (click)="gotoModPageFromNotif(item)">{{item?.notifText}}</span>
+                                </p>
+                          
+                              </a>
+                              <i class="fa fa-times-circle ml-2" (click)="updateNotification(item?.id,item)" aria-hidden="true"></i>
+                            </span>
+                          </span>
+                    </div>
+  
+                  </div>
+                  <div class="overflow" *ngIf="notificationsList.length==0">
+                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+  
+                    <div class="no_found">
+                      <!-- <img src="" alt="no notiification"> -->
+                      <div class="icon mb-4">
+                        <i class="fa fa-bell-slash"></i>
+                      </div>
+                      <h3>No Notification</h3>
+                    </div>
+  
+                  </div>
+                </div>
+              </li>
+          
+
+            <li class="nav-item dropdown bars d-flex align-items-center" *ngIf="token && homeMenu">
+              <a class="nav-link dropdown-toggle mr-1" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+              </a>
+              <div class="dropdown-menu align-bottom" aria-labelledby="dropdownMenuLink"> 
+                      <div class="text-light pl-4">Your Account</div> 
+                      <a class="dropdown-item" [routerLink]="['/timeline']" href="javascript:void(0)"> Activity Feed</a>
+                      <a class="dropdown-item" [routerLink]="['/dashboard/profile']" href="javascript:void(0)"> Your Profile</a>
+                     
+                      <a class="dropdown-item" (click)="goToPage('follwedInterest')" href="javascript:void(0)"> Followed Interests Mods</a>
+                      <a class="dropdown-item" (click)="goToPage('FollowedMembers')" href="javascript:void(0)"> Followed Members Mods</a>
+                      <a class="dropdown-item" (click)="goToPage('LikedMods')" href="javascript:void(0)"> Liked Mods</a>
+                      <a class="dropdown-item" (click)="goToPage('FavoriteMods')" href="javascript:void(0)"> Favorite mods</a>
+                      <a class="dropdown-item" [routerLink]="['/followed-interests']" href="javascript:void(0)"> My Followed Interests</a>
+                      <a class="dropdown-item" (click)="goTofollowing()" [routerLink]="['/connections']" href="javascript:void(0)"> My
+                        Followed Members</a>
+                      <a class="dropdown-item" [routerLink]="['/account-settings']"> Settings</a>
+                      <a class="dropdown-item" (click)="logout()"> Logout</a>
+                      <hr />
+                      <div class="text-light pl-4">Help & Support</div>
+                      <a class="dropdown-item" routerLink="/getting-started" href="javascript:void(0)"> Getting Started Guide</a>
+                      <a class="dropdown-item" routerLink="/community-guidelines" href="javascript:void(0)"> Community Guidelines</a>
+                      <a class="dropdown-item" routerLink="/contact-us" href="javascript:void(0)"> Contact Us</a>
+      
+                      <hr />
+                      <div class="text-light pl-4">Rvmodshare</div> 
+                      <a class="dropdown-item" [routerLink]="['/about-us']" href="javascript:void(0)"> About Us</a>
+                      <a class="dropdown-item" routerLink="/terms-of-service" href="javascript:void(0)"> Terms & Conditions</a>
+                      <a class="dropdown-item" routerLink="/privacy-policy" href="javascript:void(0)"> Privacy Policy</a> 
+                     
+
+      </div>
+      </li>
+        
+
+        </ul>
+    </div>
+
+
+  
+
+    </div>
+  </nav>
+</header>
+
+
+
+
+
+
+
+
+
+<!---------------------- responsive mobile menu bottom align html -------------->
+
+
+
+<!-- <div class="mobile" *ngIf="token && homeMenu">
+  <ul class="header_icon">
+    <li class="nav-item rounded-bg">
+      <a routerLink="/timeline" href="javascript:void(0)"  class="nav-link text-center whiteBG"> 
+        <i class="fa fa-home"></i>
+        <p class="mb-0">Home</p>
+      </a>
+    </li>
+    <li class="nav-item rounded-bg" *ngIf="token">
+      <a class="nav-link text-center whiteBG" data-toggle="modal" data-target="#searchPBottom">
+        <i class="fa fa-search"></i>
+        <p class="mb-0">Search</p>
+      </a>
+    </li>
+ 
+    <li class="nav-item dropdown rounded-bg" *ngIf="token">
+      <a class="dropdown-toggle" id="dropdownForm1" data-toggle="modal" data-target="#notificationPBottom"
+        (click)="notifActive=!notifActive;getAllNotification()">
+        <a [ngClass]="{'active': notifActive}">
+          <i class="fa fa-bell col-bg" aria-hidden="true"></i>
+          <p class="mb-0">Notifications</p>
+        </a>
+        <span class="blink" *ngIf="notificationsList?.length>0"></span>
+      </a>
+    </li> 
+    <li class="nav-item dropdown bars d-flex align-items-center" *ngIf="token">
+      <a class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="modal"
+        data-target="#menuPBottom" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+        <p class="mb-0">Menu</p>
+      </a>
+    </li>
+
+  </ul>
+</div> -->
+
+<div class="mobile_view" *ngIf="false">
+  <div class="container">
+    <div class="d-flex my-auto" *ngIf="token && homeMenu">
+      <div class="icon">
+        <ul class="nav nav-tabs modTabs" id="myTab" role="tablist">
+          <li class="nav-item" placement="bottom" ngbTooltip="See and search mods">
+            <a class="nav-link" (click)="notifActive=false" id="pills-See-tab" routerLinkActive="active"
+              [ngClass]="{'active':activeParam=='seeMods'}" routerLink="/mods"><i class="fa fa-binoculars mr-1"
+                aria-hidden="true"></i>See
+              Mods</a>
+          </li>
+          <li class="nav-item" placement="bottom" ngbTooltip="Post your mods">
+            <a class="nav-link" (click)="notifActive=false" routerLinkActive="active"
+              [ngClass]="{'active':activeParam=='shareMods'}" routerLink="/share-mod">
+              <i class="fa fa-wrench mr-1" aria-hidden="true"></i>
+              Share Mods
+            </a>
+          </li>
+          <li class="nav-item" placement="bottom" ngbTooltip="Engage in groups">
+            <a class="nav-link " (click)="notifActive=false" routerLinkActive="active" id="pills-Talk-tab"
+              [ngClass]="{'active': activeParam=='talkMods'}" routerLink="/talk-mods"><i class="fa fa-users mr-1"
+                aria-hidden="true"></i>Talk
+              Mods</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+<ng-template #invitecontent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Don’t leave your friends behind!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click');">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> 
+
+
+  <div class="modal-body">
+    <form [formGroup]="Form">
+      <div class="form-group">
+        <label for="dateOfBirth">Email</label>
+        <div class="input-group"> 
+          <input type="email" [ngStyle]="{'border-color' : submitted && f.toEmail.errors?'#dc3545':''}"
+            formControlName="toEmail" name="toEmail" id="toEmail" placeholder="Create Your Display Name" email="true"
+            required class="form-control" placeholder="abc@gmail.com" /><span><i class="fa fa-envelope all"></i></span>
+
+        </div>
+        <div *ngIf="submitted && f.toEmail.errors" class="invalid-feedback">
+          <div *ngIf="f.toEmail.errors.required">Email is required
+          </div>
+          <div *ngIf="f.toEmail.errors.email || f.toEmail.errors?.pattern">Email
+            is invalid</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="onSubmit()">Invite</button>
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+
+<!-- Modal -->
+<div class="modal fade p-Cls" id="menuPBottom">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="box bg-white">
+          <h4 class="d-flex justify-content-between top_head"> Menu <i class="fa fa-times close" data-dismiss="modal"
+              aria-label="Close"></i></h4>
+
+          <ul class="menu_list">
+            
+
+            <li>
+              <div id="accordion">
+                <div class="inner_menu_list">
+                  <div class="list_head" id="headingOne">
+                    <a href="javascript:;" class="dropdown-item pl-3" data-toggle="collapse" data-target="#collapseOne"
+                      aria-expanded="false" aria-controls="collapseOne"><b>Your Account</b> <i class="fa fa-angle-down"></i></a>
+                  </div>
+
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="botton_card">
+                      <ul>
+                          <a class="dropdown-item" data-dismiss="modal" aria-label="Close" [routerLink]="['/timeline']" href="javascript:void(0)"> Activity Feed</a>
+                          <a class="dropdown-item" data-dismiss="modal" aria-label="Close" [routerLink]="['/dashboard/profile']" href="javascript:void(0)"> Your Profile</a>
+                           
+                            <a class="dropdown-item" (click)="goToPage('follwedInterest')" data-dismiss="modal" aria-label="Close"  href="javascript:void(0)"> Followed Interests Mods</a>
+                            <a class="dropdown-item" data-dismiss="modal" aria-label="Close" (click)="goToPage('FollowedMembers')" 
+                              href="javascript:void(0)"> Followed Members Mods</a>
+                          <a class="dropdown-item" data-dismiss="modal" aria-label="Close" (click)="goToPage('LikedMods')" href="javascript:void(0)"> Liked Mods</a>
+                          <a class="dropdown-item" data-dismiss="modal" aria-label="Close" (click)="goToPage('FavoriteMods')" href="javascript:void(0)"> Favorite mods</a>
+                          <a class="dropdown-item" data-dismiss="modal" aria-label="Close" [routerLink]="['/followed-interests']" href="javascript:void(0)"> My Followed Interests</a>
+                          <a class="dropdown-item" data-dismiss="modal" aria-label="Close" (click)="goTofollowing()" [routerLink]="['/connections']" href="javascript:void(0)"> My
+                            Followed Members</a>
+                          <a class="dropdown-item" data-dismiss="modal" aria-label="Close" [routerLink]="['/account-settings']" href="javascript:void(0)"> Settings</a>
+                          <a class="dropdown-item" data-dismiss="modal" aria-label="Close" (click)="logout()"> Logout</a>
+                     
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="inner_menu_list">
+                  <div class="list_head" id="headingTwo">
+                    <!-- <h5 class="mb-0"> -->
+                    <!-- <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Community
+                    </button> -->
+                    <a href="javascript:;" class="dropdown-item pl-3" data-toggle="collapse" data-target="#collapseTwo"
+                      aria-expanded="false" aria-controls="collapseTwo"><b>Help & Support</b> <i class="fa fa-angle-down"></i></a>
+                    <!-- </h5> -->
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="botton_card">
+                      <ul>
+                          <a class="dropdown-item" data-dismiss="modal" aria-label="Close" routerLink="/getting-started" href="javascript:void(0)"> Getting Started Guide</a>
+                          <a class="dropdown-item" data-dismiss="modal" aria-label="Close" routerLink="/community-guidelines"  href="javascript:void(0)"> Community Guidelines</a>
+                          <a class="dropdown-item" data-dismiss="modal" aria-label="Close" routerLink="/contact-us"  href="javascript:void(0)"> Contact Us</a>
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="inner_menu_list">
+                  <div class="list_head" id="headingThree">
+                    <!-- <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                     About
+                    </button> -->
+                    <a href="javascript;;" class="dropdown-item pl-3" data-toggle="collapse"
+                      data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><b>Rvmodshare</b> <i
+                        class="fa fa-angle-down"></i></a>
+                    <!-- </h5> -->
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="botton_card">
+                      <ul>
+                         <a class="dropdown-item" data-dismiss="modal" aria-label="Close" [routerLink]="['/about-us']"  href="javascript:void(0)"> About Us</a>
+            <a class="dropdown-item" data-dismiss="modal" aria-label="Close" routerLink="/terms-of-service"  href="javascript:void(0)"> Terms & Conditions</a>
+            <a class="dropdown-item" data-dismiss="modal" aria-label="Close" routerLink="/privacy-policy"  href="javascript:void(0)"> Privacy Policy</a>
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade p-Cls" id="profilePBottom">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="box bg-white">
+          <h4 class="d-flex justify-content-between top_head"> Profile <i class="fa fa-times close" data-dismiss="modal"
+              aria-label="Close"></i></h4>
+
+          <ul class="menu_list">
+            <li data-dismiss="modal" aria-label="Close">
+              <a class="dropdown-item pl-3" [routerLink]="['/dashboard/profile']"  href="javascript:void(0)"> Profile</a>
+            </li>
+            <li data-dismiss="modal" aria-label="Close">
+              <a class="dropdown-item pl-3" (click)="logout()"  href="javascript:void(0)"> Log Out</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade p-Cls" id="notificationPBottom">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        
+
+        <div class="box noti_popup noti">
+          <div class="overflow" *ngIf="notificationsList && notificationsList.length>0">
+            <h4 class="d-flex justify-content-between top_head"> Notifications <i class="fa fa-times close"
+                data-dismiss="modal" aria-label="Close"></i></h4>
+            <div class="inner-notification">
+              <div class="notification" *ngFor="let item of notificationsList">
+
+                <span *ngIf="item?.type=='friendRequest' && item?.type!='comment'">
+
+                  <span class="noti-text"><img class="noto-img"
+                      src="{{getUrl(item?.userFromDetails?.image,item?.userFromDetails)}}" alt="">
+                    <a class="pointer-cursor">
+                      <p class="truncateCls mb-0" [innerHTML]="item?.description"></p>
+                    </a><i class="fa fa-times-circle ml-2" (click)="updateNotification(item?.id,item)"
+                      aria-hidden="true"></i>
+                  </span>
+                  <div class="text-right">
+                    <button *ngIf="item?.acceptedBtnURL!=''" class="btn btn-primary ml-2"
+                      (click)="friendRequest(item?.acceptedBtnURL,item?.id,item?.from)">Accept</button>
+                    <button *ngIf="item?.rejectedBtnURL!=''" class="btn btn-primary ml-2"
+                      (click)="friendRequest(item?.rejectedBtnURL,item?.id,item?.from)">Reject</button>
+                  </div>
+                </span>
+                <span *ngIf="item.type!='friendRequest' && item.type!='comment'">
+                  <span class="noti-text">
+                    <img class="noto-img" src="{{getUrl(item?.userFromDetails?.image,item?.userFromDetails)}}" alt="">
+                    <a class="cursor-pointer">
+                      <p class="truncateCls mb-0" [innerHTML]="item?.description" *ngIf="item?.type!='groupPost'"></p>
+
+                      <p class="truncateCls mb-0" [innerHTML]="item?.description" *ngIf="item?.type=='groupPost'"></p>
+                    </a><i class="fa fa-times-circle ml-2" (click)="updateNotification(item?.id,item)"
+                      aria-hidden="true"></i>
+                  </span>
+                </span>
+                <span *ngIf="item?.type=='comment' && item?.type!='friendRequest'">
+                  <span class="noti-text">
+                    <img class="noto-img" src="{{getUrl(item?.userFromDetails?.image,item?.userFromDetails)}}" alt="">
+                    <a class="pointer-cursor">
+                      <p class="truncateCls mb-0" [innerHTML]="item?.description">
+                        <span></span>
+                      </p>
+                    </a>
+                    <i class="fa fa-times-circle ml-2" (click)="updateNotification(item?.id,item)"
+                      aria-hidden="true"></i>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="overflow" *ngIf="notificationsList.length==0">
+            <!-- <i class="fa fa-caret-up" aria-hidden="true"></i> -->
+
+            <div class="no_found">
+              <div class="icon mb-4">
+                <i class="fa fa-bell-slash"></i>
+              </div>
+              <h3>No Notification</h3>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade p-Cls"   id="searchPBottom">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="box bg-white search_popup">
+          <div class="pb-3 border-bottom">
+            <div class="relative">
+              <div class="arrow_back close" id="searchClose" data-dismiss="modal" aria-label="Close">
+                <i class="fa fa-angle-left"></i>
+              </div>
+             
+              <form class="search-container">
+
+                <input type="text" [(ngModel)]="searchKeyword" [ngModelOptions]="{standalone: true}"
+                  (keydown.enter)="getSearchResult()" id="search-bar" placeholder="Search for mods and members..">
+                <a href="javascript:void(0)" data-dismiss="modal" aria-label="Close" (click)="getSearchResult()"><i
+                    id="search-bar1" class="fa fa-search"></i></a>
+
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+
+    <section id="terms-of-service">
+        <div class="card shadow">
+           <a class="text-right mr-4" (click)="back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>     
+            <h1 class="primary-heading">{{data?.title | titlecase}} </h1>
+            <p class="paragraph" [innerHTML]="data?.description">
+            </p>
+        </div>
+    </section>
+    

@@ -1,0 +1,37 @@
+<div class="bg-white mb-3 rounded height left_side_sponsors"  >
+        <h4 class="heading pt-1">Sponsored</h4>
+  
+        <div class="sliders row" *ngFor="let item of leftAdvertisements">
+          <div class="col-md-12">
+            <a  target="_blank" href="{{item.redirectURL}}" (click)="addClickCount(item.id)">
+              <img class="img-responsive high"  src="{{_host}}images/advertisement/{{item.image}}">
+            </a>
+          </div>
+          <div class="col-md-12 ">
+            <p class="mt-2">{{item.description}}
+            </p>
+          </div>
+        </div>
+        <div #myIdentifiersponsor>
+            <div class="col-md-12 overFlow p-0" >
+              <ng2-adsense [adClient]="'ca-pub-7911750406935657'" [adSlot]="1821684686" [display]="'inline-block'" [width]="290"
+                [height]="238">
+              </ng2-adsense>
+            </div>
+        </div>
+        <!-- <div #myIdentifiersponsor>
+        <div  *ngFor="let n of numSequence(seeModcount)">
+      <div class="col-md-12 overFlow p-0" *ngIf="n%2==0">
+        <ng2-adsense [adClient]="'ca-pub-7911750406935657'" [adSlot]="9631333463" [display]="'inline-block'" [width]="290"
+          [height]="238">
+        </ng2-adsense>
+      </div>
+      <div class="col-md-12 overFlow p-0" *ngIf="n%2!=0">
+        <ng2-adsense [adClient]="'ca-pub-7911750406935657'" [adSlot]="1821684686" [display]="'inline-block'" [width]="290"
+          [height]="238">
+        </ng2-adsense>
+      </div>
+          </div>
+          </div> -->
+        
+      </div>

@@ -1,0 +1,60 @@
+button.btn.btn-primary.size {
+    width: 30px;
+    height: 30px;
+    padding: 0px !important;
+  }
+  button.btn.btn-warning.size {
+    width: 30px;
+    height: 30px;
+    padding: 0px !important;
+  }
+.userItem{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    align-items: center;
+    > img{
+        display: inline-block;
+        height: 40px;
+        width: 40px;
+        object-fit: cover;
+        object-position: center top;
+        border-radius: 50%;
+        margin: 2px;
+    }
+
+    > .content{
+        width: calc(100% - 50px);
+
+        > h5{
+            display: flex;
+            text-transform: capitalize;
+            justify-content: space-between;
+            align-items: center;
+
+            .btn{
+                padding: 6px;
+                margin: 3px;
+
+                img{
+                    max-width: 30px;
+                }
+            }
+        }
+        
+    }
+
+    &:not(:last-child){
+        border-bottom: 1px solid #d6d6d6;
+    }
+}
+
+.loader{
+    width: 50px;
+}
+@media only screen and (max-width: 767px) {
+.userItem > .content > h5 .btn{
+    padding: 1px;
+    margin: 3px;
+  }
+}

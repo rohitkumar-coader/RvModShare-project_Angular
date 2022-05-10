@@ -1,0 +1,162 @@
+<ngx-spinner bdColor="#fff" size="" color="#fff">
+    <div class='ajax-spinner-bars'>
+        <div class='bar-1'></div>
+        <div class='bar-2'></div>
+        <div class='bar-3'></div>
+        <div class='bar-4'></div>
+        <div class='bar-5'></div>
+        <div class='bar-6'></div>
+        <div class='bar-7'></div>
+        <div class='bar-8'></div>
+        <div class='bar-9'></div>
+        <div class='bar-10'></div>
+        <div class='bar-11'></div>
+        <div class='bar-12'></div>
+        <div class='bar-13'></div>
+        <div class='bar-14'></div>
+        <div class='bar-15'></div>
+        <div class='bar-16'></div>
+    </div>
+</ngx-spinner>
+
+<div class="picsum-img-wrapper bgAfter mt-5 pt-5 main-content">
+    <div class="container">
+    <!-- <img class="imgSize" src="assets/img/mission.jpg" alt="Random first slide"> -->
+    <div class="pos-top">
+        <h1 class="top-Headign">Contact Us</h1>
+        <h2 class="bottom-desc">Get in touch with us by completing the form </h2>
+      </div>
+    </div>
+  </div>
+
+<section class="office">
+    <div class="container pl-0 pr-0 mb-4 form_part shadow">
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="contact-form mb50 wow fadeIn">
+                    <!-- <h2 class="qua-text">Contact us</h2> -->
+                    <div class="p-5 bg-white">
+                        <h3 class="black-text mb-5">Send us a message</h3>
+                        <form [formGroup]="commonContactForm" (ngSubmit)="onSubmit()">
+                            <div class="row mb-2">
+                                <div class="col-md-6 mb-2 pr-0">
+                                    <input type="text" autocomplete="off" placeholder="First Name"
+                                        formControlName="firstName" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && e.firstName.errors }" required="">
+                                    <div *ngIf="submitted && e.firstName.errors" class="invalid-feedback">
+                                        <div *ngIf="e.firstName.errors.required">First name is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" autocomplete="off" placeholder="Last Name"
+                                        formControlName="lastName" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && e.lastName.errors }" required="">
+                                    <div *ngIf="submitted && e.lastName.errors" class="invalid-feedback">
+                                        <div *ngIf="e.lastName.errors.required">Last name is required</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-md-6 mb-2 pr-0">
+                                    <input type="email" autocomplete="off" placeholder="Email" formControlName="email"
+                                        class="form-control" [ngClass]="{ 'is-invalid': submitted && e.email.errors }"
+                                        required="">
+                                    <div *ngIf="submitted && e.email.errors" class="invalid-feedback">
+                                        <div *ngIf="e.email.errors.required">Email is required</div>
+                                        <div *ngIf="e.email.errors.pattern">Email is not valid</div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-6 mb-2">
+                                        <input type="text" autocomplete="off" placeholder="Subject"
+                                            formControlName="subject" class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && e.subject.errors }" required="">
+                                        <div *ngIf="submitted && e.subject.errors" class="invalid-feedback">
+                                            <div *ngIf="e.subject.errors.required">Subject is required</div>
+                                        </div>
+                                </div> -->
+                                <div class="col-md-6">
+                                    <input type="number" autocomplete="off" placeholder="Phone No" name="phone"
+                                        id="phone" formControlName="phone"
+                                        pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && e.phone.errors }">
+                                    <div *ngIf="submitted && e.phone.errors" class="invalid-feedback">
+                                      <div *ngIf="e.phone.errors?.min">
+                                            Phone number must be at least 10 digits.
+                                        </div>
+                                        <div *ngIf="e.phone.errors?.max">
+                                            Phone number cannot exceed above 12 digits.
+                                        </div>
+                                        <div *ngIf="e.phone.errors?.pattern">
+                                            Invalid Phone number.
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-12 mb-2">
+                                    <input type="text" autocomplete="off" placeholder="Subject"
+                                        formControlName="subject" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && e.subject.errors }" required="">
+                                    <div *ngIf="submitted && e.subject.errors" class="invalid-feedback">
+                                        <div *ngIf="e.subject.errors.required">Subject is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" id="message-field">
+                                <div class="form-input">
+                                    <section>
+                                        <textarea rows="5" cols="100" id="description" placeholder="Message"
+                                            formControlName="description" class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && e.description.errors }"
+                                            maxlength="900">
+                                          </textarea>
+                                        <div *ngIf="submitted && e.description.errors" class="invalid-feedback">
+                                            <div *ngIf="e.description.errors.required">Message is required</div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                            <div class="captcha col-md-9">
+                            <recaptcha formControlName="myRecaptcha" class="recaptcha" (scriptLoad)="onScriptLoad()"
+                                (scriptError)="onScriptError()"></recaptcha>
+
+                        </div>
+                        <div class="col-md-3 desktop_view">
+                            <div class="message text-right">
+                                <button type="submit" class="btn"><i class="fa fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                            <div class="form-group mb-0 mt-4 mobile_view">
+                                <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="content_form p-5">
+                <h3 class="black-text mb-5">Contact Information</h3>
+                <!-- <p>Get in touch with us by completing the form, or by emailing us directly: <a>
+                        support@rvmodshare.com</a> </p> -->
+                        <ul class="information">
+                            <li><i class="fa fa-map"></i>1422 Pottstown Pike, #322<br>West Chester, PA 19380</li>
+                            <!-- <li><i class="fa fa-phone"></i>+000 0000 000</li> -->
+                            <li><i class="fa fa-envelope"></i>support@rvmodshare.com</li>
+                        </ul>
+                        <ul class="social_links">
+                            <li><a href="https://www.facebook.com/Rvmodshare-102595902166973/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/rvmodshare/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                             <li><a href="https://www.youtube.com/channel/UC-VGbqJ1PCvjhwEORmo7UhQ" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                            <!-- <li><a href="javascript:;" target="_blank"><i class="fa fa-twitter"></i></a></li> -->
+                        </ul>
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>

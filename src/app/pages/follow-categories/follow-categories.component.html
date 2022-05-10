@@ -1,0 +1,37 @@
+<div class="container main-content mt-5 pt-5">
+    <div class="row">
+            <div class="col-md-12">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h1 class="follow-heading mb-0">My Followed Interests</h1>
+                        <div class="text-right">
+                        <button class="btn btn-primary" (click)="open()">Add More</button>
+                </div>
+        </div>
+            </div>
+        <div class="col-sm-6 col-lg-4 mb-3"  *ngFor="let item of followedCategories">
+            <div class="shadow bg-white p-2 pb-3">
+        
+                    <i class="fa fa-trash-o" ngbTooltip=" Delete" aria-hidden="true" (click)="removeIntrest(item?.id)"></i>
+                        <!-- <img class="category-user-img w-100" *ngIf="!item.categoryDetails.image" src="assets/img/no-image.png" alt="">
+                        <img class="category-user-img w-100" *ngIf="item.categoryDetails.image" src="{{_host}}{{item.categoryDetails.image}}" alt=""> -->
+                        <div class="pt-4">
+                           
+                                <p   class="mb-0">{{item?.rvYear}} <span class="fa fa-long-arrow-right" *ngIf="item?.rvYear &&  item?.rvClass" aria-hidden="true"   ></span>
+                                      {{sharedService.getRvType(item?.rvClass )}}  <span class="fa fa-long-arrow-right" *ngIf="(item?.rvYear || item?.rvClass) && item?.rvMakeDetails && item?.rvMakeDetails?.name!=''" aria-hidden="true"   ></span> 
+
+                                    {{item?.rvMakeDetails?.name }}  <span class="fa fa-long-arrow-right" *ngIf="(item?.rvYear || item?.rvClass || (item?.rvMakeDetails && item?.rvMakeDetails?.name)) && item?.rvSeriesDetails && item?.rvSeriesDetails?.name "aria-hidden="true" ></span> 
+                                    {{item?.rvSeriesDetails?.name }}  <span class="fa fa-long-arrow-right" *ngIf="(item?.rvYear || item?.rvClass || (item?.rvMakeDetails && item?.rvMakeDetails?.name) || (item?.rvSeriesDetails && item?.rvSeriesDetails?.name)) && item?.sizeDetails && item?.sizeDetails?.name"aria-hidden="true" ></span> 
+                                    {{item?.sizeDetails?.name }}  <span class="fa fa-long-arrow-right" *ngIf="(item?.rvYear || item?.rvClass || ( item?.rvMakeDetails && item?.rvMakeDetails?.name ) || (item?.rvSeriesDetails && item?.rvSeriesDetails?.name) || ( item?.sizeDetails && item?.sizeDetails?.name)) && item?.skillLevelDetails && item?.skillLevelDetails?.name" aria-hidden="true" ></span> 
+                                     {{item?.skillLevelDetails?.name }}  <span class="fa fa-long-arrow-right" *ngIf="(item?.rvYear || item?.rvClass || (item?.rvMakeDetails && item?.rvMakeDetails?.name) || (item?.rvSeriesDetails && item?.rvSeriesDetails?.name) || ( item?.sizeDetails && item?.sizeDetails?.name) || (item?.skillLevelDetails && item?.skillLevelDetails?.name )) && item?.timerange && item?.timerange != null" aria-hidden="true"  ></span> 
+                                    {{item?.timerange }} <span class="fa fa-long-arrow-right" *ngIf="(item?.rvYear || item?.rvClass || (item?.rvMakeDetails && item?.rvMakeDetails?.name) || (item?.rvSeriesDetails && item?.rvSeriesDetails?.name) || ( item?.sizeDetails && item?.sizeDetails?.name) || (item?.skillLevelDetails && item?.skillLevelDetails?.name ) || (item?.timerange && item?.timerange != null)) && item?.rvModel!=''" aria-hidden="true" ></span> 
+                                    {{item?.rvModel }} 
+                                    <span class="fa fa-long-arrow-right" *ngIf="(item?.rvYear || item?.rvClass ||(item?.rvMakeDetails && item?.rvMakeDetails?.name) || (item?.rvSeriesDetails && item?.rvSeriesDetails?.name) || ( item?.sizeDetails && item?.sizeDetails?.name) || (item?.skillLevelDetails && item?.skillLevelDetails?.name ) || (item?.timerange && item?.timerange != null) || item?.rvModel!='') && item?.categoryDetails && item?.categoryDetails?.name!=''" aria-hidden="true"   ></span> 
+                                    {{item?.categoryDetails?.name }} 
+                                    <!-- <span  class="fa fa-long-arrow-right" *ngIf=" item?.categoryDetails?.name" aria-hidden="true" ></span>  -->
+                                    
+                        </div>                
+              
+                </div>
+            </div>
+       </div>
+   </div>

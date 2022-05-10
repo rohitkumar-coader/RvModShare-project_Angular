@@ -1,0 +1,61 @@
+<!-- <ng-template #follow let-modal> -->
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title">Following</h3>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="loadersmall" *ngIf="isLoading"></div>
+    <div *ngIf="!isLoading">
+        <div class="conatiner" *ngFor="let item of Followingdata;let i=index">
+
+            <div class="row" *ngIf="item?.isUserExist && Followingdata.length>0">
+
+                <div class="col-md-2">
+                    <img src="{{getUrl(item?.followFriendIDDetails?.image,item?.followFriendIDDetails)}}" alt="" />
+                    <!-- <img class="userImg" src="assets/img/user.png" alt=""> -->
+                </div>
+                <div class="col-md-7 pl-0">
+                    <h4 *ngIf="user?.id==item?.id"><a
+                            href="/dashboard/friend-profile">{{item.fullName}}</a>
+                    </h4>
+                    <h4 *ngIf="user?.id!=item?.id"><a href="/profile/{{item?.slug}}">{{item.fullName}}</a></h4>
+                </div>
+
+
+
+                <div class="col-md-3">
+                    <div *ngIf="item?.isFollow !=true">
+                        <button (click)="followerMod(item?.id,i)" class="btn btn-primary">Follow</button>
+                    </div>
+                    <div *ngIf="item?.isFollow == true">
+                        <button (click)="followerMod(item?.id,i)" class="btn btn-primary">Unfollow</button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row">
+                                        <div class="col-md-12"> 
+                                        </div>
+                                        <div class="col-md-2">
+                                            <img class="userImg" src="assets/img/user.png" alt="">
+                                        </div>
+                                        <div class="col-md-7 pl-0">
+                                            <h4>User Name</h4>
+                                            <p>rv life after 50 followed by spot...</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button class="btn btn-primary">Follow</button>
+                                        </div>
+                                    </div> -->
+        </div>
+        <div class="text-center" *ngIf="Followingdata.length==0">
+            <b>No data found</b>
+        </div>
+    </div>
+
+</div>
+<!-- <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        </div> -->
+<!-- </ng-template> -->

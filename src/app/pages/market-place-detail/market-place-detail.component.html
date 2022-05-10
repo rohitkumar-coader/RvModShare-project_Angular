@@ -1,0 +1,782 @@
+<main class="main-pannel">
+        <!-- This is a Dispensaries -->
+        <div class="container-fluid mt-5">
+          <div class="row">
+        
+      
+            <div class="col-md-9 not_aphria" >
+              
+              <div class="mountains position-relative">
+                <!-- <div class="full-width-images"> -->
+                <img
+                  
+                  class="w-100 banner_img"
+                  src="https://images.squarespace-cdn.com/content/v1/5d758539a1315522fb3a1437/1613423221273-Q2Y694HB4RZE5PCHUZCP/mobiventure-van-interior.jpg?format=1000w"
+                />
+               
+                <img
+                class="avtar_img right"
+                src="https://image.freepik.com/free-psd/silver-sedan-car_53876-84522.jpg"
+              />
+              </div>
+            </div>
+      
+            <div class="col-md-3">
+           
+              <ul class="pro-address col-sm-12">
+                <li>
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+                 marker
+                </li>
+                <li>
+                  <i class="fa fa-envelope" aria-hidden="true"></i> abc@yopmail.com
+                </li>
+                <li >
+                  <i class="fa fa-mobile" aria-hidden="true"></i> 987786787
+                </li>
+                <li >
+                  <i class="fa fa-globe" aria-hidden="true"></i>
+                  <a
+                    
+                    target="_blank"
+                    style="color: #656569"
+                  
+                    >website </a
+                  >
+                </li>
+              </ul>
+              <span class="fv"
+              >
+              <i
+                
+                class="fa fa-heart"
+                aria-hidden="true"
+              ></i
+            ></span>
+            
+              <div class="cent-cls-open-clo">
+                <div class="col-md-6 p-0">
+                <p
+                  class="open-tim-1"
+                 
+                > Open Now
+                </p>
+                <p class="open-tim-2">
+                   10:00 AM-11:59PM <br />
+                </p>
+                <div class="text-center">
+                  <div>
+                    <!-- <h3 class="image-name text-center">tetst</h3> -->
+                
+                    </div>
+                    <div class="text-center">
+                    <span class="rating rating-pro">
+                        <i
+                          class="fa fa-star"
+                          
+                          title="Poor"
+                        ></i>
+              
+                        <i
+                          class="fa fa-star"
+                          title="Not bad"
+                        ></i>
+              
+                        <i
+                          class="fa fa-star"
+                          title="Average"
+                        ></i>
+              
+                        <i
+                          class="fa fa-star"
+                          
+                          title="Good"
+                        ></i>
+              
+                        <i
+                          class="fa fa-star"
+                          
+                          title="Excellent"
+                        ></i>
+                        <span
+                        >4.5</span
+                      >
+                      </span>
+                      
+                    </div>
+                </div>
+              </div>
+                <a
+                href=""
+                target="_blank"
+                class="btn-ph-center"
+              >
+                <button class="btn btn-default pro-btn">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i> Get Directions
+                </button>
+              </a>
+             
+              </div>
+             
+            
+              <div class="col-md-12 p-2">
+                <a href="" target="_blank"
+                  ><i class="fa fa-facebook social-icon" aria-hidden="true"></i
+                ></a>
+                <a
+                  href=""
+                  target="_blank"
+                  ><i class="fa fa-instagram social-icon" aria-hidden="true"></i
+                ></a>
+                <a
+                  href=""
+                  target="_blank"
+                  ><i class="fa fa-twitter social-icon" aria-hidden="true"></i
+                ></a>
+             
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="nav nav-tabs text-center mb-3 w-100">
+          <li
+            class="nav-item"
+            
+          >
+            <a
+              class="nav-link active"
+              id="pills-near-tab"
+              data-toggle="pill"
+              href="#pills-near"
+              role="tab"
+              aria-controls="pills-near"
+              aria-selected="false"
+              >MAPS</a
+            >
+          </li>
+          <li>
+            <a class="nav-link active" data-toggle="tab" href="#home">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" data-toggle="tab" href="#menu1">ABOUT US</a>
+          </li>
+          <!-- <li class="nav-item" *ngIf="object.businessType != 'producer'">
+            <a
+              class="nav-link"
+              id="pills-blog-tab"
+              data-toggle="pill"
+              href="#pills-blog"
+              role="tab"
+              aria-controls="pills-blog"
+              aria-selected="false"
+              >BLOG</a
+            >
+          </li> -->
+          <li>
+            <a class="nav-link" data-toggle="tab" href="#menu2">REVIEW</a>
+          </li>
+        </ul>
+        <div class="tab-content pro-menu-tab w-100">
+          <div
+            id="home"
+            class="tab-pane fade show active"
+          >
+            <div class="row pb-3 pt-3">
+              
+              <div class="col-md-3 col-sm-3 pr-0">
+                  <section class="results-header">
+                      <h1 class="pl-4 class">Modshare</h1>
+                    </section>
+                <section class="filter-section">
+                  <form class="product-search">
+                    <div class="form-group w-100">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search..."
+                        name="search"
+                        id="search"
+                        [(ngModel)]="name"
+                      />
+                      <button
+                        style="color: white"
+                        class="btn btn-default"
+                        (click)="fetchProduct()"
+                      >
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  </form>
+                  <!--<div class="filter-section-one filter-sec">
+                                        <h4>STRAIN TYPE</h4>
+                                        <ul>
+                                            <li *ngFor="let obj of categories">
+                                                <span class="input-single">
+                                                    <!-- <input class="align" type="checkbox" name="Chocolate" id="5f722eb80657166f83826d35">
+                                                    <!-- <input type="checkbox" class="align" name="{{obj.name}}" id="{{obj.id}}" (click)="setCategory(obj.id)" checked="{{checkIfSelected(obj.name)}}">
+                                                    <input type="radio" class="align" name="{{obj.name}}" id="{{obj.id}}" (click)="setTypeCategory(obj.name)" checked="{{checkIfSelected(obj.id)}}">
+                                                    <label for="{{obj.id}}"><img alt="" src="assets/img/pat-icon.png"> {{obj.name}} </label>
+                                                </span>
+                                            </li>
+                                            <!-- <li><span class="input-single">
+                                                <input class="align" type="checkbox" name="Chocolate" id="5f722eb80657166f83826d35"><label for="">
+                                                <img alt="" src="assets/img/pat-icon.png"> Indica </label></span>
+                                            </li>
+                                            <li><span class="input-single">
+                                                <input class="align" type="checkbox" name="Chocolate" id="5f722eb80657166f83826d35"><label for="">      
+                                                <img alt="" src="assets/img/pat-icon.png"> Hybrid </label></span>
+                                            </li>
+                                            <li><span class="input-single">
+                                                <input class="align" type="checkbox" name="Chocolate" id="5f722eb80657166f83826d35"><label for="">                        
+                                                <img alt="" src="assets/img/pat-icon.png"> High CBD </label></span>
+                                            </li>
+                                        </ul>       
+                                    </div>-->
+                  <div class="drp-section">
+                    <!-- <div class="select select-fancy select-fancy-noimage">
+                      <select
+                        name="producer_name"
+                        id="1"
+                        [(ngModel)]="filterObject.producerName"
+                        (change)="fetchProduct()"
+                      >
+                        <option value="">Producer</option>
+                        <option
+                          value="{{ data.supplierId }}"
+                        >
+                          name this
+                        </option>
+                      </select>
+                    </div> -->
+                    <!-- <div
+                      class="select select-fancy select-fancy-noimage"
+                      *ngIf="categoryinfo.length > 0"
+                    >
+                      <select
+                        name="product_name"
+                        id="1"
+                        [(ngModel)]="filterObject.productName"
+                        (change)="fetchProduct()"
+                      >
+                        <option value="">Product Categories</option>
+                        <option
+                          *ngFor="let catdata of categoryinfo"
+                          value="{{ catdata._id.name }}"
+                        >
+                          {{ catdata._id.name }}
+                        </option>
+                      </select>
+                    </div> -->
+                    <!-- <div
+                      class="select select-fancy select-fancy-noimage"
+                      *ngIf="mainCategories.length > 0"
+                    >
+                      <select
+                        name="product_name"
+                        id="1"
+                       
+                      >
+                        <option value="">Instaleaf Main Categories</option>
+                        <option
+                          value="{{ item._id.instaleaf_categoryId }}"
+                        >
+                         category name
+                        </option>
+                      </select>
+                    </div> -->
+                    <!-- <div class="select select-fancy select-fancy-noimage">
+                      <select
+                        name="cbd"
+                        id="cbd"
+                        [(ngModel)]="filterObject.CBD"
+                        (change)="fetchProduct()"
+                      >
+                        <option value="">CBD</option>
+                        <option value="cbd desc">Highest to Lowest</option>
+                        <option value="cbd asc">Lowest to Highest</option>
+                      </select>
+                    </div>
+                    <div class="select select-fancy select-fancy-noimage">
+                      <select
+                        name="thc"
+                        id="thc"
+                        [(ngModel)]="filterObject.THC"
+                        (change)="fetchProduct()"
+                      >
+                        <option value="">THC</option>
+                        <option value="thc desc">Highest to Lowest</option>
+                        <option value="thc asc">Lowest to Highest</option>
+                      </select>
+                    </div> -->
+                  </div>
+                  <div class="boxes">
+                    <input type="checkbox" id="box-1" />
+                    <label class="mb-4d" for="box-1"
+                      ><span class="mr-2cls">Specials</span></label
+                    >
+                    <input type="checkbox" id="box-2" />
+                    <label class="mb-4d mr-2" for="box-2"
+                      ><span class="mr-2cls">Staff Favourites</span>
+                    </label>
+                  </div>
+                  <!-- <div
+                    class="ads-banner-section ph-none"
+                   
+                  >
+                    <img
+                      (click)="bannerviewclick(imgobj.id)"
+                      class="w-100 mt-2"
+                      src="{{ _host }}images/banners/{{ imgobj.image }}"
+                    />
+                  </div> -->
+                </section>
+              </div>
+              <div class="col-md-9 col-sm-9">
+              
+              
+                  <div
+                    class="col-md-4 col-sm-6"
+                   
+                  >
+                    <div class="profile">
+                     
+                      <a >
+                        <div class="profile__image">
+                      
+                          <img
+                            src="https://www.extremetech.com/wp-content/uploads/2019/12/SONATA-hero-option1-764A5360-edit-640x354.jpg"
+                            class="img-responsive"
+                            width="90"
+                          />
+                          <div class="profile__info">
+                            <h3>name</h3>
+                          </div>
+                          <div class="profile__stats">
+                            <p class="profile__stats__title">Producer</p>
+                            <h5 class="profile__stats__info">
+                              jgy  fgif ig
+                            </h5>
+                          </div>
+                          <div class="profile__stats">
+                            <p class="profile__stats__title">Category</p>
+                            <h5
+                              class="profile__stats__info"
+                            >
+                              obj
+                            </h5>
+                            <h5
+                              class="profile__stats__info"
+                            >
+                              categeoryname 
+                            </h5>
+                          </div>
+                          <div class="profile__stats">
+                            <p class="profile__stats__title">Price</p>
+                            <h5 class="profile__stats__info">
+                              300
+                            </h5>
+                          </div>
+                          <div class="profile__stats">
+                            <p class="profile__stats__title">THC</p>
+                            <h5 class="profile__stats__info">
+                              Accessories
+                            </h5>
+                          </div>
+                          <div class="profile__stats">
+                            <p class="profile__stats__title">CBD</p>
+                            <h5 class="profile__stats__info">
+                              cbd
+                            </h5>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+              
+              </div>
+              <div class="ads-banner-section desk-none">
+                <img
+                  class="w-100 mt-2"
+                  src=""
+                />            </div>
+            </div>
+          </div>
+        
+          <!-- About Us Tab Section Starts-->
+          <div
+            id="menu1"
+            class="tab-pane fade in"
+          >
+            <div class="container pb-4">
+              <h4 class="accordion-tit">jafu</h4>
+              <div class="row">
+                <div class="col-sm-8 p-o">
+                  <div class="wht-bg-cls pb-3">
+                    <h4 class="rit-main-title">About Us</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, </p>
+                  </div>
+                </div>
+              
+              </div>
+            </div>
+          </div>
+          <!-- About Us Tab Section Ends-->
+        
+          <!-- Blog Tab Section Starts-->
+          <div
+            class="tab-pane fade"
+            id="pills-blog"
+            role="tabpanel"
+            aria-labelledby="pills-blog-tab"
+          >
+            <div class="container">
+              <div class="row">
+                <div class="col-md-5 mrg">
+                  <div class="d-flex mb-2">
+                    <div class="col-md-4 p-0">
+                      <!-- <a 
+                        ><img
+                          src="assets/img/no-image.jpg"
+                          class="img-responsive img-Ht marker"
+                      /></a>
+                      <a (click)="blogdetail(obj.id)"
+                        ><img
+                          src="{{ _host }}images/blogs/{{ obj.image }}"
+                          class="img-responsive img-Ht"
+                      /></a> -->
+                    </div>
+                    <div class="col-md-8 p-0 pl-2">
+                      <a 
+                        ><p class="bold pt-4">j fou wguofg ouw gefog owegfo wegof gowe  fowvbouwegf</p>  
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <div class="blog-img-sec">
+                    <!-- <img class="w-100 blog-img" src="https://instaleaf.ca:1337/images/news/612656fc-fa98-4f2b-9857-6a3371449f8a-1600715573183.jpeg"> -->
+                    <!-- <img *ngIf="!obj[0].image" src="assets/img/no-image.jpg" class="w-100 blog-img"> -->
+                    <img
+                      src="no-image.jpg"
+                      class="w-100 blog-img"
+                    />
+                  </div>
+        
+                  <div class="text-blog">
+                    <p class="bold heading"> gfk wg iuwgiufgwii wgie gew</p>
+                   
+                    <a
+                      class="dis-red-more"
+                      >Read More</a
+                    >
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <div class="blog-img-sec">
+                    <!-- <img class="w-100 blog-img" src="https://instaleaf.ca:1337/images/news/612656fc-fa98-4f2b-9857-6a3371449f8a-1600715573183.jpeg"> -->
+                    <!-- <img *ngIf="!obj[0].image" src="assets/img/no-image.jpg" class="w-100 blog-img"> -->
+                    <img
+                    src="assets/img/user.png"
+                      class="w-100 blog-img"
+                    />
+                  </div>
+        
+                  <div class="text-blog">
+                    <p class="bold heading">u gfui gef gwegfi wekf  wkvgkwgv</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-5 mrg">
+                  <div class="d-flex mb-2">
+                    <div class="col-md-4 p-0">
+                      <!-- <a (click)="route(obj.slug)" ><img *ngIf="!obj.image" src="assets/img/no-image.jpg" class="img-responsive img-Ht"></a> -->
+                      <!-- <a (click)="newsdetail(obj.slug)"><img *ngIf="obj.image" src="{{_host}}images/news/{{obj.image}}" class="img-responsive img-Ht"></a> -->
+                      <a
+                        ><img
+         
+                        src="assets/img/user.png"
+                          class="img-responsive img-Ht"
+                      /></a>
+                      <!-- <a
+                        ><img
+                          *ngIf="obj.image"
+                          src="{{ _host }}images/news/{{ obj.image }}"
+                          class="img-responsive img-Ht"
+                      /></a> -->
+                    </div>
+                    <!-- <div class="col-md-8 p-0 pl-2">
+                      <a (click)="showBlogs(obj)"
+                        ><p class="bold pt-4" [innerHTML]="obj.title"></p>
+                        <p
+                          class="sub-text"
+                          [innerHTML]="htmlLength(obj.subtitle, 56)"
+                        ></p
+                      ></a>
+                    </div> -->
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <div class="blog-img-sec">
+                    <!-- <img class="w-100 blog-img" src="https://instaleaf.ca:1337/images/news/612656fc-fa98-4f2b-9857-6a3371449f8a-1600715573183.jpeg"> -->
+                    <!-- <img *ngIf="!obj[0].image" src="assets/img/no-image.jpg" class="w-100 blog-img"> -->
+                    <img
+                      
+                    src="assets/img/user.png"
+                      class="w-100 blog-img"
+                    />
+                  </div>
+                  <div class="text-blog">
+                    <p class="bold heading"> gfugifgfiuqefgi </p>
+                   
+                    <a
+                     
+                      class="dis-red-more"
+                      >Read More</a
+                    >
+                  </div>
+                </div>
+        
+                <div class="col-md-7">
+                  <div class="blog-img-sec">
+                    <!-- <img class="w-100 blog-img" src="https://instaleaf.ca:1337/images/news/612656fc-fa98-4f2b-9857-6a3371449f8a-1600715573183.jpeg"> -->
+                    <!-- <img *ngIf="!obj[0].image" src="assets/img/no-image.jpg" class="w-100 blog-img"> -->
+                    <img
+                    src="assets/img/user.png"
+                      class="w-100 blog-img"
+                    />
+                  </div>
+                  <div class="text-blog">
+                    <p class="bold heading" >dgdfg</p>
+                    <p
+                      class="disc-blog"
+                     
+                    >dfgdfgdf</p>
+                    <a
+                      
+                      class="dis-red-more"
+                      >Read More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Blog Tab Section Ends-->
+        
+          <!-- Review Tab Section Starts-->
+          <div id="menu2" class="tab-pane fade">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4 review-tab-left">
+                  <div class="wh-bg">
+                    <div class="top-review-tab-left">
+                      <span class="riv-rat" style="margin-right: 12px">
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                      </span>
+                      <span class="riv-num-rat"
+                        ><strong>1</strong> out of 5
+                        stars
+                        <p>2 Reviews</p></span
+                      >
+                    </div>
+                    <div class="bottom-review-tab-left text-center">
+                      <h2>Write A Review</h2>
+                      <p>Select a rating</p>
+                      <div class="row">
+                        <div class="col-sm-12 d-flex">
+                          <div
+                            class="col-md-6"
+                            style="color: black; padding: 0px 0px; font-size: 13px"
+                          >
+                            Overall Experience
+                          </div>
+                          <div class="col-md-6 p-0">
+                            <!-- <span class="riv-rat text-center">
+                              <i
+                                (click)="!existRating ? clickStar(1) : ''"
+                                class="fa fa-star"
+                                
+                                title="Poor"
+                              ></i>
+                              <i
+                              (click)="!existRating ? clickStar(1) : ''"
+                              class="fa fa-star"
+                              
+                              title="Poor"
+                            ></i>
+                            <i
+                                (click)="!existRating ? clickStar(1) : ''"
+                                class="fa fa-star"
+                                
+                                title="Poor"
+                              ></i>
+                              <i
+                                (click)="!existRating ? clickStar(1) : ''"
+                                class="fa fa-star"
+                                
+                                title="Poor"
+                              ></i>
+                              <i
+                                (click)="!existRating ? clickStar(1) : ''"
+                                class="fa fa-star"
+                                
+                                title="Poor"
+                              ></i>
+                            </span> -->
+                          </div>
+                        </div>
+                      
+                        <div class="col-md-12 d-flex">
+                          <div
+                            class="col-md-6"
+                            style="color: black; padding: 0px 0px; font-size: 13px"
+                          >
+                            Staff
+                          </div>
+                          <div class="col-md-6 p-0">
+                            <!-- <span class="riv-rat text-center">
+                              <i
+                              (click)="!existRating ? clickStar(1) : ''"
+                              class="fa fa-star"
+                              
+                              title="Poor"
+                            ></i>
+                            <i
+                                (click)="!existRating ? clickStar(1) : ''"
+                                class="fa fa-star"
+                                
+                                title="Poor"
+                              ></i>
+                              <i
+                                (click)="!existRating ? clickStar(1) : ''"
+                                class="fa fa-star"
+                                
+                                title="Poor"
+                              ></i>
+                              <i
+                                (click)="!existRating ? clickStar(1) : ''"
+                                class="fa fa-star"
+                                
+                                title="Poor"
+                              ></i>
+                              <i
+                                (click)="!existRating ? clickStar(1) : ''"
+                                class="fa fa-star"
+                                
+                                title="Poor"
+                              ></i>
+                            </span> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 p-0 pt-3 text-left">
+                      <h4 class="rit-main-title">Your Review</h4>
+                      <form>
+                        <div class="col-sm-12 p-0">
+                          <div class="form-group">
+                            <textarea
+                              rows="3"
+                              cols="15"
+                              name="detail"
+                              id="detail"
+                            
+                              class="form-control text-form-control"
+                              placeholder="Write a review..."
+                            ></textarea>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 p-0 text-right">
+                          <button
+                            
+                            class="btn cus-btn cus-login"
+                            
+                          >
+                            Post your review
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8 review-tab-right">
+                  <div
+                    class="inner-review-rit bgCol col-sm-12 d-flex"
+                  >
+                    <div class="col-sm-2">
+                      <div class="revi-img">
+                        <img
+                          src="https://www.extremetech.com/wp-content/uploads/2019/12/SONATA-hero-option1-764A5360-edit-640x354.jpg"
+                          class="img-responsive heightVh"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-7 col-xs-7 aligName">
+                      <h4 class="rit-main-title">
+                       hii user
+                      </h4>
+                      <!-- <span class="riv-rat">
+                          <i
+                          (click)="!existRating ? clickStar(1) : ''"
+                          class="fa fa-star"
+                          
+                          title="Poor"
+                        ></i>
+                        <i
+                                (click)="!existRating ? clickStar(1) : ''"
+                                class="fa fa-star"
+                                
+                                title="Poor"
+                              ></i>
+                              <i
+                                (click)="!existRating ? clickStar(1) : ''"
+                                class="fa fa-star"
+                                
+                                title="Poor"
+                              ></i>
+                              <i
+                                (click)="!existRating ? clickStar(1) : ''"
+                                class="fa fa-star"
+                                
+                                title="Poor"
+                              ></i>
+                              <i
+                                (click)="!existRating ? clickStar(1) : ''"
+                                class="fa fa-star"
+                                
+                                title="Poor"
+                              ></i>
+                      </span> -->
+                      <span class="riv-rat-no">4.5</span>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 text-right">
+                      <p class="month-view">22/03/1021</p>
+                    </div>
+                  </div>
+        
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- PRODUCT NEAR ME section start -->
+          <div
+            class="tab-pane fade"
+            id="pills-near"
+            role="tabpanel"
+            aria-labelledby="pills-near-tab"
+           
+          >
+            <div class="container-fluid mt-top">
+              <!-- <app-mapc [slug]="slug"></app-mapc> -->
+            </div>
+          </div>
+        </div>
+        <!-- End Dispensaries -->
+        <div class="clearfix"></div>
+        <!-- Modal -->
+        </main>
+        
+        
+        
+        

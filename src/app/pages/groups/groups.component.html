@@ -1,0 +1,611 @@
+<ngx-spinner bdColor="#fff" size="" color="#fff">
+  <div class='ajax-spinner-bars'>
+    <div class='bar-1'></div>
+    <div class='bar-2'></div>
+    <div class='bar-3'></div>
+    <div class='bar-4'></div>
+    <div class='bar-5'></div>
+    <div class='bar-6'></div>
+    <div class='bar-7'></div>
+    <div class='bar-8'></div>
+    <div class='bar-9'></div>
+    <div class='bar-10'></div>
+    <div class='bar-11'></div>
+    <div class='bar-12'></div>
+    <div class='bar-13'></div>
+    <div class='bar-14'></div>
+    <div class='bar-15'></div>
+    <div class='bar-16'></div>
+  </div>
+</ngx-spinner>
+
+<div class="container-fluid mt-5 pt-5 main-content">
+  <div class="row">
+    <div class="col-md-3">
+
+      <app-sponsored></app-sponsored>
+    </div>
+    <div class="col-md-6">
+      <div class="container mods_part">
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <a (click)="addClss()" ngbTooltip="Large View" [class.disabled]="fullCls" class="p-2"> <i
+                class="fa fa-arrows-alt" aria-hidden="true"></i></a>
+            <a ngbTooltip="Tile View" (click)="showClss()" [class.disabled]="smallCls" class="p-2"><i class="fa fa-list"
+                aria-hidden="true"></i></a>
+          </div>
+          <div class="col-md-12 mt-3" *ngIf="smallCls">
+            <div class="shadow mods_box mb-4" *ngFor="let modDetail of allMods;let i=index">
+
+              <div class="row">
+                <div class="col-md-4" *ngIf="modDetail?.typeOfPost=='mod'">
+                  <div class="favourite">
+                    <span class="favorite shadow" (click)="favourite(modDetail?.id,i)">
+                      <input type="checkbox" [checked]="modDetail.isFavourite" />
+                      <i ngbTooltip="Favorite" placement="left" class="fa fa-heart shadow"></i>
+                    </span>
+                  </div>
+                  <div class="mods_img">
+                    <div
+                      *ngIf="modDetail?.registeredRV && modDetail?.addedBydetails?.isrvRental && modDetail?.addedBydetails?.rvRental && ( modDetail?.addedBydetails?.rvRental?.rvShareUrl!='' || modDetail?.addedBydetails?.rvRental?.outdoorsyUrl!='' || modDetail?.addedBydetails?.rvRental?.rvezyUrl!='')"
+                      class="ribbon blue_col">
+                      <a href="javascript:void(0)"
+                        (click)="goTouserProfile(modDetail?.addedBydetails?._id != credentials?.credentials?.id ? '/friend-profile' :'/dashboard/profile',{id:  modDetail?.addedBydetails?._id})"><span>Rent</span></a>
+                    </div>
+                    <a class="pointer-cursor mod_left_img">
+                      <img (click)="goToModDetail('/mods',modDetail?.slug)"
+                        *ngIf="modDetail?.afterImages?.length==0 && modDetail?.beforeImages?.length==0"
+                        class="img-responsive roundeds contain" src="assets/img/follow-new1.png">
+                      <img (click)="goToModDetail('/mods',modDetail?.slug)" *ngIf="modDetail?.afterImages?.length>0 "
+                        class="img-responsive roundeds contain"
+                        src="{{_host}}images/modPost/{{modDetail.afterImages[0]}}">
+                      <img (click)="goToModDetail('/mods',modDetail?.slug)"
+                        *ngIf="modDetail?.afterImages?.length==0 && modDetail?.beforeImages?.length>0"
+                        class="img-responsive roundeds contain"
+                        src="{{_host}}images/modPost/{{modDetail?.beforeImages[0]}}">
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-8" *ngIf="modDetail?.typeOfPost=='mod'">
+                  <div class="py-2 px-3">
+                    <div class="bagesSection">
+                      <article class="postTop mb-2">
+                        <div class="d-flex">
+                          <p class="mb-0 pt-1">
+                            <a (click)="goToModDetail('/mods',modDetail?.slug)" class="pointer-cursor"><b>
+                                {{modDetail?.name}}</b>
+                              <span class="ml-2">{{modDetail?.createdAt | date:'longDate' }}</span></a>
+                          </p>
+
+                        </div>
+
+                        <div class="text-right-align-btn rightAlignCls" *ngIf="credentials?.credentials?.id">
+                          <div class="dropdown cretDropdown ml-2 mods_dropdown">
+                            <button class="btn btn-primary dropdown-toggle" (click)="setShareData(modDetail)"
+                              type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                              aria-expanded="false">
+                              <i aria-hidden="true" class="fa fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu mods_drop_list" aria-labelledby="dropdownMenuButton">
+
+                              <div class="connection_icon dropdown-item bg-none">
+
+                                <button class="btn imgBtn mr-2"
+                                  *ngIf="!modDetail?.isFriend && !modDetail?.isPending && modDetail?.addedBydetails?._id != credentials?.credentials?.id && !seeAllmods"
+                                  (click)="followFriend(modDetail,i)" ngbTooltip="Request Social Connection"><img
+                                    class="follow-img" src="assets/img/add-plus-svgrepo-com.svg" alt=""> </button>
+                                <button class="btn imgBtn mr-2"
+                                  *ngIf="modDetail?.isFriend && modDetail?.addedBydetails?._id != credentials?.credentials?.id && !seeAllmods"
+                                  (click)="unFriend(modDetail,i)" ngbTooltip="Unconnect"><img class="follow-img"
+                                    src="assets/img/delete-user-svgrepo-com.svg" alt=""></button>
+                                <button class="btn imgBtn mr-2"
+                                  *ngIf="modDetail?.isPending && modDetail?.addedBydetails?._id != credentials?.credentials?.id && !seeAllmods"
+                                  (click)="cancelRequest(modDetail,i)" ngbTooltip="Cancel Request"><img
+                                    class="follow-img" src="assets/img/CancelRequest.png" alt=""></button>
+                                <button class="btn imgBtn mr-2" *ngIf="modDetail?.isPending && !seeAllmods"
+                                  ngbTooltip="Pending"><img class="follow-img" src="assets/img/pannding.png" alt="">
+                                </button>
+                                <button class="btn imgBtn mr-2"
+                                  *ngIf="!modDetail?.isFollow && modDetail?.addedBydetails?._id != credentials?.credentials?.id && !seeAllmods"
+                                  (click)="followMod(modDetail,i)" ngbTooltip="Make Mod Connection"> <img
+                                    class="followIcon" src="assets/img/follow.svg" alt=""></button>
+                                <button class="btn imgBtn mr-2"
+                                  *ngIf="modDetail?.isFollow && modDetail?.addedBydetails?._id != credentials?.credentials?.id && !seeAllmods"
+                                  (click)="followMod(modDetail,i)" ngbTooltip="Unconnect"><img class="followIcon"
+                                    src="assets/img/unfollow.svg" alt=""></button>
+
+                                <div class="connection_icon dropdown-item p-0">
+                                  <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
+                                    (click)="setShareData(modDetail)"
+                                    [attr.data-a2a-url]="'https://rvmodshare.com/mods/'+modDetail?.slug"
+                                    [attr.data-a2a-title]="modDetail?.name">
+                                    <a class="a2a_button_facebook"></a>
+                                  </div>
+                                </div>
+
+                              </div>
+                              <a class="dropdown-item"
+                                *ngIf=" modDetail?.addedBydetails?._id == credentials?.credentials?.id"
+                                href="/share-mod/{{modDetail?.slug}}">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                Edit Post
+                              </a>
+                              <a class="dropdown-item"
+                                *ngIf=" modDetail?.addedBydetails?._id != credentials?.credentials?.id"
+                                (click)="openReport(modDetail?.id,'modPost')">
+                                <i class="fa fa-bug" aria-hidden="true"></i>
+                                Report Post
+                              </a>
+                              <a class="dropdown-item"
+                                *ngIf=" modDetail?.addedBydetails?._id == credentials?.credentials?.id"
+                                (click)="deleteModPost(modDetail?.id,i)">
+                                <i class="fa fa-trash mr-1" aria-hidden="true"></i>
+                                Delete Post
+                              </a>
+
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    </div>
+
+                    <div class="main_badges">
+                      <div class="d-flex align-items-center w-100 inner_prof_badge mb-1 mt-2">
+
+                        <div class="prof_img">
+                          <img *ngIf="modDetail?.addedBydetails?.image=='' || modDetail?.addedBydetails?.image==null"
+                            class="mr-2" src="assets/img/user.png" alt="profile_img">
+                          <img *ngIf="modDetail?.addedBydetails?.image!='' && modDetail?.addedBydetails?.image!=null"
+                            class="mr-2" src="{{getUrl(modDetail?.addedBydetails?.image,modDetail?.addedBydetails)}}"
+                            alt="profile_img">
+                        </div>
+
+                        <div>
+                          <a href="javascript:void(0)" class="large_font"
+                            (click)="goTouserProfile(modDetail?.addedBydetails?._id != credentials?.credentials?.id ? '/friend-profile' :'/dashboard/profile',{id:  modDetail?.addedBydetails?._id})">
+                            <b>{{modDetail?.addedBydetails?.fullName}}</b>
+
+
+                          </a>
+                          <div class="common_badge">
+                            <a href="javascript:;">{{modDetail?.addedBydetails?.rankBadgeImage?.title}}</a>
+                            <ul class="tooltiptext">
+                              <li><b>Points:</b> {{modDetail?.addedBydetails?.rankPoints}}</li>
+                              <li><a
+                                  href="https://endpoint.rvmodshare.com/images/modPost/f7b737b8-d7f2-4361-8ed3-d0a30cea6a1f1642682372997.pdf"
+                                  target="_blank"><b>Badges & Rewards: </b>
+                                  {{modDetail?.addedBydetails?.rankBadgeImage?.title}}</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row w-100">
+                        <div class="col-md-6 ">
+
+
+                          <div class="tagsAlign">
+                            <h4 class="mod-rv-texts"><small> {{modDetail?.year}} {{modDetail?.rvType}}
+                                {{modDetail?.make?.name}}
+                                {{modDetail?.series?.name | titlecase}} {{modDetail?.model}}
+                              </small></h4>
+
+                          </div>
+                          <h6 class="mb-0">{{modDetail?.catName}}</h6>
+                          <h4><small>{{modDetail?.sizedetails?.name}}</small></h4>
+                        </div>
+                        <div class="col-md-6 border-left">
+                          <div class="rightAlign ">
+                            <b>Summary</b>
+                            <p class="truncate font_normal" [innerHTML]="htmlLength(modDetail?.whatIDid,100)"></p>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="likeShare">
+                        <a><i class="fa fa-thumbs-up" ngbTooltip="Likes"
+                            aria-hidden="true"></i>{{modDetail?.likesTotal}}</a>
+                        <a *ngIf="!modDetail?.isCommentDisabled"><i class="fa fa-comment" ngbTooltip="Comment"
+                            aria-hidden="true"></i>{{modDetail?.commentTotal}}</a>
+                        <a><i class="fa fa-share-alt" aria-hidden="true" ngbTooltip="Share"></i>
+                          {{modDetail?.totalShare}}</a>
+                        <a style="width: 23px;" *ngIf="modDetail?.skillLevel=='6193a45efc4c9b3d4ce7ad62'"
+                          class="high"><img src="assets/img/low.png" ngbTooltip="Low" class="skill-ic" alt=""></a>
+                        <a style="width: 23px;" class="high"
+                          *ngIf="modDetail?.skillLevel=='6194c77a4d8a1d9518bbe18c'"><img src="assets/img/medium.png"
+                            ngbTooltip="Medium" class="skill-ic" alt=""></a>
+                        <a class="high" *ngIf="modDetail?.skillLevel=='6197d36401d78bc07b538196'"><img
+                            src="assets/img/high.png" ngbTooltip="High" class="skill-ic" alt=""></a>
+                        <a><i class="fa fa-clock-o" ngbTooltip="{{modDetail?.timerange}}" placement="top"
+                            aria-hidden="true"></i></a>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-md-12" *ngIf="modDetail?.typeOfPost=='google-ad' && seeAllmods">
+                  <ng2-adsense [adClient]="'ca-pub-7911750406935657'" [adSlot]="9631333463" [display]="'inline-block'"
+                    [width]="565" [height]="238">
+                  </ng2-adsense>
+                </div>
+                <div class="col-md-12" *ngIf="modDetail?.typeOfPost=='google-ad' && !seeAllmods">
+                  <ng2-adsense [adClient]="'ca-pub-7911750406935657'" [adSlot]="9631333463" [display]="'inline-block'"
+                    [width]="801" [height]="238">
+                  </ng2-adsense>
+                </div>
+              </div>
+
+            </div>
+
+
+
+          </div>
+          <div class="col-md-12 mt-3" *ngIf="fullCls">
+            <div class="shadow mods_box mb-4 p-3" *ngFor="let modDetail of allMods;let i=index">
+
+              <div class="row">
+                <div class=" align-items w-100 inner_prof_badge mb-1 col-md-12" *ngIf="modDetail?.typeOfPost=='mod'">
+                  <div class="header-post">
+
+                    <article class="postTop">
+                      <div class="d-flex">
+                        <a *ngIf="modDetail?.addedBy != credentials?.credentials?.id"
+                          href="/friend-profile?id={{modDetail?.addedBy}}">
+                          <img *ngIf="!modDetail?.addedBydetails?.image" class="img-responsive round mr-3"
+                            src="assets/img/noImg.png">
+                          <img *ngIf="modDetail?.addedBydetails?.image" class="img-responsive round mr-3"
+                            src="{{getUrl(modDetail?.addedBydetails?.image,modDetail?.addedBydetails)}}">
+                        </a>
+                        <a *ngIf="modDetail?.addedBy == credentials?.credentials?.id"
+                          href="/dashboard/profile?id={{modDetail?.addedBy}}">
+                          <img *ngIf="!modDetail?.addedBydetails?.image" class="img-responsive round mr-3"
+                            src="assets/img/noImg.png">
+                          <img *ngIf="modDetail?.addedBydetails?.image" class="img-responsive round mr-3"
+                            src="{{getUrl(modDetail?.addedBydetails?.image,modDetail?.addedBydetails)}}">
+                        </a>
+
+                        <div>
+                          <div class="mb-0">
+
+                            <a *ngIf="modDetail?.addedBy != credentials?.credentials?.id"
+                              href="/friend-profile?id={{modDetail?.addedBy}}" class="bold">
+                              <strong> {{modDetail?.addedBydetails?.fullName| titlecase}}</strong>
+                            </a>
+                            <a *ngIf="modDetail?.addedBy == credentials?.credentials?.id"
+                              href="/dashboard/profile?id={{modDetail?.addedBy}}" class="bold">
+                              <strong> {{modDetail?.addedBydetails?.fullName| titlecase}}</strong>
+                            </a>
+                            <div class="common_badge">
+                              <a href="javascript:;">{{modDetail?.addedBydetails?.rankBadgeImage?.title}}</a>
+                              <ul class="tooltiptext">
+                                <li><b>Points:</b> {{modDetail?.addedBydetails?.rankPoints}}</li>
+                                <li><a
+                                    href="https://endpoint.rvmodshare.com/images/modPost/f7b737b8-d7f2-4361-8ed3-d0a30cea6a1f1642682372997.pdf"
+                                    target="_blank"><b>Badges & Rewards: </b>
+                                    {{modDetail?.addedBydetails?.rankBadgeImage?.title}}</a></li>
+                              </ul>
+                            </div>
+
+                          </div>
+                          <h4 class="mod-rv-texts"><small> {{modDetail?.year}} {{modDetail?.rvType}}
+                              {{modDetail?.make?.name}}
+                              {{modDetail?.series?.name | titlecase}} {{modDetail?.model}} | {{modDetail?.createdAt |
+                              date:'short' }}</small>
+                          </h4>
+                          <div class="mr-2 bgClsLink" *ngIf="modDetail?.whomSharedById"><a
+                              href="/friend-profile?id={{modDetail?.whomSharedById}}">{{modDetail?.whomSharedByName |
+                              titlecase}}</a>
+                            Shared
+                            this post of <a
+                              href="/friend-profile?id={{modDetail?.originalAddedBy}}">{{modDetail?.sharedName |
+                              titlecase}}</a> with <a
+                              href="/friend-profile?id={{modDetail?.addedByName?.id}}">{{modDetail?.addedByName?.fullName
+                              |
+                              titlecase}}</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="rightAlignCls">
+                        <span
+                          *ngIf="modDetail?.registeredRV && modDetail?.addedBydetails?.isrvRental && modDetail?.addedBydetails?.rvRental && ( modDetail?.addedBydetails?.rvRental?.rvShareUrl!='' || modDetail?.addedBydetails?.rvRental?.outdoorsyUrl!='' || modDetail?.addedBydetails?.rvRental?.rvezyUrl!='')">
+                          <a ngbTooltip="Outdoorsy" *ngIf="modDetail?.addedBydetails?.rvRental?.outdoorsyUrl!=''"
+                            href="{{modDetail?.addedBydetails?.rvRental?.outdoorsyUrl}}" target="_blank"><img
+                              class="socialICON pointer-cursor" src="assets/img/Rent_on_Outdoorsy.png" alt=""></a>
+                          <a ngbTooltip="RVezy" *ngIf="modDetail?.addedBydetails?.rvRental?.rvezyUrl!=''"
+                            href="{{modDetail?.addedBydetails?.rvRental?.rvezyUrl}}" target="_blank"><img
+                              class="socialICON pointer-cursor" src="assets/img/Rent_on_RVezy.png" alt=""></a>
+                          <a ngbTooltip="RVshare" *ngIf="modDetail?.addedBydetails?.rvRental?.rvShareUrl!=''"
+                            href="{{modDetail?.addedBydetails?.rvRental?.rvShareUrl}}" target="_blank"><img
+                              class="socialICON pointer-cursor" src="assets/img/Rent_on_RV_Share.png" alt=""></a>
+                        </span>
+                        <div class="dropdown cretDropdown">
+                          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            (click)="setShareData(modDetail)">
+                            <i aria-hidden="true" class="fa fa-ellipsis-v"></i>
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                            (click)="setShareData(modDetail)">
+                            <a class="dropdown-item">
+                              <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
+                                [attr.data-a2a-url]="'https://rvmodshare.com/mods/'+modDetail?.slug"
+                                [attr.data-a2a-title]="modDetail?.name">
+                                <a class="a2a_button_facebook"></a>
+                              </div>
+                            </a>
+                            <!-- <a class="dropdown-item" (click)="openshare(modDetail,modDetail?.id,'mods')">
+                              <i class="fa fa-share bg mr-1" aria-hidden="true"></i>Share
+                            </a> -->
+                            <a class="dropdown-item" (click)="likePost(modDetail?.id,'modPost',i,modDetail?.addedBy)"><i
+                                class="fa fa-thumbs-o-up bg mr-1" [ngClass]="{'text-primary': modDetail?.likestatus}"
+                                aria-hidden="true"></i>Like</a>
+
+
+                            <a class="dropdown-item" *ngIf="modDetail?.addedBy!=credentials?.credentials?.id"
+                              (click)="openReport(modDetail.id,'modPost')"><i class="fa fa-bug mr-1"
+                                aria-hidden="true"></i>
+                              Report Post
+                            </a>
+                            <a class="dropdown-item" *ngIf="modDetail?.addedBy==credentials?.credentials?.id"
+                              (click)="deletePost(modDetail?.id,i)"><i class="fa fa-trash mr-1" aria-hidden="true"></i>
+                              Delete Post
+                            </a>
+
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+
+                    <p class="mt-2 cursor-pointer"><a href="/mods/{{modDetail?.slug}}">{{modDetail?.name}}</a></p>
+                  </div>
+                  <div class="post-img">
+                    <a href="/mods/{{modDetail?.slug}}">
+                      <img *ngIf="modDetail?.afterImages?.length==0 && modDetail?.beforeImages?.length==0"
+                        class="img-responsive roundeds contain full" src="assets/img/follow-new1.png">
+                      <img *ngIf="modDetail?.afterImages?.length>0 " class="img-responsive roundeds full"
+                        src="{{_host}}images/modPost/{{modDetail.afterImages[0]}}">
+                      <img *ngIf="modDetail?.afterImages?.length==0 && modDetail?.beforeImages?.length>0"
+                        class="img-responsive roundeds full"
+                        src="{{_host}}images/modPost/{{modDetail.beforeImages[0]}}">
+                    </a>
+
+                    <div class="like-share d-flex pt-2 pb-2 justify-content-between">
+                      <p class="mb-0 pt-2 cursor-pointer" (click)="openLikeModal(modDetail)"><i
+                          class="fa fa-thumbs-up mr-1" aria-hidden="true"></i>{{modDetail?.likesTotal}}
+                        Likes</p>
+                      <div class="pull-right pt-2">
+                        <small class="mr-3" *ngIf="!modDetail?.isCommentDisabled"
+                          (click)="readmoreLess(i,null);getComments(modDetail?.id,'modPost')">{{modDetail?.commentTotal}}
+                          Comments</small>
+                        <!-- <small class="mr-3" (click)="OpenListingOfSharedUsers(modDetail)">{{modDetail?.totalShare}}
+                          Shares</small> -->
+                      </div>
+
+
+                    </div>
+                  </div>
+                  <hr style="margin: 0rem;" />
+                  <div class="post-section pt-2 d-flex justify-content-between">
+                    <span class="mb-0 mr-hover cursor-pointer"
+                      (click)="likePost(modDetail?.id,'modPost',i,modDetail?.addedBy)"><i class="fa fa-thumbs-o-up bg"
+                        [ngClass]="{'text-primary': modDetail?.likestatus}" aria-hidden="true"></i>Like</span>
+                    <span class="mb-0 mr-hover" *ngIf="!modDetail?.isCommentDisabled"
+                      (click)="readmoreLess(i,null);getComments(modDetail?.id,'modPost')"><i
+                        class="fa fa-commenting-o bg" aria-hidden="true"></i>Comment</span>
+
+
+                    <div class="dropdown share_dropdown">
+                      <span class="mb-0 mr-hover" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="fa fa-share bg" aria-hidden="true"></i>
+                        Share
+                      </span>
+
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                        <a class="connection_icon dropdown-item">
+                          <a class="dropdown-item">
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
+                              [attr.data-a2a-url]="'https://rvmodshare.com/mods/'+modDetail?.slug"
+                              [attr.data-a2a-title]="modDetail?.name">
+                              <a class="a2a_button_facebook"></a>
+                            </div>
+                          </a>
+                          <a (click)="copyLink(modDetail)"><i class="fa fa-copy"></i> Copy Link</a>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <article class="comments shadow p-3 mt-3" *ngIf="modDetail?.showMore">
+                    <textarea *ngIf="!editComment"
+                      (keyup.enter)="addComment(modDetail?.id,'','modPost',modDetail?.addedBy)"
+                      [(ngModel)]="commentOnPost" placeholder="Post a comment..."
+                      class="form-control commentInput"></textarea>
+                    <label *ngIf="!editComment && commentOnPost">Press Enter to post.</label>
+
+                    <article class="allComments mt-2" [ngClass]="{'isLoading': loader}">
+                      <div class="loaderDiv text-center" *ngIf="loader"> <img style="width: 50px;"
+                          src="assets/img/loader-img.gif"></div>
+                      <h5 *ngIf="allComments?.length==0">No Comments</h5>
+                      <div class="commentItem" *ngFor="let comment of allComments;let i=index">
+                        <div class="d-flex mb-2">
+                          <img *ngIf="!comment?.userImage" class="usercreate img-small noto-img"
+                            src="assets/img/user.png">
+                          <img *ngIf="comment?.userImage" class="usercreate"
+                            src="{{getUrl(comment?.userImage,comment)}}">
+                          <div class="user-name-rule bg-gray">
+                            <strong *ngIf="comment?.userId != credentials?.credentials?.id"><a
+                                href="/friend-profile?id={{comment?.userId}}">{{comment?.userFullName
+                                | titlecase}}</a></strong>
+                            <strong *ngIf="comment?.userId == credentials?.credentials?.id"><a
+                                href="/dashboard/profile?id={{comment?.userId}}">{{comment?.userFullName
+                                | titlecase}}</a></strong>
+                            <span class="ml-1">{{comment?.createdAt | date:'short' }}</span>
+                            <a *ngIf="!editComment" class="public-bg ml-2">{{comment?.comment}}</a>
+                            <div *ngIf="editComment && commentData?.id==comment?.id">
+                              <textarea [(ngModel)]="commentOnPost"
+                                (keyup.enter)="submiteditComment(commentData,'comment',modDetail?.id,'modPost',modDetail)"
+                                class="form-control reply"> </textarea>
+                              <label>Press Enter to post.</label>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="action_comment text-right mb-2">
+                          <a ngbTooltip="Reply" class="reply mr-2" (click)="replyClick(comment?.id)"><i
+                              class="fa fa-reply"></i></a>
+                          <a ngbTooltip="Edit" class="edit mr-2" (click)="oneditComment(comment,'comment')"><i
+                              class="fa fa-edit"></i></a>
+                          <a *ngIf="comment?.userId == credentials?.credentials?.id" ngbTooltip="Delete"
+                            (click)="deleteComment(comment?.id,i,null,null,'comment',modDetail)" class="delete mr-2"><i
+                              class="fa fa-trash"></i></a>
+                        </div>
+
+                        <article class="replyList">
+                          <div class="replyForm" *ngIf="!editReply && replyForm == comment?.id">
+                            <textarea [(ngModel)]="replyOnPost"
+                              (keyup.enter)="replyComment(modDetail?.id,comment?.id,'comment','modPost',modDetail?.addedBy)"
+                              placeholder="Post a reply..." class="form-control"></textarea>
+                            <label *ngIf="replyOnPost">Press Enter to post.</label>
+                          </div>
+                          <article class="replyItem align" *ngFor="let itm of comment?.reply;let j=index">
+                            <div class="d-flex subReply">
+                              <img *ngIf="!itm?.userImage" class="usercreate img-small noto-img"
+                                src="assets/img/user.png">
+                              <img *ngIf="itm?.userImage" class="usercreate" src="{{getUrl(itm?.userImage,itm)}}">
+                              <div class="user-name-rule bg-gray">
+                                <strong *ngIf="itm?.userId != credentials?.credentials?.id"><a
+                                    href="/friend-profile?id={{itm?.userId}}">{{itm?.userFullName
+                                    | titlecase}}</a></strong>
+                                <strong *ngIf="itm?.userId == credentials?.credentials?.id"><a
+                                    href="/dashboard/profile?id={{itm?.userId}}">{{itm?.userFullName
+                                    | titlecase}}</a></strong>
+                                <span style="font-weight: 300">{{itm?.createdAt | date:'short'
+                                  }}</span>
+                                <p class="mb-0 pt-1"></p>
+                                <a *ngIf="!editReply  || commentData?.id!=itm?.id" class="public-bg">
+                                  {{itm?.comment}}</a>
+                                <div *ngIf="editReply && commentData?.id==itm?.id">
+                                  <textarea [(ngModel)]="replyOnPost"
+                                    (keyup.enter)="submiteditComment(commentData,'reply',modDetail?.id,'modPost',modDetail)"
+                                    class="form-control reply"> </textarea>
+                                  <label>Press Enter to post.</label>
+                                </div>
+                                <div class="action_comment text-right mb-2">
+                                  <a ngbTooltip="Reply" class="reply mr-2" (click)="replyClick(itm?.id)"><i
+                                      class="fa fa-reply"></i></a>
+                                  <a *ngIf="itm?.userId == credentials?.credentials?.id" ngbTooltip="Edit"
+                                    class="edit mr-2" (click)="oneditComment(itm,'reply')"><i
+                                      class="fa fa-edit"></i></a>
+                                  <a *ngIf="itm?.userId == credentials?.credentials?.id"
+                                    (click)="deleteComment(itm?.id,i,j,null,'reply',modDetail)" ngbTooltip="Delete"
+                                    class="delete mr-2"><i class="fa fa-trash"></i></a>
+                                </div>
+                              </div>
+                            </div>
+                            <article class="replyList">
+                              <div class="replyForm" *ngIf="!editReply && replyForm == itm?.id">
+                                <textarea [(ngModel)]="replyOnPost2"
+                                  (keyup.enter)="replyComment(modDetail?.id,itm?.id,'reply','modPost',modDetail?.addedBy)"
+                                  placeholder="Post a reply..." class="form-control"></textarea>
+                                <label>Press Enter to post.</label>
+                              </div>
+                              <article class="replyItem align" *ngFor="let reply of itm?.reply;let k=index">
+                                <div class="d-flex subReply">
+                                  <img *ngIf="!reply?.userImage" class="usercreate img-small noto-img"
+                                    src="assets/img/user.png">
+                                  <img *ngIf="reply?.userImage" class="usercreate"
+                                    src="{{getUrl(reply?.userImage,reply)}}">
+                                  <div class="user-name-rule bg-gray">
+                                    <strong *ngIf="reply?.userId != credentials?.credentials?.id"><a
+                                        href="/friend-profile?id={{reply?.userId}}">{{reply?.userFullName
+                                        | titlecase}}</a></strong>
+                                    <strong *ngIf="reply?.userId == credentials?.credentials?.id"><a
+                                        href="/dashboard/profile?id={{reply?.userId}}">{{reply?.userFullName
+                                        | titlecase}}</a></strong>
+                                    <span style="font-weight: 300">{{reply?.createdAt | date:'short'
+                                      }}</span>
+                                    <p class="mb-0 pt-1"></p>
+                                    <a *ngIf="!editReply || commentData?.id!=reply?.id" class="public-bg">
+                                      {{reply?.comment}}</a>
+                                    <div *ngIf="editReply && commentData?.id==reply?.id">
+                                      <textarea [(ngModel)]="replyOnPost"
+                                        (keyup.enter)="submiteditComment(commentData,'reply',modDetail?.id,'modPost',modDetail)"
+                                        class="form-control reply"> </textarea>
+                                      <label>Press Enter to post.</label>
+                                    </div>
+                                    <div class="action_comment text-right mb-2">
+                                      <a ngbTooltip="Reply" class="reply mr-2" (click)="replyClick(reply?.id)"><i
+                                          class="fa fa-reply"></i></a>
+                                      <a *ngIf="reply?.userId == credentials?.credentials?.id" ngbTooltip="Edit"
+                                        class="edit mr-2" (click)="oneditComment(reply,'reply')"><i
+                                          class="fa fa-edit"></i></a>
+                                      <a *ngIf="reply?.userId == credentials?.credentials?.id"
+                                        (click)="deleteComment(reply?.id,i,j,k,'replyonreply',modDetail)"
+                                        ngbTooltip="Delete" class="delete mr-2"><i class="fa fa-trash"></i></a>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="replyForm" *ngIf="!editReply && replyForm == reply?.id">
+                                  <textarea [(ngModel)]="replyOnPost3"
+                                    (keyup.enter)="replyComment(modDetail?.id,itm?.id,'replyonreply','modPost',modDetail?.addedBy)"
+                                    placeholder="Post a reply..." class="form-control"></textarea>
+                                  <label>Press Enter to post.</label>
+                                </div>
+                              </article>
+                            </article>
+                          </article>
+                        </article>
+                      </div>
+                    </article>
+
+                  </article>
+                </div>
+                <div class="col-md-12 text-center" *ngIf="modDetail?.typeOfPost=='google-ad' && seeAllmods">
+                  <ng2-adsense [adClient]="'ca-pub-7911750406935657'" [adSlot]="9631333463" [display]="'inline-block'"
+                    [width]="565" [height]="238">
+                  </ng2-adsense>
+                </div>
+                <div class="col-md-12 text-center" *ngIf="modDetail?.typeOfPost=='google-ad' && !seeAllmods">
+                  <ng2-adsense [adClient]="'ca-pub-7911750406935657'" [adSlot]="9631333463" [display]="'inline-block'"
+                    [width]="801" [height]="238">
+                  </ng2-adsense>
+                </div>
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+          <!-- <div class="col-md-12" *ngIf="seeAllmods">
+      
+            <div class="ad_box mb-4">
+              <div class="row m-0">
+                <ng2-adsense [adClient]="'ca-pub-7911750406935657'" [adSlot]="9631333463" [display]="'inline-block'"
+                  [width]="565" [height]="110">
+                </ng2-adsense>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12" *ngIf="!seeAllmods">
+      
+            <div class="ad_box mb-4">
+              <div class="row m-0">
+                <ng2-adsense [adClient]="'ca-pub-7911750406935657'" [adSlot]="9631333463" [display]="'inline-block'"
+                  [width]="800" [height]="110">
+                </ng2-adsense>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <app-right-sponsored></app-right-sponsored>
+    </div>
+  </div>
+</div>

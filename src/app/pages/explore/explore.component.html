@@ -1,0 +1,235 @@
+<div class="container p-0 sticky">
+  <div class="box bg-white max_width">
+    <!-- <div class="mb-2 transparent_hover_btn">
+      <a *ngIf="showExplore" href="/help" class="btn btn-primary mb-2">Help</a>
+    </div> -->
+    <button class="btn btn-primary w-100 mb-2" *ngIf="isfollow != true && (modfilters.makeFilter != '' || modfilters.modCategoryValue !='' || modfilters.rvTypeFilter !='' || modfilters.size !='' || modfilters.skillLevel !='' || modfilters.timerange !='' ||
+       modfilters.yearValue !='')" (click)="followNotificationByclick()">Follow this List</button>
+    <button class="btn btn-primary w-100 mb-2" *ngIf="isfollow == true && (modfilters.makeFilter != '' || modfilters.modCategoryValue !='' || modfilters.rvTypeFilter !='' || modfilters.size !='' || modfilters.skillLevel !='' || modfilters.timerange !='' ||
+       modfilters.yearValue !='')"  (click)="unfollowNotificationByclick()">Unfollow this List</button>
+    <button class="btn btn-outline-primary w-100 mb-3 text-primary" (click)="copy()"><i class="fa fa-share-alt mr-2"></i> Share with Friends</button>
+    <div class="text-right" *ngIf="showExplore">
+      <!-- <h1 class="follow-heading mb-0 text-left">Explore Mods
+      </h1> -->
+
+      <div class="mylink_filter_btn">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPBottom"
+          ngbTooltip="Filter"><i class="fa fa-sliders"></i></button>
+      </div>
+    </div>
+    <!-- <div class="share_btn">
+      <div class="mb-2 transparent_hover_btn">
+        <button (click)="goToshareMod()" *ngIf="showExplore" class="btn btn-primary w-100 mb-2"><i
+            class="fa fa-plus mr-2"></i>Share a
+          Mod</button>
+      </div>
+      <div class="border_hover_btn">
+        <button ngbTooltip="Copy URL" (click)="copy()" class="btn w-100 mb-2"><i class="fa fa-share-alt mr-2"></i>Share
+          with Friends</button>
+      </div>
+    </div> -->
+
+
+    <hr *ngIf="showExplore" />
+
+    <!-- <h4>Mods Category</h4> -->
+    <div class="filter_left mb-4 shadow p-2 bg-white">
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0"> Filters</h4>
+        <div>
+          <button class="btn btn-danger" (click)="reset()">Reset</button>
+        </div>
+      </div>
+      <hr  *ngIf="user"/>
+      <select *ngIf="user" [(ngModel)]="modfilters.type" (change)="resetCount();searchValue();" name="mods" id="mods" class="form-control mb-2">
+        <!-- <option id="all-mod" value="" >All Mods</option>
+        <option id="timeline-mod" value="{{timelinemods}}">Timeline</option>
+        <option id="follow-interest-mod" value="{{followmodIds}}">Followed Interests</option>
+        <option id="follow-members" value="{{followids}}">Followed Members</option>
+        <option id="liked-mods" value="{{likedids}}">Liked Mods</option>
+        <option id="favorite-mods" value="{{favids}}">Favorite Mods</option> -->
+        <option id="SimpleMods" value="SimpleMods" selected>All Mods</option>
+        <option id="timeline" value="timeline">Timeline</option>
+        <option id="follwedInterest" value="follwedInterest">Followed Interests Mods</option>
+        <option id="FollowedMembers" value="FollowedMembers">Followed Members Mods</option>
+        <option id="LikedMods" value="LikedMods">Liked Mods</option>
+        <option id="FavoriteMods" value="FavoriteMods">Favorite Mods</option>
+      </select>
+      <hr />
+      <div class="border p-2 mb-2">
+
+        <select name="cars" id="carsff5" [ngClass]="{'highlightfilter': modfilters?.rvTypeFilter}"
+          (change)="modfilters.makeFilter = '';modfilters.modelValue = '';searchValue();getFiltersMake();"
+          class="form-control mb-2" [(ngModel)]="modfilters.rvTypeFilter">
+          <!-- <option value="" selected disabled>Select Make</option> -->
+          <option value="">All Classes</option>
+          <option *ngFor="let item of rvTypes" value="{{item.detail.value}}">{{item.description}}</option>
+
+        </select>
+        <select name="cars" 
+          [ngClass]="{'highlightfilter': modfilters?.makeFilter}" id="cars5"
+          (change)="modfilters.modelValue = '';searchValue();getFilterModels();" class="form-control mb-2"
+          [(ngModel)]="modfilters.makeFilter">
+          <option value="">All Makes</option>
+          <option *ngFor="let item of MakesFilters" value="{{item.id}}">{{item.name}}</option>
+
+        </select>
+        <select [disabled]="!modfilters?.makeFilter" [(ngModel)]="modfilters.modelValue"
+          [ngClass]="{'highlightfilter': modfilters?.modelValue}" (change)="searchValue()" class="form-control"
+          name="model" id="model">
+          <option value="">Choose Series</option>
+          <option *ngFor="let item of filterModels" value="{{item.id}}">{{item.name}}</option>
+        </select>
+      </div>
+      <!-- <div class="border p-2 mt-2"> -->
+      <select name="Year" id="Year" (change)="searchValue()" [ngClass]="{'highlightfilter': modfilters?.yearValue}"
+        [(ngModel)]="modfilters.yearValue" class="form-control mb-2">
+        <option value=""> Choose Year</option>
+        <option value="{{item}}" *ngFor="let item of years">{{item}}</option>
+      </select>
+      <select name="cars" id="cars5" (change)="searchValue()" [ngClass]="{'highlightfilter': modfilters?.size}"
+        [(ngModel)]="modfilters.size" class="form-control mb-2">
+        <option value="">Choose Size</option>
+        <option *ngFor="let item of difficulties" title="{{item.description}}" value="{{item.id}}">{{item.name}}
+        </option>
+      </select>
+      <select name="cars" id="cars5" (change)="searchValue()"
+        [ngClass]="{'highlightfilter': modfilters?.modCategoryValue}" [(ngModel)]="modfilters.modCategoryValue"
+        class="form-control mb-2">
+        <option value="">Choose Category</option>
+        <option *ngFor="let item of modCategories" value="{{item.id}}">{{item.name}}</option>
+
+      </select>
+      <!-- </div> -->
+      <!-- <div class="border p-2 mt-2"> -->
+      <select name="cars" id="cars5" (change)="searchValue()" [ngClass]="{'highlightfilter': modfilters?.skillLevel}"
+        [(ngModel)]="modfilters.skillLevel" class="form-control mb-2">
+        <option value="">Choose Difficulty</option>
+        <option *ngFor="let item of skillLevelNeeded" value="{{item?.id}}">{{item.name}}</option>
+
+      </select>
+      <select name="cars" id="cars5" (change)="searchValue()" [ngClass]="{'highlightfilter': modfilters?.timerange}"
+        [(ngModel)]="modfilters.timerange" class="form-control mb-2">
+        <option value="">Choose Total Time</option>
+        <option *ngFor="let item of timeRanges" value="{{item?.totalHours}}">{{item.totalHours}}</option>
+      </select>
+      <div class="date_range padding_input">
+        <input type="text" name="daterange"
+          [ngClass]="{'highlightfilter': modfilters?.startDate || modfilters?.endDate }" (change)="searchValue()"
+          ngxDaterangepickerMd [(ngModel)]="selectedDate" class="form-control" placeholder="Select Date Range" />
+      </div>
+      <div class="padding_input">
+        <input type="text" name="search" [ngClass]="{'highlightfilter': modfilters?.search}"
+          (keyup.enter)="searchValue()" [(ngModel)]="modfilters.search" class="form-control mt-2 fs"
+          placeholder="Search Title & Summary (Press Enter to search)" />
+      </div>
+      <!-- <label for="customRange3" class="form-label">Date Range</label> <br />
+    <input type="range" class="form-range w-100" min="0" max="5" step="0.5" id="customRange3"> -->
+      <!-- </div> -->
+      <!-- <div class="form-group has-search">
+          <span class="fa fa-search form-control-feedback"></span>
+          <input type="text" class="form-control" (change)="searchValue()" [(ngModel)]="modfilters.tag"  placeholder="Search">
+        </div> -->
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade modal-p-bottom" id="modalPBottom">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="box shadow bg-white p-3">
+          <h4 class="d-flex justify-content-between top_head"> Filters <i class="fa fa-times close" data-dismiss="modal"
+              aria-label="Close"></i></h4>
+              <hr />
+              <select *ngIf="user" [(ngModel)]="modfilters.type" (change)="resetCount();searchValue();" name="mods" id="mods" class="form-control mb-2">
+               
+                <option id="SimpleMods" value="SimpleMods" selected>All Mods</option>
+                <option id="timeline" value="timeline">Timeline</option>
+                <option id="follwedInterest" value="follwedInterest">Followed Interests Mods</option>
+                <option id="FollowedMembers" value="FollowedMembers">Followed Members Mods</option>
+                <option id="LikedMods" value="LikedMods">Liked Mods</option>
+                <option id="FavoriteMods" value="FavoriteMods">Favorite Mods</option>
+              </select>
+          <div class="border p-2 mb-2 mt-3">
+
+            <select name="cars" id="cars5" [ngClass]="{'highlightfilter': modfilters?.rvTypeFilter}"
+              (change)="modfilters.makeFilter = '';modfilters.modelValue = '';searchValue();getFiltersMake();"
+              class="form-control mb-2" [(ngModel)]="modfilters.rvTypeFilter">
+              <!-- <option value="" selected disabled>Select Make</option> -->
+              <option value="">Choose Class</option>
+              <option *ngFor="let item of rvTypes" value="{{item.detail.value}}">{{item.description}}</option>
+
+            </select>
+            <select name="cars" [disabled]="!modfilters?.rvTypeFilter"
+              [ngClass]="{'highlightfilter': modfilters?.makeFilter}" id="cars5"
+              (change)="modfilters.modelValue = '';searchValue();getFilterModels();" class="form-control mb-2"
+              [(ngModel)]="modfilters.makeFilter">
+              <option value="">Choose Make</option>
+              <option *ngFor="let item of MakesFilters" value="{{item.id}}">{{item.name}}</option>
+
+            </select>
+            <select [disabled]="!modfilters?.makeFilter" [(ngModel)]="modfilters.modelValue"
+              [ngClass]="{'highlightfilter': modfilters?.modelValue}" (change)="searchValue()" class="form-control"
+              name="model" id="model">
+              <option value="">Choose Series</option>
+              <option *ngFor="let item of filterModels" value="{{item.id}}">{{item.name}}</option>
+            </select>
+          </div>
+          <!-- <div class="border p-2 mt-2"> -->
+          <select name="Year" id="Year" (change)="searchValue()" [ngClass]="{'highlightfilter': modfilters?.yearValue}"
+            [(ngModel)]="modfilters.yearValue" class="form-control mb-2">
+            <option value=""> Choose Year</option>
+            <option value="{{item}}" *ngFor="let item of years">{{item}}</option>
+          </select>
+          <select name="cars" id="cars5" (change)="searchValue()" [ngClass]="{'highlightfilter': modfilters?.size}"
+            [(ngModel)]="modfilters.size" class="form-control mb-2">
+            <option value="">Choose Size</option>
+            <option *ngFor="let item of difficulties" title="{{item.description}}" value="{{item.id}}">{{item.name}}
+            </option>
+          </select>
+          <select name="cars" id="cars5" (change)="searchValue()"
+            [ngClass]="{'highlightfilter': modfilters?.modCategoryValue}" [(ngModel)]="modfilters.modCategoryValue"
+            class="form-control mb-2">
+            <option value="">Choose Category</option>
+            <option *ngFor="let item of modCategories" value="{{item.id}}">{{item.name}}</option>
+
+          </select>
+          <!-- </div> -->
+          <!-- <div class="border p-2 mt-2"> -->
+          <select name="cars" id="cars5" (change)="searchValue()"
+            [ngClass]="{'highlightfilter': modfilters?.skillLevel}" [(ngModel)]="modfilters.skillLevel"
+            class="form-control mb-2">
+            <option value="">Choose Difficulty</option>
+            <option *ngFor="let item of skillLevelNeeded" value="{{item?.id}}">{{item.name}}</option>
+
+          </select>
+          <select name="cars" id="cars5" (change)="searchValue()" [ngClass]="{'highlightfilter': modfilters?.timerange}"
+            [(ngModel)]="modfilters.timerange" class="form-control mb-2">
+            <option value="">Choose Total Time</option>
+            <option *ngFor="let item of timeRanges" value="{{item?.totalHours}}">{{item.totalHours}}</option>
+          </select>
+          <div class="date_range padding_input">
+            <input type="text" name="daterange"
+              [ngClass]="{'highlightfilter': modfilters?.startDate || modfilters?.endDate }" (change)="searchValue()"
+              ngxDaterangepickerMd [(ngModel)]="selectedDate" class="form-control" placeholder="Select Date Range" />
+          </div>
+          <div class="padding_input">
+            <input type="text" name="search" [ngClass]="{'highlightfilter': modfilters?.search}"
+              (keyup.enter)="searchValue()" [(ngModel)]="modfilters.search" class="form-control mt-2"
+              placeholder="Search Title & Summary (Press Enter to search)" />
+          </div>
+          <div class="text-right mt-4">
+            <button class="btn btn-danger" (click)="reset()">Reset</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>

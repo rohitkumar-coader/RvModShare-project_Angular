@@ -1,0 +1,665 @@
+<ngx-spinner bdColor="#fff" size="" color="#fff">
+  <div class='ajax-spinner-bars'>
+    <div class='bar-1'></div>
+    <div class='bar-2'></div>
+    <div class='bar-3'></div>
+    <div class='bar-4'></div>
+    <div class='bar-5'></div>
+    <div class='bar-6'></div>
+    <div class='bar-7'></div>
+    <div class='bar-8'></div>
+    <div class='bar-9'></div>
+    <div class='bar-10'></div>
+    <div class='bar-11'></div>
+    <div class='bar-12'></div>
+    <div class='bar-13'></div>
+    <div class='bar-14'></div>
+    <div class='bar-15'></div>
+    <div class='bar-16'></div>
+  </div>
+</ngx-spinner>
+<div class="container-fluid mt-5 pt-5 main-content">
+  <!-- This is a Login Form -->
+  <section class="dispen-dashboard">
+    <div class="container-flude">
+      <div class="row m-0">
+        <div class="col-sm-12 p-0">
+          <app-user-sidebar></app-user-sidebar>
+          <!-- Chat design -->
+          <div class="tab-content-wrapper clearfix">
+            <div class="tab-pane">
+              <div class="inn-container">
+                <div class="home-page__content messages-page">
+                  <div class="container-fluid h-100 p-0">
+                    <div class="row">
+                      <div class="col-md-6 mx-auto">
+
+
+
+                        <!-- <div class="profile_textarea w-100 pb-3 ">
+                          <div class="d-flex">
+                            <img *ngIf="!user?.image" class="img-responsive rounded mr-2" src="assets/img/user.png">
+                            <img *ngIf="user?.image" class="img-responsive rounded mr-2"
+                              src="{{getUrl(user?.image,user)}}">
+                            <form method="post" class="w-100">
+                              <textarea rows="2" readonly class="form-control w-100 border-none"
+                                placeholder="What's happening in your RV life?"
+                                (click)="openEditSocialPost()"></textarea>
+                            </form>
+                          </div>
+                        </div> -->
+
+                        <ul class="nav nav-pills mb-2 filterTabs" id="pills-tab" role="tablist">
+                          <li class="nav-item">
+                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
+                              role="tab" aria-controls="pills-home" aria-selected="true" (click)="allFriends()
+                              ">Following</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" id="pills-mod-contact-tab" data-toggle="pill" href="#pills-mod-contact"
+                              role="tab" aria-controls="pills-mod-contact" (click)="getRVModfriendList()"
+                              aria-selected="false">Followers</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
+                              role="tab" aria-controls="pills-profile" aria-selected="false">Find</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact"
+                              role="tab" aria-controls="pills-contact" (click)="getSuggestedRVfriendList()"
+                              aria-selected="false">Suggested</a>
+                          </li>
+
+
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                          <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                            aria-labelledby="pills-home-tab">
+                            <div class="contacts">
+
+                              <div id="custom-search-input" class="mb-3">
+                                <div class="input-group col-md-12">
+
+                                  <input style="border-radius: 50px !important" *ngIf="showFriendList"
+                                    class="form-control input-lg" id="search" name="search" placeholder="Search"
+                                    type="text" autocomplete="new-password" [(ngModel)]="addedFriendSearch" (keyup)="allFriends()
+                                      " />
+                                  <i class="fa fa-search frnds"></i>
+
+                                </div>
+                              </div>
+                              <span *ngIf="showFriendList">
+                                <div id="{{item.email}}" class="contact hoverCls"
+                                  *ngFor="let item of getFriendList;let i=index">
+                                  <span *ngIf="item?.id!=user?.id">
+                                    <div class="pic rogers" (click)="selectedUser(item, item?.id);">
+                                      <img *ngIf="!item?.image" src="assets/img/user.png" class="dummy-user-img" />
+                                      <img *ngIf="item?.image" class="dummy-user-img"
+                                        src="{{getUrl(item?.image,item)}}" />
+
+                                    </div>
+
+                                    <!-- <div class="dropdown ic" *ngIf="showFriendList">
+                                      <button class="btn btn-primary dropdown-toggle" type="button"
+                                        data-toggle="dropdown">
+                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                      </button>
+                                      <ul class="dropdown-menu" style="position: absolute;
+                                      transform: translate3d(0px, 43px, 0px);
+                                      top: 0px; left: initial; right: 0px !important;">
+
+                                        <a class="dropdown-item" href="javascript:void(0)" (click)="
+                                             viewProfile(item.id)">View Profile</a> 
+                                      </ul>
+                                    </div>  -->
+
+                                    <div class="ml-2 d-flex flex-wrap align-items-center justify-content-between">
+                                      <div class="width_content" (click)="selectedUser(item, item?.id)">
+                                        <div class="name" (click)="remove();">
+                                          {{ item?.fullName }}
+                                        </div>
+                                        <!-- <div class="message mb-2">
+                                          <span *ngIf="!item?.isOnline">
+                                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>Offline
+                                          </span>
+                                          <span *ngIf="item?.isOnline">
+                                            <i class="fa fa-circle" aria-hidden="true"></i>Online
+                                          </span>
+                                        </div> -->
+                                      </div>
+                                      <button class="btn btn-primary"
+                                        (click)="followMod(item?.id,'myFriend',i)">Following</button>
+                                      <!-- <div>
+                                        <button *ngIf="item?.isFriend" class="btn imgBtn padding-plus mr-1"
+                                          (click)="unFriend(item?.id,'myFriend',i)" ngbTooltip="Unconnect"
+                                          placement="bottom"><img class="follow-img"
+                                            src="assets/img/delete-user-svgrepo-com.svg" alt=""></button>
+                                        <div *ngIf="item?.isPending" class="text-left dBlock mr-1"
+                                          (click)="cancelRequest(item?.id,'myFriend',i)">
+                                          <button class="btn imgBtn padding-plus" ngbTooltip="Cancel Request"
+                                            placement="bottom"> <img class="follow-img"
+                                              src="assets/img/CancelRequest.png" alt=""></button>
+                                        </div>
+                                        <div *ngIf="item?.isPending" class="text-left" style="display: inline-block;">
+                                          <button class="btn imgBtn padding-plus mr-1" ngbTooltip="Pending"
+                                            placement="bottom"> <img class="follow-img" src="assets/img/pannding.png"
+                                              alt=""></button>
+                                        </div> 
+
+                                      </div> -->
+                                    </div>
+
+
+                                  </span>
+
+                                </div>
+
+                              </span>
+
+
+
+                            </div>
+                          </div>
+                          <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                            aria-labelledby="pills-profile-tab">
+                            <div class="contacts">
+                              <div id="custom-search-input" class="mb-3">
+                                <div class="input-group col-md-12">
+                                  <input style="border-radius: 50px !important" *ngIf="showFriendList"
+                                    class="form-control input-lg" id="search" name="search"
+                                    placeholder="Find a member to connect with" type="text" autocomplete="off"
+                                    [(ngModel)]="addFriendSearch" (keyup)="suggestedFriendList()
+                                      " />
+                                  <i class="fa fa-search frnds"></i>
+                                </div>
+                              </div>
+                              <span *ngIf="showFriendList">
+                                <div class="contact hoverCls" *ngFor="let item of userList;let i=index">
+
+                                  <span>
+                                    <div class="pic rogers conn">
+                                      <img *ngIf="!item.image" src="assets/img/user.png" class="dummy-user-img" />
+                                      <img *ngIf="item?.image" class="dummy-user-img"
+                                        src="{{getUrl(item?.image,item)}}" />
+
+                                    </div>
+                                    <!-- <div class="dropdown ic" *ngIf="showFriendList">
+                                      <button class="btn btn-primary dropdown-toggle" type="button"
+                                        data-toggle="dropdown">
+                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                      </button>
+                                      <ul class="dropdown-menu">
+
+                                        <a class="dropdown-item" href="javascript:void(0)" (click)="
+                                             viewProfile(item.id)">View Profile</a> 
+                                      </ul>
+                                    </div> -->
+                                    <div class="ml-2 d-flex flex-wrap align-items-center justify-content-between">
+                                      <div class="width_content">
+
+                                        <div class="name">
+                                          {{ item?.fullName }}
+                                        </div>
+                                        <!-- <div class="message">
+                                          <span *ngIf="!item?.isOnline">
+                                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>Offline
+                                          </span>
+                                          <span *ngIf="item?.isOnline">
+                                            <i class="fa fa-circle" aria-hidden="true"></i>Online
+                                          </span>
+                                        </div> -->
+
+                                      </div>
+                                      <div>
+                                        <button class="btn btn-primary"
+                                          (click)="followMod(item?.id,'normalFriend',i)">Follow</button>
+                                        <!-- <button *ngIf="item?.isFriend" class="btn imgBtn padding-plus mr-1"
+                                          (click)="unFriend(item?.id,'normalFriend',i)" ngbTooltip="Unconnect"
+                                          placement="bottom"><img class="follow-img"
+                                            src="assets/img/delete-user-svgrepo-com.svg" alt=""></button>
+                                        <div *ngIf="!item.isPending && !item?.isFriend" class="text-left dBlock mr-2"
+                                          (click)="addFriend(item?.id,'normalFriend',i)">
+                                          <button class="btn imgBtn padding-plus" ngbTooltip="Request Social Connection"
+                                            placement="bottom"> <img class="follow-img"
+                                              src="assets/img/add-plus-svgrepo-com.svg" alt="">
+                                          </button>
+                                        </div>
+                                        <div *ngIf="item.isPending" class="text-left dBlock mr-2"
+                                          (click)="cancelRequest(item.id,'normalFriend',i)">
+                                          <button class="btn imgBtn padding-plus" ngbTooltip="Cancel Request"
+                                            placement="bottom"><img class="follow-img"
+                                              src="assets/img/CancelRequest.png" alt=""></button>
+                                        </div>
+                                        <div *ngIf="item.isPending" class="text-left" style="display: inline-block;">
+                                          <button class="btn imgBtn padding-plus mr-2" ngbTooltip="Pending"
+                                            placement="bottom"> <img class="follow-img" src="assets/img/pannding.png"
+                                              alt=""></button>
+                                        </div>
+                                        <button *ngIf="!item?.isFollow" class="btn imgBtn padding-plus mr-2"
+                                          (click)="followMod(item?.id,'normalFriend',i)" placement="bottom"
+                                          ngbTooltip="Make Mod Connection"><img class="follow-img"
+                                            src="assets/img/follow.svg" alt=""></button>
+                                        <button class="btn imgBtn padding-plus mr-2" *ngIf="item?.isFollow"
+                                          (click)="followMod(item?.id,'normalFriend',i)" placement="bottom"
+                                          ngbTooltip="Unconnect"><img class="unfollow-img" src="assets/img/unfollow.svg"
+                                            alt=""></button> -->
+
+
+                                      </div>
+
+
+                                    </div>
+
+                                  </span>
+
+
+                                </div>
+                                <div class="button-acc-dec" *ngIf="userList.length == 0">
+                                  <p class="text-center">Start typing to search for a member</p>
+                                </div>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                            aria-labelledby="pills-contact-tab">
+                            <div class="col-md-12 p-0" *ngIf="showFriendList">
+                              <div class="shadow my-frnd bg-white">
+
+
+                                <div id="custom-search-input" class="mb-3">
+                                  <div class="input-group col-md-12">
+                                    <input class="form-control input-lg" id="search" name="search"
+                                      placeholder="Search/ Add Connection" type="text" autocomplete="off"
+                                      [(ngModel)]="searchKeyword" (keyup)="getSuggestedRVfriendList()" />
+
+                                    <i class="fa fa-search frnds"></i>
+                                    <div class="button-acc-dec small_font mt-1">
+                                      <p class="mb-0">Suggestions are based on common connections, group membership,
+                                        registered with the same type of RV, or have similar
+                                        followed interests.</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="search-lists loca-trank">
+                                  <ul id="mylist">
+                                    <li class="filter-lop" *ngFor="let item of suggestedRVfriends;let i=index">
+                                      <div class="contact hoverCls">
+                                        <div class="pic rogers">
+
+                                          <img *ngIf="!item.image" src="assets/img/user.png" class="dummy-user-img" />
+                                          <img *ngIf="item?.image" class="dummy-user-img"
+                                            src="{{getUrl(item?.image,item)}}" />
+
+                                        </div>
+
+                                        <!-- <div class="dropdown ic" *ngIf="showFriendList">
+                                          <button class="btn btn-primary dropdown-toggle" type="button"
+                                            data-toggle="dropdown">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                          </button>
+                                          <ul class="dropdown-menu">
+
+                                            <a class="dropdown-item" href="javascript:void(0)" (click)="
+                                             viewProfile(item.id)">View Profile</a> 
+                                          </ul>
+                                        </div> -->
+
+                                        <div class="ml-2 d-flex flex-wrap align-items-center justify-content-between">
+                                          <div class="width_content">
+                                            <div class="name">{{
+                                              item?.fullName }} </div>
+                                            <!-- <div class="message mb-2">
+                                              <span *ngIf="!item?.isOnline">
+                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>Offline
+                                              </span>
+                                              <span *ngIf="item?.isOnline">
+                                                <i class="fa fa-circle" aria-hidden="true"></i>Online
+                                              </span>
+                                            </div> -->
+                                          </div>
+                                          <div>
+                                            <button class="btn btn-primary"
+                                              (click)="followMod(item?.id,'suggestedRvfriend',i)">Follow</button>
+                                            <!-- <button *ngIf="item?.isFriend" class="btn imgBtn padding-plus mr-1"
+                                              (click)="unFriend(item?.id,'suggestedRvfriend',i)" ngbTooltip="Unconnect"
+                                              placement="bottom"><img class="follow-img"
+                                                src="assets/img/delete-user-svgrepo-com.svg" alt=""></button>
+                                            <div *ngIf="item?.isPending" class="text-left dBlock mr-2"
+                                              (click)="cancelRequest(item?.id,'suggestedRvfriend',i)">
+                                              <button class="btn imgBtn text-danger padding-plus"
+                                                ngbTooltip="Cancel Request" placement="bottom"> <img class="follow-img"
+                                                  src="assets/img/CancelRequest.png" alt=""></button>
+                                            </div>
+                                            <div class="connection" *ngIf="!item.isPending && !item.isFriend"
+                                              (click)="addFriend(item?.id,'suggestedRvfriend',i)">
+                                              <button class="btn imgBtn padding-plus mr-2"
+                                                ngbTooltip="Request Social Connection" placement="bottom"><img
+                                                  class="follow-img" src="assets/img/add-plus-svgrepo-com.svg"
+                                                  alt=""></button>
+                                            </div>
+                                            <div *ngIf="item?.isPending" class="text-left"
+                                              style="display: inline-block;">
+                                              <button class="btn imgBtn padding-plus mr-2" ngbTooltip="Pending"
+                                                placement="bottom"> 
+                                                <img class="follow-img" src="assets/img/pannding.png" alt="">
+                                              </button>
+                                            </div>
+                                            <button *ngIf="!item?.isFollow" class="btn imgBtn padding-plus mr-2"
+                                              (click)="followMod(item?.id,'suggestedRvfriend',i)"
+                                              ngbTooltip="Make Mod Connection" placement="bottom"><img
+                                                class="follow-img" src="assets/img/follow.svg" alt=""></button>
+
+                                            <button class="btn imgBtn padding-plus mr-2" *ngIf="item?.isFollow"
+                                              (click)="followMod(item?.id,'suggestedRvfriend',i)" placement="bottom"
+                                              ngbTooltip="Unconnect"><img class="unfollow-img"
+                                                src="assets/img/unfollow.svg" alt=""></button> -->
+                                          </div>
+
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <div class="button-acc-dec" *ngIf="suggestedRVfriends.length == 0">
+                                      <p class="text-center">Select your profile with suggested mods</p>
+                                    </div>
+
+                                  </ul>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane fade" id="pills-mod-contact" role="tabpanel"
+                            aria-labelledby="pills-mod-contact-tab">
+                            <div class="col-md-12 p-0" *ngIf="showModFriendList">
+                              <div class="shadow my-frnd bg-white">
+
+
+                                <div id="custom-search-input" class="mb-3">
+                                  <div class="input-group col-md-12">
+                                    <input class="form-control input-lg" id="search" name="search"
+                                      placeholder="Search Your Mod Connections" type="text" autocomplete="off"
+                                      [(ngModel)]="modFriendKeyword" (keyup)="getRVModfriendList()" />
+
+                                    <i class="fa fa-search frnds"></i>
+                                  </div>
+                                </div>
+                                <div class="search-lists loca-trank">
+                                  <ul id="mylist">
+                                    <li class="filter-lop" *ngFor="let item of ModRVfriends;let i=index">
+                                      <div class="contact hoverCls" *ngIf="item?.isUserExist">
+                                        <div class="pic rogers">
+                                          <img *ngIf="!item?.image" src="assets/img/user.png"
+                                            class="filter-user-img mr-0" />
+                                          <img *ngIf="item.image" class="filter-user-img"
+                                            src="{{getUrl(item?.image,item)}}" />
+                                        </div>
+
+                                        <!-- <div class="dropdown ic" *ngIf="showFriendList">
+                                          <button class="btn btn-primary dropdown-toggle" type="button"
+                                            data-toggle="dropdown">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                          </button>
+                                          <ul class="dropdown-menu">
+
+                                            <a class="dropdown-item" href="javascript:void(0)" (click)="
+                                           viewProfile(item.id)">View Profile</a> 
+                                          </ul>
+                                        </div> -->
+                                        <div class="ml-2 d-flex flex-wrap align-items-center justify-content-between">
+
+                                          <div class="width_content">
+                                            <div class="name"> {{ item?.fullName }} </div>
+                                            <!-- <div class="message mb-2">
+                                              <span *ngIf="!item?.isOnline">
+                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>Offline
+                                              </span>
+                                              <span *ngIf="item?.isOnline">
+                                                <i class="fa fa-circle" aria-hidden="true"></i>Online
+                                              </span>
+                                            </div> -->
+                                          </div>
+
+
+
+
+                                          <div>
+                                            <button class="btn btn-primary"
+                                              (click)="followMod(item?.id,'myModFriends',i)">Follow</button>
+                                            <!-- <button class="btn imgBtn padding-plus" *ngIf="item?.isFollow"
+                                              (click)="followMod(item?.id,'myModFriends',i)" placement="bottom"
+                                              ngbTooltip="Unconnect"><img class="unfollow-img"
+                                                src="assets/img/unfollow.svg" alt=""></button> -->
+                                          </div>
+
+                                        </div>
+                                      </div>
+                                    </li>
+
+                                  </ul>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div class="col-md-8">
+                        <div class="desk-chat-show mb-4">
+                          <div class="chat-design">
+                            <div class="center">
+
+
+                              <div class="chat" [ngClass]="{'dCls': dnone}" *ngIf="showChat">
+                                <div class="contact bar">
+                                  <div class="pic stark" [routerLink]="['/friend-profile']"
+                                    [queryParams]="{id: selectedUserData?.userId}">
+                                    <img *ngIf="!selectedUserData?.image" src="assets/img/user.png"
+                                      class="rounded-img-user" />
+                                    <img *ngIf="selectedUserData?.image" class="rounded-img-user"
+                                      src="{{getUrl(selectedUserData?.image,selectedUserData)}}" />
+                                    <div class="active-away chat-icon">
+                                      <i class="fa fa-circle" aria-hidden="true"
+                                        *ngIf="selectedUserData?.activityStatus"></i>
+                                      <i class="fa fa-exclamation-circle" aria-hidden="true"
+                                        *ngIf="!selectedUserData?.activityStatus"></i>
+                                    </div>
+                                  </div>
+                                  <div [routerLink]="['/friend-profile']" [queryParams]="{id: selectedUserData?.userId}"
+                                    class="name header" style="  line-height: 3;">
+                                    {{ selectedUserData?.name }}
+                                  </div>
+                                  
+                                  <div class="dropdown ic" *ngIf="showFriendList">
+                                    <a class="AlignCenter" (click)="remove();"><i class="fa fa-times"
+                                        aria-hidden="true"></i></a>
+                                    <button class="btn btn-primary dropdown-toggle" type="button"
+                                      data-toggle="dropdown">
+                                      <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <li *ngIf="selectedUserData?.isFriend">
+                                        <a href="javascript:void(0)" (click)="
+                                                blockFriend(
+                                                  selectedUserData?.id,
+                                                  true
+                                                )
+                                              ">Block</a>
+                                      </li>
+                                      
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="bg">
+                                  <div class="messages" id="chat" #scrollMe [scrollTop]="scrollMe?.scrollHeight">
+                                  
+                                    <div *ngFor="let chat of chat_history">
+                                      <div [ngClass]="{
+                                            'user-left': user.email != msg.from,
+                                            'user-right': user.email === msg.from
+                                          }" *ngFor="let msg of chat.messages">
+                                        {{ msg.message }}
+                                        <div class="timedate">
+                                          {{ msg.date_time | date: "medium" }}
+                                        </div>
+                                        <div class="text attachment shadow bg-white"
+                                          *ngIf="msg.message == 'attachment'">
+                                          <a target="_blank" class="attachement-text"
+                                            *ngIf="msg?.message == 'attachment'" href="{{chat_url}}{{
+                                                msg?.img
+                                              }}"><img class="attachImg" src="{{chat_url}}{{
+                                                  msg?.img
+                                                }}" /></a>
+                                        </div>
+
+                                        <span class="sindal-tick" *ngIf="
+                                              !msg.receiver_readStatus &&
+                                              user.email == msg.from
+                                            ">
+                                          <i class="fa fa-check" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="tick" *ngIf="
+                                              msg.receiver_readStatus &&
+                                              user.email == msg.from
+                                            ">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15"
+                                            id="msg-dblcheck-ack" x="2063" y="2076">
+                                            <path
+                                              d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"
+                                              fill="#4fc3f7" />
+                                          </svg>
+                                        </span>
+
+                                        <div *ngIf="user.email == msg.from" class="action_icon text-right">
+                                          <a (click)="deleteMessage(msg)"><i class="fa fa-trash"></i></a>
+                                        </div>
+
+                                      </div>
+                                      <div class="progress mb-3" *ngIf="progress > 0 && progress < 100">
+                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                                          [style.width.%]="progress"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="input">
+                               
+                                  <input placeholder="Type your message here!" (keyup)="
+                                          $event.keyCode == 13 && sendMessage()
+                                        " [(ngModel)]="newMessage" type="text" />
+                                
+                                  <input type="file" class="d-block" id="file"
+                                    accept="image/gif, image/jpeg, image/png, image/jpg, image/JPG, image/PNG" (change)="
+                                          handleFileInput($event.target.files)
+                                        " />
+                                  <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                  
+                                  <i class="fa fa-paper-plane" aria-hidden="true" (click)="sendMessage()"></i>
+                                </div>
+                              </div>
+                              <div class="chat h-auto text-center mb-4" style="display: grid; justify-content: center"
+                                *ngIf="!showChat">
+
+                                <div class="row align-items-center m-0 p-2">
+
+                                  <div class="col-md-6">
+                                    <img class="no-user" src="assets/img/chatlandingimage.png" />
+                                  </div>
+                                  <div class="col-md-6">
+                                   
+                                    <div class="chat_list text-left">
+                                      <div class="chat_heading mb-4"><span>Social Connections</span></div>
+                                      <ul>
+                                        <li>Social connections allow you to message other members and see their social
+                                          posts on your Home page.
+                                        </li>
+                                        <li>They are a simple version of social network friends.</li>
+                                        <li>You request connecting to a member by clicking the <img
+                                            src="assets/img/add-plus-svgrepo-com.svg" class="img_size" alt=""> icon next
+                                          to their name.</li>
+                                        <li>When you receive a connection request in your notifications, you can accept
+                                          or reject it.</li>
+                                        <li>To message a connection, just click their profile photo.</li>
+                                      </ul>
+                                      <div class="chat_heading mb-4 mt-4"><span>Mod Connections</span></div>
+                                      <ul>
+                                        <li>Mod connections are how you see selected member's mods on your Home page.
+                                        </li>
+                                        <li>You don't have to be socially connected to see a member's mods.</li>
+                                        <li>You follow the mods of members by clicking the <img
+                                            src="assets/img/unfollow.svg" class="img_size" alt=""> icon.</li>
+                                      </ul>
+                                    </div>
+                                  </div>
+
+                                </div>
+                              </div>
+                            </div>
+
+                            
+
+                          </div>
+                        </div>
+                      </div> -->
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- profile modal -->
+  <div class="modal fade" id="profilemodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Blocked Connections</h5>
+        </div>
+        <div class="modal-body" style="padding-top: 0px">
+          <div class="container w-100">
+            <div class="row" *ngFor="let item of blockedUsers" style="
+                display: flex;
+                border-bottom: 1px solid #ccc;
+                padding-bottom: 10px;
+              ">
+              <div class="section-profile d-flex">
+                <div class="col-md-2">
+                  <div class="profile-block-user">
+                    <img *ngIf="!item?.recipientId?.image" src="assets/img/user.png" class="block-user-img" />
+                    <img *ngIf="item?.recipientId?.image" class="block-user-img"
+                      src="{{getUrl(item?.recipientId?.image,item?.recipientId)}}" />
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h6 class="user-name">{{ item?.recipientId?.fullName }}</h6>
+                </div>
+                <div class="col-md-4 text-center">
+                  <button type="button" class="btn btn-primary un-block"
+                    (click)="blockFriend(item.recipientId.id, false)">
+                    Unblock
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="button-acc-dec" *ngIf="blockedUsers.length == 0">
+              <p class="text-center">No data found</p>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" #closeModal class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

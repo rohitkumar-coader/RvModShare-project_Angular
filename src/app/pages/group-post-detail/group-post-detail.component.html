@@ -1,0 +1,300 @@
+<ngx-spinner bdColor="#fff" size="" color="#fff">
+  <div class='ajax-spinner-bars'>
+    <div class='bar-1'></div>
+    <div class='bar-2'></div>
+    <div class='bar-3'></div>
+    <div class='bar-4'></div>
+    <div class='bar-5'></div>
+    <div class='bar-6'></div>
+    <div class='bar-7'></div>
+    <div class='bar-8'></div>
+    <div class='bar-9'></div>
+    <div class='bar-10'></div>
+    <div class='bar-11'></div>
+    <div class='bar-12'></div>
+    <div class='bar-13'></div>
+    <div class='bar-14'></div>
+    <div class='bar-15'></div>
+    <div class='bar-16'></div>
+  </div>
+</ngx-spinner>
+<div class="container mt-5 pt-5">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+          <div class="box shadows">
+            <div class="shadow p-3 mb-3">
+              <div class="header-post">
+
+                <article class="postTop">
+                  <div class="d-flex">
+                    <img class="img-responsive round mr-3"
+                      src="{{getUrl(groupDetail?.addedBy?.image,groupDetail?.addedBy)}}">
+
+                    <!-- <img *ngIf="group.addedBy?.gId" class="img-responsive round mr-3"
+                      src="{{_host}}images/group/{{item}}"> -->
+                    <div class="text-left">
+                      <p class="mb-0 pt-1">
+                        <a class="pointer-cursor"
+                          [routerLink]="[groupDetail?.addedBy?.id != credentials?.credentials?.id ? '/friend-profile' :'/dashboard/profile']"
+                          [queryParams]="{id: groupDetail?.addedBy?.id}">
+                          <b>{{groupDetail?.addedBy?.fullName | titlecase}}</b>
+                        </a>
+                        <!-- <img *ngIf="groupDetail?.addedBy?.isFoundingMember" ngbTooltip="Founding Member"
+                          class="badges tab" src="{{_host}}images/badges/{{groupDetail?.addedBy?.foundingMemberImage}}"
+                          (click)="getMagnifyImage(groupDetail?.addedBy?.foundingMemberImage)">
+                        <img *ngIf="groupDetail?.addedBy?.rankBadgeImage"
+                          ngbTooltip="{{groupDetail?.addedBy?.rankBadgeImage?.title}}" class="badges tab"
+                          src="{{_host}}images/badges/{{groupDetail?.addedBy?.rankBadgeImage?.image}}"
+                          (click)="getMagnifyImage(groupDetail?.addedBy?.rankBadgeImage?.image)">
+
+
+                        <img *ngIf="groupDetail?.addedBy?.modderBadgeImage" class="badges tab"
+                          ngbTooltip="{{groupDetail?.addedBy?.modderBadgeImage?.title}}"
+                          src="{{_host}}images/badges/{{groupDetail?.addedBy?.modderBadgeImage?.image}}"
+                          (click)="getMagnifyImage(groupDetail?.addedBy?.modderBadgeImage?.image)">
+                        <img *ngIf="groupDetail?.addedBy?.networkerImage"
+                          ngbTooltip="{{groupDetail?.addedBy?.networkerImage?.title}}" class="badges tab"
+                          src="{{_host}}images/badges/{{groupDetail?.addedBy?.networkerImage?.image}}"
+                          (click)="getMagnifyImage(groupDetail?.addedBy?.networkerImage?.image)">
+                        <img *ngIf="groupDetail?.addedBy?.ambassadorBadgeImage"
+                          ngbTooltip="{{groupDetail?.addedBy?.ambassadorBadgeImage?.title}}" class="badges tab"
+                          src="{{_host}}images/badges/{{groupDetail?.addedBy?.ambassadorBadgeImage?.image}}"
+                          (click)="getMagnifyImage(groupDetail?.addedBy?.ambassadorBadgeImage?.image)"> -->
+                      </p>
+                        <div class="common_badge">
+                          <a href="javascript:;">{{groupDetail?.addedBy?.rankBadgeImage?.title}}</a>
+                          <ul class="tooltiptext">
+                            <li><b>Points:</b> {{groupDetail?.addedBy?.rankPoints}}</li>
+                            <li><a href="https://endpoint.rvmodshare.com/images/modPost/f7b737b8-d7f2-4361-8ed3-d0a30cea6a1f1642682372997.pdf"
+                                target="_blank"><b>Badges & Rewards: </b> {{groupDetail?.addedBy?.rankBadgeImage?.title}}</a></li>
+                          </ul>
+                        </div>
+                      <p class="mb-0 pt-1 pre_line">{{groupDetail?.name}}</p>
+
+
+                    </div>
+
+                  </div>
+                </article>
+              </div>
+
+              <div class="post-img">
+                <!-- <img *ngIf="(groupDetail?.image && groupDetail?.image.length==0) || !groupDetail?.image" class="post-img" src="assets/img/user.png" alt=""> -->
+                <ngx-slick-carousel *ngIf="groupDetail?.image && groupDetail?.image.length>0" class="carousel"
+                  #slickModal="slick-carousel" [config]="slideConfig" (breakpoint)="breakpoint($event)">
+                  <div ngxSlickItem *ngFor="let item of groupDetail?.image" class="slide">
+                    <div class="picsum-img-wrapper">
+                      <img src="{{_host}}images/group/{{item}}" (click)="onClickImage()" alt=" slide">
+                    </div>
+                  </div>
+                </ngx-slick-carousel>
+                <div *ngIf="!groupDetail?.image || (groupDetail?.image && groupDetail?.image.length==0)"
+                  class="picsum-img-wrapper">
+                  <img class="img-responsive roundeds no" (click)="onClickImage()" src="assets/img/user.png">
+                </div>
+                <div *ngIf="!credentials?.credentials?.id" class="like-share d-flex pt-2 pb-2 justify-content-between">
+                  <p class="mb-0 pt-2" (click)="onClickImage()"><i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                    {{groupDetail?.likesTotal}} Likes</p>
+                  <div class="pull-right pt-2">
+                    <small class="mr-3" (click)="onClickImage()">{{groupDetail?.commentTotal}}
+                      Comments</small>
+                    <small (click)="onClickImage()"> {{groupDetail?.totalShare}} Shares</small>
+                  </div>
+
+
+                </div>
+                <div *ngIf="credentials?.credentials?.id" class="like-share d-flex pt-2 pb-2 justify-content-between">
+                  <p class="mb-0 pt-2" (click)="openLikeModal(groupDetail)"><i class="fa fa-thumbs-up"
+                      aria-hidden="true"></i>
+                    {{groupDetail?.likesTotal}} Likes</p>
+                  <div class="pull-right pt-2">
+                    <small class="mr-3" *ngIf="!groupDetail?.isCommentDisabled"
+                      (click)="readmoreLess();getComments()">{{groupDetail?.commentTotal}}
+                      Comments</small>
+                    <small (click)="OpenListingOfSharedUsers(groupDetail)"> {{groupDetail?.totalShare}} Shares</small>
+                  </div>
+
+
+                </div>
+              </div>
+              <hr style="margin: 0rem;" />
+              <div class="post-section pt-2 d-flex justify-content-between" *ngIf="credentials?.credentials?.id">
+                <span class="mb-0 mr-4" (click)="addLike(groupDetail?.addedBy?.id)"><i class="fa fa-thumbs-o-up bg mr-2"
+                    [ngClass]="{'text-primary': groupDetail?.likestatus}" aria-hidden="true"></i>Like</span>
+                <span class="mb-0 mr-4" *ngIf="!groupDetail?.isCommentDisabled"
+                  (click)="readmoreLess();getComments()"><i class="fa fa-commenting-o bg mr-2"
+                    aria-hidden="true"></i>Comment</span>
+                <span class="mb-0 mr-1" (click)="openshare()"><i class="fa fa-share bg" aria-hidden="true"></i>
+                  Share</span>
+              </div>
+
+              <article class="comments" *ngIf="groupDetail?.showMore && credentials?.credentials?.id">
+                <textarea *ngIf="!editComment" (keyup.enter)="addComment(null,groupDetail?.addedBy?.id)"
+                  [(ngModel)]="commentOnPost" placeholder="Post a comment..."
+                  class="form-control commentInput"></textarea>
+                <label *ngIf="!editComment">Press Enter to post.</label>
+                <div class="loaderDiv text-center" *ngIf="loader"> <img style="width: 50px;"
+                    src="assets/img/loader-img.gif"></div>
+                <article class="" *ngIf="!loader">
+                  <div class="commentItem" *ngFor="let comment of allComments;let i=index">
+                    <div class="d-flex mb-2">
+                      <img class="usercreate img-small" src="{{getUrl(comment?.userImage,comment)}}">
+                      <div class="user-name-rule bg-gray">
+                        <strong
+                          [routerLink]="[comment?.userId != credentials?.credentials?.id ? '/friend-profile' :'/dashboard/profile']"
+                          [queryParams]="{id: comment?.userId}"><a class="pointer-cursor">{{comment?.userFullName |
+                            titlecase}}</a></strong>
+                        <span class="ml-1">{{comment.createdAt | date:'short' }}</span>
+                        <a *ngIf="!editComment" class="public-bg d-block"> {{comment?.comment}}</a>
+                        <div *ngIf="editComment && commentData?.id==comment?.id">
+                          <textarea [(ngModel)]="commentOnPost" (keyup.enter)="submiteditComment(commentData,'comment')"
+                            class="form-control reply"> </textarea>
+                          <label>Press Enter to post.</label>
+                        </div>
+                        <div class="action_comment text-right mb-2">
+                          <a ngbTooltip="Reply" class="reply mr-2" (click)="replyClick(comment?.id)"><i
+                              class="fa fa-reply"></i></a>
+                          <a *ngIf="comment?.userId == credentials?.credentials?.id" ngbTooltip="Edit" class="edit mr-2"
+                            (click)="oneditComment(comment,'comment')"><i class="fa fa-edit"></i></a>
+                          <a *ngIf="comment?.userId == credentials?.credentials?.id" ngbTooltip="Delete"
+                            (click)="deleteComment(comment?.id,i,null,null,'comment')" class="delete mr-2"><i
+                              class="fa fa-trash"></i></a>
+                        </div>
+
+                      </div>
+                    </div>
+<article class="replyList">
+  <div class="replyForm" *ngIf="!editReply && replyForm == comment?.id">
+    <textarea [(ngModel)]="replyOnPost" (keyup.enter)="replyComment(comment?.id,'comment',groupDetail?.addedBy?.id)"
+      placeholder="Post a reply..." class="form-control"></textarea>
+    <label>Press Enter to post.</label>
+  </div>
+  <article class="replyItem align" *ngFor="let itm of comment?.reply;let j=index">
+    <div class="d-flex subReply">
+      <img class="usercreate" src="{{getUrl(itm?.userImage,itm)}}">
+      <div class="user-name-rule bg-gray">
+        <strong [routerLink]="[itm?.userId != credentials?.credentials?.id ? '/friend-profile' :'/dashboard/profile']"
+          [queryParams]="{id: itm?.userId}"><a class="pointer-cursor">{{itm?.userFullName |
+            titlecase}} </a><span style="font-weight: 300">{{itm?.createdAt | date:'short'
+            }}</span></strong>
+        <p class="mb-0 pt-1"></p>
+        <a *ngIf="!editReply  || commentData?.id!=itm?.id" class="public-bg"> {{itm?.comment}}</a>
+        <div *ngIf="editReply && commentData?.id==itm?.id">
+          <textarea [(ngModel)]="replyOnPost" (keyup.enter)="submiteditComment(commentData,'reply')"
+            class="form-control reply"> </textarea>
+          <label>Press Enter to post.</label>
+        </div>
+        <div class="action_comment text-right mb-2">
+          <a ngbTooltip="Reply" class="reply mr-2" (click)="replyClick(itm?.id)"><i class="fa fa-reply"></i></a>
+          <a *ngIf="itm?.userId == credentials?.credentials?.id" ngbTooltip="Edit" class="edit mr-2"
+            (click)="oneditComment(itm,'reply')"><i class="fa fa-edit"></i></a>
+          <a *ngIf="itm?.userId == credentials?.credentials?.id" (click)="deleteComment(itm?.id,i,j,null,'reply')"
+            ngbTooltip="Delete" class="delete mr-2"><i class="fa fa-trash"></i></a>
+        </div>
+      </div>
+    </div>
+    <article class="replyList">
+      <div class="replyForm" *ngIf="!editReply && replyForm == itm?.id">
+        <textarea [(ngModel)]="replyOnPost2" (keyup.enter)="replyComment(itm?.id,'reply',groupDetail?.addedBy?.id)"
+          placeholder="Post a reply..." class="form-control"></textarea>
+        <label>Press Enter to post.</label>
+      </div>
+      <article class="replyItem align" *ngFor="let reply of itm?.reply;let k=index">
+        <div class="d-flex subReply">
+          <img class="usercreate" src="{{getUrl(reply?.userImage,reply)}}">
+          <div class="user-name-rule bg-gray">
+            <strong
+              [routerLink]="[reply?.userId != credentials?.credentials?.id ? '/friend-profile' :'/dashboard/profile']"
+              [queryParams]="{id: reply?.userId}"><a class="pointer-cursor">{{reply?.userFullName |
+                titlecase}} </a><span style="font-weight: 300">{{reply?.createdAt | date:'short'
+                }}</span></strong>
+            <p class="mb-0 pt-1"></p>
+            <a *ngIf="!editReply || commentData?.id!=reply?.id" class="public-bg">
+              {{reply?.comment}}</a>
+            <div *ngIf="editReply && commentData?.id==reply?.id">
+              <textarea [(ngModel)]="replyOnPost" (keyup.enter)="submiteditComment(commentData,'reply')"
+                class="form-control reply"> </textarea>
+              <label>Press Enter to post.</label>
+            </div>
+            <div class="action_comment text-right mb-2">
+              <a ngbTooltip="Reply" class="reply mr-2" (click)="replyClick(reply?.id)"><i class="fa fa-reply"></i></a>
+              <a *ngIf="reply?.userId == credentials?.credentials?.id" ngbTooltip="Edit" class="edit mr-2"
+                (click)="oneditComment(reply,'reply')"><i class="fa fa-edit"></i></a>
+              <a *ngIf="reply?.userId == credentials?.credentials?.id"
+                (click)="deleteComment(reply?.id,i,j,k,'replyonreply')" ngbTooltip="Delete" class="delete mr-2"><i
+                  class="fa fa-trash"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="replyForm" *ngIf="!editReply && replyForm == reply?.id">
+          <textarea [(ngModel)]="replyOnPost3"
+            (keyup.enter)="replyComment(itm?.id,'replyonreply',groupDetail?.addedBy?.id)" placeholder="Post a reply..."
+            class="form-control"></textarea>
+          <label>Press Enter to post.</label>
+        </div>
+        <!-- <div class="replyForm" *ngIf="!editReply && replyForm == reply?.id">
+                              <textarea [(ngModel)]="replyOnPost3" (keyup.enter)="replyComment(reply?.id,'replyonreply',groupDetail?.addedBy?.id)"
+                                placeholder="Post a reply..." class="form-control"></textarea>
+                              <label>Press Enter to post.</label>
+                            </div> -->
+      </article>
+    </article>
+  </article>
+</article>
+                    <!-- <article class="replyList">
+                      <div class="replyForm" *ngIf="!editReply && replyForm == comment.id">
+                        <textarea [(ngModel)]="replyOnPost"
+                          (keyup.enter)="replyComment(comment.id,'comment',groupDetail?.addedBy?.id)"
+                          placeholder="Post a reply..." class="form-control"></textarea>
+                        <label>Press Enter to post.</label>
+                      </div>
+                      <article class="replyItem align" *ngFor="let itm of comment?.reply;let j=index">
+                        <div class="d-flex subReply">
+                          <img class="usercreate img-small" src="{{getUrl(itm?.userImage,itm)}}">
+                          <div class="user-name-rule bg-gray">
+                            <strong
+                              [routerLink]="[itm?.userId != credentials?.credentials?.id ? '/friend-profile' :'/dashboard/profile']"
+                              [queryParams]="{id: itm?.userId}"><a class="pointer-cursor">{{itm?.userFullName |
+                                titlecase}}</a></strong>
+                            <span class="ml-1">{{itm?.createdAt | date:'short' }}</span>
+                            <a *ngIf="!editReply" class="public-bg d-block"> {{itm?.comment}}</a>
+                            <div *ngIf="editReply && commentData?.id==itm?.id">
+                              <textarea [(ngModel)]="replyOnPost" (keyup.enter)="submiteditComment(commentData,'reply')"
+                                class="form-control reply"> </textarea>
+                              <label>Press Enter to post.</label>
+                            </div>
+                            <div class="action_comment text-right mb-2">
+                              <a ngbTooltip="Reply" class="reply mr-2" (click)="replyClick(itm?.id)"><i
+                                  class="fa fa-reply"></i></a>
+                              <a *ngIf="itm?.userId == credentials?.credentials?.id" ngbTooltip="Edit" class="edit mr-2"
+                                (click)="oneditComment(itm,'reply')"><i class="fa fa-edit"></i></a>
+                              <a *ngIf="itm?.userId == credentials?.credentials?.id"
+                                (click)="deleteComment(itm?.id,i,j,'reply')" ngbTooltip="Delete" class="delete mr-2"><i
+                                  class="fa fa-trash"></i></a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="replyForm" *ngIf="!editReply && replyForm == itm.id">
+                          <textarea [(ngModel)]="replyOnPost2"
+                            (keyup.enter)="replyComment(comment.id,'reply',groupDetail?.addedBy?.id)"
+                            placeholder="Post a reply..." class="form-control"></textarea>
+                          <label>Press Enter to post.</label>
+                        </div>
+                      </article>
+                    </article> -->
+                  </div>
+                </article>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-md-4">
+        <app-right-sponsored></app-right-sponsored>
+    </div> -->
+
+  </div>
+</div>

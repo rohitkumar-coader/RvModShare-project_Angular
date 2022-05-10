@@ -1,0 +1,327 @@
+.picsum-img-wrapper {
+    position: relative;
+    background-image: url('/assets/img/contact.jpg');
+    height: 36rem;
+    background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index: -1;
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: flex-start;
+    //   text-align: left;
+  }
+  .bgAfter:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.34);
+    z-index: -1;
+  }
+  .pos-top {
+    color: #fff;
+    z-index: 10;
+    position: absolute;
+    top: 26%;
+    bottom: auto;
+    left: auto;
+    right: auto;
+  }
+  h1.top-Headign {
+    font-size: 61.9573px;
+    font-weight: 700;
+  }
+  h2.bottom-desc {
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 2rem;
+  }
+  .content_form {
+    background-color: #073c73;
+    color: #fff;
+    height: 100%;
+    position: relative;
+}
+.form_part{
+    background-color: #fff;
+}
+.contact-form input {
+    border-radius: 4px;
+}
+.information {
+    margin-bottom: 3rem;
+}
+.information li {
+    margin-bottom: 1.8rem;
+    position: relative;
+    font-size: 18px;
+    padding-left: 30px;
+    word-break: break-word;
+}
+.information li i.fa {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    right: auto;
+    bottom: auto;
+    color: #b0b7bf;
+}
+.social_links {
+    position: absolute;
+    top: auto;
+    bottom: 3rem;
+    left: auto;
+    right: auto;
+}
+.social_links li {
+    display: inline-block;
+    margin-right: 2rem;
+    font-size: 25px;
+}
+// textarea#description {
+//     height: 80px !important;
+// }
+.message button{
+    background-color: #03e08e;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    font-size: 32px;
+    color: #fff;
+}
+// 
+p {
+    font-size: 15px;
+    line-height: 24px;
+}
+button.btn.join-us.max.mt-4 {
+    margin-top: 29px !important;
+}
+p.disc-text.text-primary {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 40px;
+}
+button.btn.btn-primary.demo {
+    border-radius: 50px;
+    padding: 1rem 2rem; 
+}
+a {
+    color: #03e08e !important;
+  }
+.grid-section {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 1rem;
+    height: 100%;
+    text-align: center;
+}
+img.w-100.icon-marker { 
+    width: 100%;
+    max-width: 3rem;
+}
+
+.office{
+    margin-top: -200px;
+    padding-bottom: 5rem;
+}
+recaptcha.recaptcha {
+    display: block;
+    overflow: hidden;
+}
+
+// h3.black-text {
+//     font-size: 44px;
+//     font-weight: 700;
+// }
+section#contact {
+    background: #FBFBFB;
+    margin-top: 0rem !important;
+}
+button.btn.join-us {
+    margin-bottom: 1rem;
+}
+.fw{
+    font-weight: 700 !important;
+}
+h1.heading-text {
+    color: #000000 !important;
+    font-family: Poppins;
+    margin-bottom: 0px !important;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 44px !important;
+    line-height: 56px !important;
+}
+button.btn.join-us.bottom {
+    padding: 0px 2rem;
+    font-size: 18px;
+    line-height: 27px;
+    width: 180px;
+    text-align: center;
+    height: 50px;
+    border-radius: 60px;
+    margin-top: 15px;
+}
+img.w-100.icon {
+    width: 100%;
+    max-width: 10rem;
+    display: block;
+    margin: auto;
+    padding: 2rem;
+}
+h4.text-black.fs.mb-1 {
+    font-weight: 600;
+}
+.welcome-text {
+    margin-top: -18rem;
+}
+
+.max {
+    width: 100% !important;
+    max-width: 18rem !important;
+}
+h3.black-text {
+    word-break: break-word;
+}
+.mobile_view{
+    display: none;
+}
+
+
+@media only screen and (max-width: 1080px) {
+.welcome-text{
+    margin-top: -5rem;
+  }
+//   h2.bottom-desc{
+//     font-size: 44.3974px;
+//     font-weight: 700;
+//     margin-top: 7rem;
+//   }
+}
+
+@media only screen and (max-width: 991px) {
+    h1.top-Headign {
+        font-size: 50px;
+      }
+      h2.bottom-desc {
+        font-size: 20px;
+        font-weight: 700;
+        margin-top: 2rem;
+    }
+    .content_form, .p-5.bg-white {
+        padding: 3rem 1rem !important;
+    }
+    .picsum-img-wrapper{
+        height: 20rem;
+    }
+    .office{
+        margin-top: -50px;
+    }
+    .office .col-md-8 {
+        padding-left: 0px !important;
+    }
+    .office .col-md-4 {
+        padding-left: 0px !important;
+     padding-right: 0px !important;
+    }
+    .information li{
+        margin-bottom: 1.8rem;
+        position: relative;
+        font-size: 15px;
+        padding-left: 23px;
+        word-break: break-word;
+    }
+}
+
+
+@media only screen and (max-width: 800px) {
+.welcome-text{
+    margin-top: 0rem;
+  }
+  .picsum-img-wrapper.bgAfter.mt-5.pt-5.main-content {
+    margin-top: 0px !important;
+  }
+}
+@media only screen and (max-width: 768px) {
+    button.btn.join-us.max.mt-4 {
+        position: absolute;
+        display: block;
+        margin: auto;
+        width: 100%;
+        max-width: 15rem !important;
+        bottom: 2rem;
+      }
+.welcome-text{
+    margin-top: 0rem;
+}
+button.btn.join-us {
+    margin-left: 0rem;
+  }
+}
+@media only screen and (max-width: 767px) {
+    h1.top-Headign {
+        font-size: 45px;
+      }
+      h2.bottom-desc {
+        margin-top: 1rem;
+      }
+    button.btn.join-us.max.mt-4 {
+        position: inherit;
+    }
+.row.flex-v-center {
+    margin-top: 25rem;
+    padding: 15px;
+}
+.col-md-5 {
+    margin-top: 20px;
+}
+.grid-section{
+    margin-bottom: 1rem;
+}
+
+element.style {
+}
+button.btn.join-us {
+    margin-bottom: 1rem;
+}
+button.btn.join-us {
+    margin-left: 0rem;
+}
+.office {
+    margin-top: auto;
+    padding-bottom: 2rem;
+}
+.row {
+    margin: 0px;
+}
+ .p-5.bg-white {
+    padding: 3rem 0rem !important;
+}
+form .pr-0, form .col-md-6, form .col-md-12 {
+    padding: 0px !important;
+}
+.mobile_view{
+    display: block;
+}
+.desktop_view{
+    display: none !important;
+}
+.social_links {
+    position: relative;
+    bottom: auto;
+}
+.form_part {
+    box-shadow: none !important;
+}
+.captcha{
+    padding: 0px !important;
+}
+}
+

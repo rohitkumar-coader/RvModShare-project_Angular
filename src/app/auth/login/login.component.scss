@@ -1,0 +1,325 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,300,200,700");
+// social css
+.button--google {
+  background-color: #fff;
+  border: 1px solid #03e08e;
+}
+.button--google .icon {
+  border-right: 1px solid #03e08e;
+}
+.button--facebook {
+  background-color: #fff;
+  border: 1px solid #03e08e;
+}
+.button--facebook .icon {
+  border-right: 1px solid #03e08e;
+}
+.button--facebook .icon:after {
+  border-right: 1px solid #03e08e;
+}
+i.icon.fa.fa-facebook {
+  color: #4267B2;
+}
+i.icon.fa.fa-google {
+  color: #4285F4;
+}
+i.icon.fa.fa-apple {
+  color: #A2AAAD;
+}
+.button--github {
+  background-color: #fff;
+  border: 1px solid #03e08e;
+}
+.button--github .icon {
+  border-right: 1px solid #03e08e;
+}
+.button--social-login .icon:before {
+  display: inline-block;
+  width: 40px;
+}
+.button--github .icon:after {
+  border-right: 1px solid #03e08e;
+}
+
+.button--social-login .icon:after {
+  content: "";
+}
+
+.button:hover {
+  text-decoration: none;
+}
+.line {
+  border-top: 1px solid #ccc;
+}
+strong.border-rounded {
+  border-radius: 50px;
+  border: 1px solid #ccc;
+  padding: 6px 6px;
+  background: #fff;
+  text-align: center;
+  justify-content: center;
+  margin: auto;
+  position: relative;
+  left: 43%;
+  top: 11px;
+}
+.button--social-login {
+  margin-bottom: 12px;
+  color: #000;
+  height: 50px;
+  line-height: 46px;
+  position: relative;
+  display: block;
+  text-align: left;
+  border-radius: 5px;
+}
+.button--social-login .icon {
+  margin-right: 12px;
+  font-size: 24px;
+  line-height: 24px;
+  width: 42px;
+  height: 24px;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  top: 4px;
+}
+.button--social-login .icon:before {
+  display: inline-block;
+  width: 40px;
+}
+
+
+
+a {
+  color: #36db9f;
+}
+img.img-fluid.login-img {
+  width: 320px;
+  height: 72.3833px;
+  display: block;
+  object-fit: cover;
+}
+span.fa.fa-eye {
+  float: right;
+  margin-right: 10px;
+  margin-top: -52px;
+  position: relative;
+  z-index: 2;
+}
+span.fa.fa-eye-slash {
+  float: right;
+  margin-right: 10px;
+  margin-top: -52px;
+  position: relative;
+  z-index: 2;
+}
+.ic-login{
+    background-size: 20px;
+    z-index: 50;
+    width: 18px;
+    position: absolute;
+    top: 18px;
+    left: 16px;
+}
+.error-message {
+  color: rgb(255, 34, 34);
+}
+
+.columns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 73vh;
+  max-height: 100vh;
+  // background-image: url("https://res.cloudinary.com/www-santhoshthomas-xyz/image/upload/v1620796347/portfolio/bg8_ub3ck3.png");
+
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  animation-name: MOVE-BG;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  animation-direction: alternate;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes MOVE-BG {
+  from {
+    background-size: 80%;
+  }
+  to {
+    background-size: 84%;
+  }
+}
+@keyframes MOVE-BG-MOBILE {
+  from {
+    background-size: 90%;
+  }
+  to {
+    background-size: 110%;
+  }
+}
+
+.login-box {
+  // height: 100px;
+  a {
+    text-decoration: none;
+  }
+  animation: fadeIn 1s;
+  .login {
+    display: none;
+  }
+  .signin {
+    animation: fadeIn 0.8s;
+  }
+  .signup {
+    animation: fadeIn 0.8s;
+  }
+  z-index: 10;
+  border-radius: 5px;
+  position: relative;
+  .action {
+    p {
+      display: inline;
+    }
+    .forgot {
+    }
+    .signup {
+      float: right;
+      font-weight: 700;
+    }
+  }
+  .input-field {
+    width: 100%;
+    position: relative;
+    i {
+      position: relative;
+      position: absolute;
+      top: 10px;
+      left: 50px;
+    }
+    // #password {
+    //   background: url("../../../assets/img/ic-login.png")
+    //     no-repeat 5%;
+    //   background-size: 20px;
+    //   z-index: 50;
+    // }
+    #email {
+    //   background: url(../../../assets/img/ic-pass.png)
+        // no-repeat 5%;
+    //   background-size: 20px;
+    //   z-index: 50;
+    }
+    #tel {
+    //   background: url("../../../assets/telephone.png") no-repeat 5%;
+      background-size: 20px;
+      z-index: 50;
+    }
+    input {
+      -webkit-box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+      box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+width: 100%;
+display: block;
+padding: 15px 35px;
+padding-left: 55px;
+margin: 20px 0;
+border: none;
+border-left: 4px solid #36db9f;
+border-radius: 4px;
+    }
+  }
+
+  &-button {
+    margin: 1rem;
+    text-align: center;
+
+    button {
+      padding: 0.8rem 2rem;
+      background: #36db9f;
+      color: white;
+      font-weight: 800;
+      border: none;
+      border-radius: 5px;
+      transition: all 1s ease-in;
+      background-position: 0;
+      &:active {
+        background-image: linear-gradient(
+          to right top,
+          #0e1776,
+          #091b97,
+          #031db9,
+          #011edc,
+          #081dff
+        );
+        background-position: 400%;
+        transform: scale(1.1);
+      }
+    }
+  }
+  .topline {
+    display: inline-block;
+    position: relative;
+    position: relative;
+  }
+  // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  min-width: 400px;
+  min-height: 200px;
+  padding: 1rem 3rem;
+  background-color: white;
+}
+h1.topline.mt-2 {
+  font-size: 25px;
+  margin-top: 0px !important;
+  font-weight: 700;
+}
+// .columns.mt-5 {
+//   margin-top: 30px !important;
+// }
+@media screen and (max-width: 1024px) {
+.login-box {
+  padding: 1rem 5rem !important;
+}
+}
+@media screen and (max-width: 991px) {
+.bg.mt-5.pt-4.main_page {
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+}
+}
+
+@media screen and (max-width: 767px) {
+  .login-box {
+    padding: 0rem 1rem 1rem 1rem !important;
+    right: unset !important;
+    animation: fadeIn 1s;
+    z-index: 10;
+    border-radius: 5px;
+    position: relative;
+    min-width: 100%;
+    width: 100%;
+    min-height: 200px;
+    background-color: white;
+    // margin-top: 1rem;
+  }
+}

@@ -1,0 +1,15 @@
+@font-face {
+    font-family: font1;
+    font-weight:500;
+    src: url(/assets/fonts/gibson/Gibson-Regular.ttf);
+}
+
+@font-face {
+    font-family: font1;
+    font-weight: 600;
+    src: url(/assets/fonts/gibson/gibson-bold.ttf);
+}
+
+
+
+

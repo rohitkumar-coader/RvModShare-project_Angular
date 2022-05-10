@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Report Post</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form action="" [formGroup]="reportForm" (ngSubmit)="onSubmit()">
+      <small class="pl-3 mb-3">Do you want to report this?</small>
+      <div class="form-group col-md-12">
+          <label for="type"> Type</label>
+          <select name="type" formControlName="type" id="type" class="form-control">
+            <option value="" selected disabled>Select</option>
+            <option value="Spam">Spam</option>
+            <option value="Solicitation">Solicitation</option>
+            <option value="Abusive Content">Abusive Content</option>
+            <option value="Adult Content">Adult Content</option>
+            <option value="Displaced Political Content">Displaced Political Content</option>
+            <option value="Displaced Religious Content">Displaced Religious Content</option>
+            <option value="Licensed Material">Licensed Material</option>
+            <option value="Guerilla Marketing">Guerilla Marketing</option>
+            <option value="Other">Other</option>
+          </select>
+          <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+            <div *ngIf="f.type.errors.required">This field is required</div>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+        <label>Description</label>
+        <textarea class="form-control" formControlName="reason" cols="5" rows="5"></textarea>
+        <div *ngIf="submitted && f.reason.errors" class="invalid-feedback">
+            <div *ngIf="f.reason.errors.required">This field is required</div>
+          </div>    
+    </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-primary" (click)="onSubmit()">Send</button>
+  </div>

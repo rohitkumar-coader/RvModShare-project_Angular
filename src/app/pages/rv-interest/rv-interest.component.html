@@ -1,0 +1,198 @@
+<div class="modal-body checkbox-tyle">
+  <div class="row">
+    <div *ngIf="fromWelcomePage" class="col-md-4 leftOverlap">
+      <div class="shadow bg-white p-2">
+      <strong>What are Followed Interests? </strong>
+        <p>A followed interest subscribes you to content you want to see in your feed.</p>
+          <p>You can select a few interest now or wait
+            until after you log in by selecting the My Followed Interest menu item under your user profile icon. </p>
+              <p> You can add, remove or change Followed Interest at any time. Changes to followed interest will immediately update
+                your
+                feed</p>
+        <p class="mb-0">You can start customizing your feed by clicking on any combination of categories to the right, then press add.  You can create multiple Followed Interest this way.</p>
+      </div>
+    </div>
+    <div *ngIf="!fromWelcomePage" class="co leftOverlap">
+      <div class="shadow bg-white p-2">
+        <strong>What are Followed Interests? </strong>
+        <p>Followed Interests subscribe you to the Mods you want to see in your feed.  Customize your feed by filling out any combination of data fields and then pressing “Add”.  Your feed will then display all Mods that meet any of the Followed Interests that you’ve set-up. </p>
+        <p><strong>Examples:</strong> If you want to see all storage related mods (regardless of RV class, make, series, model, or year), you would need to add one Followed Interest:</p>
+      <p>    Mod Category = “Storage” </p>
+      <p>If you want to see all 2019 and 2020 Winnebago Class C Navion (all models/categories, but only for those selected years), you would need to add 2 separate Followed Interests:</p>
+      <ul>
+        <li> RV Class = “Class C”, RV Make = “Winnebago”, RV Series = “Navion” and Year = “2019” </li>
+        <li> RV Class = “Class C”, RV Make = “Winnebago”, RV Series = “Navion” and Year = “2020” </li>
+      </ul>
+      </div>
+    </div>
+    <div class="col-md-12 mb-2">
+    <p class="text-center mb-3">  <strong>Curate your feed by selecting any combination of RV and Mods that you are interested in following.</strong></p>
+    </div>
+    <form class="d-contents" [formGroup]="Form">
+      <div class="form-group col-md-6">
+        <label for="Type">RV Class</label>
+        <ngx-select-dropdown [config]="config1" [options]="rvTypes" [multiple]="false" formControlName="rvType"
+          (change)="selectedRVType($event)">
+        </ngx-select-dropdown>
+        <!-- <div *ngIf="submitted && f.rvType.errors" class="invalid-feedback">
+            <div *ngIf="f.rvType.errors.required">RV Class is required</div>
+          </div> -->
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="Make">RV Make </label>
+        <ngx-select-dropdown [config]="config2" [options]="allMakes" [multiple]="false" formControlName="make"
+          (change)="selectedMake($event)">
+        </ngx-select-dropdown>
+        <!-- <div *ngIf="submitted && f.make.errors" class="invalid-feedback">
+            <div *ngIf="f.make.errors.required">Make is required</div>
+          </div> -->
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="mobile">RV Series </label>
+        <ngx-select-dropdown [config]="config3" [options]="allModels" [multiple]="false" formControlName="model"
+          (change)="selectedModel($event)">
+        </ngx-select-dropdown>
+        <!-- <select name="Model" id="Model" formControlName="model" class="form-control">
+            <option value="Model" selected disabled>Select Model</option>
+          </select> -->
+        <!-- <div *ngIf="submitted && f.series.errors" class="invalid-feedback">
+            <div *ngIf="f.series.errors.required">Series is required</div>
+          </div> -->
+      </div>
+      <div class="form-group col-md-6">
+        <label for="mobile">RV Model </label>
+        <input type="text" formControlName="series" class="form-control w-100" placeholder="Enter RV Model Name">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="email">RV Year </label>
+        <select name="Year" id="Year"  formControlName="year"
+          class="form-control">
+          <option value="" > Select Year</option>
+          <option value="{{item}}" *ngFor="let item of years">{{item}}</option>
+        </select>
+        <!-- <select name="Year" id="Year" *ngIf="Form.get('rvType').value=='wanna-be'" formControlName="year"
+          class="form-control">
+          <option value="wanna-be" selected>I'm wannabe</option>
+        </select> -->
+        <!-- <div *ngIf="submitted && f.year.errors" class="invalid-feedback">
+            <div *ngIf="f.year.errors.required">Year is required</div>
+          </div> -->
+      </div>
+      <div class="form-group col-md-6">
+        <label for="email">Mod Category</label>
+        <select name="modCategory" id="modCategory" [ngClass]="{ 'is-invalid': modSubmit && mf.modCategory.errors }"
+        formControlName="modCategory" class="form-control">
+        <!-- <select name="modCategory" id="modCategory" [ngClass]="{ 'is-invalid': modSubmit && mf.modCategory.errors }"
+          formControlName="modCategory" class="form-control" required> -->
+          <option value="">{{modCategories.length>0 ? 'Choose Category' : 'No Data Found'}}
+          </option>
+          <option *ngFor="let item of modCategories" value="{{item.id}}">{{item.name}}</option>
+        </select>
+        <!-- <div *ngIf="submitted && f.modCategory.errors" class="invalid-feedback">
+          <div *ngIf="f.modCategory.errors.required">Mod Category is required</div>
+        </div> -->
+      </div>
+
+
+      <div class="form-group col-md-6">
+        <label for="email">RV Size </label>
+        <select name="size" id="size"  formControlName="size"
+          class="form-control">
+          <option value="" > Select Size</option>
+          <option *ngFor="let item of difficulties" title="{{item.description}}" value="{{item.id}}">{{item.name}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="email">RV Difficulty </label>
+        <select name="difficulty" id="difficulty"  formControlName="difficulty"
+          class="form-control">
+          <option value="" > Choose Difficulty</option>
+          <option *ngFor="let item of skillLevelNeeded" value="{{item?.id}}">{{item.name}}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="email">RV Total Time </label>
+        <select name="timerange" id="timerange"  formControlName="timerange"
+          class="form-control">
+          <option value="" > Choose Total Time</option>
+          <option *ngFor="let item of timeRanges" value="{{item?.totalHours}}">{{item.totalHours}}</option>
+        </select>
+      </div>
+      <div class="col-md-12 text-right">
+        <button class="btn btn-primary brd mr-2" [disabled]="isEmpty" type="button" (click)="pushCategory()">Add</button>
+        <button class="btn btn-primary brd" type="button" *ngIf="closeBtn" (click)="closeModal()">Close</button>
+      </div>
+
+      <div class="col-md-12" *ngIf="addedInterest.length>0">
+        <div class="row">
+          <div class="col-md-6 mt-2" *ngFor="let item of addedInterest;let i=index;">
+            <div class="d-flex align-pat pl-2 pr-2 pt-2">
+              <strong>Pattern</strong>
+              <i class="fa fa-trash" title="Delete" (click)="removeIntrest(item?.id)"></i>
+            </div>
+            <div class="shadow p-2">
+              <div class="row ">
+
+                
+                <div class="col-md-6" *ngIf="item?.rvClass"><p class="details mb-2"><i class="fa fa-circle"
+                  aria-hidden="true"></i>{{sharedService.getRvType(item?.rvClass)}}</p></div>
+                <div class="col-md-6" *ngIf="item?.rvSeriesDetails"><p class="details mb-2"><i class="fa fa-circle"
+                  aria-hidden="true"></i>{{item?.rvSeriesDetails.name}}</p></div>
+                <div class="col-md-6" *ngIf="item?.rvMakeDetails?.name"><p class="details mb-2"><i class="fa fa-circle"
+                  aria-hidden="true"></i>{{item?.rvMakeDetails?.name}}</p></div>
+                    <div class="col-md-6" *ngIf="item?.rvModel"><p class="details mb-2"><i class="fa fa-circle" aria-hidden="true"></i>{{item?.rvModel}}</p>
+                    </div>
+                <div class="col-md-6" *ngIf="item?.rvYear"><p class="details mb-2"><i class="fa fa-circle" aria-hidden="true"></i>{{item?.rvYear}}</p>
+                </div>
+
+                <div *ngIf="item?.categoryDetails?.name"  class="col-md-6">
+                  <p class="details mb-2"><i class="fa fa-circle" aria-hidden="true"></i>{{item?.categoryDetails?.name}}</p>
+                </div>
+                  <div *ngIf="item?.sizeDetails?.name" class="col-md-6">
+                    <p class="details mb-2"><i class="fa fa-circle" aria-hidden="true"></i>{{item?.sizeDetails?.name}}</p>
+                  </div>
+                  <div *ngIf="item?.skillLevelDetails?.name" class="col-md-6">
+                    <p class="details mb-2"><i class="fa fa-circle" aria-hidden="true"></i>{{item?.skillLevelDetails?.name}}</p>
+                  </div>
+                    <div *ngIf="item?.timerange" class="col-md-6">
+                      <p class="details mb-2"><i class="fa fa-circle" aria-hidden="true"></i>{{item?.timerange}}</p>
+                    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <span class="badge badge-secondary" *ngFor="let item of addedInterest;let i=index;">,,,, </span> -->
+        <!-- <span class="badge badge-secondary">New <i class="fa fa-close"></i></span> -->
+        <!-- <span class="badge badge-secondary">New <i class="fa fa-close"></i></span> -->
+      </div>
+    </form>
+  </div>
+
+  <!-- <div class="text-right">
+      <input type="checkbox"  (click)="selectAll(this)" value="Bike">
+      <label > Select All</label><br>
+    </div> -->
+
+  <!-- <div class="d-check mr-2" *ngFor="let item of allCategories">
+      <input type="checkbox" (change)="pushCategory($event)" id="vehicle1" name="vehicle1" value="{{item.id}}">
+      <label for="vehicle1"> {{item.name}}</label>
+    </div>
+   
+    <button class="btn btn-primary" *ngIf="followCategories.length>0" (click)="addFollowCategories()">follow</button> -->
+
+</div>
+<!-- <div class="modal-footer">
+   
+    <div class="stepDots">
+        <span ></span>
+        <span  class="active"></span>
+      <span ></span>
+      <span></span>
+      <span  ></span>
+      <span></span>
+    </div>
+  </div> -->

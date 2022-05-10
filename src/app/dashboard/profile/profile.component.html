@@ -1,0 +1,1916 @@
+<ngx-spinner bdColor="#fff" size="" color="#fff">
+  <div class='ajax-spinner-bars'>
+    <div class='bar-1'></div>
+    <div class='bar-2'></div>
+    <div class='bar-3'></div>
+    <div class='bar-4'></div>
+    <div class='bar-5'></div>
+    <div class='bar-6'></div>
+    <div class='bar-7'></div>
+    <div class='bar-8'></div>
+    <div class='bar-9'></div>
+    <div class='bar-10'></div>
+    <div class='bar-11'></div>
+    <div class='bar-12'></div>
+    <div class='bar-13'></div>
+    <div class='bar-14'></div>
+    <div class='bar-15'></div>
+    <div class='bar-16'></div>
+  </div>
+</ngx-spinner>
+
+
+<div class="container-fluid bg-white px-0 profile_page">
+  <div class="container-head">
+    <!-- <div class="menu">
+                    <p>___ <br>___<br>___</p>
+                    </div> -->
+
+    <img *ngIf="!data?.coverPhoto" class="pic" src="assets/img/rvCoverImage.jpg">
+    <img *ngIf="data?.coverPhoto" class="pic" src="{{_host}}{{data?.coverPhoto}}">
+    <!-- <input class="file-uploads" type="file" (change)="uploadCoverImage($event.target.files,'outModel')"
+      accept="image/*" /> -->
+    <div class="progress-cover group-user" *ngIf="coverImageLoader" style="max-width:400px;;">
+
+      <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success" role="progressbar"
+        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progress + '%'}">
+        {{progress}}%</div>
+    </div>
+
+    <!-- <button class="btn btn-primary" (click)="open(profilecontent)"><i class="fa fa-camera mr-2"
+        aria-hidden="true"></i>Add Cover Photo</button>
+  </div> -->
+
+    <div class="container-body container">
+      <div class="profile-picture d-flex">
+        <div class="user_prof_img">
+          <img *ngIf="userImage" src="{{getUrl(userImage,data)}}">
+          <img *ngIf="!userImage" src="assets/img/user.png">
+          <div class="alignToogle">
+            <a ngbTooltip="Copy URL" (click)="copy(data);openModal()" class="alignmentCopyLink small_font">
+              <i class="fa fa-share-alt"></i> Share with Friends
+            </a>
+            <!-- <span class="private">Private</span> -->
+            <!-- <label class="switch ">
+            <input type="checkbox" [(ngModel)]="isPrivate" (change)="updatePrivacy()" checked>
+            <span class="slider round"></span>
+          </label>
+          <span class="public">Public</span> -->
+
+          </div>
+        </div>
+
+        <!-- <div class="p-image" (click)="open(profilecontent)">
+          <i class="fa fa-camera upload-button"></i> -->
+        <!-- <input (change)="uploadImage($event.target.files,'outModel')"
+          accept="image/jpg, image/jpeg, image/png,.png,.jpg,.jpeg" class="file-upload" type="file" accept="image/*" /> -->
+
+        <!-- </div> -->
+
+
+        <div class="progress group-user" *ngIf="imageLoader" style="max-width:400px;;">
+
+          <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success" role="progressbar"
+            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progress + '%'}">
+            {{progress}}%</div>
+        </div>
+        <div class="w-100">
+          <div class="alignmentTab">
+            <div class="d-flex align-item-center space_between pl-3">
+              <div class="nameCLS">
+                <strong class="mb-0"> {{data?.fullName}}</strong>
+                <p class="mb-2" *ngIf="this.ownRV == false"><b>Dreamer</b></p>
+                <p class="mb-2" *ngIf="this.ownRV == true"><b>Owner</b></p>
+                <!-- <div class="common_badge">
+                  <a href="javascript:;">{{data?.rankBadge?.name}}</a>
+                  <ul class="tooltiptext">
+                    <li><b>Points:</b> {{data?.rankPoints}}</li>
+                    <li><a
+                        href="https://endpoint.rvmodshare.com/images/modPost/f7b737b8-d7f2-4361-8ed3-d0a30cea6a1f1642682372997.pdf"
+                        target="_blank"><b>Badges & Rewards: </b> {{data?.rankBadge?.name}}</a></li>
+                  </ul>
+                </div> -->
+                <!-- <p class="mb-0">{{data?.email}}</p> -->
+              </div>
+              <div class="d-flex text-center mt-2 mtop_0">
+                <!-- <div class="step">
+                  <span>{{data?.totalfriends}}</span>
+                  <p class="mb-0"><b>Connections</b></p>
+                </div> -->
+                <div class="step">
+                  <span>{{data?.totalFollower}}</span>
+                  <p routerLink="/connections" class="mb-0" (click)="goTofollowers()"><b>Followers</b></p>
+                </div>
+                <div class="step">
+                  <span>{{data?.totalfollowing}}</span><br />
+                  <p class="mb-0" routerLink="/connections" (click)="goTofollowing()"><b>Following</b></p>
+                </div>
+                <div class="step">
+                  <span>{{data?.totalModPost}}</span><br />
+                  <p class="mb-0"><b>Mods Shared</b></p>
+                </div>
+                <!-- <div class="step">
+                  <span>{{data?.totalpost}}</span><br />
+                  <p class="mb-0"><b>Posts</b></p>
+                </div> -->
+              </div>
+            </div>
+            <div class="left d-flex">
+              <button class="btn btn-primary mr-2" *ngIf="data?.invitedUser && data?.invitedUser?.length>0"
+                (click)="open(invited)"> Friends Invited <span
+                  class="member">{{data?.invitedUser?.length}}</span></button>
+              <button class="btn btn-primary mr-2" (click)="open(joined)">
+                Friends Joined <span class="member">{{data?.acceptedUserData?.length}}</span></button>
+              <!-- <button class="btn btn-primary mr-2" *ngIf="data?.acceptedUserData?.length>0" (click)="open(joined)">
+                Friends Joined <span class="member">{{data?.acceptedUserData?.length}}</span></button> -->
+              <!-- <button class="btn btn-primary" (click)="open(profilecontent)"> Edit Profile</button> -->
+
+            </div>
+            <!-- <input type="text"  [(ngModel)]="profileUrl" id="myInput" class="form-control alignBottom"> -->
+          </div>
+          <div class="row mt-3 mb-2 badge_icon"
+            *ngIf="data?.rankBadge  || data?.ambassadorBadge || data?.modderBadge || data?.networkerBadge">
+            <!-- <div class="flex_badge"
+              [ngClass]="[(data?.rvRental &&  data?.rvRental?.rvShareUrl=='' && data?.rvRental?.outdoorsyUrl=='' && data?.rvRental?.rvezyUrl=='') ? 'col-md-6 flex_no_url' : '' ||  (data?.rvRental &&  (data?.rvRental?.rvShareUrl!='' || data?.rvRental?.outdoorsyUrl!='' || data?.rvRental?.rvezyUrl!='')) ? 'col-md-4' : '']">
+              <p> <b>My badges: </b></p>
+              <img *ngIf="data?.isFoundingMember" ngbTooltip="Founding Member" class="badges"
+                src="{{_host}}images/badges/{{data?.foundingMemberImage}}"
+                (click)="getMagnifyImage(data?.foundingMemberImage)">
+              <img *ngIf="data?.rankBadge" ngbTooltip="{{data?.rankBadge?.name}} " class="badges"
+                src="{{_host}}images/badges/{{data?.rankBadge?.image}}"
+                (click)="getMagnifyImage(data?.rankBadge?.image)">
+             <img *ngIf="data?.modderBadge" ngbTooltip="{{data?.modderBadge?.name}} " class="badges"
+                src="{{_host}}images/badges/{{data?.modderBadge?.image}}"
+                (click)="getMagnifyImage(data?.modderBadge?.image)">
+              <img *ngIf="data?.networkerBadge" ngbTooltip="{{data?.networkerBadge?.name}}" class="badges"
+                src="{{_host}}images/badges/{{data?.networkerBadge?.image}}"
+                (click)="getMagnifyImage(data?.networkerBadge?.image)">
+
+
+              <img *ngIf="data?.ambassadorBadge" ngbTooltip="{{data?.ambassadorBadge?.name}} " class="badges"
+                src="{{_host}}images/badges/{{data?.ambassadorBadge?.image}}"
+                (click)="getMagnifyImage(data?.ambassadorBadge?.image)"> 
+
+            </div> -->
+
+            <div class="col-md-4 flex_badge rental_icon"
+              *ngIf="data?.isrvRental && data?.rvRental &&  (data?.rvRental?.rvShareUrl!='' || data?.rvRental?.outdoorsyUrl!='' || data?.rvRental?.rvezyUrl!='')">
+              <p> <b>My RV Rental: </b></p>
+              <a ngbTooltip="RVshare" *ngIf="data?.rvRental?.rvShareUrl!=''" href="{{data?.rvRental?.rvShareUrl}}"
+                target="_blank"><img class="socialICON pointer-cursor" src="assets/img/Rent_on_RV_Share.png" alt=""></a>
+              <a ngbTooltip="Outdoorsy" *ngIf="data?.rvRental?.outdoorsyUrl!=''" href="{{data?.rvRental?.outdoorsyUrl}}"
+                target="_blank"><img class="socialICON pointer-cursor" src="assets/img/Rent_on_Outdoorsy.png"
+                  alt=""></a>
+              <a ngbTooltip="RVezy" *ngIf="data?.rvRental?.rvezyUrl!=''" href="{{data?.rvRental?.rvezyUrl}}"
+                target="_blank"><img class="socialICON pointer-cursor" src="assets/img/Rent_on_RVezy.png" alt=""></a>
+
+            </div>
+
+            <div class="socialIcon  flex_badge"
+              [ngClass]="[(data?.rvRental &&  data?.rvRental?.rvShareUrl=='' && data?.rvRental?.outdoorsyUrl=='' && data?.rvRental?.rvezyUrl=='') ? 'col-md-6 flex_no_url' : '' ||  (data?.rvRental &&  (data?.rvRental?.rvShareUrl!='' || data?.rvRental?.outdoorsyUrl!='' || data?.rvRental?.rvezyUrl!='')) ? 'col-md-4' : '']">
+              <p> <b>My Social Accounts: </b></p>
+              <a href="{{data?.instagramLink}}" target="_blank"><img *ngIf="data?.instagramLink"
+                  class="socialICON pointer-cursor" src="assets/img/Instagram.png" alt=""></a>
+              <a href="{{data?.youTubeLink}}" target="_blank"><img *ngIf="data?.youTubeLink"
+                  class="socialICON pointer-cursor" src="assets/img/you.png" alt=""></a>
+              <a href="{{data?.facebookLink}}" target="_blank"><img *ngIf="data?.facebookLink"
+                  class="socialICON pointer-cursor" src="assets/img/facebook.png" alt=""></a>
+
+              <a href="{{data?.twitterLink}}" target="_blank"><img *ngIf="data?.twitterLink"
+                  class="socialICON pointer-cursor" src="assets/img/twitter1.png" alt=""></a>
+              <a href="{{data?.yourWebsite}}" target="_blank"><img *ngIf="data?.yourWebsite"
+                  class="socialICON pointer-cursor" src="assets/img/www.png" alt=""></a>
+              <a href="{{data?.blogLink}}" target="_blank"><img *ngIf="data?.blogLink" class="socialICON pointer-cursor"
+                  src="assets/img/blogger.png" alt=""></a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="mt-4">
+        <div class="row">
+
+          <div class="col-md-3">
+            <div class="d-flex justify-content-between align-items-center mb-3 desk-none" style="float: right;">
+              
+              <div>
+                <div class="mylink_filter_btn ">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPBottom"
+                    ngbTooltip="Filter"><i class="fa fa-sliders"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="shadow bg-white p-2 pt-0 mb-4 topAlign ph-none">
+              <div class="embed-responsive embed-responsive-16by9 mb-4"
+                *ngIf="data?.featuredYouTubeLink && data?.featuredYouTubeLink!='' && urlSafe!='' ">
+                <iframe *ngIf="urlSafe!=''" [src]="urlSafe" class="embed-responsive-item" frameborder="0"
+                  allowfullscreen></iframe>
+                <!-- <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe> -->
+              </div>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="mb-0"> Filters</h4>
+                <div>
+                  <button class="btn btn-danger " (click)="reset()">Reset</button>
+
+                </div>
+              </div>
+
+              <div class="border p-2 mb-2">
+
+                <select name="cars" id="cars5" (change)="searchValue();resetMakeSeries('both')"
+                  [ngClass]="{'highlightfilter': modfilters?.rvTypeFilter}" class="form-control mb-2"
+                  [(ngModel)]="modfilters.rvTypeFilter">
+                  <option value="">Choose Class</option>
+                  <option *ngFor="let item of filterrvTypes" value="{{item.detail.value}}">{{item.description}}</option>
+
+                </select>
+                <select name="cars" id="cars5" [disabled]="!modfilters?.rvTypeFilter"
+                  (change)="searchValue();resetMakeSeries('series')" class="form-control mb-2"
+                  [(ngModel)]="modfilters.makeFilter" [ngClass]="{'highlightfilter': modfilters?.makeFilter}"
+                  class="form-control mb-2">
+                  <option value="">Choose Make</option>
+                  <option *ngFor="let item of MakesFilters" value="{{item?.id}}">{{item?.name}}</option>
+
+                </select>
+                <select class="form-control" [disabled]="!modfilters?.makeFilter" [(ngModel)]="modfilters.modelValue"
+                  [ngClass]="{'highlightfilter': modfilters?.modelValue}" (change)="searchValue()" name="model"
+                  id="model">
+                  <option value="">Choose Series</option>
+                  <option *ngFor="let item of filterModels" value="{{item?.id}}">{{item.name}}</option>
+                </select>
+              </div>
+              <select name="Year" id="Year" (change)="searchValue()" [(ngModel)]="modfilters.yearValue"
+                [ngClass]="{'highlightfilter': modfilters?.yearValue}" class="form-control mb-2">
+                <option value=""> Choose Year</option>
+                <option value="{{item?.id}}" *ngFor="let item of rvYears">{{item?.id}}</option>
+              </select>
+              <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.size"
+                [ngClass]="{'highlightfilter': modfilters?.size}" class="form-control mb-2">
+                <option value="">Choose Size</option>
+                <option *ngFor="let item of difficulties" title="{{item?.description}}" value="{{item.id}}">
+                  {{item.name}}
+                </option>
+              </select>
+              <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.modCategoryValue"
+                [ngClass]="{'highlightfilter': modfilters?.modCategoryValue}" class="form-control mb-2">
+                <option value="">Choose Category</option>
+                <option *ngFor="let item of modCategories" value="{{item?.id}}">{{item?.name}}({{item?.count}})</option>
+              </select>
+
+              <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.skillLevel"
+                [ngClass]="{'highlightfilter': modfilters?.skillLevel}" class="form-control mb-2">
+                <option value="">Choose Difficulty</option>
+                <option *ngFor="let item of skillLevelNeeded" value="{{item?.id}}">{{item?.name}}</option>
+
+              </select>
+              <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.timerange"
+                [ngClass]="{'highlightfilter': modfilters?.timerange}" class="form-control mb-2">
+                <option value="">Choose Total Time</option>
+                <option *ngFor="let item of timeRanges" value="{{item?.id}}">{{item?.id}}</option>
+              </select>
+              <div class="date_range padding_input">
+                <input type="text" name="daterange"
+                  [ngClass]="{'highlightfilter': modfilters?.startDate || modfilters?.endDate}" (change)="searchValue()"
+                  ngxDaterangepickerMd [(ngModel)]="selectedDate" class="form-control"
+                  placeholder="Select Date Range" />
+              </div>
+              <div class="padding_input">
+                <input type="text" name="search" (keyup.enter)="searchValue()" [(ngModel)]="modfilters.search"
+                  [ngClass]="{'highlightfilter': modfilters?.search}" class="form-control mt-2 fs"
+                  placeholder="Search Title & Summary (Press Enter to search)" />
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+          <div class="col-md-9">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                  aria-controls="pills-home" aria-selected="true">My Mods</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" id="pills-rv-tab" data-toggle="pill" (click)="patchRVdetails()" href="#pills-rv"
+                  role="tab" aria-controls="pills-rv" aria-selected="false">My RV</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                  aria-controls="pills-profile" aria-selected="false">My Points</a>
+              </li> -->
+              <!-- <li class="nav-item">
+                <a class="nav-link" id="pills-personal-tab" data-toggle="pill" (click)="patchPersonalDetails()"
+                  href="#pills-personal" role="tab" aria-controls="pills-personal" aria-selected="false">Personal</a>
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab"
+                  aria-controls="pills-about" aria-selected="false">About Me</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
+                  aria-controls="pills-contact" (click)="getAllPhotos()" aria-selected="false">Photos</a>
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link" id="pills-social-tab" data-toggle="pill" href="#pills-social" role="tab"
+                  aria-controls="pills-social" (click)="patchSocialDetails();" aria-selected="false">My Social Accounts
+                </a>
+              </li>
+            </ul>
+
+            <div class="tab-content mt-2" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="container">
+                  <div class="row">
+
+                    <div class="col-md-12 mb-5">
+                      <div class="p-2">
+                        <div class="bg-white mb-3" *ngIf="featuredMods.length>0">
+
+                          <h4 class="heading pt-1 pl-2">Featured</h4>
+                          <ngx-slick-carousel class="carousel mb-3" #slickModal="slick-carousel" [config]="slideConfig"
+                            (init)="slickInit($event)" (breakpoint)="breakpoint($event)"
+                            (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+                            <div ngxSlickItem *ngFor="let item of featuredMods;let i=index" class="slide mr-3">
+                              <div class="shadow bg-white mb-4 ">
+                                <div class="overlapBTN">
+                                  <!-- <span class="d-inline-block">
+                                <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
+                                  [attr.data-a2a-url]="'https://rvmodshare.com/page/mod-details?id='+item?.id+'&uid='+item?.addedBydetails?._id"
+                                  [attr.data-a2a-title]="item?.name">
+                                  <a class="a2a_button_facebook"></a>
+                                </div>
+                              </span> -->
+                                  <div class="dropdown cretDropdown ml-2" (click)="setShareData(item)"
+                                    *ngIf="item?.addedBy == credentials?.credentials?.id">
+                                    <button class="btn btn-primary dropdown-toggle alignBTN" type="button"
+                                      id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                      aria-expanded="false">
+                                      <i aria-hidden="true" class="fa fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <span class="d-inline-block">
+                                        <div (click)="setShareData(item)"
+                                          class="a2a_kit a2a_kit_size_32 a2a_default_style"
+                                          [attr.data-a2a-url]="'https://rvmodshare.com/mods/'+item?.slug"
+                                          [attr.data-a2a-title]="item?.name">
+                                          <a class="a2a_button_facebook"></a>
+                                          <a class="a2a_button_twitter"></a>
+                                        </div>
+                                      </span>
+                                      <a class="dropdown-item" *ngIf="item?.addedBy == credentials?.credentials?.id"
+                                        [routerLink]="['/share-mod',item?.slug]"> <i class="fa fa-edit"></i> Edit</a>
+                                      <a class="dropdown-item" *ngIf="item?.addedBy == credentials?.credentials?.id"
+                                        (click)="deleteModPost(item?.id,i)"> <i class="fa fa-trash"></i> Delete Post</a>
+
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- <i class="fa fa-pencil" ngbTooltip="Edit" placement="bottom" [routerLink]="['/page/share-mods']"
+                                              [queryParams]="{id: item?.id}"></i>
+                                            <i class="fa fa-trash" ngbTooltip="Delete" placement="bottom" (click)="deleteModPost(item?.id,i)"></i> -->
+                                <div class="img mods_img">
+                                  <div
+                                    *ngIf="item?.registeredRV && item?.addedBydetails?.isrvRental && item?.addedBydetails?.rvRental && ( item?.addedBydetails?.rvRental?.rvShareUrl!='' || item?.addedBydetails?.rvRental?.outdoorsyUrl!='' || item?.addedBydetails?.rvRental?.rvezyUrl!='')"
+                                    class="ribbon blue_col">
+                                    <a *ngIf="item?.addedBydetails?._id != credentials?.credentials?.id" href="javascript:void(0)"
+                                      (click)="goTouserProfile('/profile'+item?.addedBydetails?.slug)"><span>Rent</span></a>
+                                      <a href="javascript:void(0)" *ngIf="item?.addedBydetails?._id == credentials?.credentials?.id"
+                                        (click)="goTouserProfile('/dashboard/profile')"><span>Rent</span></a>
+                                  </div>
+                                  <a class="pointer-cursor">
+                                    <img [routerLink]="['/mods',item?.slug]"
+                                      *ngIf="item?.afterImages?.length==0 && item?.beforeImages?.length==0"
+                                      class="img-responsive roundeds containe" src="assets/img/follow-new1.png">
+                                    <img [routerLink]="['/mods',item?.slug]" *ngIf="item?.afterImages?.length>0 "
+                                      class="img-responsive roundeds"
+                                      src="{{_host}}images/modPost/{{item.afterImages[0]}}">
+                                    <img [routerLink]="['/mods',item?.slug]"
+                                      *ngIf="item?.afterImages?.length==0 && item?.beforeImages?.length>0"
+                                      class="img-responsive roundeds"
+                                      src="{{_host}}images/modPost/{{item?.beforeImages[0]}}">
+                                  </a>
+                                </div>
+                                <div class="mt-2 p-2">
+                                  <p class="mb-0 font-weight-bold"><a class="truncate"
+                                      [routerLink]="['/mods',item?.slug]" ngbTooltip="{{item?.name}}">{{item.name}}</a>
+                                  </p>
+                                  <p class="mb-0">by<a class="by-link ml-2" href="javascript:void(0)"
+                                      (click)="goTouserProfile('/profile'+item?.addedBydetails?.slug)">{{item?.addedBydetails?.fullName}}</a>
+                                  </p>
+                                  <div class="social-icon">
+                                    <a><i class="fa fa-thumbs-up" ngbTooltip="Likes"
+                                        aria-hidden="true"></i>{{item?.likeTotal}}</a>
+                                    <a *ngIf="!item?.isCommentDisabled"><i class="fa fa-comment" ngbTooltip="Comment"
+                                        aria-hidden="true"></i>{{item?.commentTotal}}</a>
+                                    <a *ngIf="item?.skillLevel=='6193a45efc4c9b3d4ce7ad62'" class="high pt-1"><img
+                                        src="assets/img/low.png" ngbTooltip="Low" class="skill-ic" alt=""></a>
+                                    <a class="high pt-1" *ngIf="item?.skillLevel=='6194c77a4d8a1d9518bbe18c'"><img
+                                        src="assets/img/medium.png" ngbTooltip="Medium" class="skill-ic" alt=""></a>
+                                    <a *ngIf="item?.skillLevel=='6197d36401d78bc07b538196'" class="high pt-1"><img
+                                        src="assets/img/high.png" ngbTooltip="High" class="skill-ic" alt=""></a>
+                                    <a><i class="fa fa-clock-o" ngbTooltip="{{item.timerange}}" placement="top"
+                                        aria-hidden="true"></i></a>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </ngx-slick-carousel>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-12">
+                            <app-mods [userId]="data?.id" [modfilters]="modfilters" [featured]="false"></app-mods>
+                          </div>
+                        </div>
+                        <div class="col-md-8">
+
+                          <article class="myActivities">
+
+                            <div class="shadow p-3 mb-3 postDiv" *ngFor="let item of posts; let i=index">
+                              <div class="header-post">
+
+                                <article class="postTop">
+                                  <div class="d-flex">
+                                    <img *ngIf="item?.addedByImage==''" class="userProfile" src="assets/img/adel.jpg">
+                                    <img *ngIf="item?.addedByImage!=''" class="userProfile"
+                                      src="{{_host}}{{item?.addedByImage}}">
+                                    <div>
+                                      <p class="mb-0 pt-1">
+                                        {{item?.addedByName | titlecase}}
+                                      </p>
+                                      <p class="mb-0 pt-1">{{item.updatedAt | date:'short' }}</p>
+                                    </div>
+                                  </div>
+
+                                  <div class="dropdown cretDropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button"
+                                      id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                      aria-expanded="false">
+                                      <i aria-hidden="true" class="fa fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <!-- <a class="dropdown-item" href="#"><i class="fa fa-share-alt mr-1" aria-hidden="true"></i>Share
+                                  on Facebook</a> -->
+
+                                      <a class="dropdown-item" (click)="open(content2)"><i class="fa fa-bug mr-1"
+                                          aria-hidden="true"></i>Report
+                                        Post</a>
+                                      <hr class="my-2" />
+                                      <a class="dropdown-item" (click)="deletePost(item?.id)"><i
+                                          class="fa fa-trash mr-1" aria-hidden="true"></i>Delete
+                                        Post</a>
+                                    </div>
+                                  </div>
+
+                                </article>
+
+                                <p class="mt-2">{{item?.post}}</p>
+                              </div>
+                              <div class="post-img">
+                                <img *ngIf="item?.image!=''" class="w-100" src="{{_host}}images/posts/{{item?.image}}">
+
+                                <div class="like-share d-flex pt-2 pb-2 justify-content-between">
+                                  <p class="mb-0 pt-2"><i class="fa fa-thumbs-up mr-2"
+                                      aria-hidden="true"></i>{{item?.likes}}
+                                    Likes</p>
+                                  <div class="pull-right pt-2 spacecomment">
+                                    <small>{{item?.comments}}
+                                      comments</small>
+                                  </div>
+
+
+                                </div>
+                              </div>
+                              <hr style="margin: 0rem;" />
+                              <div class="post-section pt-2 d-flex justify-content-between">
+                                <span class="" (click)="likePost(item.id)"><i class="fa fa-thumbs-o-up postBbtn"
+                                    [ngClass]="{'text-primary': item?.likestatus}" aria-hidden="true"></i>Like</span>
+                                <span class="" (click)="readmoreLess(i);this.getComments(item.id)"><i
+                                    class="fa fa-commenting-o postBbtn" aria-hidden="true"></i>Comment</span>
+                              </div>
+                              <article class="comments shadow p-3 mt-3" *ngIf="item.showMore">
+                                <textarea (keyup.enter)="addComment(item.id)" [(ngModel)]="commentOnPost"
+                                  placeholder="Post a comment..." class="form-control commentInput"> </textarea>
+                                <label *ngIf="commentOnPost">Press Enter to post.</label>
+
+                                <article class="allComments mt-2" [ngClass]="{'isLoading': loader}">
+                                  <div class="loaderDiv text-center" *ngIf="loader"> <img style="width: 50px;"
+                                      src="assets/img/loader-img.gif"></div>
+                                  <h5 *ngIf="allComments?.length==0">No Comments</h5>
+                                  <div class="commentItem" *ngFor="let comment of allComments">
+                                    <div class="d-flex mb-2">
+                                      <img *ngIf="!comment?.userImage" class="usercreate" src="assets/img/no-img.png">
+                                      <img *ngIf="comment?.userImage" class="usercreate"
+                                        src="{{_host}}{{comment?.userImage}}">
+                                      <div class="user-name-rule bg-gray">
+                                        <strong>{{comment?.userFullName}}</strong>
+                                        <p class="mb-0 pt-1">{{comment?.createdAt | date:'short' }}</p>
+                                        <a class="public-bg ml-2 spacecomment">{{comment?.comment}}</a>
+
+                                      </div>
+
+                                    </div>
+                                    <div class="reply" (click)="replyClick(comment.id)">Reply</div>
+
+                                    <article class="replyList">
+                                      <div class="replyForm" *ngIf="replyForm == comment.id">
+                                        <textarea [(ngModel)]="replyOnPost"
+                                          (keyup.enter)="replyComment(item.id,comment.id,'comment')"
+                                          placeholder="Post a reply..." class="form-control"> </textarea>
+                                        <label *ngIf="replyOnPost">Press Enter to post.</label>
+                                      </div>
+                                      <article class="replyItem align" *ngFor="let itm of comment?.reply">
+                                        <div class="d-flex subReply">
+                                          <img class="usercreate img-small" src="assets/img/no-img.png">
+                                          <div class="user-name-rule bg-gray">
+                                            <strong>{{itm?.userFullName}}</strong>
+                                            <p class="mb-0 pt-1">{{itm?.createdAt | date:'short' }}</p>
+                                            <a class="public-bg spacecomment">{{itm?.comment}}</a>
+
+                                          </div>
+                                        </div>
+                                        <div class="reply " (click)="replyClick(itm.id)">Reply</div>
+                                        <div class="replyForm" *ngIf="replyForm == itm.id">
+                                          <textarea [(ngModel)]="replyOnPost2"
+                                            (keyup.enter)="replyComment(item.id,comment.id,'reply')"
+                                            placeholder="Post a reply..." class="form-control"></textarea>
+                                          <label *ngIf="replyOnPost2">Press Enter to post.</label>
+                                        </div>
+                                      </article>
+                                    </article>
+                                  </div>
+                                </article>
+
+                              </article>
+                            </div>
+
+                          </article>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-rv" role="tabpanel" aria-labelledby="pills-rv-tab">
+                <div class="container">
+                  <div class="row mb-5">
+                    <div class="col-md-12">
+                      <div class="box-shadow bg-white p-2 mt-2 shadow my_rv_tab">
+                        <div class="text-right mb-3">
+                          <h4 class="d-flex justify-content-between align-item-center points">
+                            My RV Details
+                            <div>
+
+                              <div *ngIf="!editRVDetail">
+                                <a ngbTooltip="Edit" class="alignmentCopyLink about_edit" (click)="editRVForm()">
+                                  <i class="fa fa-pencil"></i>
+                                </a>
+                              </div>
+                              <div *ngIf="editRVDetail">
+                                <button type="button" class="btn btn-primary" (click)="updateRvUser()">Save</button>
+                                <button type="button" class="btn btn-primary ml-2" (click)="CloseRv()">Close</button>
+                              </div>
+
+                            </div>
+                          </h4>
+                        </div>
+
+                        <!-- <h4 class="heading-rv">My RV
+                        </h4> -->
+                        <form [formGroup]="rvForm" class="edit_profile_form">
+
+                          <div class="overflow_form">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <p *ngIf="!ownRV">Select the RV you are most interested in:</p>
+                                <p *ngIf="ownRV">Choose RV data from below :</p>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="form-group mb-1">
+                                  <input [disabled]="!editRVDetail" type="radio" [ngModelOptions]="{standalone: true}"
+                                    [value]="false" [(ngModel)]="ownRV" class="mr-1">
+                                  <label>I don’t own a RV yet</label><br />
+                                  <input [disabled]="!editRVDetail" type="radio" [ngModelOptions]="{standalone: true}"
+                                    [value]="true" [(ngModel)]="ownRV" class="mr-1">
+                                  <label>I own a RV</label>
+                                </div>
+                              </div>
+
+                            </div>
+                            <div class="row max_width">
+                              <!-- <div class="col-md-12">
+                                <p class="text-danger" *ngIf="editRVDetail && data?.isSuggestedMakeSeries">
+                                  Your make and series will not be visible
+                                  until
+                                  it
+                                  is approved by an admin. Please contact support@rvmodshare.com if you have any
+                                  questions. </p>
+                              </div>
+                              <div class="col-md-12">
+                                <p class="text-danger"
+                                  *ngIf="editRVDetail && !data?.isSuggestedMakeSeries && data?.isSuggestedSeries">
+                                  Your series will not be visible
+                                  until
+                                  it
+                                  is approved by an admin. Please contact support@rvmodshare.com if you have any
+                                  questions. </p>
+                              </div> -->
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <label>RV Type <span class="text-danger">*</span></label>
+                                  <ngx-select-dropdown [config]="config1" [options]="rvTypes" [multiple]="false"
+                                    formControlName="rvType" (change)="selectedRVType($event);resetOldRvData();">
+                                  </ngx-select-dropdown>
+                                  <div *ngIf="rvSubmitted && rf.rvType.errors" class="invalid-feedback">
+                                    <div *ngIf="rf.rvType.errors.required">RV Type is required</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <label>RV Make<span class="text-danger">*</span></label>
+                                  <div class="check_relative">
+                                    <ngx-select-dropdown *ngIf="!isSuggestedMakeSeries" [config]="config2"
+                                      [options]="allMakes" [multiple]="false" formControlName="make"
+                                      (change)="selectedMake($event);clearYearModel()">
+                                    </ngx-select-dropdown>
+                                    <input type="text" *ngIf="isSuggestedMakeSeries" formControlName="suggestedMake"
+                                      (keyup)="searchMake($event.target.value,'parent_categories');clearYearModel()" class="form-control"
+                                      placeholder="Enter Your RV Make Name">
+                                    <div class="checkbox_field">
+                                      <input type="checkbox" [disabled]="!editRVDetail"
+                                        [ngModelOptions]="{standalone: true}" [(ngModel)]="isSuggestedMakeSeries"
+                                        (change)="onChangeSuggestedMakeSeries()">
+                                      Click here to add if you don't find your RV Make.
+                                    </div>
+
+                                    <div *ngIf="rvSubmitted && rf.make.errors" class="invalid-feedback">
+                                      <div *ngIf="rf.make.errors.required">Make is required</div>
+                                    </div>
+                                    <div class="invalid-feedback" *ngIf="makeerr!=''">
+                                      {{makeerr}}
+                                    </div>
+                                    <div *ngIf="rvSubmitted && rf.suggestedMake.errors" class="invalid-feedback">
+                                      <div *ngIf="rf.suggestedMake.errors.required">RV Make is required</div>
+                                    </div>
+
+                                    <!-- <p class="text-danger" *ngIf="data?.isSuggestedMakeSeries==true && data?.makeAction==''">
+                                    Your RV Make request is pending approval </p> -->
+                                    <p class="text-danger"
+                                      *ngIf="((!makeerr && data.suggestedMake!='' && rvForm.value.suggestedMake!='') && (data?.isSuggestedMakeSeries==true && data?.makeAction==''))">
+                                      Your RV Make request is pending approval </p>
+                                    <p class="text-primary"
+                                      *ngIf="((!makeerr  && rvForm.value.make?.id==data?.make?.id && rvForm.value.suggestedMake=='') && (data?.isSuggestedMakeSeries==false && data?.makeAction=='approved'))">
+                                      Your RV Make request is approved </p>
+                                    <p class="text-danger"
+                                      *ngIf="((!makeerr && !selectedmake && rvForm.value.suggestedMake=='') && (data?.isSuggestedMakeSeries==false && (data?.makeAction=='rejected' || data?.makeAction=='deleted')))">
+                                      Your RV make was rejected, please add or select a make.</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="form-group check_relative">
+                                  <label>RV Series<span class="text-danger">*</span> </label>
+                                  <div class="check_relative">
+                                    <ngx-select-dropdown *ngIf="!isSuggestedMakeSeries && !isSuggestedSeries" [config]="config3" [options]="allModels"
+                                      [multiple]="false" formControlName="series" (change)="selectedModel($event);clearYearModel()">
+                                    </ngx-select-dropdown>
+                                    <input type="text" (keyup)="searchMake($event.target.value,'sub_categories');clearYearModel()"
+                                      *ngIf="isSuggestedMakeSeries || isSuggestedSeries" formControlName="suggestedSeries" class="form-control"
+                                      placeholder="Enter Your RV Series Name">
+                              
+                                    <div *ngIf="isSuggestedMakeSeries" class="checkbox_field">
+                                      <input type="checkbox" [disabled]="!editRVDetail" [ngModelOptions]="{standalone: true}"
+                                        [(ngModel)]="isSuggestedMakeSeries" class="mr-1" (change)="onChangeSuggestedMakeSeries()">
+                                      Click here to add if you don't find your RV Series.
+                                    </div>
+                                    <div *ngIf="!isSuggestedMakeSeries" class="checkbox_field">
+                                      <input type="checkbox" [disabled]="!editRVDetail" [ngModelOptions]="{standalone: true}"
+                                        [(ngModel)]="isSuggestedSeries" class="mr-1" (change)="onChangeSuggestedSeries()">
+                                      Click here to add if you don't find your RV Series.
+                                    </div>
+                                  </div>
+                                  <div *ngIf="rvSubmitted && rf.series.errors" class="invalid-feedback">
+                                    <div *ngIf="rf.series.errors.required">Series is required</div>
+                                  </div>
+                                  <div class="invalid-feedback" *ngIf="serieserr!=''">
+                                    {{serieserr}}
+                                  </div>
+                                  <div *ngIf="rvSubmitted && rf.suggestedSeries.errors" class="invalid-feedback">
+                                    <div *ngIf="rf.suggestedSeries.errors.required">RV Series is required</div>
+                                  </div>
+                                  <!-- <div *ngIf="rvSubmitted && rf.series.errors" class="invalid-feedback">
+                                                              <div *ngIf="rf.series.errors.required">Series is required</div>
+                                                            </div> -->
+                              
+                                  <p class="text-danger"
+                                    *ngIf="(( !serieserr  && rvForm.value.suggestedSeries!='') && (data?.isSuggestedMakeSeries==true || data?.isSuggestedSeries==true) && data?.seriesAction=='')">
+                                    Your RV Series request is pending approval</p>
+                                  <p class="text-primary"
+                                    *ngIf="(( !serieserr && rvForm.value.series?.id==data?.series?.id && rvForm.value.suggestedSeries=='') && (data?.isSuggestedMakeSeries==false || data?.isSuggestedSeries==false) && data?.seriesAction=='approved')">
+                                    Your RV Series request is approved</p>
+                                  <!-- <p class="text-danger"
+                                                                *ngIf="(( !serieserr && !selectedmodel && rvForm.value.suggestedSeries=='') && (data?.isSuggestedMakeSeries==false || data?.isSuggestedSeries==false) && (data?.seriesAction=='rejected' || data?.seriesAction=='deleted'))">
+                                                                Your RV series was rejected, please add or select a series.</p> -->
+                                  <p class="text-danger"
+                                    *ngIf="(( !serieserr && !selectedmodel && rvForm.value.suggestedSeries=='') && (isSuggestedMakeSeries==false && isSuggestedSeries==false) && (data?.seriesAction=='rejected' || data?.seriesAction=='deleted'))">
+                                    Your RV series was rejected, please add or select a series.</p>
+                              
+                                </div>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <label>RV Year<span class="text-danger">*</span> </label>
+                                  <select name="Year" id="Year" formControlName="year" class="form-control">
+                                    <option value="" disabled selected>Choose RV year</option>
+                                    <option value="{{item}}" *ngFor="let item of years">{{item}}</option>
+                                  </select>
+                                  <div *ngIf="rvSubmitted && rf.year.errors" class="invalid-feedback">
+                                    <div *ngIf="rf.year.errors.required">Year is required</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-12">
+                                <label>RV Model</label>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" formControlName="model" placeholder="Enter RV Model Name">
+                                </div>
+                              </div>
+                              </div>
+                             
+                              <!-- <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Model </label>
+                              <input type="text" class="form-control" placeholder="">
+                              <div *ngIf="rvSubmitted && rf.model.errors" class="invalid-feedback">
+                                <div *ngIf="rf.model.errors.required">Model is required</div>
+                              </div>
+                            </div>
+                          </div> -->
+ 
+                           
+
+
+
+
+
+
+                            </div>
+
+                            <div class="row">
+                              <div class="col-md-12 mb-3">
+                                <input type="checkbox" [disabled]="!editRVDetail" [ngModelOptions]="{standalone: true}"
+                                  [(ngModel)]="isrvRental" class="mr-1">
+                                <b>Available for rent</b>
+                              </div>
+                              <div *ngIf="isrvRental" class="col-md-12" formGroupName="rvRental">
+                                <div class="form-group">
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <label for="street">RV Rental URL</label>
+                                    </div>
+                                    <div class="col-md-4 pr-2">
+                                      <input id="street" class="form-control mb-2" type="text"
+                                        formControlName="rvShareUrl" placeholder="RVshare URL">
+                                      <div *ngIf="rvSubmitted && rvForm.get('rvRental.rvShareUrl').errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="rvForm.get('rvRental.rvShareUrl').errors?.pattern"> Link
+                                          is invalid</div>
+                                      </div>
+                                    </div>
+                                 
+                                  <div class="col-md-4 pr-2 pl-2">
+                                    <input id="street" class="form-control mb-2" type="text" formControlName="outdoorsyUrl"
+                                      placeholder="Outdoorsy URL">
+                                    <div *ngIf="rvSubmitted && rvForm.get('rvRental.outdoorsyUrl').errors" class="invalid-feedback">
+                                      <div *ngIf="rvForm.get('rvRental.outdoorsyUrl').errors?.pattern"> Link
+                                        is invalid</div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4 pl-2">
+                                    <input id="street" class="form-control mb-2" type="text" formControlName="rvezyUrl" placeholder="RVezy URL">
+                                    <div *ngIf="rvSubmitted && rvForm.get('rvRental.rvezyUrl').errors" class="invalid-feedback">
+                                      <div *ngIf="rvForm.get('rvRental.rvezyUrl').errors?.pattern"> Link
+                                        is invalid</div>
+                                    </div>
+                                  </div>
+                                </div>
+                          </div>
+                              </div>
+                                <div class="col-md-12">
+                                  <div class="form-group photo_upload">
+                                
+                                    <label class="d-block">RV Photos</label>
+                                    <span *ngFor="let item of rvImages;let i=index">
+                                      <img class="img-after" src="{{_host}}images/modPost/{{item}}">
+                                      <i *ngIf="editRVDetail" class="fa fa-times" (click)="removeImage(item,i)" aria-hidden="true"></i>
+                                    </span>
+                                    <!-- updated_by_gi -->
+                                    <div class="progress" *ngIf="rvImageLoader" style="max-width:400px;;">
+                                
+                                      <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success" role="progressbar"
+                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progress + '%'}">
+                                        {{progress}}%</div>
+                                    </div>
+                                
+                                
+                                    <div class="form-group ">
+                                      <div class="file-uploads">
+                                        <div class="file-select">
+                                          <div class="file-select-button" id="fileName3">Choose Photos</div>
+                                          <div class="file-select-name" id="noFile" *ngIf="!rvImages">No Photo chosen...
+                                          </div>
+                                          <input [disabled]="!editRVDetail" (change)="uploadRVImages($event.target.files)" accept="image/*" multiple
+                                            type="file" name="chooseFile3" id="chooseFile3">
+                                        </div>
+                                      </div>
+                                    </div>
+                                
+                                  </div>
+                                </div>
+                            </div>
+                          
+                         
+                        </form>
+                        <!-- <div class="d-flex">
+          
+                          <div class="details d_list">
+                            <p>Type of RV</p>
+                            <span>{{sharedService.getRvType(data?.rvType)}}</span>
+                          </div>
+                          <div class="details d_list">
+                            <p>Make</p>
+                            <span>{{data?.make?.name}}<b class="ml-2">{{data?.isSuggestedMakeSeries ? "Unapproved":""}}</b></span>
+                          </div>
+                          <div class="details d_list">
+                            <p>Series</p>
+                            <span>{{data?.series?.name}}<b class="ml-2">{{data?.isSuggestedMakeSeries || data?.isSuggestedSeries ?
+                                "Unapproved":""}}</b></span>
+                          </div>
+                          <div class="details d_list">
+                            <p>Model</p>
+                            <span>{{data.model}}</span>
+                          </div>
+                          <div class="details d_list">
+                            <p>Year</p>
+                            <span>{{data?.year}}</span>
+                          </div>
+                        </div> -->
+
+
+
+                        <!-- <div class="details">
+                          <p class="mb-3">RV Photos</p>
+                          <div class="row">
+                            <div class="col-md-3" *ngFor="let item of data.RVImages">
+                              <div class="rv_image">
+                                <span> <img class="img-after" (click)="openLg(content)"
+                                    src="{{_host}}images/modPost/{{item}}"></span>
+                              </div>
+                            </div>
+                          </div>
+          
+                        </div> -->
+
+                        <hr>
+
+                        <div class="details d_list">
+                          <h4 class="d-flex justify-content-between align-item-center points">RV Description <a
+                              ngbTooltip="Edit" class="alignmentCopyLink about_edit" (click)="open(rvedit,1);">
+                              <i class="fa fa-pencil"></i>
+                            </a></h4>
+                          <span class="word-break ckContent" [innerHTML]="data?.rvDescription"></span>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <!-- <div class="tab-pane fade" id="pills-personal" role="tabpanel" aria-labelledby="pills-personal-tab">
+                <div class="container">
+                  <div class="col-md-12">
+                    <div class="shadow">
+
+                      <form [formGroup]="personalForm" class="edit_profile_form edit_tab mb-5 mt-4 p-2">
+                        <div id="profil-container">
+                          <div class="text-right mb-3">
+
+                            <h4 class="d-flex justify-content-between align-item-center points">
+                              Personal Details
+                              <div>
+
+                                <div *ngIf="!editPersonalForm">
+                                  <a ngbTooltip="Edit" class="alignmentCopyLink about_edit"
+                                    (click)="editPersonalData()">
+                                    <i class="fa fa-pencil"></i>
+                                  </a>
+                                </div>
+                                <div *ngIf="editPersonalForm">
+                                  <button type="button" class="btn btn-primary"
+                                    (click)="updatePersonalData()">Save</button>
+                                </div>
+                              </div>
+                            </h4>
+                          </div>
+                          <div class="pic-holder">
+                            <img *ngIf=" !usercoverimg" id="profilePic" class="pic" src="assets/img/rvCoverImage.jpg">
+                            <img *ngIf="usercoverimg" id="profilePic" class="pic" src="{{_host}}{{usercoverimg}}">
+                            <label *ngIf="editPersonalForm" for="newCoverPhoto" class="upload-file-block">
+                              <div class="text-center">
+                                <div class="mb-2">
+                                  <i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>
+                                  
+                                </div>
+                                <div class="text-uppercase">
+                                  Update Cover Photo
+                                </div>
+                              </div>
+                            </label>
+                            <input [disabled]="!editPersonalForm" class="uploadProfileInput" type="file"
+                              name="profile_pic" id="newCoverPhoto" accept="image/*" style="display: none;"
+                              (change)="uploadCoverImage($event.target.files,'inModel')" />
+                            <div class="progress-cover group-user" *ngIf="coverImageModalLoader"
+                              style="max-width:400px;;">
+
+                              <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success"
+                                role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                [ngStyle]="{width: progress + '%'}">
+                                {{progress}}%</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="profile-pic-wrapper">
+                          <div class="pic-holder"> 
+                            <img *ngIf="!userimg" id="profilePic" class="pic" src="assets/img/user.png">
+                            <img *ngIf="userimg" id="profilePic" class="pic" src="{{_host}}{{userimg}}">
+
+                            <label for="newProfilePhoto" class="upload-file-block" *ngIf="editPersonalForm">
+                              <div class="text-center">
+                                <div class="mb-2">
+                                  <i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>
+                               
+                                </div>
+                                <div class="text-uppercase">
+                                  Upload <br /> Profile Photo
+                                </div>
+                              </div>
+                            </label>
+                            <Input [disabled]="!editPersonalForm" class="uploadProfileInput"
+                              (change)="uploadImage($event.target.files,'inModel')" type="file" name="profile_pic"
+                              id="newProfilePhoto" accept="image/*" style="display: none;" />
+                            <div class="progress group-user" *ngIf="imageModalLoader" style="max-width:400px;;">
+
+                              <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success"
+                                role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                [ngStyle]="{width: progress + '%'}">
+                                {{progress}}%</div>
+                            </div>
+                          </div>
+                          <p>Email Address <strong>{{data?.email}}</strong></p>
+                        </div>
+
+                        <div class="row">
+
+                          <div class="col-md-6 pr-2">
+                            <div class="form-group">
+                              <label>First Name </label>
+                              <input type="text" class="form-control" formControlName="firstName"
+                                placeholder="First Name">
+                              <div *ngIf="personalsubmitted && pf.firstName.errors" class="invalid-feedback">
+                                <div *ngIf="pf.firstName.errors.required">First Name is required</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6 pl-2">
+                            <div class="form-group">
+                              <label>Last Name </label>
+                              <input type="text" class="form-control" formControlName="lastName"
+                                placeholder="Last Name">
+                              <div *ngIf="personalsubmitted && pf.lastName.errors" class="invalid-feedback">
+                                <div *ngIf="pf.lastName.errors.required">Last Name is required</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4 pr-2">
+                            <div class="form-group">
+                              <label>Gender </label>
+                              <select class="form-control" formControlName="gender" id="Gender" name="Gender">
+                                <option value="" selected disabled>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="col-md-4 pr-2 pl-2">
+                            <div class="form-group">
+                              <label>Birth Date </label>
+                              <input
+                                [bsConfig]="{ rangeInputFormat : 'MM-DD-YYYY', dateInputFormat: 'MM-DD-YYYY', showWeekNumbers: false,customTodayClass: 'custom-today-class' }"
+                                [maxDate]="minDate" #dp2="bsDatepicker" type="text" bsDatepicker class="form-control"
+                                formControlName="dob" placeholder="MM-DD-YYYY" name="dob">
+                            </div>
+                          </div>
+                          <div class="col-md-4 pl-2">
+                            <div class="form-group">
+                              <label>Address</label>
+                              <input type="text" class="form-control" formControlName="address" placeholder="Address">
+                            </div>
+                          </div>
+                          <div class="col-md-4 pr-2">
+                            <label>Country</label>
+                            <select name="cars" (change)="getState($event.target.value)" id="cars1"
+                              formControlName="country" class="form-control mb-2">
+                              <option value="" selected disabled>Country</option>
+                              <option value="USA">USA</option>
+                              <option value="CA">Canada</option>
+                            </select>
+
+                          </div>
+
+                          <div class="col-md-4 pr-2 pl-2">
+                            <label>State/Province</label>
+                            <select name="cars" id="cars1" (change)="getCity()" formControlName="state"
+                              class="form-control mb-2">
+                              <option value="" selected disabled>State</option>
+                              <option value="{{item.code}}" *ngFor="let item of states">{{item.name}}</option>
+                            </select>
+                          </div>
+
+                          <div class="col-md-4 pl-2">
+                            <label>City</label>
+                            <select name="cars" id="cars1" formControlName="city" class="form-control mb-2">
+                              <option value="" selected disabled>City</option>
+                              <option value="{{item.name}}" *ngFor="let item of cities">{{item.name}}</option>
+                            </select>
+                          </div>
+                          <div class="col-md-6 pr-2">
+                            <div class="form-group">
+                              <label>Zip Code</label>
+                              <input type="text" class="form-control" formControlName="zipcode" placeholder="Zip Code"
+                                maxlength="8">
+                            </div>
+                          </div>
+                          <div class="col-md-6 pl-2">
+                            <label>Occupation</label>
+                            <select name="occupation" id="occupation" formControlName="occupation"
+                              class="form-control mb-2">
+                              <option value="" selected disabled>Choose Occupation</option>
+                              <option value="{{item?.id}}" *ngFor="let item of occupations">{{item?.name}}</option>
+                            </select>
+                          </div>
+
+                        </div>
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+              <!-- <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <div class="container">
+                  <div class="col-md-12">
+          
+                    <div class="widget bg-white">
+                      <h4 class="d-flex justify-content-between mt-0">My Media</h4>
+                      <ul class="nav nav-pills mb-2 media-nav" id="pills-tab" role="tablist">
+                      </ul>
+                      <div class="media-content">
+                        <div class="photos-row">
+          
+                          <a *ngFor="let img of userPostImages"><img src="{{_host}}images/posts/{{img}}">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+              <div class="tab-pane fade" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab">
+                <div class="container">
+                  <div class="col-md-12 mb-5">
+                    <article class="sidebarLeft border">
+                      <h5 class="d-flex justify-content-between align-item-center mb-0">About Me
+
+                        <a ngbTooltip="Edit" class="alignmentCopyLink about_edit" (click)="open(edit,2)">
+                          <i class="fa fa-pencil"></i>
+                        </a>
+
+                      </h5>
+                      <div class="word-break ckContent" [innerHTML]="data?.aboutme"></div>
+                    </article>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="container">
+                  <div class="row mb-5">
+                    <!-- <div class="col-md-4">
+                    <div class="shadow bg-white d-flex text-center">
+                      <div class="step">
+                        <span>{{data?.totalfriends}}</span><br />
+                        <b>Connections</b>
+                      </div>
+                      <div class="step">
+                        <span>{{data?.totalFollower}}</span><br />
+                        <b>Followers</b>
+                      </div>
+                      <div class="step">
+                        <span>{{data?.totalfollowing}}</span><br />
+                        <b>Following</b>
+                      </div>
+                      <div class="step">
+                        <span>{{data?.totalModPost}}</span><br />
+                        <b>Mods Shared</b>
+                      </div>
+                      <div class="step">
+                        <span>{{data?.totalpost}}</span><br />
+                        <b>Posts</b>
+                      </div>
+                    </div>
+                  </div> -->
+                    <div class="col-md-12">
+                      <div class="mt-2 shadow bg-white p-2">
+                        <h4 class="points">My Points</h4>
+                        <div class="shadow pl-3 pr-3 pb-3 pt-2">
+                          <p class="mb-2">Modder Badge Points:<b class="ml-2">{{data?.modderPoints |
+                              number:'1.0-0'}}</b> </p>
+                          <!-- <p class="mb-2">Networker Badge Points: <b class="ml-2">{{data?.networkerPoints |
+                              number:'1.0-0'}}</b>
+                          </p> -->
+                          <p class="mb-2">Ambassador Badge Points: <b class="ml-2">{{data?.ambassadorPoints |
+                              number:'1.0-0'}}</b>
+                          </p>
+                        </div>
+                        <hr />
+                        <p class="mb-0">Community Rank Badge Points: <b class="ml-2">{{data?.rankPoints |
+                            number:'1.0-0'}}</b></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="tab-pane fade" id="pills-social" role="tabpanel" aria-labelledby="pills-social-tab">
+                <div class="container">
+                  <div class="row mb-5">
+                    <div class="col-md-12">
+
+                      <div class="mt-2 shadow bg-white p-2 mb-5">
+                        <div class="text-right mb-3">
+
+                          <h4 class="d-flex justify-content-between align-item-center points">
+                            Social Links
+                            <div>
+                              <div *ngIf="!editSocialForm">
+                                <a ngbTooltip="Edit" class="alignmentCopyLink about_edit" (click)="editSocial()">
+                                  <i class="fa fa-pencil"></i>
+                                </a>
+                              </div>
+                              <div class="mt-2 pb-4 text-right" *ngIf="editSocialForm">
+                                <button type="button" class="btn btn-primary" (click)="updateSocialData()">Save</button>
+                              </div>
+                              <!-- <div class="mt-2 pb-4 text-right" *ngIf="editSocialForm">
+                                <button type="button" class="btn btn-primary" (click)="CloseRv()">Close</button>
+                              </div> -->
+                            </div>
+
+                          </h4>
+                        </div>
+                        <form [formGroup]="socialForm" class="edit_profile_form">
+
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label>Instagram Account Link</label>
+                              <input formControlName="instagramLink" type="text" class="form-control"
+                                placeholder="Instagram Link">
+                              <div *ngIf="socialsubmitted && sf.instagramLink.errors" class="invalid-feedback">
+                                <div *ngIf="sf.instagramLink.errors?.pattern">Link
+                                  is invalid</div>
+                              </div>
+                            </div>
+                            <div class="col-md-4 pr-2 mt-2">
+                              <label>YouTube Account Link</label>
+                              <input formControlName="youTubeLink" type="text" class="form-control mb-2"
+                                placeholder="YouTube Link">
+                              <div *ngIf="socialsubmitted && sf.youTubeLink.errors" class="invalid-feedback">
+                                <div *ngIf="sf.youTubeLink.errors?.pattern">Link
+                                  is invalid</div>
+                              </div>
+                            </div>
+                            <div class="col-md-4 pl-2 mt-2">
+                              <label>Featured YouTube Link</label>
+                              <input formControlName="featuredYouTubeLink" type="text" class="form-control mb-2"
+                                placeholder="Featured YouTube Link">
+                              <div *ngIf="socialsubmitted && sf.featuredYouTubeLink.errors" class="invalid-feedback">
+                                <div *ngIf="sf.featuredYouTubeLink.errors?.pattern">Link
+                                  is invalid</div>
+                              </div>
+                            </div>
+                            <div class="col-md-4 pr-2 pl-2 mt-2">
+                              <label>Facebook Account Link</label>
+                              <input formControlName="facebookLink" type="text" class="form-control mb-2"
+                                placeholder="Facebook Link">
+                              <div *ngIf="socialsubmitted && sf.facebookLink.errors" class="invalid-feedback">
+                                <div *ngIf="sf.facebookLink.errors?.pattern">Link
+                                  is invalid</div>
+                              </div>
+                            </div>
+                            <div class="col-md-4 pl-2">
+                              <label>Twitter Account Link</label>
+                              <input formControlName="twitterLink" type="text" class="form-control mb-2"
+                                placeholder="Twitter Link">
+                              <div *ngIf="socialsubmitted && sf.twitterLink.errors" class="invalid-feedback">
+                                <div *ngIf="sf.twitterLink.errors?.pattern">Link
+                                  is invalid</div>
+                              </div>
+                              <!-- <div *ngIf="!validtwitterUrl">
+                                          <div class="text-danger">Link is invalid.</div>
+                                        </div> -->
+                            </div>
+                            <div class="col-md-4 pr-2">
+                              <label>My Website</label>
+                              <div class="form-group">
+                                <input type="text" class="form-control mb-2" formControlName="yourWebsite"
+                                  placeholder="My Website">
+                              </div>
+                            </div>
+                            <div class="col-md-4 pl-2 pr-2">
+                              <label>Blog Link</label>
+                              <input type="text" class="form-control mb-2" formControlName="blogLink"
+                                placeholder="Blog Link">
+                              <div *ngIf="socialsubmitted && sf.blogLink.errors" class="invalid-feedback">
+                                <div *ngIf="sf.blogLink.errors?.pattern">Link
+                                  is invalid</div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+<!-- profile -->
+<ng-template #profilecontent let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Profile</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closemodal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <main>
+      <form [formGroup]="Form" class="edit_profile_form">
+        <div id="profil-container">
+          <div class="pic-holder">
+            <img *ngIf=" !usercoverimg" id="profilePic" class="pic" src="assets/img/rvCoverImage.jpg">
+            <img *ngIf="usercoverimg" id="profilePic" class="pic" src="{{_host}}{{usercoverimg}}">
+            <label for="newCoverPhoto" class="upload-file-block">
+              <div class="text-center">
+                <div class="mb-2">
+                  <i class="fa fa-camera fa-2x"></i>
+                </div>
+                <div class="text-uppercase">
+                  Update Cover Photo
+                </div>
+              </div>
+            </label>
+            <input class="uploadProfileInput" type="file" name="profile_pic" id="newCoverPhoto" accept="image/*"
+              style="display: none;" (change)="uploadCoverImage($event.target.files,'inModel')" />
+            <div class="progress-cover group-user" *ngIf="coverImageModalLoader" style="max-width:400px;;">
+
+              <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success" role="progressbar"
+                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progress + '%'}">
+                {{progress}}%</div>
+            </div>
+          </div>
+        </div>
+        <div class="profile-pic-wrapper">
+          <div class="pic-holder">
+            <!-- uploaded pic shown here -->
+            <img *ngIf=" !userimg" id="profilePic" class="pic" src="assets/img/user.png">
+            <img *ngIf="userimg" id="profilePic" class="pic" src="{{getUrl(userimg,data)}}">
+
+            <label for="newProfilePhoto" class="upload-file-block">
+              <div class="text-center">
+                <div class="mb-2">
+                  <i class="fa fa-camera fa-2x"></i>
+                </div>
+                <div class="text-uppercase">
+                  Upload <br /> Profile Photo
+                </div>
+              </div>
+            </label>
+            <Input class="uploadProfileInput" (change)="  uploadImage($event.target.files,'inModel')" type="file"
+              name="profile_pic" id="newProfilePhoto" accept="image/*" style="display: none;" />
+            <div class="progress group-user" *ngIf="imageModalLoader" style="max-width:400px;;">
+
+              <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success" role="progressbar"
+                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progress + '%'}">
+                {{progress}}%</div>
+            </div>
+          </div>
+        </div>
+        <div class="overflow_form">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group mb-1">
+                <input type="radio" [ngModelOptions]="{standalone: true}" [value]="false" [(ngModel)]="ownRV"
+                  class="mr-1">
+                <label>I don’t own a RV yet, I’m a wannabe</label><br />
+                <input type="radio" [ngModelOptions]="{standalone: true}" [value]="true" [(ngModel)]="ownRV"
+                  class="mr-1">
+                <label>I own a RV</label>
+              </div>
+            </div>
+
+            <div class="col-md-12 mb-2">
+              <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="isrvRental" class="mr-1">
+              <b>Available for rent</b>
+            </div>
+            <div class="col-md-12">
+              <p *ngIf="!ownRV">Select the RV you are most interested in:</p>
+              <p *ngIf="ownRV">Choose RV data from below :</p>
+            </div>
+            <div class="col-md-12">
+              <p class="text-danger" *ngIf="data?.isSuggestedMakeSeries">Your make and series will not be visible
+                until
+                it
+                is approved by an admin. Please contact support@rvmodshare.com if you have any questions. </p>
+            </div>
+            <div class="col-md-12">
+              <p class="text-danger" *ngIf="data?.isSuggestedSeries">Your series will not be visible
+                until
+                it
+                is approved by an admin. Please contact support@rvmodshare.com if you have any questions. </p>
+            </div>
+
+
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h4 class="mb-4"><b>RV Details</b></h4>
+            </div>
+            <div class="col-md-4 pr-2">
+              <div class="form-group">
+                <label>RV Type <span class="text-danger">*</span></label>
+                <ngx-select-dropdown [config]="config1" [options]="rvTypes" [multiple]="false" formControlName="rvType"
+                  (change)="selectedRVType($event)">
+                </ngx-select-dropdown>
+                <div *ngIf="submitted && f.rvType.errors" class="invalid-feedback">
+                  <div *ngIf="f.rvType.errors.required">RV Type is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 pr-2 pl-2">
+              <label>RV Model</label>
+              <div class="form-group">
+                <input type="text" class="form-control" formControlName="model" placeholder="Enter RV Model Name">
+              </div>
+            </div>
+            <!-- <div class="col-md-6">
+            <div class="form-group">
+              <label>Model </label>
+              <input type="text" class="form-control" placeholder="">
+              <div *ngIf="submitted && f.model.errors" class="invalid-feedback">
+                <div *ngIf="f.model.errors.required">Model is required</div>
+              </div>
+            </div>
+          </div> -->
+            <div class="col-md-4 pl-2">
+              <div class="form-group">
+                <label>RV Year<span class="text-danger">*</span> </label>
+                <select name="Year" id="Year" formControlName="year" class="form-control">
+                  <option value="" disabled selected>Choose RV year</option>
+                  <option value="{{item}}" *ngFor="let item of years">{{item}}</option>
+                </select>
+                <div *ngIf="submitted && f.year.errors" class="invalid-feedback">
+                  <div *ngIf="f.year.errors.required">Year is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 mb-2">
+              <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="isSuggestedMakeSeries"
+                class="mr-1" (change)="onChangeSuggestedMakeSeries()">
+              Click here to add if you don't find your RV Make & Series.
+            </div>
+            <div class="col-md-12 mb-2">
+              <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="isSuggestedSeries" class="mr-1"
+                (change)="onChangeSuggestedSeries()">
+              Click here to add if you don't find your RV Series.
+            </div>
+
+            <div class="col-md-6 pr-2">
+              <div class="form-group">
+                <label>RV Make<span class="text-danger">*</span></label>
+                <ngx-select-dropdown *ngIf="!isSuggestedMakeSeries" [config]="config2" [options]="allMakes"
+                  [multiple]="false" formControlName="make" (change)="selectedMake($event)">
+                </ngx-select-dropdown>
+                <input type="text" *ngIf="isSuggestedMakeSeries" formControlName="suggestedMake" class="form-control"
+                  placeholder="Enter Your RV Make Name">
+                <div *ngIf="submitted && f.make.errors" class="invalid-feedback">
+                  <div *ngIf="f.make.errors.required">Make is required</div>
+                </div>
+                <div *ngIf="submitted && f.suggestedMake.errors" class="invalid-feedback">
+                  <div *ngIf="f.suggestedMake.errors.required">RV Make is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 pl-2">
+              <div class="form-group">
+                <label>RV Series<span class="text-danger">*</span> </label>
+                <ngx-select-dropdown *ngIf="!isSuggestedMakeSeries && !isSuggestedSeries" [config]="config3"
+                  [options]="allModels" [multiple]="false" formControlName="series" (change)="selectedModel($event)">
+                </ngx-select-dropdown>
+                <input type="text" *ngIf="isSuggestedMakeSeries || isSuggestedSeries" formControlName="suggestedSeries"
+                  class="form-control" placeholder="Enter Your RV Series Name">
+                <div *ngIf="submitted && f.series.errors" class="invalid-feedback">
+                  <div *ngIf="f.series.errors.required">Series is required</div>
+                </div>
+                <div *ngIf="submitted && f.suggestedSeries.errors" class="invalid-feedback">
+                  <div *ngIf="f.suggestedSeries.errors.required">RV Series is required</div>
+                </div>
+                <!-- <div *ngIf="submitted && f.series.errors" class="invalid-feedback">
+                <div *ngIf="f.series.errors.required">Series is required</div>
+              </div> -->
+              </div>
+            </div>
+
+            <div *ngIf="isrvRental" class="col-md-12" formGroupName="rvRental">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="street">RV Rental URL</label>
+                  </div>
+                  <div class="col-md-4 pr-2">
+                    <input id="street" class="form-control mb-2" type="text" formControlName="rvShareUrl"
+                      placeholder="RVshare URL">
+                    <div *ngIf="submitted && Form.get('rvRental.rvShareUrl').errors" class="invalid-feedback">
+                      <div *ngIf="Form.get('rvRental.rvShareUrl').errors?.pattern"> Link
+                        is invalid</div>
+                    </div>
+                  </div> 
+                  <div class="col-md-4 pr-2 pl-2">
+                    <input id="street" class="form-control mb-2" type="text" formControlName="outdoorsyUrl"
+                      placeholder="Outdoorsy URL">
+                    <div *ngIf="submitted && Form.get('rvRental.outdoorsyUrl').errors" class="invalid-feedback">
+                      <div *ngIf="Form.get('rvRental.outdoorsyUrl').errors?.pattern"> Link is invalid</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 pl-2">
+                    <input id="street" class="form-control mb-2" type="text" formControlName="rvezyUrl"
+                      placeholder="RVezy URL">
+                    <div *ngIf="submitted && Form.get('rvRental.rvezyUrl').errors" class="invalid-feedback">
+                      <div *ngIf="Form.get('rvRental.rvezyUrl').errors?.pattern"> Link is invalid</div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group ">
+
+                <label class="d-block">RV Photos</label>
+                <span *ngFor="let item of rvImages;let i=index">
+                  <img class="img-after" src="{{_host}}images/modPost/{{item}}">
+                  <i class="fa fa-times" (click)="removeImage(item,i)" aria-hidden="true"></i>
+                </span>
+                <!-- updated_by_gi -->
+                <div class="progress" *ngIf="rvImageLoader" style="max-width:400px;;">
+
+                  <div class="progress-bar progress-bar-striped  progress-bar-animated bg-success" role="progressbar"
+                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progress + '%'}">
+                    {{progress}}%</div>
+                </div>
+
+
+                <div class="form-group ">
+                  <div class="file-uploads">
+                    <div class="file-select">
+                      <div class="file-select-button" id="fileName3">Choose Photos</div>
+                      <div class="file-select-name" id="noFile" *ngIf="!rvImages">No Photo chosen...</div>
+                      <input (change)="uploadRVImages($event.target.files)" accept="image/*" multiple type="file"
+                        name="chooseFile3" id="chooseFile3">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- <div class="col-md-12">
+            <div class="form-group">
+              <label>RV Description</label>
+              <angular-editor name="ckedit" formControlName="rvDescription" [config]="editorConfig"></angular-editor>
+            </div>
+          </div> -->
+
+            <div class="col-md-12">
+              <h4 class="mb-4"><b>Personal Details</b></h4>
+            </div>
+
+            <div class="col-md-6 pr-2">
+              <div class="form-group">
+                <label>First Name </label>
+                <input type="text" class="form-control" formControlName="firstName" placeholder="First Name">
+                <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                  <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 pl-2">
+              <div class="form-group">
+                <label>Last Name </label>
+                <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name">
+                <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                  <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 pr-2">
+              <div class="form-group">
+                <label>Gender </label>
+                <select class="form-control" formControlName="gender" id="Gender" name="Gender">
+                  <option value="" selected disabled>Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4 pr-2 pl-2">
+              <div class="form-group">
+                <label>Birth Date </label>
+                <input
+                  [bsConfig]="{ rangeInputFormat : 'MM-DD-YYYY', dateInputFormat: 'MM-DD-YYYY', showWeekNumbers: false,customTodayClass: 'custom-today-class' }"
+                  [maxDate]="minDate" #dp2="bsDatepicker" type="text" bsDatepicker class="form-control"
+                  formControlName="dob" placeholder="MM-DD-YYYY" name="dob">
+              </div>
+            </div>
+            <div class="col-md-4 pl-2">
+              <div class="form-group">
+                <label>Address</label>
+                <input type="text" class="form-control" formControlName="address" placeholder="Address">
+              </div>
+            </div>
+            <div class="col-md-4 pr-2">
+              <label>Country</label>
+              <select name="cars" (change)="getState($event.target.value)" id="cars1" formControlName="country"
+                class="form-control mb-2">
+                <option value="" selected disabled>Country</option>
+                <option value="USA">USA</option>
+                <option value="CA">Canada</option>
+              </select>
+
+            </div>
+
+            <div class="col-md-4 pr-2 pl-2">
+              <label>State/Province</label>
+              <select name="cars" id="cars1" (change)="getCity()" formControlName="state" class="form-control mb-2">
+                <option value="" selected disabled>State</option>
+                <option value="{{item.code}}" *ngFor="let item of states">{{item.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-4 pl-2">
+              <label>City</label>
+              <select name="cars" id="cars1" formControlName="city" class="form-control mb-2">
+                <option value="" selected disabled>City</option>
+                <option value="{{item.name}}" *ngFor="let item of cities">{{item.name}}</option>
+              </select>
+            </div>
+            <div class="col-md-6 pr-2">
+              <div class="form-group">
+                <label>Zip Code</label>
+                <input type="text" class="form-control" formControlName="zipcode" placeholder="Zip Code" maxlength="8">
+              </div>
+            </div>
+            <div class="col-md-6 pl-2">
+              <label>Occupation</label>
+              <select name="occupation" id="occupation" formControlName="occupation" class="form-control mb-2">
+                <option value="" selected disabled>Choose Occupation</option>
+                <option value="{{item?.id}}" *ngFor="let item of occupations">{{item?.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-12">
+              <h4 class="mb-4 mt-4"><b>Social Details</b></h4>
+            </div>
+            <div class="col-md-12">
+              <label>Instagram Account Link</label>
+              <input formControlName="instagramLink" type="text" class="form-control" placeholder="Instagram Link">
+              <div *ngIf="submitted && f.instagramLink.errors" class="invalid-feedback">
+                <div *ngIf="f.instagramLink.errors?.pattern">Link
+                  is invalid</div>
+              </div>
+            </div>
+            <div class="col-md-4 pr-2 mt-2">
+              <label>YouTube Account Link</label>
+              <input formControlName="youTubeLink" type="text" class="form-control mb-2" placeholder="YouTube Link">
+              <div *ngIf="submitted && f.youTubeLink.errors" class="invalid-feedback">
+                <div *ngIf="f.youTubeLink.errors?.pattern">Link
+                  is invalid</div>
+              </div>
+            </div>
+            <div class="col-md-4 pl-2 mt-2">
+              <label>Featured YouTube Link</label>
+              <input formControlName="featuredYouTubeLink" type="text" class="form-control mb-2"
+                placeholder="Featured YouTube Link">
+              <div *ngIf="submitted && f.featuredYouTubeLink.errors" class="invalid-feedback">
+                <div *ngIf="f.featuredYouTubeLink.errors?.pattern">Link
+                  is invalid</div>
+              </div>
+            </div>
+            <div class="col-md-4 pr-2 pl-2 mt-2">
+              <label>Facebook Account Link</label>
+              <input formControlName="facebookLink" type="text" class="form-control mb-2" placeholder="Facebook Link">
+              <div *ngIf="submitted && f.facebookLink.errors" class="invalid-feedback">
+                <div *ngIf="f.facebookLink.errors?.pattern">Link
+                  is invalid</div>
+              </div>
+            </div>
+            <div class="col-md-4 pl-2">
+              <label>Twitter Account Link</label>
+              <input formControlName="twitterLink" type="text" class="form-control mb-2" placeholder="Twitter Link">
+              <div *ngIf="submitted && f.twitterLink.errors" class="invalid-feedback">
+                <div *ngIf="f.twitterLink.errors?.pattern">Link
+                  is invalid</div>
+              </div>
+              <!-- <div *ngIf="!validtwitterUrl">
+                                <div class="text-danger">Link is invalid.</div>
+                              </div> -->
+            </div>
+            <div class="col-md-4 pr-2">
+              <label>My Website</label>
+              <div class="form-group">
+                <input type="text" class="form-control mb-2" formControlName="yourWebsite" placeholder="My Website">
+              </div>
+            </div>
+            <div class="col-md-4 pl-2 pr-2">
+              <label>Blog Link</label>
+              <input type="text" class="form-control mb-2" formControlName="blogLink" placeholder="Blog Link">
+              <div *ngIf="submitted && f.blogLink.errors" class="invalid-feedback">
+                <div *ngIf="f.blogLink.errors?.pattern">Link
+                  is invalid</div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="updateUser()">Save</button>
+  </div>
+</ng-template>
+
+<!-- Rv Edit Modal -->
+
+<ng-template #rvedit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">RV Edit</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closemodal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body HeightCls">
+    <textarea id="rveditText"></textarea>
+    <!-- <angular-editor name="ckedit" [(ngModel)]="rvDescData" [ngModelOptions]="{standalone: true}"
+      [config]="editorConfig"></angular-editor> -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="updateRVDescription()">Save</button>
+  </div>
+
+</ng-template>
+
+<!-- About Edit Modal-->
+
+<ng-template #edit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit About Me</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closemodal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <textarea id="editAboutText"></textarea>
+    <!-- <angular-editor name="ckedit" [(ngModel)]="aboutMeData" [ngModelOptions]="{standalone: true}"
+      [config]="editorConfig"></angular-editor> -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="updateAboutMe()">Save</button>
+  </div>
+</ng-template>
+
+<!-- invite modal-->
+<ng-template #invited let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Friends Invited</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closemodal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="loop" *ngFor="let item of data.invitedUser">
+      <img class="noto-img" src="assets/img/no-img.png" alt="">
+      <p class="mb-0 ml-2">{{item}}</p>
+    </div>
+  </div>
+  <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div> -->
+</ng-template>
+
+<!-- joined modal -->
+<ng-template #joined let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Friends Joined</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closemodal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="loop" *ngFor="let item of data?.acceptedUserData">
+      <img class="noto-img" src="assets/img/no-img.png" alt="" *ngIf="!item?.image">
+      <img class="invite" *ngIf="item.image" src="{{_host}}{{item?.image}}" alt="">
+      <p class="mb-0 ml-2">{{item.fullName}}</p>
+    </div>
+    <!-- <div class="loop">
+              <img class="invite" src="assets/img/no-img.png" alt="">
+            <p class="mb-0 ml-2">ShubhamJaan@yopmail.com</p>
+          </div>
+          <div class="loop">
+              <img class="invite" src="assets/img/no-img.png" alt="">
+            <p class="mb-0 ml-2">ShubhamJaan@yopmail.com</p>
+          </div> -->
+  </div>
+  <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+      </div> -->
+</ng-template>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">RV Photos</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closemodal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body hght">
+    <ngb-carousel>
+      <ng-template ngbSlide *ngFor="let item of data.RVImages">
+        <div class="picsum-img-wrapper">
+          <img class="w-100" src="{{_host}}images/modPost/{{item}}">
+        </div>
+      </ng-template>
+    </ngb-carousel>
+
+    <!-- <div class="rvPhoto" >
+               <img class="w-100" src="{{_host}}images/modPost/{{item}}">
+              </div> -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="closemodal()">Close</button>
+  </div>
+</ng-template>
+<div class="modal d-block" *ngIf="viewModal">
+  <div class="modal-overlay" (click)="viewModal=false"></div>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--- <div class="modal-header">
+              <h3 class="modal-title"></h3>
+             <button type="button" class="close" (click)="viewModal=false">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>--->
+      <div class="modal-body mt-3">
+        Copied URL to clipboard!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" (click)="viewModal=false">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade modal-p-bottom" id="modalPBottom">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="box bg-white p-2">
+          <h4 class="d-flex justify-content-between top_head"> Filters <i class="fa fa-times close" data-dismiss="modal"
+              aria-label="Close"></i></h4>
+          <hr />
+          <div class="border p-2 mb-2">
+
+            <select name="cars" id="cars5" (change)="searchValue();resetMakeSeries('both')"
+              [ngClass]="{'highlightfilter': modfilters?.rvTypeFilter}" class="form-control mb-2"
+              [(ngModel)]="modfilters.rvTypeFilter">
+              <option value="">Choose Class</option>
+              <option *ngFor="let item of filterrvTypes" value="{{item.detail.value}}">{{item.description}}</option>
+
+            </select>
+            <select name="cars" id="cars5" [disabled]="!modfilters?.rvTypeFilter"
+              (change)="searchValue();resetMakeSeries('series')" class="form-control mb-2"
+              [(ngModel)]="modfilters.makeFilter" [ngClass]="{'highlightfilter': modfilters?.makeFilter}"
+              class="form-control mb-2">
+              <option value="">Choose Make</option>
+              <option *ngFor="let item of MakesFilters" value="{{item?.id}}">{{item?.name}}</option>
+
+            </select>
+            <select class="form-control" [disabled]="!modfilters?.makeFilter" [(ngModel)]="modfilters.modelValue"
+              [ngClass]="{'highlightfilter': modfilters?.modelValue}" (change)="searchValue()" name="model" id="model">
+              <option value="">Choose Series</option>
+              <option *ngFor="let item of filterModels" value="{{item?.id}}">{{item.name}}</option>
+            </select>
+          </div>
+          <select name="Year" id="Year" (change)="searchValue()" [(ngModel)]="modfilters.yearValue"
+            [ngClass]="{'highlightfilter': modfilters?.yearValue}" class="form-control mb-2">
+            <option value=""> Choose Year</option>
+            <option value="{{item?.id}}" *ngFor="let item of rvYears">{{item?.id}}</option>
+          </select>
+          <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.size"
+            [ngClass]="{'highlightfilter': modfilters?.size}" class="form-control mb-2">
+            <option value="">Choose Size</option>
+            <option *ngFor="let item of difficulties" title="{{item?.description}}" value="{{item.id}}">
+              {{item.name}}
+            </option>
+          </select>
+          <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.modCategoryValue"
+            [ngClass]="{'highlightfilter': modfilters?.modCategoryValue}" class="form-control mb-2">
+            <option value="">Choose Category</option>
+            <option *ngFor="let item of modCategories" value="{{item?.id}}">{{item?.name}}({{item?.count}})</option>
+          </select>
+
+          <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.skillLevel"
+            [ngClass]="{'highlightfilter': modfilters?.skillLevel}" class="form-control mb-2">
+            <option value="">Choose Difficulty</option>
+            <option *ngFor="let item of skillLevelNeeded" value="{{item?.id}}">{{item?.name}}</option>
+
+          </select>
+          <select name="cars" id="cars5" (change)="searchValue()" [(ngModel)]="modfilters.timerange"
+            [ngClass]="{'highlightfilter': modfilters?.timerange}" class="form-control mb-2">
+            <option value="">Choose Total Time</option>
+            <option *ngFor="let item of timeRanges" value="{{item?.id}}">{{item?.id}}</option>
+          </select>
+          <div class="date_range padding_input">
+            <input type="text" name="daterange"
+              [ngClass]="{'highlightfilter': modfilters?.startDate || modfilters?.endDate}" (change)="searchValue()"
+              ngxDaterangepickerMd [(ngModel)]="selectedDate" class="form-control" placeholder="Select Date Range" />
+          </div>
+          <div class="padding_input">
+            <input type="text" name="search" (keyup.enter)="searchValue()" [(ngModel)]="modfilters.search"
+              [ngClass]="{'highlightfilter': modfilters?.search}" class="form-control mt-2"
+              placeholder="Search Title & Summary (Press Enter to search)" />
+          </div>
+
+ 
+               
+           
+           
+          <div class="text-right mt-4">
+            <button class="btn btn-danger" (click)="reset()">Reset</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

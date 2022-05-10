@@ -1,0 +1,300 @@
+ 
+        <div class="sider-bar hide d-none" (click)="changeSidebar()" [ngClass]="{ tooglebutton: !tooglebutton }">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+          </div>
+          <div class="sb2-1 main_sidebar pt-5 mt-4 d-none"  [ngClass]="{'minSidebar': tooglebutton}">
+            <!--== LEFT MENU  ==-->
+            <div class="sb2-13">
+            
+              <ul class="collapsible mt-3" data-collapsible="accordion">
+                  <!-- <h6 class="bg-white text-primary pl-4"><i class="fa fa-gift mr-2" aria-hidden="true"></i>Mod Contests</h6> -->
+                <li>
+                  <a [routerLink]="['/']" (click)="tabClick(0)" routerLinkActive='active'
+                    class="collapsible-header no_submenu"><i class="fa fa-home"></i> Home</a>
+                </li>
+               
+                <li>
+                  <a class="no_submenu" routerLinkActive='active' routerLink="/mods">
+                    <i style="margin: 3px 7px;" class="fa fa-file-text" aria-hidden="true"></i> Explore Mods
+                  </a>
+                </li>
+          <!-- <li>
+              <a class="collapsible-header" [ngClass]="{'collapsed': tab !=2}" (click)="tabClick(5)">
+                  <i class="fa fa-rocket" aria-hidden="true"></i>
+                Explore Mods
+              </a>
+              <div class="collapse" [ngClass]="{'show': tab ==5}">
+                <div class="panel-body">
+          <ul class="nav navbar-nav">
+          <li>
+          <a class="pl-5" routerLink="/page/search-category" routerLinkActive='active'>
+              Search by Categories</a>
+          </li>
+          <li>
+            <a class="pl-5" routerLinkActive='active'>
+              Favorites</a>
+          </li>
+          <li>
+            <a class="pl-5" routerLinkActive='active'>
+              Most Active Mods</a>
+          </li>
+          <li>
+            <a class="pl-5" routerLinkActive='active'>
+              Most Searched Mods</a>
+          </li>
+          <li>
+              <a class="pl-5" routerLinkActive='active'>
+                  Most Liked Mods</a>
+            </li>
+            <li>
+              <a class="pl-5" routerLinkActive='active'>
+                  Most Active RVs</a>
+            </li>
+        
+          </ul>
+          
+          
+          </div>
+          </div>
+          </li> -->
+            <!-- Explore Social -->
+    <!-- <li>
+      <a class="collapsible-header" [ngClass]="{'collapsed': tab !=2}" (click)="tabClick(4)">
+          <i class="fa fa-rocket" aria-hidden="true"></i>
+        Explore Social
+      </a>
+
+      <div class="collapse" [ngClass]="{'show': tab ==4}">
+        <div class="panel-body">
+<ul class="nav navbar-nav">
+<li>
+  <a class="pl-5" routerLinkActive='active'>
+      Feed</a>
+</li>
+<li>
+    <a class="pl-5" routerLinkActive='active'>
+      Post</a>
+  </li>
+  <li>
+    <a class="pl-5" routerLinkActive='active'>
+      Chat</a>
+  </li>
+  <li>
+    <a class="pl-5" routerLinkActive='active'>
+      Following</a>
+  </li>
+  <li>
+      <a class="pl-5" routerLinkActive='active'>
+          Friends</a>
+    </li>
+    <li>
+      <a class="pl-5" routerLinkActive='active'>
+          Latest New Members</a>
+    </li>
+    <li>
+      <a class="pl-5" routerLinkActive='active'>
+          Most Active Members</a>
+    </li>
+    <li>
+      <a class="pl-5" routerLinkActive='active'>
+          Invite a Friend to Join</a>
+    </li>
+</ul>
+</div>
+</div>
+</li> -->
+          <li>
+            <a class="no_submenu" routerLinkActive='active' routerLink="/group">
+              <i style="margin: 3px 7px;" class="fa fa-users" aria-hidden="true"></i> Groups
+            </a>
+          </li>
+          <li>
+              <a class="no_submenu" routerLinkActive='active' routerLink="/notifications">
+                <i style="margin: 3px 7px;" class="fa fa-bell" aria-hidden="true"></i> Notifications
+              </a>
+            </li>
+          <li>
+            <a class="no_submenu" routerLink="/connections" (click)="tabClick(0)" routerLinkActive='active'>
+              <i style="margin: 3px 7px;" class="fa fa-comments"></i>Chat
+            </a>
+          </li>
+         
+          <!-- <li>
+            <a class="no_submenu" routerLink="/page/blogs" (click)="tabClick(0)" routerLinkActive='active'>
+              <i style="margin: 3px 7px;" class="fa fa-rss"></i>Blog
+            </a>
+          </li> -->
+        
+          <!-- <li>
+            <a class="no_submenu" routerLink="/manage-coach/manage-credential" (click)="tabClick(0)" routerLinkActive='active'>
+              <i class="fa fa-key"></i>Search
+            </a>
+          </li> -->
+          <!-- <li>
+            <a class="no_submenu" routerLink="/manage-coach/manage-credential" (click)="tabClick(0)" routerLinkActive='active'>
+              <i class="fa fa-key"></i>RVmodU
+            </a>
+          </li> -->
+          <!-- <li>
+            <a class="no_submenu" routerLink="/manage-coach/manage-credential" (click)="tabClick(0)" routerLinkActive='active'>
+              <i class="fa fa-key"></i>RV Industry news
+            </a>
+          </li> -->
+          <li>
+              <a class="collapsible-header" [ngClass]="{'collapsed': tab !=2}" (click)="tabClick(2)">
+                <i style="margin: 3px 7px;" class="fa fa-users" aria-hidden="true"></i>
+                Community
+              </a>
+              <!-- Dropdown level 1 -->
+              <div class="collapse" [ngClass]="{'show': tab ==2}">
+                <div class="panel-body">
+                  <ul class="nav navbar-nav" [ngClass]="{'collapsed': mainsubtab !=1}" (click)="maintabClick(1)">
+                   
+                  
+                   
+      
+      
+      </ul>
+      <ul class="nav navbar-nav">
+        <!-- <li>
+          <a class="pl-5" routerLinkActive='active'>
+            Meet & Greet</a>
+        </li> -->
+        <li>
+          <a class="pl-5" routerLinkActive='active'>
+              Getting Started</a>
+        </li>
+        <li>
+            <a class="pl-5" routerLinkActive='active'>
+                Community Guidelines</a>
+          </li>
+       
+       
+          <li>
+            <a class="pl-5" routerLinkActive='active'>
+                Points & Badges</a>
+          </li>
+          <li>
+            <a class="pl-5" routerLinkActive='active'>
+                Tips & Tricks</a>
+          </li>
+          <li>
+            <a class="pl-5" routerLink="/faq" routerLinkActive='active'>
+                FAQ</a>
+          </li>
+        <!-- initial consult tab -->
+      </ul>
+  
+      </div>
+      </div>
+      </li>
+          <!-- About -->
+          <li>
+            <a class="collapsible-header" [ngClass]="{'collapsed': tab !=2}" (click)="tabClick(3)">
+              <i style="margin: 3px 7px;" class="fa fa-info-circle" aria-hidden="true"></i>
+              About
+            </a>
+            <!-- Dropdown level 1 -->
+            <div class="collapse" [ngClass]="{'show': tab ==3}">
+              <div class="panel-body">
+    <ul class="nav navbar-nav">
+      <li>
+        <a class="pl-5" routerLink="/about-us" routerLinkActive='active'>
+            About Us</a>
+      </li>
+      <li>
+          <a class="pl-5" routerLinkActive='active'>
+              DMCA
+            </a>
+        </li>
+        <li>
+          <a class="pl-5" routerLink="/terms-of-service" routerLinkActive='active'>
+            Terms of Service</a>
+        </li>
+        <li>
+          <a class="pl-5" routerLink="/privacy-policy" routerLinkActive='active'>
+            Privacy Policy</a>
+        </li>
+     
+      <!-- initial consult tab -->
+     
+    </ul>
+  
+    </div>
+    </div>
+    </li>
+    <!-- <li>
+        <a class="no_submenu"  (click)="tabClick(0)" routerLink="/page/modstores" routerLinkActive='active'>
+          <i style="margin: 3px 7px;" class="fa fa-location-arrow" aria-hidden="true"></i>Modstores
+        </a>
+      </li>
+      <li>
+        <a class="no_submenu" routerLink="/page/modmarket" (click)="tabClick(0)" routerLinkActive='active'>
+          <i style="margin: 3px 7px;" class="fa fa-briefcase" aria-hidden="true"></i>Modmarket
+        </a>
+      </li> -->
+    <!-- <li>
+      <a class="pl-5" style="  line-height: 4;">
+        <img class="badges mr-2" src="assets/img/badges.png"> Earned Badge
+      </a>
+      </li> -->
+  
+
+
+          </ul>
+          <div class="mb-3 p-3 bg-white">
+              <div class="d-flex">
+                    <h4 class="heading pt-1"><b>Your Groups</b></h4>
+                 
+                    <!-- <span class="green r-0" style="position: absolute; top: inherit; right: 33px;">See All</span> -->
+              </div>
+              <hr style="  margin-top: 4px;  margin-bottom: 10px;" />
+                <div class="slider row">
+                   
+                    <div class="col-md-4 pr-0">
+                            <!-- <img class="img-responsive high" src="http://www.kalapuraparambil.com/wp-content/uploads/photo-gallery/Election_Vehicle/election-vehicle-exterior-side-right-side.jpg"> -->
+                    </div>
+                    <div class="col-md-8 ">
+                        <p class="email m-0">Crazy Dude EscapeVelocity
+                            </p>
+                            <small class="text-darks mb-0">2h ago</small>
+                        </div>
+      
+                </div> 
+                <hr />
+                <div class="slider row">
+                   
+                        <div class="col-md-4 pr-0">
+                                <!-- <img class="img-responsive high" src="http://www.kalapuraparambil.com/wp-content/uploads/photo-gallery/caravan/thumb/caravan-interior-bed-posh-seating-backside-view.jpg"> -->
+                        </div>
+                        <div class="col-md-8 ">
+                            <p class="email m-0">Crazy Dude EscapeVelocity
+                                </p>
+                                <small class="text-darks mb-0">2 Weeks ago</small>
+                            </div>
+      
+                    </div> 
+                    <hr />
+                    <div class="slider row">
+                   
+                            <div class="col-md-4 pr-0">
+                                    <!-- <img class="img-responsive high" src="http://www.kalapuraparambil.com/wp-content/uploads/photo-gallery/Election_Vehicle/election-vehicle-exterior-side-right-side.jpg"> -->
+                            </div>
+                            <div class="col-md-8 ">
+                                <p class="email m-0">Crazy Dude EscapeVelocity
+                                    </p>
+                                    <small class="text-darks mb-0">2 Weeks ago</small>
+                                </div>
+      
+                        </div> 
+                        <hr />
+                        <div class="profile-com text-center">
+                          <h4>12% Profile completeness</h4>
+                            <p><ngb-progressbar [showValue]="true" type="success" [value]="12"></ngb-progressbar></p>
+                            <span>Next: + Interests (+19%)</span>
+                            <button type="submit" class="btn btn-primary mt-2 w-100">Update Proile</button>
+                        </div>
+              </div>
+          </div>
+          </div>
+     

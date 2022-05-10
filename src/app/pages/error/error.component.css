@@ -1,0 +1,59 @@
+.coming_soon {
+    height: calc(100vh - 55.5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.coming_soon h1 {
+    font-size: 64px;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin-bottom: 2.5rem;
+
+    text-align: center;
+}
+.coming_soon p {
+    font-size: 20px;
+    margin-bottom: 2rem;
+
+    text-align: center;
+}
+.social i {
+    background: #04244f;
+    padding: 10px;
+    cursor: pointer;
+    color: #03e08e;
+}
+.social i.fa.fa-facebook.mr-3 {
+    padding: 10px 13px;
+}
+ span.dot {
+    color: #03e08e;
+}
+.icon i.fa.fa-frown-o {
+    font-size: 80px;
+    color: #727272;
+}
+
+@media(max-width: 767px){
+    .coming_soon h1 {
+        font-size: 40px;
+        margin-bottom: 1.5rem;
+    }
+    .coming_soon p {
+        font-size: 15px;
+        margin-bottom: 1rem;
+    }
+    .icon i.fa.fa-calendar {
+        font-size: 40px;
+    }
+    .coming_soon {
+        height: calc(100vh - 150px);
+    }
+    .icon i.fa.fa-frown-o {
+        font-size: 40px;
+    }
+
+}

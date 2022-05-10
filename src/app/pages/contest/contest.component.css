@@ -1,0 +1,383 @@
+.d-flex.align-item-center {
+    align-items: center;
+  }
+  h1.heading-earn {
+    font-size: 100px;
+    color: #023870;
+    text-align: right;
+    padding-right: 9rem;
+    margin-bottom: 5rem;
+  }
+  .boxGradient.shadow {
+    background-image: linear-gradient(#03d98d, #023870);
+    padding: 25px 20px;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px;
+    font-family: "Times New Roman", Times, serif;
+  }
+  span.gradient {
+    background: -webkit-linear-gradient(#06c287, #023870);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+  }
+  span.blueColor {
+    background: -webkit-linear-gradient(#1ab795, #023870);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+  }
+  span.greenColor {
+    background: -webkit-linear-gradient(#03d98d, #054b2a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+  }
+  .bottom h2 {
+    font-size: 50px;
+    font-weight: 700;
+    color: #023870;
+    text-align: end;
+  }
+  img.sideIMG {
+    width: 20%;
+    object-fit: contain;
+    position: absolute;
+    right: 0;
+  }
+
+  p.descContest {
+    font-size: 29px;
+    font-weight: 600;
+    color: black;
+    padding: 0px 6rem;
+  }
+  .boxGradient h4 {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .boxGradient {
+    background-image: linear-gradient(#03d98d, #023870);
+    padding: 50px;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px;
+  }
+  h4.blueColor {
+    background: -webkit-linear-gradient(#1ab795, #023870);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    text-align: center;
+  }
+  .border-dooted {
+    border: dotted;
+    padding: 3rem;
+  }
+  img.badgesIcon {
+    width: 10rem;
+    height: 10rem;
+    position: relative;
+    right: 60px;
+  }
+  .row.align-item-center {
+    align-items: center;
+    width: 100%;
+  }
+  span.yellow-color {
+    color: #f7b54b;
+  }
+  h1.pointsCls {
+    color: #023870;
+    font-weight: 700;
+    font-size: 60px;
+    margin-top: 4rem;
+  }
+  h1 span.gradient.underLine:before {
+    border-bottom: 1pc solid red;
+  }
+  h1.pointsCls.mt-0 {
+    background: linear-gradient(#07c287, #07c287) no-repeat bottom left/2.4em 0.2ch;
+    width: 100px;
+    padding-bottom: 12px;
+  }
+
+  .boxBG-Image{
+    background-image: url(../../../assets/img/points.png);
+    width: 100%;
+  background-repeat: no-repeat;
+  height: 60rem;
+  background-size: contain;
+  display: block;
+  position: relative;
+  right: 15px;
+  }
+  .row.centerAlign {
+    position: relative;
+    left: 15px;
+    top: 10rem;
+  }
+  i {
+    font-family: "Times New Roman", Times, serif;
+    font-weight: 700;
+  }
+  .boxGradient.shadow h4 {
+    font-size: 22px !important;
+  font-family: "Times New Roman", Times, serif;
+  }
+  img.Icon-bg {
+    text-align: center;
+    display: block;
+    margin: auto;
+  }
+  h6.alignmentText {
+    z-index: 99;
+    color: #fff;
+    position: relative;
+    top: 70px;
+    font-size: 24px;
+    text-align: center;
+    right: 73px;
+    font-weight: 700;
+  }
+  img.badgesIconRight {
+    width: 6rem;
+    margin: 10px;
+  }
+  .row.mt-Cls.w-100 {
+    position: relative;
+    bottom: 8rem;
+  }
+  .banner-bg{
+    background-image: url("../../../assets/img/contest3.jpg");
+    width: 100%;
+    background-repeat: no-repeat;
+    height: 40rem;
+    background-position: center;
+    background-size: 100%;
+    position: relative;
+  }
+  .banner-bg:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(24 153 123 / 45%);
+  }
+  img.overlapImg {
+    width: 100%;
+    position: relative;
+    z-index: 99;
+    bottom: 9rem;
+    height: 400px;
+  }
+  img.roundedImg.right-Align {
+    position: absolute;
+    right: 0;
+    width: 15rem;
+  }
+  h1.community {
+    color: #fff;
+    font-size: 40px;
+    font-weight: 700;
+  }
+  .col-md-4.vertical-center {
+    position: relative;
+    top: 10rem;
+  }
+  span.greenBold {
+    color: #07c287;
+    font-weight: 600;
+    background: linear-gradient(#ffffff, #ffffff) no-repeat bottom left/2.4em 0.2ch;
+    padding-bottom: 14px;
+  }
+  table.table.table-bordered {
+    position: relative;
+    bottom: 25rem;
+    z-index: 999;
+  }
+  th {
+    font-size: 30px;
+    padding: 12px 23px !important;
+    text-align: center;
+  }
+  table thead {
+    background-color: #023870;
+  }
+  .table-bordered td, .table-bordered th {
+    border: 2px solid #03e08e;
+  }
+  .Mountain{
+    background-image: url("../../../assets/img/contest4.jpg");
+    background-size: 100%;
+    width: 100%;
+    height: 35rem;
+    position: relative;
+    bottom: 16rem;
+  }
+  .rightCorner {
+    border-radius: 12% 150% 150% 0%/ 0% 80% 81% 85%;
+    background-image: linear-gradient(#13467a, #03e08e);
+    height: 33rem;
+    width: 18rem;
+    position: relative;
+    top: 16rem;
+  }
+  .rightCorner h3 {
+    color: #fff;
+    position: relative;
+    top: 5rem;
+    padding: 0px 15px;
+    font-size: 32px;
+  }
+  .border-blue {
+    border: 2px solid #023870;
+    width: fit-content;
+    padding: 5px 15px;
+    color: #023870;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 5px;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+  p b {
+    font-size: 18px;
+  }
+  .pbCls p {
+    margin-bottom: 5px;
+  }
+  img.trangleRight {
+    position: absolute;
+    width: 10rem;
+    right: 0;
+  }
+  img.trangleleft {
+    position: absolute;
+    width: 10rem;
+    left: 0;
+    margin-top: 2rem;
+  }
+  img.RVLOGO {
+    width: 6rem;
+  }
+
+  @media(max-width:767px){
+    .row.align-item-center .col-md-6 {
+      margin-left: 20px !important;
+    }
+    .d-flex.align-item-center {
+      align-items: center;
+      display: block !important;
+    }
+    .row.align-item-center .col-md-3 {
+      margin-left: 20px !important;
+    }
+    th {
+      font-size: 5px;
+      padding: 10px 0px !important;
+      text-align: center;
+    }
+  h1.heading-earn{
+    font-size: 30px;
+    color: #023870;
+    text-align: right;
+    padding-right: 0rem;
+    margin-bottom: 5rem;
+  }
+  .bottom h2 {
+    font-size: 25px;
+  }
+  p.descContest {
+    font-size: 29px;
+    font-weight: 600;
+    color: black;
+    padding: 0px 0rem;
+  }
+  .col-md-6 .d-flex {
+    display: block !important;
+  }
+  img.badgesIcon{
+    width: 10rem;
+    height: 10rem;
+    position: relative;
+    right: 0px;
+    display: block;
+    margin: auto;
+    padding: 24px;
+  }
+  .row.centerAlign {
+    position: relative;
+    left: 15px;
+    top: 0rem;
+  }
+  .boxBG-Image{
+    right: 0px;
+    background-image: none !important;
+    height: auto !important;
+  }
+  h6.alignmentText {
+    z-index: 99;
+    color: #02c489;
+    position: relative;
+    top: 132px;
+    font-size: 17px;
+    margin-bottom: 9rem;
+    text-align: center;
+    right: 0px;
+    font-weight: 700;
+    width: 100%;
+    padding: 0px !important;
+  }
+  h1.community {
+    color: #fff;
+    font-weight: 700;
+    font-size: 32px;
+  }
+  img.overlapImg {
+    width: 100%;
+    position: relative;
+    z-index: 99;
+    bottom: 17rem;
+    height: 400px;
+  }
+  img.roundedImg {
+    display: none;
+  }
+  h1.pointsCls {
+   font-size: 20px;
+    margin-top: 2rem;
+    margin-bottom: 0rem;
+  }
+  .container-fluid.ph {
+    position: relative;
+    bottom: 0rem !important;
+  }
+  .Mountain {
+    background-repeat: no-repeat;
+  }
+  .rightCorner {
+    border-radius: 12% 150% 150% 0%/ 0% 80% 81% 85%;
+    background-image: linear-gradient(#13467a, #03e08e);
+    height: 33rem;
+    width: 18rem;
+    position: relative;
+    top: -8rem;
+  }
+  img.trangleRight{
+    position: relative;
+    width: 10rem;
+    right: 0;
+    float: right;
+  }
+  img.trangleleft {
+    position: relative;
+    width: 10rem;
+    float: left;
+    left: -15px;
+    margin-top: 2rem;
+  }
+}
